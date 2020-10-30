@@ -6,6 +6,7 @@ import { UsersComponent } from './users.component';
 import { UsersMaintainerComponent } from './users-maintainer/users-maintainer.component';
 import { UsersRoutingModule } from './users-routing.module';
 import { RolesMaintainerComponent } from './roles-maintainer/roles-maintainer.component';
+import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -14,7 +15,9 @@ import { RolesMaintainerComponent } from './roles-maintainer/roles-maintainer.co
   imports: [
     CommonModule,
     SharedModule,
-    UsersRoutingModule
+    UsersRoutingModule,
+    NgbPaginationModule,
+    NgbModule,
   ],
   exports: [UsersComponent, UsersMaintainerComponent, RolesMaintainerComponent],
 })

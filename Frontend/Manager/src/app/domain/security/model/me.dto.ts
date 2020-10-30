@@ -1,6 +1,6 @@
 export interface MeDto {
-    fullname: string;
+    username: string;
     email: string;
-    role: string;
+    roleName: string;
     permissions: any[];
 }

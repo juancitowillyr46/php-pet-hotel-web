@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { UseCase } from '../../../core/base/use-case';
 import { Observable } from "rxjs";
 import { UserRepository } from "../repository/user.repository";
-// import { AccessTokenDto } from "../model/access-token.dto"; 
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -14,11 +13,11 @@ export class UserAllUseCase implements UseCase<any, any> {
 
     }
 
-    public execute(): Observable<any> {
+    public execute(obj: any): Observable<any> {
         const that = this;
-        //let accessTokenData: AccessTokenDto = new AccessTokenDto();
+        // let accessTokenData: AccessTokenDto = new AccessTokenDto();
 
-        return that.userRepository.getAll().pipe(map(res => {
+        return that.userRepository.getAll(obj).pipe(map(res => {
             console.log(res);
             return res;
             // accessTokenData.token = res.data.token;

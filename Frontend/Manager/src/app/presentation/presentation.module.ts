@@ -3,17 +3,18 @@ import { CommonModule } from '@angular/common';
 
 import { SharedModule } from '../shared/shared.module';
 
-import { ConfigurationModule } from '../presentation/configuration/configuration.module';
 
 import { PresentationComponent } from './presentation.component';
 import { PresentationRoutingModule } from './../presentation/presentation-routing.module';
 
+// import { ConfigurationModule } from '../presentation/configuration/configuration.module';
 import { CustomersModule } from './customers/customers.module';
-import { ProductsModule } from '../presentation/products/products.module';
+// import { ProductsModule } from '../presentation/products/products.module';
 import { UsersModule } from '../presentation/users/users.module';
-import { PurchasesModule } from '../presentation/purchases/purchases.module';
-import { ProvidersModule } from '../presentation/providers/providers.module';
-import { SalesModule } from '../presentation/sales/sales.module';
+// import { PurchasesModule } from '../presentation/purchases/purchases.module';
+// import { ProvidersModule } from '../presentation/providers/providers.module';
+// import { SalesModule } from '../presentation/sales/sales.module';
+import { PetsModule } from '../presentation/pets/pets.module';
 
 @NgModule({
   declarations: [PresentationComponent],
@@ -23,15 +24,14 @@ import { SalesModule } from '../presentation/sales/sales.module';
     CommonModule,
 
     // Modules
-    ConfigurationModule,
+    // ConfigurationModule,
     CustomersModule,
-    ProductsModule,
+    // ProductsModule,
     UsersModule,
-    PurchasesModule,
-    ProvidersModule,
-    SalesModule
-    // EmployeesModule,
-    // RolesModule
+    // PurchasesModule,
+    // ProvidersModule,
+    // SalesModule,
+    PetsModule
   ]
 })
 export class PresentationModule { }

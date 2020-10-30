@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { UserAllUseCase } from '../../../domain/users/usecase/user-all.usecase';
-import { ModalDataObservable } from 'src/app/shared/components/modals/modal-data.observable';
-import { ModalUsersComponent } from 'src/app/shared/components/modals/modal-users/modal-users.component';
-import { BaseTableComponent } from 'src/app/shared/components/tables/base-table.component';
+import { PetAllUseCase } from '../../../domain/pets/usecase/pet-all.usecase';
+import { ModalUsersComponent } from '../../../shared/components/modals/modal-users/modal-users.component';
+// import { ModalPetsComponent } from '../../../shared/components/modals/modal-pets/modal-pets.component';
+import { BaseTableComponent } from '../../../shared/components/tables/base-table.component';
 
 @Component({
-  selector: 'app-users-maintainer',
-  templateUrl: './users-maintainer.component.html',
-  styleUrls: ['./users-maintainer.component.css']
+  selector: 'app-Pets-maintainer',
+  templateUrl: './Pets-maintainer.component.html',
+  styleUrls: ['./Pets-maintainer.component.css']
 })
-export class UsersMaintainerComponent extends BaseTableComponent implements OnInit {
+export class PetsMaintainerComponent extends BaseTableComponent implements OnInit {
 
   public dataRows: any[] = [];
 
   constructor(
     public route: ActivatedRoute,
-    private userAllUseCase: UserAllUseCase,
+    private petAllUseCase: PetAllUseCase,
     public modalService: NgbModal
   ) { 
     super(modalService, route);
@@ -49,7 +49,7 @@ export class UsersMaintainerComponent extends BaseTableComponent implements OnIn
   getPaginatedRows(page: number): void {
     const that = this;
     that.loadData = true;
-    that.userAllUseCase.execute({
+    that.petAllUseCase.execute({
       page: page,
       size: that.totalPages
     }).subscribe(res => {

@@ -17,9 +17,9 @@ export class UserRepository {
 
     }
 
-    getAll(): Observable<ResponseDataDto<UserDto[]>> {
+    getAll(obj: any): Observable<ResponseDataDto<UserDto[]>> {
         const that = this;
-        return that.dataService.get(that.resource + '?size=10&page=1');
+        return that.dataService.get(that.resource + '?size='+ obj.size  +'&page=' + obj.page);
     }
     
     get(id: string): Observable<ResponseDataDto<UserDto>> {
