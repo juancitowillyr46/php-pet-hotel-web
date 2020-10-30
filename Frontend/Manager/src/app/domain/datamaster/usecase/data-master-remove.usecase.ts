@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { UseCase } from '../../../core/base/use-case';
 import { Observable } from "rxjs";
-import { DataMasterRepository } from "../repository/data-master.repository";
+import { PetRepository } from "../repository/pet.repository";
+// import { AccessTokenDto } from "../model/access-token.dto"; 
 import { map } from 'rxjs/operators';
-import { DataMasterStoreDto } from '../model/data-master-store.dto';
-import { ResponseIdDataDto } from '../../../core/entities/response-id-data.dto';
+// import { PetDto } from '../model/pet.dto';
+import { PetStoreDto } from '../model/user-store.dto';
+import { ResponseIdDataDto } from 'src/app/core/entities/response-id-data.dto';
 
 @Injectable({
     providedIn: 'root'
 })
 export class DataMasterRemoveUseCase implements UseCase<string, ResponseIdDataDto> {
 
-    constructor(private dataMasterRepository: DataMasterRepository) {
+    constructor(private userRepository: PetRepository) {
 
     }
 
@@ -19,7 +21,7 @@ export class DataMasterRemoveUseCase implements UseCase<string, ResponseIdDataDt
         const that = this;
         console.log(id);
         let responseIdDataDto: ResponseIdDataDto;
-        return that.dataMasterRepository.remove(id).pipe(map(res => {
+        return that.userRepository.remove(id).pipe(map(res => {
             responseIdDataDto = res.data;
             return responseIdDataDto;
         }));

@@ -8,6 +8,7 @@ use Exception;
 class RoleEntity extends Audit
 {
     public string $name;
+    public string $description;
 
     /**
      * @return string
@@ -25,18 +26,31 @@ class RoleEntity extends Audit
         $this->name = $name;
     }
 
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
 
+    /**
+     * @param string $description
+     */
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
 
     public function payload(object $formData): void {
 
         try {
 
             $validate = new RoleActionRequestSchema();
-            $validate->getMessages((array) $formData);
-
+            $validate->getMessages((array)$formData);
             $this->identifiedResource($formData);
-
             $this->setName($formData->name);
+            $this->setDescription($formData->description);
             $this->setActive($formData->active);
 
         } catch(Exception $ex) {

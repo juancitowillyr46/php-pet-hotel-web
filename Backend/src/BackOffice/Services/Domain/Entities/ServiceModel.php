@@ -21,6 +21,7 @@ class ServiceModel extends Model
         'image',
         'main',
         'image',
+        'price',
         'service_type_id',
         'created_at',
         'created_by',

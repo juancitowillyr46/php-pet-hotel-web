@@ -3,18 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { SharedModule } from '../shared/shared.module';
 
-
 import { PresentationComponent } from './presentation.component';
 import { PresentationRoutingModule } from './../presentation/presentation-routing.module';
 
-// import { ConfigurationModule } from '../presentation/configuration/configuration.module';
 import { CustomersModule } from './customers/customers.module';
-// import { ProductsModule } from '../presentation/products/products.module';
 import { UsersModule } from '../presentation/users/users.module';
-// import { PurchasesModule } from '../presentation/purchases/purchases.module';
-// import { ProvidersModule } from '../presentation/providers/providers.module';
-// import { SalesModule } from '../presentation/sales/sales.module';
 import { PetsModule } from '../presentation/pets/pets.module';
+import { ServicesModule } from '../presentation/services/services.module';
+import { DataMasterModule } from '../presentation/datamaster/data-master.module';
 
 @NgModule({
   declarations: [PresentationComponent],
@@ -24,14 +20,11 @@ import { PetsModule } from '../presentation/pets/pets.module';
     CommonModule,
 
     // Modules
-    // ConfigurationModule,
     CustomersModule,
-    // ProductsModule,
     UsersModule,
-    // PurchasesModule,
-    // ProvidersModule,
-    // SalesModule,
-    PetsModule
+    PetsModule,
+    ServicesModule,
+    DataMasterModule
   ]
 })
 export class PresentationModule { }

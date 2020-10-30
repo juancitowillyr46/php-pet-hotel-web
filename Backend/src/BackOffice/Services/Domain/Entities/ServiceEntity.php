@@ -14,6 +14,7 @@ class ServiceEntity extends Audit
     public bool $main;
     public string $image;
     public string $service_type_id;
+    public float $price;
 
     /**
      * @return string
@@ -95,7 +96,21 @@ class ServiceEntity extends Audit
         $this->service_type_id = $service_type_id;
     }
 
+    /**
+     * @return float
+     */
+    public function getPrice(): float
+    {
+        return $this->price;
+    }
 
+    /**
+     * @param float $price
+     */
+    public function setPrice(float $price): void
+    {
+        $this->price = $price;
+    }
 
     public function payload(object $formData): void {
 
@@ -108,8 +123,8 @@ class ServiceEntity extends Audit
             $this->setDescription($formData->description);
             $this->setMain($formData->main);
             $this->setImage($formData->image);
+            $this->setPrice($formData->price);
             $this->setActive($formData->active);
-
 
         } catch(Exception $ex) {
             throw new Exception($ex->getMessage(), $ex->getCode());

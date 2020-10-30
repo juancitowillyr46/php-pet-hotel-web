@@ -3,15 +3,14 @@ namespace App\BackOffice\Roles\Domain\Repository;
 
 interface RoleRepositoryInterface
 {
-    public function addRole(array $role): bool;
+    public function addUser(array $role): bool;
 
-    public function editRole(int $id, array $role): bool;
+    public function editUser(int $id, array $role): bool;
 
-    public function findRole(int $id): array;
+    public function findUser(int $id): array;
 
-    public function removeRole(int $id): bool;
+    public function removeUser(int $id): bool;
 
-    public function allRoles(array $query): object;
+    public function allUsers(array $query): object;
 
-    public function commonRoles(): array;
 }

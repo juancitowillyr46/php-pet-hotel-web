@@ -19,6 +19,22 @@ return function (App $app) {
             $group->get('/me', \App\BackOffice\Users\Application\Actions\UserInfoAction::class)->add(AuthValidateTokenMiddleware::class);
         });
 
+        $group->group('/modules', function (RouteCollectorProxy $group) {
+            $group->post('', \App\BackOffice\Modules\Application\Actions\ModuleAddAction::class);
+            $group->put('/{uuid}', \App\BackOffice\Modules\Application\Actions\ModuleEditAction::class);
+            $group->get('/{uuid}', \App\BackOffice\Modules\Application\Actions\ModuleFindAction::class);
+            $group->delete('/{uuid}', \App\BackOffice\Modules\Application\Actions\ModuleRemoveAction::class);
+            $group->get('', \App\BackOffice\Modules\Application\Actions\ModuleFindAllAction::class);
+        })->add(AuthValidateTokenMiddleware::class);
+
+        $group->group('/roles', function (RouteCollectorProxy $group) {
+            $group->post('', \App\BackOffice\Roles\Application\Actions\RoleAddAction::class);
+            $group->put('/{uuid}', \App\BackOffice\Roles\Application\Actions\RoleEditAction::class);
+            $group->get('/{uuid}', \App\BackOffice\Roles\Application\Actions\RoleFindAction::class);
+            $group->delete('/{uuid}', \App\BackOffice\Roles\Application\Actions\RoleRemoveAction::class);
+            $group->get('', \App\BackOffice\Roles\Application\Actions\RoleFindAllAction::class);
+        })->add(AuthValidateTokenMiddleware::class);
+
         $group->group('/users', function (RouteCollectorProxy $group) {
             $group->post('', \App\BackOffice\Users\Application\Actions\UserAddAction::class);
             $group->put('/{uuid}', \App\BackOffice\Users\Application\Actions\UserEditAction::class);

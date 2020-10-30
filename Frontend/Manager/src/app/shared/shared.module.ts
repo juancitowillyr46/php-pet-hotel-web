@@ -8,7 +8,7 @@ import { ModalsModule } from './components/modals/modals.module';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faSpinner, faSignInAlt, faBan, faSync, faDownload, faTrash, faPencilAlt, faMoneyBillAlt } from '@fortawesome/free-solid-svg-icons';
+import { faSpinner, faSignInAlt, faBan, faSync, faDownload, faTrash, faPencilAlt, faMoneyBillAlt, faEye } from '@fortawesome/free-solid-svg-icons';
 import { MeObservable } from '../shared/observables/me.observable';
 import { GridSimpleObservable } from '../shared/components/grid-simple/grid-simple.observable';
 import { GridSimpleService } from '../shared/components/grid-simple/grid-simple.service';
@@ -61,7 +61,8 @@ export class SharedModule {
       faDownload,
       faTrash,
       faPencilAlt,
-      faMoneyBillAlt
+      faMoneyBillAlt,
+      faEye
     )
   }
 

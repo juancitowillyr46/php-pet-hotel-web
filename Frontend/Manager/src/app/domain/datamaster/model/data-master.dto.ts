@@ -1,10 +1,8 @@
 export interface DataMasterDto {
-    id: string;
-    description: string;
-    name: string;
-    type: string;
-    idRegister: number;
-    active: boolean;
-    activeName: string;
-    createdAt: string
+    id:string;
+    email: string;
+    username: string;
+    active: string;
+    createdAt: string;
+    userType: string;
 }

@@ -5,6 +5,8 @@ class RoleDto
 {
     public string $id;
     public string $name;
-    public string $active;
+    public string $description;
+    public bool $active;
+    public string $activeName;
     public string $createdAt;
 }

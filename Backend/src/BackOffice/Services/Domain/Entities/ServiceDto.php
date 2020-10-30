@@ -12,5 +12,6 @@ class ServiceDto
     public bool $active;
     public string $activeName;
     public string $createdAt;
+    public float $price;
 
 }

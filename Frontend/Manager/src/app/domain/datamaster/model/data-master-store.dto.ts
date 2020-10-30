@@ -1,7 +1,11 @@
 export interface DataMasterStoreDto {
     id: string;
-    type: string;
-    name: string;
-    description: string;
+    email: string;
+    username: string;
+    password: string;
+    firstName: string;
+    lastName: string;
     active: boolean;
+    roleId: string;
+    blocked: boolean;
 }

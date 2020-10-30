@@ -1,24 +1,26 @@
 import { Injectable } from '@angular/core';
 import { UseCase } from '../../../core/base/use-case';
 import { Observable } from "rxjs";
-import { DataMasterRepository } from "../repository/data-master.repository";
+import { PetRepository } from "../repository/pet.repository";
+// import { AccessTokenDto } from "../model/access-token.dto"; 
 import { map } from 'rxjs/operators';
-import { DataMasterStoreDto } from '../model/data-master-store.dto';
-import { ResponseIdDataDto } from '../../../core/entities/response-id-data.dto';
+// import { PetDto } from '../model/pet.dto';
+import { PetStoreDto } from '../model/user-store.dto';
+import { ResponseIdDataDto } from 'src/app/core/entities/response-id-data.dto';
 
 @Injectable({
     providedIn: 'root'
 })
-export class DataMasterEditUseCase implements UseCase<DataMasterStoreDto, ResponseIdDataDto> {
+export class DataMasterEditUseCase implements UseCase<UserStoreDto, ResponseIdDataDto> {
 
-    constructor(private dataMasterRepository: DataMasterRepository) {
+    constructor(private userRepository: PetRepository) {
 
     }
 
-    public execute(object: DataMasterStoreDto): Observable<ResponseIdDataDto> {
+    public execute(object: PetStoreDto): Observable<ResponseIdDataDto> {
         const that = this;
         let responseIdDataDto: ResponseIdDataDto;
-        return that.dataMasterRepository.edit(object.id, object).pipe(map(res => {
+        return that.userRepository.edit(object.id, object).pipe(map(res => {
             responseIdDataDto = res.data;
             return responseIdDataDto;
         }));

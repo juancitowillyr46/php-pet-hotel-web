@@ -15,7 +15,7 @@ class PaymentFindAllAction extends PaymentsAction
                 foreach ($rows as $row) {
                     $row->order = $this->paymentOrderService->executeGetAllDetail(['paymentId' => $row->id]);
                 }
-                $success->data->rows = $rows;
+                $success->rows = $rows;
             }
             return $this->commandSuccess($success);
 

@@ -17,30 +17,30 @@ export class DataMasterRepository {
 
     }
 
-    getAll(): Observable<ResponseDataDto<DataMasterDto[]>> {
+    getAll(obj: any): Observable<ResponseDataDto<DataMasterDto[]>> {
         const that = this;
-        return that.dataService.get(that.resource + '?size=10&page=1');
+        return that.dataService.get(that.resource + '?size='+ obj.size  +'&page=' + obj.page);
     }
     
-    get(id: string): Observable<ResponseDataDto<DataMasterDto>> {
-        const that = this;
-        return that.dataService.get(that.resource, id);
-    }
+    // get(id: string): Observable<ResponseDataDto<UserDto>> {
+    //     const that = this;
+    //     return that.dataService.get(that.resource, id);
+    // }
 
-    edit(id: string, object: DataMasterStoreDto): Observable<ResponseDataDto<ResponseIdDataDto>> {
-        const that = this;
-        return that.dataService.put(that.resource, id, object);
-    }
+    // edit(id: string, object: PetStoreDto): Observable<ResponseDataDto<ResponseIdDataDto>> {
+    //     const that = this;
+    //     return that.dataService.put(that.resource, id, object);
+    // }
 
-    add(object: DataMasterStoreDto): Observable<ResponseDataDto<ResponseIdDataDto>> {
-        const that = this;
-        return that.dataService.post(that.resource, object);
-    }
+    // add(object: PetStoreDto): Observable<ResponseDataDto<ResponseIdDataDto>> {
+    //     const that = this;
+    //     return that.dataService.post(that.resource, object);
+    // }
 
-    remove(id: string): Observable<ResponseDataDto<ResponseIdDataDto>> { 
-        const that = this;
-        return that.dataService.delete(that.resource, id);
-    }
+    // remove(id: string): Observable<ResponseDataDto<ResponseIdDataDto>> { 
+    //     const that = this;
+    //     return that.dataService.delete(that.resource, id);
+    // }
 
     
 

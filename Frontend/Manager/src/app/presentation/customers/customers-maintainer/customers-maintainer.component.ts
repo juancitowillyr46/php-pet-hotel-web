@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerAllUseCase } from '../../../domain/customers/usecase/customer-all.usecase';
-import { ModalCustomersComponent } from 'src/app/shared/components/modals/modal-customers/modal-customers.component';
+// import { ModalCustomersComponent } from 'src/app/shared/components/modals/modal-customers/modal-customers.component';
 import { ModalDataObservable } from 'src/app/shared/components/modals/modal-data.observable';
 import { BaseTableComponent } from 'src/app/shared/components/tables/base-table.component';
+import { ModalUsersComponent } from 'src/app/shared/components/modals/modal-users/modal-users.component';
 
 @Component({
   selector: 'app-customers-maintainer',
@@ -22,7 +23,7 @@ export class CustomersMaintainerComponent extends BaseTableComponent implements 
   ) { 
     super(modalService, route);
     const that = this;
-    that.modalComponent = ModalCustomersComponent;
+    that.modalComponent = ModalUsersComponent;
   }
 
   ngOnInit(): void {
