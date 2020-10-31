@@ -35,7 +35,7 @@ class RoleModel extends Model
 //
     public function modules()
     {
-        return $this->belongsToMany(ModuleModel::class, 'role_module', 'role_id', 'module_id');
+        return $this->belongsToMany(ModuleModel::class, 'module_role', 'role_id', 'module_id');
     }
 
 

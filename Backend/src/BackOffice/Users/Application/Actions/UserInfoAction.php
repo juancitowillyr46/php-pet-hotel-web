@@ -21,7 +21,11 @@ class UserInfoAction extends UsersAction
             $verify = $jwtCustom->decodeToken($token);
             $id = $verify->data->id;
 
-            return $this->commandSuccess($this->userService->executeMe($id));
+            $success = $this->userService->executeMe($id);
+            if($success){
+                $success->roleModules = $this->moduleService->executeModuleMenu($success->roleModules);
+            }
+            return $this->commandSuccess($success);
         } catch (Exception $ex) {
             return $this->commandError($ex);
         }

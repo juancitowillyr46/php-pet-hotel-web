@@ -27,7 +27,7 @@ export class MenuComponent implements OnInit {
     const that = this;
     that.meObservable.currentData.subscribe( res => {
       if(res){
-        that.menus = res.permissions;
+        that.menus = res.roleModules;
       }
     });
   }

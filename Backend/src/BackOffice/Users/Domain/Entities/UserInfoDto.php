@@ -8,7 +8,7 @@ class UserInfoDto
 {
     public string $username;
     public string $email;
-//    public string $roleId;
+    public string $roleId;
     public string $roleName;
-    public array $menu;
+    public array $roleModules;
 }

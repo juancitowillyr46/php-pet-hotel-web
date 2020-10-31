@@ -32,7 +32,7 @@ class UserModel extends Model
         'active'
     ];
 
-//    protected $with = ['role'];
+    protected $with = ['role'];
 
     use SoftDeletes;
 

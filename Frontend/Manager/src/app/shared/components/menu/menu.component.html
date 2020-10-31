@@ -7,7 +7,7 @@
                 <i class="fa fa-angle-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li *ngFor="let submenu of menu.submenu" routerLinkActive="active">
+                <li *ngFor="let submenu of menu.subMenu" routerLinkActive="active">
                     <a [routerLink]="[menu.slug, submenu.slug]">{{ submenu.name }}</a>
                 </li>
             </ul>

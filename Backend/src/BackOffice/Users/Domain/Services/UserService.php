@@ -69,6 +69,8 @@ class UserService extends BaseService
         $row = $this->read($uuid);
         $role = $this->getRowByIdModel(new RoleModel(), $row['role_id']);
         $row['role_name'] = $role['name'];
+        $row['role_id'] = $role['uuid'];
+        $row['role_modules'] = $role['modules'];
         return $this->userMapper->autoMapper->map($row, UserInfoDto::class);
     }
 

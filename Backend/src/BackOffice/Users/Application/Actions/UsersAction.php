@@ -1,11 +1,12 @@
 <?php
 namespace App\BackOffice\Users\Application\Actions;
 
-use App\BackOffice\Users\Domain\Services\UserAddService;
-use App\BackOffice\Users\Domain\Services\UserEditService;
-use App\BackOffice\Users\Domain\Services\UserFindAllService;
-use App\BackOffice\Users\Domain\Services\UserFindService;
-use App\BackOffice\Users\Domain\Services\UserRemoveService;
+//use App\BackOffice\Users\Domain\Services\UserAddService;
+//use App\BackOffice\Users\Domain\Services\UserEditService;
+//use App\BackOffice\Users\Domain\Services\UserFindAllService;
+//use App\BackOffice\Users\Domain\Services\UserFindService;
+//use App\BackOffice\Users\Domain\Services\UserRemoveService;
+use App\BackOffice\Modules\Domain\Services\ModuleService;
 use App\BackOffice\Users\Domain\Services\UserService;
 use App\Shared\Action\Action;
 use Psr\Log\LoggerInterface;
@@ -13,9 +14,15 @@ use Psr\Log\LoggerInterface;
 abstract class UsersAction extends Action
 {
     public UserService $userService;
+    public ModuleService $moduleService;
 
-    public function __construct(LoggerInterface $logger, UserService $userService)
+    public function __construct(
+        LoggerInterface $logger,
+        UserService $userService,
+        ModuleService $moduleService
+    )
     {
+        $this->moduleService = $moduleService;
         $this->userService = $userService;
         parent::__construct($logger);
     }
