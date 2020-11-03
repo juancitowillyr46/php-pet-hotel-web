@@ -1,0 +1,62 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Caniles
+      <fa-icon [icon]="['fas', 'spinner']" class="mr-1" [pulse]="true" *ngIf="loadData"></fa-icon>
+    </h5>
+    <button type="button" class="close" (click)="closeModal('CLOSE')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formGroup" novalidate >
+        <div class="form-group">
+            <label for="treatments">Código:</label>
+            <input type="text" class="form-control" id="num" placeholder="Ingrese código"
+            formControlName="num" 
+            [ngClass]="[   
+            (
+                formGroup.get('num').errors == null && 
+                (formGroup.get('num').value != null || formGroup.get('num').value != '')
+            )? 'is-valid' : ''
+            ]" 
+            >
+        </div>
+        <div class="form-group">
+            <label for="treatments">Nombre:</label>
+            <input type="text" class="form-control" id="name" placeholder="Ingrese nombre"
+            formControlName="name" 
+            [ngClass]="[   
+            (
+                formGroup.get('name').errors == null && 
+                (formGroup.get('name').value != null || formGroup.get('name').value != '')
+            )? 'is-valid' : ''
+            ]" 
+            >
+        </div>
+        <div class="form-group">
+            <label for="isBooked">Mostrar en la reserva:</label>
+            <select id="isBooked" class="form-control" formControlName="isBooked">
+                <option value="">--SELECCIONE--</option>
+                <option>PAGADO</option>
+                <option>PENDIENTE</option>
+            </select>
+            <label *ngIf="formGroup.controls.isBooked.errors && formGroup.controls.isBooked.value" id="isBooked" class="error mt-2 text-danger" for="isBooked">Campo obligatorio.</label>
+        </div>
+        <div class="form-group">
+            <label for="active">Activo:</label>
+            <select id="active" class="form-control" formControlName="active">
+                <option value="">--SELECCIONE--</option>
+                <option>SI</option>
+                <option>NO</option>
+            </select>
+            <label *ngIf="formGroup.controls.active.errors && formGroup.controls.statactiveeId.value" id="active" class="error mt-2 text-danger" for="active">Campo obligatorio.</label>
+        </div>
+    </form>
+    <button type="button" class="btn btn-primary mr-2 mt-15" (click)="onClickDone()" [disabled]="(formGroup.invalid || submit === true)">
+        <fa-icon [icon]="['fas', 'spinner']" class="mr-1" [pulse]="true" *ngIf="submit"></fa-icon>
+        Guardar
+    </button>
+    <button type="button" (click)="onClickClose()" class="btn btn-danger mt-15">
+        Cancelar
+    </button>
+  </div>
+  

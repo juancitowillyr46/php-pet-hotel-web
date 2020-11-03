@@ -54,108 +54,111 @@ export class ModalUsersComponent extends BaseModalComponent implements OnInit  {
   ngOnInit(): void {
     const that = this;
 
-    that.loadCommonUser();
+    // that.loadCommonUser();
     that.buildingFormUser();
     
-    that.modalDataSub = that.modalDataObservable.currentData.subscribe(res => {
-      that.dataModal = null;
-      that.submit = false;
-      that.resetFormUser();
-      if(res !== null){
-        that.dataModal = JSON.parse(res);
-        that.userGetUseCase.execute(that.dataModal.id).subscribe( res => {
-          that.submit = false;
-          //that.editValues(res);
-        });
-      } else {
-        that.newValues();
-      }
-    });
+    that.getRow();
+    // that.modalDataSub = that.modalDataObservable.currentData.subscribe(res => {
+    //   that.dataModal = null;
+    //   that.submit = false;
+    //   that.resetFormUser();
+    //   if(res !== null){
+    //     that.dataModal = JSON.parse(res);
+    //     that.userGetUseCase.execute(that.dataModal.id).subscribe( res => {
+    //       that.submit = false;
+    //       //that.editValues(res);
+    //     });
+    //   } else {
+    //     that.newValues();
+    //   }
+    // });
 
-    that.modalDataRemoveObservable.currentData.subscribe( res => {
-      if(res !== null){
-        that.dataModal = JSON.parse(res);
-        that.userRemoveUserCase.execute(that.dataModal.id).subscribe( response => {
-          that.modalDataRemoveObservable.changeData(null);
-          that.gridSimpleService.reload();
-        });
-      }
-    });
+    // that.modalDataRemoveObservable.currentData.subscribe( res => {
+    //   if(res !== null){
+    //     that.dataModal = JSON.parse(res);
+    //     that.userRemoveUserCase.execute(that.dataModal.id).subscribe( response => {
+    //       that.modalDataRemoveObservable.changeData(null);
+    //       that.gridSimpleService.reload();
+    //     });
+    //   }
+    // });
 
   }
 
-  loadCommonUser(): void {
+  getRow() {
     const that = this;
-    that.commonRolesUseCase.execute().subscribe(res => {
-      that.commonRoles = res;
-    });
-    that.commonBlockedUserUseCase.execute().subscribe( res => {
-      that.commonBlockedUser = res;
-    });
+    console.log(that.dataModal.id);
+    if(that.dataModal.id != ''){
+      that.loadData = true;
+      that.formGroup.disable();
+      // that.serviceGetUseCase.execute(that.dataModal.id).subscribe( res => {
+      //   that.loadData = false;
+      //   that.formGroup.patchValue(res);
+      //   that.formGroup.enable();
+      //   // that.onChangeProductByProvider(that.formGroup.controls.providerId.value);
+      //   // that.getRowsOrders();
+      // }, (error) => {
+        
+      // });
+    }
   }
+
+  // loadCommonUser(): void {
+  //   const that = this;
+  //   that.commonRolesUseCase.execute().subscribe(res => {
+  //     that.commonRoles = res;
+  //   });
+  //   that.commonBlockedUserUseCase.execute().subscribe( res => {
+  //     that.commonBlockedUser = res;
+  //   });
+  // }
 
   buildingFormUser(): void {
     const that = this;
     that.formGroup = that.buildingForm({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
       username: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      roleId: ['', [Validators.required]],
-      blocked: [false, [Validators.required]],
-      active: [true, [Validators.required]],
+      password: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      blocked : ['', [Validators.required]],
+      active: ['', [Validators.required]]
     });
   }
 
-  resetFormUser() {
-    const that = this;
-    that.resetForm({
-      firstName: '',
-      lastName: '',
-      email: '',
-      username: '',
-      password: '',
-      roleId: '',
-      blocked: false,
-      active: true,
-    });
-  }
+  
 
   onClickClose() {
     const that = this;
-    
-    that.gridSimpleService.closeModal();
+    that.closeModal('DONE');
   }
 
   onClickDone() {
-    const that = this;
+    // const that = this;
     
-    let object: UserStoreDto = that.formGroup.value;
+    // let object: UserStoreDto = that.formGroup.value;
     
-    object.active = (that.formGroup.controls.active.value == 'true' || that.formGroup.controls.active.value == true)? true : false;
-    object.blocked = (that.formGroup.controls.blocked.value == 'true' || that.formGroup.controls.blocked.value == true)? true : false;
+    // object.active = (that.formGroup.controls.active.value == 'true' || that.formGroup.controls.active.value == true)? true : false;
+    // object.blocked = (that.formGroup.controls.blocked.value == 'true' || that.formGroup.controls.blocked.value == true)? true : false;
 
-    if(that.dataModal !== null){
-      object.id = that.dataModal.id;
-      that.userEditUseCase.execute(object).subscribe( res => {
-        that.submit = false;
-        that.gridSimpleService.closeModal();
-        that.gridSimpleService.reload();
-      }, (error) => {
-        alert(error);
-        that.submit = false;
-      });
-    } else {
-      that.userAddUseCase.execute(object).subscribe( res => {
-        console.log(res);
-        that.submit = false;
-        that.gridSimpleService.closeModal();
-        that.gridSimpleService.reload();
-      });
-    }
+    // if(that.dataModal !== null){
+    //   object.id = that.dataModal.id;
+    //   that.userEditUseCase.execute(object).subscribe( res => {
+    //     that.submit = false;
+    //     that.gridSimpleService.closeModal();
+    //     that.gridSimpleService.reload();
+    //   }, (error) => {
+    //     alert(error);
+    //     that.submit = false;
+    //   });
+    // } else {
+    //   that.userAddUseCase.execute(object).subscribe( res => {
+    //     console.log(res);
+    //     that.submit = false;
+    //     that.gridSimpleService.closeModal();
+    //     that.gridSimpleService.reload();
+    //   });
+    // }
     
-    that.submit = true;
+    // that.submit = true;
   }
 
 }

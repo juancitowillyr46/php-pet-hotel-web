@@ -1,8 +1,12 @@
 export interface ServiceDto {
-    id:string;
-    email: string;
-    username: string;
-    active: string;
+    id: string;
+    name: string;
+    description: string;
+    image: string;
+    main: boolean;
+    serviceTypeName: string;
+    active: boolean;
+    activeName: string;
     createdAt: string;
-    userType: string;
+    price: number;
 }

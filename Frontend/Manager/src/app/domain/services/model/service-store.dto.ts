@@ -1,11 +1,10 @@
 export interface ServiceStoreDto {
-    id: string;
-    email: string;
-    username: string;
-    password: string;
-    firstName: string;
-    lastName: string;
+    id?: string;
+    name: string;
+    description: string;
+    price: string;
+    serviceTypeId: string;
     active: boolean;
-    roleId: string;
-    blocked: boolean;
+    main?: boolean;
+    image: string;
 }

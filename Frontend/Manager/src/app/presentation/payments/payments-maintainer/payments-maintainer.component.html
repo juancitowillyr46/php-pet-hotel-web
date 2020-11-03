@@ -20,11 +20,11 @@
                       <!-- (click)="onClickAdd()"  -->
                       <div class="d-flex pb-2">
                         <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic"> 
-                          <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Crear" (click)="onClickModalStore('')">
+                          <!-- <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Crear" (click)="onClickModalStore('')">
                             <a href="javascript:void(0)" class="text-white" ngbButton > 
                               <i class="ti-plus"></i>
                             </a>
-                          </label>
+                          </label> -->
                           <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Actualizar">
                             <a href="javascript:void(0)" class="text-white" ngbButton (click)="onClickRefresh()"> 
                               <fa-icon [icon]="['fas', 'sync']" class="mr-1" [pulse]="loadData"></fa-icon>
@@ -61,7 +61,8 @@
                                 {{ row.total }}
                               </td>  
                               <td width="14%">
-                                {{ row.stateName }}
+                                <a class="badge badge-success-lighten">{{ row.stateName }}</a>
+                                
                               </td>                         
                               <!-- <td width="14%">
                                 {{ row.activeName }}
@@ -76,16 +77,16 @@
                                       <fa-icon [icon]="['fas', 'pencil-alt']" class="mr-1"></fa-icon>
                                     </a>
                                   </label>
-                                  <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Eliminar" (click)="onClickRemove(row.id)">
-                                    <a href="javascript:void(0)" ngbButton class="text-white">
-                                      <fa-icon [icon]="['fas', 'trash']" class="mr-1" ></fa-icon>
-                                    </a>
-                                  </label>
-                                  <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Ver detalle" (click)="onClickRemove(row.id)">
+                                  <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Ver detalle" (click)="openDetail(row.id)">
                                     <a href="javascript:void(0)" ngbButton class="text-white">
                                       <fa-icon [icon]="['fas', 'eye']" class="mr-1" ></fa-icon>
                                     </a>
                                   </label>
+                                  <!-- <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Eliminar" (click)="onClickRemove(row.id)">
+                                    <a href="javascript:void(0)" ngbButton class="text-white">
+                                      <fa-icon [icon]="['fas', 'trash']" class="mr-1" ></fa-icon>
+                                    </a>
+                                  </label> -->
                                 </div>
                               </td>
                             </tr>

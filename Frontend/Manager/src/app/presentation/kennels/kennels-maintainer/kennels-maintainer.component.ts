@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { KennelAllUseCase } from '../../../domain/kennels/usecase/kennel-all.usecase';
-import { ModalUsersComponent } from '../../../shared/components/modals/modal-users/modal-users.component';
-// import { ModalPetsComponent } from '../../../shared/components/modals/modal-pets/modal-pets.component';
+import { ModalKennelsComponent } from '../../../shared/components/modals/modal-kennels/modal-kennels.component';
 import { BaseTableComponent } from '../../../shared/components/tables/base-table.component';
 
 @Component({
@@ -22,7 +21,7 @@ export class KennelsMaintainerComponent extends BaseTableComponent implements On
   ) { 
     super(modalService, route);
     const that = this;
-    that.modalComponent = ModalUsersComponent;
+    that.modalComponent = ModalKennelsComponent;
   }
 
   ngOnInit(): void {

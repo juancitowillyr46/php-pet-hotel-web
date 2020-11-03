@@ -1,0 +1,216 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Mascota 
+      <fa-icon [icon]="['fas', 'spinner']" class="mr-1" [pulse]="true" *ngIf="loadData"></fa-icon>
+    </h5>
+    <button type="button" class="close" (click)="closeModal('CLOSE')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formGroup" novalidate >
+      
+        <div class="form-group">
+            <label for="name">Nombre:</label>
+            <input type="text" class="form-control" id="name" placeholder="Ingrese nombre"
+            formControlName="name" 
+            [ngClass]="[   
+            (
+                formGroup.get('name').errors == null && 
+                (formGroup.get('name').value != null || formGroup.get('name').value != '')
+            )? 'is-valid' : ''
+            ]" 
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="age">Edad:</label>
+            <input type="text" class="form-control" id="age" placeholder="Ingrese edad"
+            formControlName="age" 
+            [ngClass]="[   
+            (
+                formGroup.get('age').errors == null && 
+                (formGroup.get('age').value != null || formGroup.get('age').value != '')
+            )? 'is-valid' : ''
+            ]" 
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="gender">Genero:</label>
+            <input type="text" class="form-control" id="gender" placeholder="Ingrese genero"
+            formControlName="gender" 
+            [ngClass]="[   
+            (
+                formGroup.get('gender').errors == null && 
+                (formGroup.get('gender').value != null || formGroup.get('gender').value != '')
+            )? 'is-valid' : ''
+            ]" 
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="race">Raza:</label>
+            <input type="text" class="form-control" id="race" placeholder="Ingrese raza"
+            formControlName="race" 
+            [ngClass]="[   
+            (
+                formGroup.get('race').errors == null && 
+                (formGroup.get('race').value != null || formGroup.get('race').value != '')
+            )? 'is-valid' : ''
+            ]" 
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="race">Peso</label>
+            <input type="text" class="form-control" id="weight" placeholder="Ingrese peso"
+            formControlName="weight" 
+            [ngClass]="[   
+            (
+                formGroup.get('weight').errors == null && 
+                (formGroup.get('weight').value != null || formGroup.get('weight').value != '')
+            )? 'is-valid' : ''
+            ]" 
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="size">Talla:</label>
+            <input type="text" class="form-control" id="size" placeholder="Ingrese talla"
+            formControlName="size" 
+            [ngClass]="[   
+            (
+                formGroup.get('size').errors == null && 
+                (formGroup.get('size').value != null || formGroup.get('size').value != '')
+            )? 'is-valid' : ''
+            ]" 
+            >
+        </div>
+        <div class="form-group">
+            <label for="diseases">Enfermedades:</label>
+            <input type="text" class="form-control" id="diseases" placeholder="Ingrese enfermedades"
+            formControlName="diseases" 
+            [ngClass]="[   
+            (
+                formGroup.get('diseases').errors == null && 
+                (formGroup.get('diseases').value != null || formGroup.get('diseases').value != '')
+            )? 'is-valid' : ''
+            ]" 
+            >
+        </div>
+        <div class="form-group">
+            <label for="veterinary">Nombre del veterinario:</label>
+            <input type="text" class="form-control" id="veterinary" placeholder="Ingrese nombre del veterinario"
+            formControlName="veterinary" 
+            [ngClass]="[   
+            (
+                formGroup.get('veterinary').errors == null && 
+                (formGroup.get('veterinary').value != null || formGroup.get('veterinary').value != '')
+            )? 'is-valid' : ''
+            ]" 
+            >
+        </div>
+        <div class="form-group">
+            <label for="veterinary_phone">Teléfono del veterinario:</label>
+            <input type="text" class="form-control" id="veterinary" placeholder="Ingrese teléfono del veterinario"
+            formControlName="veterinary_phone" 
+            [ngClass]="[   
+            (
+                formGroup.get('veterinary_phone').errors == null && 
+                (formGroup.get('veterinary_phone').value != null || formGroup.get('veterinary_phone').value != '')
+            )? 'is-valid' : ''
+            ]" 
+            >
+        </div>
+        <div class="form-group">
+            <label for="treatments">Tratamientos:</label>
+            <textarea class="form-control" id="treatments" name="treatments" placeholder="Ingrese tratamientos" rows="4"
+            formControlName="treatments" 
+            [ngClass]="[   
+            (
+                formGroup.get('treatments').errors == null && 
+                (formGroup.get('treatments').value != null || formGroup.get('treatments').value != '')
+            )? 'is-valid' : ''
+            ]" 
+            ></textarea>
+           
+        </div>
+
+        <div class="form-group">
+            <label for="last_vaccine">Última vacuna:</label>
+            <input type="text" class="form-control" id="last_vaccine" placeholder="Ingrese últimas vacunas"
+            formControlName="last_vaccine" 
+            [ngClass]="[   
+            (
+                formGroup.get('last_vaccine').errors == null && 
+                (formGroup.get('last_vaccine').value != null || formGroup.get('last_vaccine').value != '')
+            )? 'is-valid' : ''
+            ]" 
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="is_agressive">Es agresivo:</label>
+            <select id="is_agressive" class="form-control" formControlName="is_agressive">
+                <option value="">--SELECCIONE--</option>
+                <option value [value]="item.value" *ngFor="let item of commonAuditStatus">{{item.text}}</option>
+            </select>
+            <label *ngIf="formGroup.controls.active.errors && formGroup.controls.active.value" id="is_agressive" class="error mt-2 text-danger" for="is_agressive">Campo obligatorio.</label>
+        </div>
+
+        <div class="form-group">
+            <label for="observation">Depende(Explicar):</label>
+            <textarea class="form-control" id="observation" name="observation" placeholder="Ingrese depende(Explicat)" rows="4"
+            formControlName="observation" 
+            [ngClass]="[   
+            (
+                formGroup.get('observation').errors == null && 
+                (formGroup.get('observation').value != null || formGroup.get('observation').value != '')
+            )? 'is-valid' : ''
+            ]" 
+            ></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="last_zeal">Fecha de celo:</label>
+            <input type="text" class="form-control" id="last_zeal" placeholder="Ingrese fecha de celo"
+            formControlName="last_zeal" 
+            [ngClass]="[   
+            (
+                formGroup.get('last_zeal').errors == null && 
+                (formGroup.get('last_zeal').value != null || formGroup.get('last_zeal').value != '')
+            )? 'is-valid' : ''
+            ]" 
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="other">Comidad y cama o manta en que duerme:</label>
+            <textarea class="form-control" id="other" name="other" placeholder="Ingrese otro datos" rows="4"
+            formControlName="other" 
+            [ngClass]="[   
+            (
+                formGroup.get('other').errors == null && 
+                (formGroup.get('other').value != null || formGroup.get('other').value != '')
+            )? 'is-valid' : ''
+            ]" 
+            ></textarea>
+        </div>        
+        <div class="form-group">
+            <label for="active">Activo:</label>
+            <select id="active" class="form-control" formControlName="active">
+                <option value="">--SELECCIONE--</option>
+                <option value [value]="item.value" *ngFor="let item of commonAuditStatus">{{item.text}}</option>
+            </select>
+            <label *ngIf="formGroup.controls.active.errors && formGroup.controls.active.value" id="active" class="error mt-2 text-danger" for="active">Campo obligatorio.</label>
+        </div>
+    </form>
+    <button type="button" class="btn btn-primary mr-2 mt-15" (click)="onClickDone()" [disabled]="(formGroup.invalid || submit === true)">
+        <fa-icon [icon]="['fas', 'spinner']" class="mr-1" [pulse]="true" *ngIf="submit"></fa-icon>
+        Guardar
+    </button>
+    <button type="button" (click)="onClickClose()" class="btn btn-danger mt-15">
+        Cancelar
+    </button>
+  </div>
+  

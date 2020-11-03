@@ -1,7 +1,7 @@
 <?php
 namespace App\BackOffice\DataMaster\Domain\Repository;
 
-interface KennelRepositoryInterface
+interface DataMasterRepositoryInterface
 {
     public function addUser(array $user): bool;
 

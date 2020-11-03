@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Pago
+      <fa-icon [icon]="['fas', 'spinner']" class="mr-1" [pulse]="true" *ngIf="loadData"></fa-icon>
+    </h5>
+    <button type="button" class="close" (click)="closeModal('CLOSE')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formGroup" novalidate >
+        <div class="form-group">
+            <label for="stateId">Estado de :</label>
+            <select id="stateId" class="form-control" formControlName="stateId">
+                <option value="">--SELECCIONE--</option>
+                <option>PAGADO</option>
+                <option>PENDIENTE</option>
+            </select>
+            <label *ngIf="formGroup.controls.stateId.errors && formGroup.controls.stateId.value" id="stateId" class="error mt-2 text-danger" for="stateId">Campo obligatorio.</label>
+        </div>
+    </form>
+    <button type="button" class="btn btn-primary mr-2 mt-15" (click)="onClickDone()" [disabled]="(formGroup.invalid || submit === true)">
+        <fa-icon [icon]="['fas', 'spinner']" class="mr-1" [pulse]="true" *ngIf="submit"></fa-icon>
+        Guardar
+    </button>
+    <button type="button" (click)="onClickClose()" class="btn btn-danger mt-15">
+        Cancelar
+    </button>
+  </div>
+  

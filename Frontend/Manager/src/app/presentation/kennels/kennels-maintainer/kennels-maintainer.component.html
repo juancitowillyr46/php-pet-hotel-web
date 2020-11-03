@@ -69,6 +69,11 @@
                                       <fa-icon [icon]="['fas', 'pencil-alt']" class="mr-1"></fa-icon>
                                     </a>
                                   </label>
+                                  <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Ver detalle" (click)="onClickRemove(row.id)">
+                                    <a href="javascript:void(0)" ngbButton class="text-white">
+                                      <fa-icon [icon]="['fas', 'eye']" class="mr-1" ></fa-icon>
+                                    </a>
+                                  </label>
                                   <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Eliminar" (click)="onClickRemove(row.id)">
                                     <a href="javascript:void(0)" ngbButton class="text-white">
                                       <fa-icon [icon]="['fas', 'trash']" class="mr-1" ></fa-icon>

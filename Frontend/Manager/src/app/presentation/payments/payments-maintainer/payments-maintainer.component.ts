@@ -4,6 +4,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PaymentAllUseCase } from '../../../domain/payments/usecase/payment-all.usecase';
 import { ModalUsersComponent } from '../../../shared/components/modals/modal-users/modal-users.component';
 import { BaseTableComponent } from '../../../shared/components/tables/base-table.component';
+import { ModalPaymentsViewComponent } from '../../../shared/components/modals/modal-payments-view/modal-payments-view.component';
+import { ModalPaymentsComponent } from '../../../shared/components/modals/modal-payments/modal-payments.component';
 
 @Component({
   selector: 'app-service-maintainer',
@@ -21,7 +23,7 @@ export class PaymentsMaintainerComponent extends BaseTableComponent implements O
   ) { 
     super(modalService, route);
     const that = this;
-    that.modalComponent = ModalUsersComponent;
+    that.modalComponent = ModalPaymentsComponent;
   }
 
   ngOnInit(): void {
@@ -72,6 +74,17 @@ export class PaymentsMaintainerComponent extends BaseTableComponent implements O
     // }, (error) => {
     //   that.loadData = false;
     // });
+  }
+
+  openDetail(id: string) {
+    let ref = null;
+    ref = this.modalService.open(ModalPaymentsViewComponent, 
+      {
+        ariaLabelledBy: 'modal-basic-title', 
+        backdrop: 'static', 
+        size: 'lg'
+      }
+    );
   }
 
 }

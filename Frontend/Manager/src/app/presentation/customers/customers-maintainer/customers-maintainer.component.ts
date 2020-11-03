@@ -6,6 +6,8 @@ import { CustomerAllUseCase } from '../../../domain/customers/usecase/customer-a
 import { ModalDataObservable } from 'src/app/shared/components/modals/modal-data.observable';
 import { BaseTableComponent } from 'src/app/shared/components/tables/base-table.component';
 import { ModalUsersComponent } from 'src/app/shared/components/modals/modal-users/modal-users.component';
+import { ModalCustomersComponent } from 'src/app/shared/components/modals/modal-customers/modal-customers.component';
+import { ModalCustomersViewComponent } from 'src/app/shared/components/modals/modal-customers-view/modal-customers-view.component';
 
 @Component({
   selector: 'app-customers-maintainer',
@@ -23,7 +25,7 @@ export class CustomersMaintainerComponent extends BaseTableComponent implements 
   ) { 
     super(modalService, route);
     const that = this;
-    that.modalComponent = ModalUsersComponent;
+    that.modalComponent = ModalCustomersComponent;
   }
 
   ngOnInit(): void {
@@ -64,7 +66,7 @@ export class CustomersMaintainerComponent extends BaseTableComponent implements 
     });
   }
 
-  deleteRow(idPurchase: string): void {
+  deleteRow(id: string): void {
     const that = this;
     that.loadData = true;
     // that.purchaseRemoveUseCase.execute(idPurchase).subscribe( res => {
@@ -74,6 +76,17 @@ export class CustomersMaintainerComponent extends BaseTableComponent implements 
     // }, (error) => {
     //   that.loadData = false;
     // });
+  }
+
+  openDetail(id: string) {
+    let ref = null;
+    ref = this.modalService.open(ModalCustomersViewComponent, 
+      {
+        ariaLabelledBy: 'modal-basic-title', 
+        backdrop: 'static', 
+        size: 'lg'
+      }
+    );
   }
 
 }

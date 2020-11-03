@@ -22,20 +22,20 @@ export class ServiceRepository {
         return that.dataService.get(that.resource + '?size='+ obj.size  +'&page=' + obj.page);
     }
     
-    // get(id: string): Observable<ResponseDataDto<UserDto>> {
-    //     const that = this;
-    //     return that.dataService.get(that.resource, id);
-    // }
+    get(id: string): Observable<ResponseDataDto<ServiceDto>> {
+        const that = this;
+        return that.dataService.get(that.resource, id);
+    }
 
     // edit(id: string, object: ServiceStoreDto): Observable<ResponseDataDto<ResponseIdDataDto>> {
     //     const that = this;
     //     return that.dataService.put(that.resource, id, object);
     // }
 
-    // add(object: ServiceStoreDto): Observable<ResponseDataDto<ResponseIdDataDto>> {
-    //     const that = this;
-    //     return that.dataService.post(that.resource, object);
-    // }
+    add(object: ServiceStoreDto): Observable<ResponseDataDto<ResponseIdDataDto>> {
+        const that = this;
+        return that.dataService.post(that.resource, object);
+    }
 
     // remove(id: string): Observable<ResponseDataDto<ResponseIdDataDto>> { 
     //     const that = this;

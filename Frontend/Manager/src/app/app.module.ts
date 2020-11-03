@@ -37,8 +37,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     
     SecurityModule,
     PresentationModule,
-    // NgbModule,
-    
+    NgbModule
+  ],
+  exports: [
+    NgbModule
   ],
   providers: [
     {

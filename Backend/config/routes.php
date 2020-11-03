@@ -92,6 +92,10 @@ return function (App $app) {
             $group->delete('/{uuid}', \App\BackOffice\Payments\Application\Actions\PaymentRemoveAction::class);
         })->add(AuthValidateTokenMiddleware::class);
 
+        $group->group('/commons', function (RouteCollectorProxy $group) {
+            $group->get('/active-audit', \App\BackOffice\DataMaster\Application\Actions\DataMasterCommonTypeAction::class);
+        })->add(AuthValidateTokenMiddleware::class);
+
 //        $group->group('/categories', function (RouteCollectorProxy $group) {
 //            $group->post('', \App\BackOffice\Categories\Application\Actions\CategoryAddAction::class);
 //            $group->get('/{uuid}', \App\BackOffice\Categories\Application\Actions\CategoryFindAction::class);

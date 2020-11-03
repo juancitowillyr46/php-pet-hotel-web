@@ -101,4 +101,13 @@ class BaseService implements ServiceInterface
 
     }
 
+    public function executeCommonType(model $model, string $type): array {
+        $listCommon = [];
+        $common = $model::all()->where('type', '=' ,$type)->toArray();
+        foreach ($common as $item) {
+            $listCommon[] = ['value' => $item->uuid, 'text' => $item->name];
+        }
+        return $listCommon;
+    }
+
 }

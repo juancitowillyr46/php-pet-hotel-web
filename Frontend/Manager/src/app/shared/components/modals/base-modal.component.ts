@@ -1,5 +1,5 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, Input } from '@angular/core';
 import { CommonAuditStatusUseCase } from 'src/app/domain/commons/usecase/common-audit-status.usecase';
 import { CommonDto } from 'src/app/domain/commons/model/common.dto';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -15,6 +15,8 @@ export class BaseModalComponent {
     public commonAuditStatusUseCase: CommonAuditStatusUseCase;
 
     public modalService: NgbModal = null;
+
+    @Input() public dataModal: any = null;
 
     constructor(
         @Inject(FormBuilder) formBuilder: FormBuilder,

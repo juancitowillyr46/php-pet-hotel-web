@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ServiceAllUseCase } from '../../../domain/services/usecase/service-all.usecase';
 import { ModalUsersComponent } from '../../../shared/components/modals/modal-users/modal-users.component';
+import { ModalServicesComponent } from '../../../shared/components/modals/modal-services/modal-services.component';
 import { BaseTableComponent } from '../../../shared/components/tables/base-table.component';
 
 @Component({
@@ -21,7 +22,7 @@ export class ServicesMaintainerComponent extends BaseTableComponent implements O
   ) { 
     super(modalService, route);
     const that = this;
-    that.modalComponent = ModalUsersComponent;
+    that.modalComponent = ModalServicesComponent;
   }
 
   ngOnInit(): void {

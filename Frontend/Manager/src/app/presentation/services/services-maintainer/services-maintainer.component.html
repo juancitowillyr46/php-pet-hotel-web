@@ -49,30 +49,35 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr *ngFor="let service of dataRows">
+                            <tr *ngFor="let row of dataRows">
                               <td width="14%">
-                                {{ service.name }}
+                                {{ row.name }}
                               </td>
                               <td width="14%">
-                                {{ service.price }}
+                                {{ row.price }}
                               </td>
                               <td width="14%">
-                                {{ service.serviceTypeName }}
+                                {{ row.serviceTypeName }}
                               </td>                              
                               <td width="14%">
-                                {{ service.activeName }}
+                                {{ row.activeName }}
                               </td>
                               <td width="14%">
-                                {{ service.createdAt }}
+                                {{ row.createdAt }}
                               </td>
                               <td width="10%" align="center">
                                 <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic"> 
-                                  <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Editar" (click)="onClickModalStore(service.id)">
+                                  <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Editar" (click)="onClickModalStore(row.id)">
                                     <a href="javascript:void(0)" ngbButton class="text-white">
                                       <fa-icon [icon]="['fas', 'pencil-alt']" class="mr-1"></fa-icon>
                                     </a>
                                   </label>
-                                  <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Eliminar" (click)="onClickRemove(service.id)">
+                                  <!-- <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Ver detalle" (click)="onClickRemove(row.id)">
+                                    <a href="javascript:void(0)" ngbButton class="text-white">
+                                      <fa-icon [icon]="['fas', 'eye']" class="mr-1" ></fa-icon>
+                                    </a>
+                                  </label> -->
+                                  <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Eliminar" (click)="onClickRemove(row.id)">
                                     <a href="javascript:void(0)" ngbButton class="text-white">
                                       <fa-icon [icon]="['fas', 'trash']" class="mr-1" ></fa-icon>
                                     </a>

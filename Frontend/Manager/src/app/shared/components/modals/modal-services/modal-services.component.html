@@ -1,0 +1,76 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Servicio 
+      <fa-icon [icon]="['fas', 'spinner']" class="mr-1" [pulse]="true" *ngIf="loadData"></fa-icon>
+    </h5>
+    <button type="button" class="close" (click)="closeModal('CLOSE')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formGroup" novalidate >
+      <div class="form-group">
+          <label for="providerId">Tipo de Servicio:</label>
+          <select id="providerId" class="form-control mb-3" formControlName="serviceTypeId">
+              <option disabled selected>-- SELECCIONE --</option>
+              <option>PAQUETE</option>
+              <option>SERVICIO</option>
+          </select>
+          <label *ngIf="formGroup.get('serviceTypeId').errors && formGroup.get('serviceTypeId').value" id="serviceTypeId" class="error mt-2 text-danger" for="serviceTypeId">Campo obligatorio.</label>
+      </div>
+      <div class="form-group">
+          <label for="name">Nombre:</label>
+          <input type="text" class="form-control" id="name" placeholder="Ingrese nombre del servicio"
+          formControlName="name" 
+          [ngClass]="[   
+          (
+              formGroup.get('name').errors == null && 
+              (formGroup.get('name').value != null || formGroup.get('name').value != '')
+          )? 'is-valid' : ''
+          ]" 
+          >
+      </div>
+
+      <div class="form-group">
+          <label for="note">Descripción:</label>
+          <textarea class="form-control" id="description" name="description" placeholder="Ingrese una descripción" rows="4"
+          formControlName="description" 
+          [ngClass]="[   
+          (
+              formGroup.get('description').errors == null && 
+              (formGroup.get('description').value != null || formGroup.get('description').value != '')
+          )? 'is-valid' : ''
+          ]" 
+          ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="price">Precio:</label>
+        <input type="text" class="form-control" id="price" placeholder="Ingrese el precio"
+        formControlName="price" 
+        [ngClass]="[   
+        (
+            formGroup.get('price').errors == null && 
+            (formGroup.get('price').value != null || formGroup.get('name').value != '')
+        )? 'is-valid' : ''
+        ]" 
+        >
+    </div>
+
+      <div class="form-group">
+          <label for="active">Activo:</label>
+          <select id="active" class="form-control" formControlName="active">
+              <option value="">--SELECCIONE--</option>
+              <option value [value]="item.value" *ngFor="let item of commonAuditStatus">{{item.text}}</option>
+          </select>
+          <label *ngIf="formGroup.controls.active.errors && formGroup.controls.active.value" id="active" class="error mt-2 text-danger" for="active">Campo obligatorio.</label>
+      </div>
+    </form>
+    <button type="button" class="btn btn-primary mr-2 mt-15" (click)="onClickDone()" [disabled]="(formGroup.invalid || submit === true)">
+        <fa-icon [icon]="['fas', 'spinner']" class="mr-1" [pulse]="true" *ngIf="submit"></fa-icon>
+        Guardar
+    </button>
+    <button type="button" (click)="onClickClose()" class="btn btn-danger mt-15">
+        Cancelar
+    </button>
+  </div>
+  

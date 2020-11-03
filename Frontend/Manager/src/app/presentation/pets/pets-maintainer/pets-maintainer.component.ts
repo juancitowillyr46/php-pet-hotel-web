@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PetAllUseCase } from '../../../domain/pets/usecase/pet-all.usecase';
-import { ModalUsersComponent } from '../../../shared/components/modals/modal-users/modal-users.component';
+import { ModalPetsComponent } from '../../../shared/components/modals/modal-pets/modal-pets.component';
 // import { ModalPetsComponent } from '../../../shared/components/modals/modal-pets/modal-pets.component';
 import { BaseTableComponent } from '../../../shared/components/tables/base-table.component';
 
@@ -22,7 +22,7 @@ export class PetsMaintainerComponent extends BaseTableComponent implements OnIni
   ) { 
     super(modalService, route);
     const that = this;
-    that.modalComponent = ModalUsersComponent;
+    that.modalComponent = ModalPetsComponent;
   }
 
   ngOnInit(): void {

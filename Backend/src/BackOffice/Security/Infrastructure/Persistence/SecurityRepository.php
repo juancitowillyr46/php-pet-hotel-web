@@ -20,8 +20,13 @@ class SecurityRepository extends BaseRepository implements SecurityRepositoryInt
         $this->setModel($loginModel);
     }
 
-    public function searchUserByUsername(string $username): array
+    public function searchUserByUsername(string $username): ?array
     {
-        return $this->loginModel::all()->where('email', '=', $username)->first()->toArray();
+        $success = $this->loginModel::all()->where('email', '=', $username)->first();
+        $row = null;
+        if(!is_null($success)){
+            $row = $success->toArray();
+        }
+        return $row;
     }
 }

@@ -15,6 +15,7 @@ use App\BackOffice\Security\Infrastructure\Persistence\SecurityRepository;
 use App\Shared\Domain\Services\BaseService;
 use App\Shared\Utility\JwtCustom;
 use App\Shared\Utility\SecurityPassword;
+use Exception;
 use Psr\Log\LoggerInterface;
 
 class SecurityService extends BaseService
@@ -35,14 +36,16 @@ class SecurityService extends BaseService
 
         $this->loginEntity->payload((object)$request);
 
-        $user = $this->securityRepository->searchUserByUsername($request['username']);
+        $success = $this->securityRepository->searchUserByUsername($request['username']);
+
+        if(is_null($success)){
+            throw new UserNotExistException();
+        }
+
+        $user = (array)$success;
 
         if($isAdmin == true && $user['role_id'] != 2){
             throw new UserIsNotAdminException();
-        }
-
-        if(is_null($user)){
-            throw new UserNotExistException();
         }
 
         $this->isBlockedUser($user);

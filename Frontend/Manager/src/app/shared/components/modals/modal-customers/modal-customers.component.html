@@ -1,0 +1,128 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Cliente 
+      <fa-icon [icon]="['fas', 'spinner']" class="mr-1" [pulse]="true" *ngIf="loadData"></fa-icon>
+    </h5>
+    <button type="button" class="close" (click)="closeModal('CLOSE')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formGroup" novalidate >
+      
+        <div class="form-group">
+            <label for="firstName">Nombre:</label>
+            <input type="text" class="form-control" id="firstName" placeholder="Ingrese nombres completos"
+            formControlName="firstName" 
+            [ngClass]="[   
+            (
+                formGroup.get('firstName').errors == null && 
+                (formGroup.get('firstName').value != null || formGroup.get('firstName').value != '')
+            )? 'is-valid' : ''
+            ]" 
+            >
+        </div>
+
+        
+        <div class="form-group">
+            <label for="lastName">Apellidos:</label>
+            <textarea class="form-control" id="lastName" name="lastName" placeholder="Ingrese apellidos" rows="4"
+            formControlName="lastName" 
+            [ngClass]="[   
+            (
+                formGroup.get('lastName').errors == null && 
+                (formGroup.get('lastName').value != null || formGroup.get('lastName').value != '')
+            )? 'is-valid' : ''
+            ]" 
+            ></textarea>
+           
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Teléfono fijo / celular:</label>
+            <textarea class="form-control" id="phone" name="phone" placeholder="Ingrese teléfono fijo / celular" rows="4"
+            formControlName="phone" 
+            [ngClass]="[   
+            (
+                formGroup.get('phone').errors == null && 
+                (formGroup.get('phone').value != null || formGroup.get('phone').value != '')
+            )? 'is-valid' : ''
+            ]" 
+            ></textarea>
+           
+        </div>
+
+        <div class="form-group">
+            <label for="address">Dirección principal:</label>
+            <textarea class="form-control" id="address" name="address" placeholder="Ingrese otro datos" rows="4"
+            formControlName="address" 
+            [ngClass]="[   
+            (
+                formGroup.get('address').errors == null && 
+                (formGroup.get('address').value != null || formGroup.get('address').value != '')
+            )? 'is-valid' : ''
+            ]" 
+            ></textarea>
+           
+        </div>
+
+        <div class="form-group">
+            <label for="addressOptional">Dirección opcional:</label>
+            <textarea class="form-control" id="addressOptional" name="addressOptional" placeholder="Ingrese otro datos" rows="4"
+            formControlName="addressOptional" 
+            [ngClass]="[   
+            (
+                formGroup.get('addressOptional').errors == null && 
+                (formGroup.get('addressOptional').value != null || formGroup.get('addressOptional').value != '')
+            )? 'is-valid' : ''
+            ]" 
+            ></textarea>
+           
+        </div>
+
+        <div class="form-group">
+            <label for="comments">Comentario:</label>
+            <textarea class="form-control" id="addressOptional" name="comments" placeholder="Ingrese otro datos" rows="4"
+            formControlName="comments" 
+            [ngClass]="[   
+            (
+                formGroup.get('comments').errors == null && 
+                (formGroup.get('comments').value != null || formGroup.get('comments').value != '')
+            )? 'is-valid' : ''
+            ]" 
+            ></textarea>
+           
+        </div>
+
+        <!-- <div class="form-group">
+            <label for="comments">Comentario:</label>
+            <textarea class="form-control" id="addressOptional" name="comments" placeholder="Ingrese otro datos" rows="4"
+            formControlName="comments" 
+            [ngClass]="[   
+            (
+                formGroup.get('comments').errors == null && 
+                (formGroup.get('comments').value != null || formGroup.get('comments').value != '')
+            )? 'is-valid' : ''
+            ]" 
+            ></textarea>
+           
+        </div> -->
+
+
+        <div class="form-group">
+            <label for="active">Activo:</label>
+            <select id="active" class="form-control" formControlName="active">
+                <option value="">--SELECCIONE--</option>
+                <option value [value]="item.value" *ngFor="let item of commonAuditStatus">{{item.text}}</option>
+            </select>
+            <label *ngIf="formGroup.controls.active.errors && formGroup.controls.active.value" id="active" class="error mt-2 text-danger" for="active">Campo obligatorio.</label>
+        </div>
+    </form>
+    <button type="button" class="btn btn-primary mr-2 mt-15" (click)="onClickDone()" [disabled]="(formGroup.invalid || submit === true)">
+        <fa-icon [icon]="['fas', 'spinner']" class="mr-1" [pulse]="true" *ngIf="submit"></fa-icon>
+        Guardar
+    </button>
+    <button type="button" (click)="onClickClose()" class="btn btn-danger mt-15">
+        Cancelar
+    </button>
+  </div>
+  
