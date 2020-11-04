@@ -27,10 +27,10 @@ export class ServiceRepository {
         return that.dataService.get(that.resource, id);
     }
 
-    // edit(id: string, object: ServiceStoreDto): Observable<ResponseDataDto<ResponseIdDataDto>> {
-    //     const that = this;
-    //     return that.dataService.put(that.resource, id, object);
-    // }
+    edit(id: string, object: ServiceStoreDto): Observable<ResponseDataDto<ResponseIdDataDto>> {
+        const that = this;
+        return that.dataService.put(that.resource, id, object);
+    }
 
     add(object: ServiceStoreDto): Observable<ResponseDataDto<ResponseIdDataDto>> {
         const that = this;

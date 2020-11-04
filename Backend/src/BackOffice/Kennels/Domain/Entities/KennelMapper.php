@@ -25,6 +25,8 @@ class KennelMapper
             new CamelCaseNamingConvention()
         )->forMember('activeName', function ($source) {
             return ($source['active'] == true)? 'SI' : 'NO';
+        })->forMember('isBookedName', function ($source) {
+            return ($source['is_booked'] == true)? 'SI' : 'NO';
         })->forMember('createdAt', function ($source) {
             $time = strtotime($source['created_at']);
             return date('d-m-Y H:m:s', $time);

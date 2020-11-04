@@ -22,25 +22,25 @@ export class KennelRepository {
         return that.dataService.get(that.resource + '?size='+ obj.size  +'&page=' + obj.page);
     }
     
-    // get(id: string): Observable<ResponseDataDto<UserDto>> {
-    //     const that = this;
-    //     return that.dataService.get(that.resource, id);
-    // }
+    get(id: string): Observable<ResponseDataDto<KennelDto>> {
+        const that = this;
+        return that.dataService.get(that.resource, id);
+    }
 
-    // edit(id: string, object: PetStoreDto): Observable<ResponseDataDto<ResponseIdDataDto>> {
-    //     const that = this;
-    //     return that.dataService.put(that.resource, id, object);
-    // }
+    edit(id: string, object: KennelStoreDto): Observable<ResponseDataDto<ResponseIdDataDto>> {
+        const that = this;
+        return that.dataService.put(that.resource, id, object);
+    }
 
-    // add(object: PetStoreDto): Observable<ResponseDataDto<ResponseIdDataDto>> {
-    //     const that = this;
-    //     return that.dataService.post(that.resource, object);
-    // }
+    add(object: KennelStoreDto): Observable<ResponseDataDto<ResponseIdDataDto>> {
+        const that = this;
+        return that.dataService.post(that.resource, object);
+    }
 
-    // remove(id: string): Observable<ResponseDataDto<ResponseIdDataDto>> { 
-    //     const that = this;
-    //     return that.dataService.delete(that.resource, id);
-    // }
+    remove(id: string): Observable<ResponseDataDto<ResponseIdDataDto>> { 
+        const that = this;
+        return that.dataService.delete(that.resource, id);
+    }
 
     
 

@@ -101,11 +101,40 @@ class BaseService implements ServiceInterface
 
     }
 
-    public function executeCommonType(model $model, string $type): array {
+    public function executeCommonType(string $type): array {
         $listCommon = [];
-        $common = $model::all()->where('type', '=' ,$type)->toArray();
+        $dataMaster = new DataMasterModel();
+
+        $table = '';
+        if($type == 'audit-status') {
+            $table = 'TABLE_STATE_AUDIT';
+        } else if($type == 'blocked-user') {
+            $table = 'TABLE_BLOCKED_USER';
+        } else if($type == 'is-booked') {
+            $table = 'TABLE_IS_BOOKED';
+        }
+
+        $common = $dataMaster::all()->where('type', '=' ,$table)->toArray();
+
+        if($type == 'audit-status' || $type == 'blocked-user' || $type == 'is-booked'){
+            foreach ($common as $item) {
+                $listCommon[] = ['value' => $item['id_row'] == 1, 'text' => $item['name']];
+            }
+        } else {
+            foreach ($common as $item) {
+                $listCommon[] = ['value' => $item['id'], 'text' => $item['name']];
+            }
+        }
+
+
+        return $listCommon;
+    }
+
+    public function executeCommon(Model $model): array {
+        $listCommon = [];
+        $common = $model::all()->toArray();
         foreach ($common as $item) {
-            $listCommon[] = ['value' => $item->uuid, 'text' => $item->name];
+            $listCommon[] = ['value' => $item['uuid'], 'text' => $item['name']];
         }
         return $listCommon;
     }

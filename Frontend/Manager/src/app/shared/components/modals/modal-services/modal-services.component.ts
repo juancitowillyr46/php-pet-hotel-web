@@ -5,8 +5,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BaseModalComponent } from '../base-modal.component';
 import { CommonAuditStatusUseCase } from '../../../../domain/commons/usecase/common-audit-status.usecase';
 
-// import { ServiceAddUseCase } from '../../../../domain/services/usecase/service-add.usecase';
+import { ServiceAddUseCase } from '../../../../domain/services/usecase/service-add.usecase';
+import { ServiceEditUseCase } from '../../../../domain/services/usecase/service-edit.usecase';
 import { ServiceGetUseCase } from '../../../../domain/services/usecase/service-get.usecase';
+import { CommonTypeServiceUseCase } from '../../../../domain/commons/usecase/common-type-service.usecase';
+import { CommonDto } from 'src/app/domain/commons/model/common.dto';
+import { ServiceStoreDto } from 'src/app/domain/services/model/service-store.dto';
+
 
 declare var $: any;
 
@@ -20,10 +25,13 @@ export class ModalServicesComponent extends BaseModalComponent implements OnInit
   public modalDataSub: Subscription;
   public dataModal: any;
   public submit: any = null;
+  public commonTypeService: CommonDto[] = [];
   
   constructor(
-    // private serviceAddUserCase: ServiceAddUseCase,
+    private commonTypeServiceUseCase: CommonTypeServiceUseCase,
     private serviceGetUseCase: ServiceGetUseCase,
+    private serviceAddUseCase: ServiceAddUseCase,
+    private serviceEditUseCase: ServiceEditUseCase,
     public formBuilder: FormBuilder,
     public modalService: NgbModal,
     public commonAuditStatusUseCase: CommonAuditStatusUseCase
@@ -34,6 +42,7 @@ export class ModalServicesComponent extends BaseModalComponent implements OnInit
 
   ngOnInit(): void {
     const that = this;
+    that.loadCommon();
     that.buildingFormPurchases();
     that.getRow();
   }
@@ -48,8 +57,6 @@ export class ModalServicesComponent extends BaseModalComponent implements OnInit
         that.loadData = false;
         that.formGroup.patchValue(res);
         that.formGroup.enable();
-        // that.onChangeProductByProvider(that.formGroup.controls.providerId.value);
-        // that.getRowsOrders();
       }, (error) => {
         
       });
@@ -62,7 +69,7 @@ export class ModalServicesComponent extends BaseModalComponent implements OnInit
       serviceTypeId: ['', [Validators.required]],
       name: ['', [Validators.required]],
       description: ['', [Validators.required]], 
-      price: ['', [Validators.required]],
+      price: [0, [Validators.required]],
       active: [true, [Validators.required]]
     });
   }
@@ -73,6 +80,48 @@ export class ModalServicesComponent extends BaseModalComponent implements OnInit
   }
 
   onClickDone() {
+    const that = this;
+    
+    let object: ServiceStoreDto = that.formGroup.value;
+
+    object.active = (that.formGroup.controls.active.value == 'true' || that.formGroup.controls.active.value == true)? true : false;
+    object.main = false;
+    object.image = '';
+
+    that.formGroup.disable();
+
+    if(that.dataModal.id !== ''){
+      object.id = that.dataModal.id;
+      that.serviceEditUseCase.execute(object).subscribe( res => {
+        that.submit = true;
+        that.formGroup.enable();
+        setTimeout(() => { 
+          that.closeModal('DONE');
+        }, 1000);
+      }, (error) => {
+        that.submit = false;
+      });
+    }
+     else {
+      that.serviceAddUseCase.execute(object).subscribe( res => {
+        that.submit = true;
+        that.formGroup.enable();
+        setTimeout(() => { 
+          that.closeModal('DONE');
+        }, 1000);
+
+        
+      }, (error) => {
+        that.submit = false;
+      });
+    }
+  }
+
+  loadCommon(): void {
+    const that = this;
+    that.commonTypeServiceUseCase.execute().subscribe( res => {
+      that.commonTypeService = res;
+    });
   }
 
 }

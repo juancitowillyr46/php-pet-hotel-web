@@ -8,14 +8,14 @@ import { CommonRepository } from '../repository/common.repository';
 @Injectable({
     providedIn: 'root'
 })
-export class CommonUbigeoDistrictsUseCase implements UseCase<any, CommonDto[]> {
+export class CommonTypeServiceUseCase implements UseCase<any, CommonDto[]> {
 
     constructor(private commonRepository: CommonRepository) {}
 
-    public execute(obj: any): Observable<CommonDto[]> {
+    public execute(): Observable<CommonDto[]> {
         const that = this;
         let commonData: CommonDto[];
-        return that.commonRepository.getCommonUbigeoDistricts(obj.departmentId, obj.provinceId).pipe(map(res => {
+        return that.commonRepository.getCommonTypeService().pipe(map(res => {
             commonData = res.data;
             return commonData;
         }));

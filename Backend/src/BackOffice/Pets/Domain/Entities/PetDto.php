@@ -17,11 +17,11 @@ class PetDto
     public string $size;
     public string $diseases;
     public string $veterinary;
-    public string $veterinary_phone;
+    public string $veterinaryPhone;
     public string $treatments;
-    public string $last_vaccine;
-    public bool $is_agressive;
+    public string $lastVaccine;
+    public string $isAgressive;
     public string $observation;
-    public string $last_zeal;
+    public string $lastZeal;
     public string $other;
 }

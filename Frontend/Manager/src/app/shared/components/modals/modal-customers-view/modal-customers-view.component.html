@@ -1,6 +1,6 @@
 <div class="modal-header">
     <h5 class="modal-title" id="exampleModalLabel">Cliente 
-      <!-- <fa-icon [icon]="['fas', 'spinner']" class="mr-1" [pulse]="true" *ngIf="loadData"></fa-icon> -->
+      <fa-icon [icon]="['fas', 'spinner']" class="mr-1" [pulse]="true" *ngIf="loadData"></fa-icon>
     </h5>
     <button type="button" class="close" (click)="closeModal('CLOSE')">
       <span aria-hidden="true">&times;</span>
@@ -13,173 +13,118 @@
           <a ngbNavLink><fa-icon [icon]="['fas', 'user']" class="mr-1"></fa-icon> Cliente</a>
           <ng-template ngbNavContent>
             <div class="w-100 d-inline-block" style="vertical-align: top;">
-                <table class="table table-sm p-0">
-                    <tr>
+                <table class="table table-sm p-0" *ngIf="row">
+                    <!-- <tr>
                         <td style="border-top: 0 !important;" colspan="2">
                             <fa-icon [icon]="['fas', 'caret-right']" class="mr-1"></fa-icon> <b>Información personal</b>
                         </td>
+                    </tr> -->
+                    <tr>
+                        <td style="border-top: 0 !important;">Foto</td><td style="border-top: 0 !important;"><img src="http://localhost:4200/assets/img/shop-img/1.png" alt="contact-img" title="contact-img" class="round mr-3 product-thumb"></td>
                     </tr>
                     <tr>
-                        <td>Foto</td><td><img src="http://localhost:4200/assets/img/shop-img/1.png" alt="contact-img" title="contact-img" class="round mr-3 product-thumb"></td>
+                        <td>Nombres</td><td>{{row.firstName}}</td>
                     </tr>
                     <tr>
-                        <td>Nombres</td><td>Juan</td>
+                        <td>Apellidos</td><td>{{row.lastName}}</td>
                     </tr>
                     <tr>
-                        <td>Apellidos</td><td>Rodas</td>
+                        <td>Teléfono</td><td>{{row.phone}}</td>
                     </tr>
                     <tr>
-                        <td>Teléfono</td><td>943873302</td>
+                        <td>Dirección principal</td><td>{{row.address}}</td>
                     </tr>
                     <tr>
-                        <td>Dirección principal</td><td>asdasdas</td>
+                        <td>Dirección opcional</td><td>{{row.addressOptional}}</td>
                     </tr>
                     <tr>
-                        <td>Dirección opcional</td><td>asdasdas</td>
+                        <td>Comentario</td><td>{{row.comments}}</td>
                     </tr>
-                    <tr>
-                        <td>Comentario</td><td>asdasdas</td>
-                    </tr>
-                    <tr>
+                    <!-- <tr>
                         <td colspan="2">
                             <fa-icon [icon]="['fas', 'caret-right']" class="mr-1"></fa-icon> <b>Accesos</b>
                         </td>
-                    </tr>
-                    <tr>
+                    </tr> -->
+                    <!-- <tr>
                         <td>Usuario</td><td>jrodas@pethotel.pe</td>
                     </tr>
                     <tr>
                         <td>Correo</td><td>jrodas@pethotel.pe</td>
-                    </tr>
+                    </tr> -->
                 </table>
               </div>
           </ng-template>
         </li>
         <li [ngbNavItem]="2">
           <a ngbNavLink><fa-icon [icon]="['fas', 'dog']" class="mr-1"></fa-icon> Mascotas</a>
+
+          
           <ng-template ngbNavContent>
-            
+            <!-- <div *ngIf="row" class="pb-2">Total: {{row.pets.length}}</div> -->
             <ngb-accordion [closeOthers]="true">
-                <ngb-panel id="static-1">
+                <ngb-panel [id]="'static' + pet.id" *ngFor="let pet of row.pets; let i = index;">
                     <ng-template ngbPanelTitle>
-                        <span>Perro 1</span>
+                        <span>{{i + 1}}. {{pet.name}}</span>
                     </ng-template>
                   <ng-template ngbPanelContent>
                       <div class="w-100 d-inline-block" style="vertical-align: top;">
                         <table class="table table-sm p-0">
-                            <tr>
+                            <!-- <tr>
                                 <td style="border-top: 0 !important;" colspan="2">
                                     <fa-icon [icon]="['fas', 'caret-right']" class="mr-1"></fa-icon>
                                     <b>Datos Básicos</b>
                                 </td>
+                            </tr> -->
+                            <tr>
+                                <td style="border-top: 0 !important;">Foto</td><td style="border-top: 0 !important;"><img [src]="pet.image" alt="contact-img" title="contact-img" class="round mr-3 product-thumb"></td>
                             </tr>
                             <tr>
-                                <td>Foto</td><td><img src="http://localhost:4200/assets/img/shop-img/1.png" alt="contact-img" title="contact-img" class="round mr-3 product-thumb"></td>
+                                <td>Edad</td><td>{{pet.age}}</td>
                             </tr>
                             <tr>
-                                <td>Edad</td><td>12</td>
+                                <td>Género</td><td>{{pet.gender}}</td>
                             </tr>
-                            <tr>
-                                <td>Género</td><td>M</td>
-                            </tr>
-                            <tr>
+                            <!-- <tr>
                                 <td colspan="2">
                                     <fa-icon [icon]="['fas', 'caret-right']" class="mr-1"></fa-icon>
                                     <b>Datos Médicos</b>
                                 </td>
+                            </tr> -->
+                            <tr>
+                                <td>Peso</td><td>{{pet.weight}}</td>
                             </tr>
                             <tr>
-                                <td>Peso</td><td>asdasdas</td>
+                                <td>Enfermedades y<br> condiciones pre-existentes</td><td>{{pet.diseases}}</td>
                             </tr>
                             <tr>
-                                <td>Enfermedades y<br> condiciones pre-existentes</td><td>asdasdas</td>
+                                <td>Nombre del veterinario</td><td>{{pet.veterinary}}</td>
                             </tr>
                             <tr>
-                                <td>Nombre del veterinario</td><td>asdasdas</td>
+                                <td>Teléfono</td><td>{{pet.veterinaryPhone}}</td>
                             </tr>
                             <tr>
-                                <td>Teléfono</td><td>asdasdas</td>
+                                <td>Tratamientos recibidos</td><td>{{pet.treatments}}</td>
                             </tr>
                             <tr>
-                                <td>Tratamientos recibidos</td><td>asdasdas</td>
+                                <td>Última vacuna</td><td>{{pet.lastVaccine}}</td>
                             </tr>
                             <tr>
-                                <td>Última vacuna</td><td>asdasdas</td>
+                                <td>Es agresivo</td><td>{{pet.isAgressive}}</td>
                             </tr>
                             <tr>
-                                <td>Es agresivo</td><td>asdasdas</td>
+                                <td>Depende</td><td>{{pet.observation}}</td>
                             </tr>
                             <tr>
-                                <td>Depende</td><td>asdasdas</td>
+                                <td>Fecha de celo</td><td>{{pet.lastZeal}}</td>
                             </tr>
                             <tr>
-                                <td>Fecha de celo</td><td>asdasdas</td>
-                            </tr>
-                            <tr>
-                                <td>Otros</td><td>asdasdas</td>
+                                <td>Otros</td><td>{{pet.other}}</td>
                             </tr>
                         </table>
                       </div>
                   </ng-template>
                 </ngb-panel>
-                <ngb-panel id="static-2">
-                  <ng-template ngbPanelTitle>
-                        <span>Perro 2</span>
-                  </ng-template>
-                  <ng-template ngbPanelContent>
-                    <div class="w-100 d-inline-block" style="vertical-align: top;">
-                        <table class="table table-sm p-0">
-                            <tr>
-                                <td style="border-top: 0 !important;" colspan="2">
-                                    <b>Datos Básicos</b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Foto</td><td><img src="http://localhost:4200/assets/img/shop-img/1.png" alt="contact-img" title="contact-img" class="round mr-3 product-thumb"></td>
-                            </tr>
-                            <tr>
-                                <td>Edad</td><td>12</td>
-                            </tr>
-                            <tr>
-                                <td>Género</td><td>M</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"><b>Datos Médicos</b></td>
-                            </tr>
-                            <tr>
-                                <td>Peso</td><td>asdasdas</td>
-                            </tr>
-                            <tr>
-                                <td>Enfermedades y<br> condiciones pre-existentes</td><td>asdasdas</td>
-                            </tr>
-                            <tr>
-                                <td>Nombre del veterinario</td><td>asdasdas</td>
-                            </tr>
-                            <tr>
-                                <td>Teléfono</td><td>asdasdas</td>
-                            </tr>
-                            <tr>
-                                <td>Tratamientos recibidos</td><td>asdasdas</td>
-                            </tr>
-                            <tr>
-                                <td>Última vacuna</td><td>asdasdas</td>
-                            </tr>
-                            <tr>
-                                <td>Es agresivo</td><td>asdasdas</td>
-                            </tr>
-                            <tr>
-                                <td>Depende</td><td>asdasdas</td>
-                            </tr>
-                            <tr>
-                                <td>Fecha de celo</td><td>asdasdas</td>
-                            </tr>
-                            <tr>
-                                <td>Otros</td><td>asdasdas</td>
-                            </tr>
-                        </table>
-                      </div>
-                  </ng-template>
-                </ngb-panel>
+
 
             </ngb-accordion>
            

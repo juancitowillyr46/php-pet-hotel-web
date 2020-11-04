@@ -42,6 +42,7 @@
                             <tr>
                               <!-- <th scope="col">Código</th> -->
                               <th scope="col">Nombre</th>
+                              <th scope="col">Reservado</th>
                               <th scope="col">Disponible</th>
                               <th scope="col">Fecha registro</th>
                               <!-- <th>Disponible reserva</th> -->
@@ -55,7 +56,11 @@
                               </td> -->
                               <td width="14%">
                                 {{ row.name }}
-                              </td>                           
+                              </td>  
+                              <td width="14%">
+                                <div class="badge badge-danger-lighten" *ngIf="row.isBooked==true">{{ row.isBookedName }}</div>
+                                <div class="badge badge-success-lighten" *ngIf="row.isBooked==false">{{ row.isBookedName }}</div>
+                              </td>                         
                               <td width="14%">
                                 {{ row.activeName }}
                               </td>
@@ -69,16 +74,16 @@
                                       <fa-icon [icon]="['fas', 'pencil-alt']" class="mr-1"></fa-icon>
                                     </a>
                                   </label>
-                                  <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Ver detalle" (click)="onClickRemove(row.id)">
+                                  <!-- <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Ver detalle" (click)="onClickRemove(row.id)">
                                     <a href="javascript:void(0)" ngbButton class="text-white">
                                       <fa-icon [icon]="['fas', 'eye']" class="mr-1" ></fa-icon>
                                     </a>
-                                  </label>
-                                  <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Eliminar" (click)="onClickRemove(row.id)">
+                                  </label> -->
+                                  <!-- <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Eliminar" (click)="onClickRemove(row.id)">
                                     <a href="javascript:void(0)" ngbButton class="text-white">
                                       <fa-icon [icon]="['fas', 'trash']" class="mr-1" ></fa-icon>
                                     </a>
-                                  </label>
+                                  </label> -->
                                 </div>
                               </td>
                             </tr>

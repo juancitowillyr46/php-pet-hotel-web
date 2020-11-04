@@ -2,22 +2,13 @@ export interface CustomerDto {
     id: string;
     firstName: string;
     lastName: string;
-    email: string;
-    ruc: string;
-    businessName: string;
-    homePhoneNumber: string;
-    cellPhoneNumber: string;
-    documentNumber: string;
-    documentTypeName: string;
-    documentTypeId: string;
+    phone: string;
     address: string;
-    departmentId: string;
-    provinceId: string;
-    districtId: string;
-    departmentName: string;
-    provinceName: string;
-    districtName: string;
+    addressOptional: string;
+    comments: string;
+    image: string;
     active: boolean;
     activeName: string;
     createdAt: string;
+    pets: any[];
 }

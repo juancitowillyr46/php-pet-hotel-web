@@ -2,6 +2,7 @@
 namespace App\BackOffice\Users\Domain\Entities;
 
 use App\BackOffice\Users\Domain\Exceptions\UserActionRequestSchema;
+use App\BackOffice\Users\Domain\Exceptions\UserEditPasswordRequestSchema;
 use App\Shared\Domain\Entities\Audit;
 use App\Shared\Utility\SecurityPassword;
 use Exception;
@@ -139,11 +140,25 @@ class UserEntity extends Audit
             $validate = new UserActionRequestSchema();
             $validate->getMessages((array)$formData);
             $this->identifiedResource($formData);
-            $this->setPassword(SecurityPassword::encryptPassword($formData->password));
             $this->setUsername($formData->username);
             $this->setEmail($formData->email);
             $this->setActive($formData->active);
             $this->setBlocked($formData->blocked);
+
+        } catch(Exception $ex) {
+            throw new Exception($ex->getMessage(), $ex->getCode());
+        }
+
+    }
+
+    public function payloadPassword(object $formData): void {
+
+        try {
+
+            $validate = new UserEditPasswordRequestSchema();
+            $validate->getMessages((array)$formData);
+            $this->identifiedResource($formData);
+            $this->setPassword(SecurityPassword::encryptPassword($formData->password));
 
         } catch(Exception $ex) {
             throw new Exception($ex->getMessage(), $ex->getCode());

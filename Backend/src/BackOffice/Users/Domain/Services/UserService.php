@@ -44,6 +44,13 @@ class UserService extends BaseService
         return $this->userEntity->getResponseDataId();
     }
 
+    public function executeEditPassword(array $request, string $uuid): object {
+        $this->compareArgs($request['id'], $uuid);
+        $formData = $this->setFormDataPassword($request);
+        $this->edit((array)$formData, $uuid);
+        return $this->userEntity->getResponseDataId();
+    }
+
     public function executeRemove(string $uuid): object {
         $this->remove($uuid);
         $this->userEntity->setUuid($uuid);
@@ -56,13 +63,16 @@ class UserService extends BaseService
     }
 
     public function executeGetAll(array $query): object {
-        $getRows = $this->getAllRows($query, true);
+        $rows = $this->getAllRows($query, true);
         $list = [];
-        foreach ($getRows->rows as $getRow) {
-            $list[] = $this->getUserDto($getRow);
+        foreach ($rows->rows as $row) {
+            if($row['role_id'] == 1){
+                $list[] = $this->getUserDto($row);
+            }
+
         }
-        $getRows->rows = $list;
-        return $getRows;
+        $rows->rows = $list;
+        return $rows;
     }
 
     public function executeMe(string $uuid): object {
@@ -79,6 +89,11 @@ class UserService extends BaseService
         $this->userEntity->setRoleId($this->getIdByUuidModel(new RoleModel(), $request['roleId'])); // Role Id
         $this->userEntity->payload((object)$request);
         $this->validateDuplicateRow();
+        return $this->userEntity;
+    }
+
+    public function setFormDataPassword(array $request): UserEntity {
+        $this->userEntity->payloadPassword((object)$request);
         return $this->userEntity;
     }
 

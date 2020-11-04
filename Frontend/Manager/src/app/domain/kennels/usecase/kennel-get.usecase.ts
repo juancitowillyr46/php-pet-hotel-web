@@ -1,27 +1,26 @@
 import { Injectable } from '@angular/core';
 import { UseCase } from '../../../core/base/use-case';
 import { Observable } from "rxjs";
-import { PetRepository } from "../repository/pet.repository";
-// import { AccessTokenDto } from "../model/access-token.dto"; 
+import { KennelRepository } from "../repository/kennel.repository";
 import { map } from 'rxjs/operators';
-import { PetDto } from '../model/pet.dto';
+import { KennelDto } from '../model/kennel.dto';
 
 @Injectable({
     providedIn: 'root'
 })
 export class KennelGetUseCase implements UseCase<string, any> {
 
-    constructor(private userRepository: PetRepository) {
+    constructor(private kennelRepository: KennelRepository) {
 
     }
 
     public execute(id: string): Observable<any> {
         const that = this;
-        let userDto: PetDto;
+        let kennelDto: KennelDto;
 
-        return that.userRepository.get(id).pipe(map(res => {
-            userDto = res.data;
-            return userDto;
+        return that.kennelRepository.get(id).pipe(map(res => {
+            kennelDto = res.data;
+            return kennelDto;
         }));
     }
 

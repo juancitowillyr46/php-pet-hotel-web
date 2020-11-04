@@ -42,6 +42,7 @@
                             <tr>
                               <th scope="col">Usuario</th>
                               <th scope="col">Role</th>
+                              <th scope="col">Bloqueado</th>
                               <th scope="col">Activo</th>
                               <th scope="col">Fecha creación</th>
                               <th></th>
@@ -54,6 +55,10 @@
                               </td>
                               <td width="14%">
                                 {{ row.roleName }}
+                              </td>
+                              <td width="14%">
+                                <div class="badge badge-danger-lighten" *ngIf="row.blocked==true">{{ row.blockedName}}</div>
+                                <div class="badge badge-success-lighten" *ngIf="row.blocked==false">{{ row.blockedName }}</div>
                               </td>
                               <td width="14%">
                                 {{ row.activeName }}
@@ -73,11 +78,11 @@
                                       <fa-icon [icon]="['fas', 'eye']" class="mr-1" ></fa-icon>
                                     </a>
                                   </label> -->
-                                  <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Eliminar" (click)="onClickRemove(row.id)">
+                                  <!-- <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Eliminar" (click)="onClickRemove(row.id)">
                                     <a href="javascript:void(0)" ngbButton class="text-white">
                                       <fa-icon [icon]="['fas', 'trash']" class="mr-1" ></fa-icon>
                                     </a>
-                                  </label>
+                                  </label> -->
                                 </div>
                               </td>
                             </tr>

@@ -1,8 +1,11 @@
 export interface UserDto {
     id:string;
-    email: string;
     username: string;
-    active: string;
+    active: string | boolean;
+    activeName: string;
     createdAt: string;
-    userType: string;
+    roleId: string;
+    roleName: string;
+    blocked: string | boolean;
+    blockedName: string;
 }

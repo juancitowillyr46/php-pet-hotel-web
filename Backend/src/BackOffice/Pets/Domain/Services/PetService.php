@@ -58,6 +58,26 @@ class PetService extends BaseService
         return $getRows;
     }
 
+    public function executeGetAllByIdCustomer(array $query): array {
+
+        $customerId = $this->petRepository->getIdByUuidModel(new CustomerModel(), $query['customerId']);
+        $getRows = $this->petRepository->getModel()::all()->where('customer_id', '=', $customerId)->toArray();
+        $list = [];
+        foreach ($getRows as $getRow) {
+            $list[] = $this->getPetDto($getRow);
+        }
+        $getRows = $list;
+        return $getRows;
+
+//        $getRows = $this->getAllRows($query, false);
+//        $list = [];
+//        foreach ($getRows->rows as $getRow) {
+//            $list[] = $this->getPetDto($getRow);
+//        }
+//        $getRows->rows = $list;
+//        return $getRows;
+    }
+
     public function setFormData(array $request): PetEntity {
         $this->petEntity->payload((object)$request);
         $this->petEntity->setCustomerId($this->getIdByUuidModel(new CustomerModel(), $request['customerId'])); // Role Id

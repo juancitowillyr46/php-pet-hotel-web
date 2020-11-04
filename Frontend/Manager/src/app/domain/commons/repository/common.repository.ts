@@ -20,61 +20,71 @@ export class CommonRepository {
 
     getCommonAuditStatus(): Observable<ResponseDataDto<CommonDto[]>> {
         const that = this;
-        return that.dataService.get(that.resource + 'audit-status');
+        return that.dataService.get(that.resource + 'data-master/audit-status');
     }
 
     getCommonBlockedUser(): Observable<ResponseDataDto<CommonDto[]>> {
         const that = this;
-        return that.dataService.get(that.resource + 'blocked-user');
+        return that.dataService.get(that.resource + 'data-master/blocked-user');
     }
 
-    getCommonCategories(): Observable<ResponseDataDto<CommonDto[]>> {
+    getCommonTypeService(): Observable<ResponseDataDto<CommonDto[]>> { 
         const that = this;
-        return that.dataService.get(that.resource + 'categories');
+        return that.dataService.get(that.resource + 'type-services');
     }
 
-    getCommonProviders(): Observable<ResponseDataDto<CommonDto[]>> {
+    getCommonIsBooked(): Observable<ResponseDataDto<CommonDto[]>> { 
         const that = this;
-        return that.dataService.get(that.resource + 'providers');
+        return that.dataService.get(that.resource + 'data-master/is-booked');
     }
 
-    getCommonUnitMeasurement(): Observable<ResponseDataDto<CommonDto[]>> {
-        const that = this;
-        return that.dataService.get(that.resource + 'unit-measurement');
-    }
+    // getCommonCategories(): Observable<ResponseDataDto<CommonDto[]>> {
+    //     const that = this;
+    //     return that.dataService.get(that.resource + 'categories');
+    // }
 
-    getCommonDataMasterType(): Observable<ResponseDataDto<CommonDto[]>> {
-        const that = this;
-        return that.dataService.get(that.resource + 'data-master-type');
-    }
+    // getCommonProviders(): Observable<ResponseDataDto<CommonDto[]>> {
+    //     const that = this;
+    //     return that.dataService.get(that.resource + 'providers');
+    // }
 
-    getCommonUbigeoDepartments(): Observable<ResponseDataDto<CommonDto[]>> {
-        const that = this;
-        return that.dataService.get(that.resource + 'ubigeo/departments');
-    }
+    // getCommonUnitMeasurement(): Observable<ResponseDataDto<CommonDto[]>> {
+    //     const that = this;
+    //     return that.dataService.get(that.resource + 'unit-measurement');
+    // }
 
-    getCommonUbigeoProvinces(departmentId: string): Observable<ResponseDataDto<CommonDto[]>> {
-        const that = this;
-        return that.dataService.get(that.resource + 'ubigeo/departments/'+departmentId+'/provinces');
-    }
+    // getCommonDataMasterType(): Observable<ResponseDataDto<CommonDto[]>> {
+    //     const that = this;
+    //     return that.dataService.get(that.resource + 'data-master-type');
+    // }
 
-    getCommonUbigeoDistricts(departmentId: string, provinceId: string): Observable<ResponseDataDto<CommonDto[]>> {
-        const that = this;
-        return that.dataService.get(that.resource + 'ubigeo/departments/'+departmentId+'/provinces/'+provinceId+'/districts');
-    }
+    // getCommonUbigeoDepartments(): Observable<ResponseDataDto<CommonDto[]>> {
+    //     const that = this;
+    //     return that.dataService.get(that.resource + 'ubigeo/departments');
+    // }
 
-    getCommonDocumentTypes(): Observable<ResponseDataDto<CommonDto[]>> {
-        const that = this;
-        return that.dataService.get(that.resource + 'document-types');
-    }
+    // getCommonUbigeoProvinces(departmentId: string): Observable<ResponseDataDto<CommonDto[]>> {
+    //     const that = this;
+    //     return that.dataService.get(that.resource + 'ubigeo/departments/'+departmentId+'/provinces');
+    // }
 
-    getCommonTypeTaxDocument(): Observable<ResponseDataDto<CommonDto[]>> {
-        const that = this;
-        return that.dataService.get(that.resource + 'type-tax-document');
-    }
+    // getCommonUbigeoDistricts(departmentId: string, provinceId: string): Observable<ResponseDataDto<CommonDto[]>> {
+    //     const that = this;
+    //     return that.dataService.get(that.resource + 'ubigeo/departments/'+departmentId+'/provinces/'+provinceId+'/districts');
+    // }
 
-    getCommonStatusPurchase(): Observable<ResponseDataDto<CommonDto[]>> {
-        const that = this;
-        return that.dataService.get(that.resource + 'status-purchase');
-    }
+    // getCommonDocumentTypes(): Observable<ResponseDataDto<CommonDto[]>> {
+    //     const that = this;
+    //     return that.dataService.get(that.resource + 'document-types');
+    // }
+
+    // getCommonTypeTaxDocument(): Observable<ResponseDataDto<CommonDto[]>> {
+    //     const that = this;
+    //     return that.dataService.get(that.resource + 'type-tax-document');
+    // }
+
+    // getCommonStatusPurchase(): Observable<ResponseDataDto<CommonDto[]>> {
+    //     const that = this;
+    //     return that.dataService.get(that.resource + 'status-purchase');
+    // }
 }

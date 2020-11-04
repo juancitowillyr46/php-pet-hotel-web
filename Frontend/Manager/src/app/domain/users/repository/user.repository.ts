@@ -4,7 +4,7 @@ import { DataService } from "../../../core/base/data.service";
 import { ResponseDataDto } from '../../../core/base/response-data.dto';
 import { ResponseIdDataDto } from '../../../core/entities/response-id-data.dto';
 import { UserDto } from '../model/user.dto';
-import { UserStoreDto } from '../model/user-store.dto';
+import { UserPasswordStoreDto, UserStoreDto } from '../model/user-store.dto';
 
 @Injectable({
     providedIn: 'root'
@@ -30,6 +30,12 @@ export class UserRepository {
     edit(id: string, object: UserStoreDto): Observable<ResponseDataDto<ResponseIdDataDto>> {
         const that = this;
         return that.dataService.put(that.resource, id, object);
+    }
+
+    
+    editPassword(id: string, object: UserPasswordStoreDto): Observable<ResponseDataDto<ResponseIdDataDto>> {
+        const that = this;
+        return that.dataService.put(that.resource, id + '/change-password', object);
     }
 
     add(object: UserStoreDto): Observable<ResponseDataDto<ResponseIdDataDto>> {

@@ -40,31 +40,32 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
+                              <th scope="col">Tipo</th>
                               <th scope="col">Nombre</th>
                               <th scope="col">Precio</th>
-                              <th scope="col">Tipo</th>
-                              <th scope="col">Activo</th>
-                              <th scope="col">Fecha registro</th>
+                              
+                              <th scope="col">Disponible</th>
+                              <!-- <th scope="col">Fecha registro</th> -->
                               <th></th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr *ngFor="let row of dataRows">
                               <td width="14%">
+                                {{ row.serviceTypeName }}
+                              </td>     
+                              <td width="14%">
                                 {{ row.name }}
                               </td>
                               <td width="14%">
-                                {{ row.price }}
-                              </td>
-                              <td width="14%">
-                                {{ row.serviceTypeName }}
-                              </td>                              
+                                {{ row.price | currency:'S/':'code' }}
+                              </td>                   
                               <td width="14%">
                                 {{ row.activeName }}
                               </td>
-                              <td width="14%">
+                              <!-- <td width="14%">
                                 {{ row.createdAt }}
-                              </td>
+                              </td> -->
                               <td width="10%" align="center">
                                 <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic"> 
                                   <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Editar" (click)="onClickModalStore(row.id)">
@@ -77,11 +78,11 @@
                                       <fa-icon [icon]="['fas', 'eye']" class="mr-1" ></fa-icon>
                                     </a>
                                   </label> -->
-                                  <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Eliminar" (click)="onClickRemove(row.id)">
+                                  <!-- <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Eliminar" (click)="onClickRemove(row.id)">
                                     <a href="javascript:void(0)" ngbButton class="text-white">
                                       <fa-icon [icon]="['fas', 'trash']" class="mr-1" ></fa-icon>
                                     </a>
-                                  </label>
+                                  </label> -->
                                 </div>
                               </td>
                             </tr>

@@ -11,7 +11,11 @@ class CustomerFindAction extends CustomersAction
     {
         try {
             $argUuid = $this->resolveArg('uuid');
-            return $this->commandSuccess($this->customerService->executeGet($argUuid));
+            $success = $this->customerService->executeGet($argUuid);
+            if($success){
+                $success->pets = $this->petService->executeGetAllByIdCustomer(['size' => 100, 'page' => 1, 'customerId' => $success->id]);
+            }
+            return $this->commandSuccess($success);
         } catch (Exception $ex) {
             return $this->commandError($ex);
         }

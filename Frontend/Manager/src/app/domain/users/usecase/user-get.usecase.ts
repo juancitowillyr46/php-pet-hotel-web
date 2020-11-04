@@ -9,16 +9,15 @@ import { UserDto } from '../model/user.dto';
 @Injectable({
     providedIn: 'root'
 })
-export class UserGetUseCase implements UseCase<string, any> {
+export class UserGetUseCase implements UseCase<string, UserDto> {
 
     constructor(private userRepository: UserRepository) {
 
     }
 
-    public execute(id: string): Observable<any> {
+    public execute(id: string): Observable<UserDto> {
         const that = this;
         let userDto: UserDto;
-
         return that.userRepository.get(id).pipe(map(res => {
             userDto = res.data;
             return userDto;

@@ -1,11 +1,8 @@
 export interface KennelStoreDto {
-    id: string;
-    email: string;
-    username: string;
-    password: string;
-    firstName: string;
-    lastName: string;
+    id:string;
+    name: string;
+    num: string;
+    description: string;
+    isBooked: boolean;
     active: boolean;
-    roleId: string;
-    blocked: boolean;
 }

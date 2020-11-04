@@ -9,7 +9,7 @@ import { ResponseIdDataDto } from '../../../core/entities/response-id-data.dto';
 @Injectable({
     providedIn: 'root'
 })
-export class KennelEditUseCase implements UseCase<KennelStoreDto, ResponseIdDataDto> {
+export class KennelAddUseCase implements UseCase<KennelStoreDto, ResponseIdDataDto> {
 
     constructor(private kennelRepository: KennelRepository) {
 
@@ -18,7 +18,7 @@ export class KennelEditUseCase implements UseCase<KennelStoreDto, ResponseIdData
     public execute(object: KennelStoreDto): Observable<ResponseIdDataDto> {
         const that = this;
         let responseIdDataDto: ResponseIdDataDto;
-        return that.kennelRepository.edit(object.id, object).pipe(map(res => {
+        return that.kennelRepository.add(object).pipe(map(res => {
             responseIdDataDto = res.data;
             return responseIdDataDto;
         }));

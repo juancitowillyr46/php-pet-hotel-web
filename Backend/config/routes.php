@@ -41,6 +41,7 @@ return function (App $app) {
             $group->get('/{uuid}', \App\BackOffice\Users\Application\Actions\UserFindAction::class);
             $group->delete('/{uuid}', \App\BackOffice\Users\Application\Actions\UserRemoveAction::class);
             $group->get('', \App\BackOffice\Users\Application\Actions\UserFindAllAction::class);
+            $group->put('/{uuid}/change-password', \App\BackOffice\Users\Application\Actions\UserEditPasswordAction::class);
 
         })->add(AuthValidateTokenMiddleware::class);
 
@@ -93,7 +94,11 @@ return function (App $app) {
         })->add(AuthValidateTokenMiddleware::class);
 
         $group->group('/commons', function (RouteCollectorProxy $group) {
-            $group->get('/active-audit', \App\BackOffice\DataMaster\Application\Actions\DataMasterCommonTypeAction::class);
+            $group->get('/data-master/{type}', \App\BackOffice\DataMaster\Application\Actions\DataMasterCommonAction::class);
+            $group->get('/roles', \App\BackOffice\Roles\Application\Actions\RoleCommonAction::class);
+            $group->get('/type-services', \App\BackOffice\Services\Application\Actions\ServiceTypeCommonAction::class);
+//            $group->get('/is-booked', \App\BackOffice\DataMaster\Application\Actions\DataMasterCommonAction::class);
+
         })->add(AuthValidateTokenMiddleware::class);
 
 //        $group->group('/categories', function (RouteCollectorProxy $group) {
@@ -187,12 +192,12 @@ return function (App $app) {
 //
 //        $group->group('/commons', function (RouteCollectorProxy $group) {
 //            $group->get('/roles', \App\BackOffice\Roles\Application\Actions\RoleCommonAction::class);
-//            $group->get('/audit-status', \App\BackOffice\DataMaster\Application\Actions\DataMasterCommonAuditAction::class);
+//            $group->get('/audit-status', \App\BackOffice\DataMaster\Application\Actions\DataMasterCommonAction::class);
 //            $group->get('/blocked-user', \App\BackOffice\DataMaster\Application\Actions\DataMasterCommonBlockedAction::class);
 //            $group->get('/categories', \App\BackOffice\Categories\Application\Actions\CategoryCommonAction::class);
 //            $group->get('/providers', \App\BackOffice\Providers\Application\Actions\ProviderCommonAction::class);
 //            $group->get('/unit-measurement', \App\BackOffice\DataMaster\Application\Actions\DataMasterCommonUnitMeasurement::class);
-//            $group->get('/data-master-type', \App\BackOffice\DataMaster\Application\Actions\DataMasterCommonTypeAction::class);
+//            $group->get('/data-master-type', \App\BackOffice\DataMaster\Application\Actions\DataMasterCommonAction::class);
 //            $group->get('/document-types', \App\BackOffice\DataMaster\Application\Actions\DataMasterCommonDocumentTypeAction::class);
 //            $group->get('/ubigeo/departments', \App\BackOffice\Ubigeo\Application\Actions\UbigeoCommonDepartment::class);
 //            $group->get('/ubigeo/departments/{department_id}/provinces', \App\BackOffice\Ubigeo\Application\Actions\UbigeoCommonProvince::class);

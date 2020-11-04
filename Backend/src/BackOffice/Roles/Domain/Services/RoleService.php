@@ -66,8 +66,11 @@ class RoleService extends BaseService
     }
 
     public function getRoleDto(array $row): object {
-
         return $this->roleMapper->autoMapper->map($row, RoleDto::class);
+    }
+
+    public function roleCommon(): array {
+       return $this->executeCommon($this->roleRepository->getModel());
     }
 
 }

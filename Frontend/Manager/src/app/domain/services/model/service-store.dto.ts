@@ -1,10 +1,10 @@
 export interface ServiceStoreDto {
     id?: string;
+    serviceTypeId: string;
     name: string;
     description: string;
     price: string;
-    serviceTypeId: string;
     active: boolean;
     main?: boolean;
-    image: string;
+    image?: string;
 }

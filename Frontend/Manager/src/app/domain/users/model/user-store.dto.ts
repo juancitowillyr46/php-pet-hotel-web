@@ -1,11 +1,15 @@
 export interface UserStoreDto {
     id: string;
-    email: string;
+    email?: string;
     username: string;
     password: string;
-    firstName: string;
-    lastName: string;
-    active: boolean;
+    active: boolean | string;
     roleId: string;
-    blocked: boolean;
+    blocked: boolean | string;
+}
+
+
+export interface UserPasswordStoreDto {
+    id: string;
+    password: string;
 }

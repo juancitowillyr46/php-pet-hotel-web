@@ -5,13 +5,13 @@ import { ServiceRepository } from "../repository/service.repository";
 // import { AccessTokenDto } from "../model/access-token.dto"; 
 import { map } from 'rxjs/operators';
 // import { ServiceDto } from '../model/service.dto';
-import { ServiceStoreDto } from '../model/user-store.dto';
-import { ResponseIdDataDto } from 'src/app/core/entities/response-id-data.dto';
+import { ServiceStoreDto } from '../model/service-store.dto';
+import { ResponseIdDataDto } from '../../../../app/core/entities/response-id-data.dto';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ServiceEditUseCase implements UseCase<UserStoreDto, ResponseIdDataDto> {
+export class ServiceEditUseCase implements UseCase<ServiceStoreDto, ResponseIdDataDto> {
 
     constructor(private serviceRepository: ServiceRepository) {
 

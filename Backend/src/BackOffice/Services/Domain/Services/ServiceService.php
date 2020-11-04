@@ -68,8 +68,12 @@ class ServiceService extends BaseService
     public function getServiceDto(array $row): object {
         $serviceType = $this->getRowByIdModel(new ServiceTypeModel(), $row['service_type_id']);
         $row['service_type_name'] = $serviceType['name'];
+        $row['service_type_id'] = $serviceType['uuid'];
         return $this->serviceMapper->autoMapper->map($row, ServiceDto::class);
     }
 
+    public function serviceCommon(): array {
+        return $this->executeCommon(new ServiceTypeModel());
+    }
 
 }
