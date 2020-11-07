@@ -1,12 +1,12 @@
 <?php
-namespace App\BackOffice\Payments\Domain\Entities;
+namespace App\BackOffice\Bookings\Domain\Entities;
 
 use AutoMapperPlus\AutoMapperInterface;
 use AutoMapperPlus\Configuration\AutoMapperConfigInterface;
 use AutoMapperPlus\NameConverter\NamingConvention\CamelCaseNamingConvention;
 use AutoMapperPlus\NameConverter\NamingConvention\SnakeCaseNamingConvention;
 
-class PaymentMapper
+class BookingMapper
 {
     public AutoMapperInterface $autoMapper;
     public AutoMapperConfigInterface $config;
@@ -20,7 +20,7 @@ class PaymentMapper
 
     public function registerMapping()
     {
-        $this->config->registerMapping('array', PaymentDto::class)->withNamingConventions(
+        $this->config->registerMapping('array', BookingDto::class)->withNamingConventions(
             new SnakeCaseNamingConvention(),
             new CamelCaseNamingConvention()
         )->forMember('activeName', function ($source) {
@@ -30,8 +30,6 @@ class PaymentMapper
             return date('d-m-Y H:m:s', $time);
         })->forMember('id', function($source){
             return $source['uuid'];
-        })->forMember('ticket', function($source){
-            return $source['id'];
         });
 
     }

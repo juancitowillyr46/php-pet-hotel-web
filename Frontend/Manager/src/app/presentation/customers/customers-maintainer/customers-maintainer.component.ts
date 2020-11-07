@@ -87,6 +87,9 @@ export class CustomersMaintainerComponent extends BaseTableComponent implements 
         size: 'lg'
       }
     );
+    ref.componentInstance.dataModal = {
+      id: id
+    };
   }
 
 }

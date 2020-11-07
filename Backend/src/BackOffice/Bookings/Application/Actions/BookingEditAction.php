@@ -1,10 +1,10 @@
 <?php
-namespace App\BackOffice\Payments\Application\Actions;
+namespace App\BackOffice\Bookings\Application\Actions;
 
 use Exception;
 use Psr\Http\Message\ResponseInterface as Response;
 
-class PaymentEditAction extends PaymentsAction
+class BookingEditAction extends BookingsAction
 {
     protected function action(): Response
     {
@@ -12,7 +12,7 @@ class PaymentEditAction extends PaymentsAction
 
             $argUuid = $this->resolveArg('uuid');
             $bodyParsed = $this->getFormData();
-            return $this->commandSuccess($this->paymentService->executeEditState((array)$bodyParsed, $argUuid));
+            return $this->commandSuccess($this->bookingService->executeEdit((array)$bodyParsed, $argUuid));
 
         } catch (Exception $ex) {
             return $this->commandError($ex);

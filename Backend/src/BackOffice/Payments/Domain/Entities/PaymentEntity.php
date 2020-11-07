@@ -2,6 +2,7 @@
 namespace App\BackOffice\Payments\Domain\Entities;
 
 use App\BackOffice\Payments\Domain\Exceptions\PaymentActionRequestSchema;
+use App\BackOffice\Payments\Domain\Exceptions\PaymentStateRequestSchema;
 use App\Shared\Domain\Entities\Audit;
 use App\Shared\Utility\SecurityPassword;
 use Exception;
@@ -290,4 +291,19 @@ class PaymentEntity extends Audit
         }
 
     }
+
+    public function payloadState(object $formData): void {
+        try {
+
+            $validate = new PaymentStateRequestSchema();
+            $validate->getMessages((array)$formData);
+            $this->identifiedResource($formData);
+//            $this->setStateId($formData->stateId);
+
+        } catch(Exception $ex) {
+            throw new Exception($ex->getMessage(), $ex->getCode());
+        }
+
+    }
+
 }

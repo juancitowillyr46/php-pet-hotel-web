@@ -38,6 +38,16 @@ export class CommonRepository {
         return that.dataService.get(that.resource + 'data-master/is-booked');
     }
 
+    getCommonPaymentState(): Observable<ResponseDataDto<CommonDto[]>> { 
+        const that = this;
+        return that.dataService.get(that.resource + 'data-master/payment-state');
+    }
+
+    getCommonBanks(): Observable<ResponseDataDto<CommonDto[]>> { 
+        const that = this;
+        return that.dataService.get(that.resource + 'data-master/banks');
+    }
+
     // getCommonCategories(): Observable<ResponseDataDto<CommonDto[]>> {
     //     const that = this;
     //     return that.dataService.get(that.resource + 'categories');

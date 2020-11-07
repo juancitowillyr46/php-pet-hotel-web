@@ -9,13 +9,24 @@
   <div class="modal-body">
     <form [formGroup]="formGroup" novalidate >
         <div class="form-group">
-            <label for="stateId">Estado de :</label>
+            <label for="stateId">Estado del pago:</label>
             <select id="stateId" class="form-control" formControlName="stateId">
                 <option value="">--SELECCIONE--</option>
-                <option>PAGADO</option>
-                <option>PENDIENTE</option>
+                <option [value]="item.value" *ngFor="let item of commonPaymentState">{{item.text}}</option>
             </select>
             <label *ngIf="formGroup.controls.stateId.errors && formGroup.controls.stateId.value" id="stateId" class="error mt-2 text-danger" for="stateId">Campo obligatorio.</label>
+        </div>
+
+        <div class="form-group" *ngIf="paymentDto && paymentDto.paymentMethodId == '176d7072-19f1-11eb-a86b-50e549398ade1'">
+          <label for="bankId">Bancos:</label>
+          <select id="bankId" class="form-control" formControlName="bankId">
+              <option value="">--SELECCIONE--</option>
+              <option [value]="item.value" *ngFor="let item of commonBanks">{{item.text}}</option>
+          </select>
+          <label *ngIf="formGroup.controls.bankId.errors && formGroup.controls.bankId.value" id="stateId" class="error mt-2 text-danger" for="bankId">Campo obligatorio.</label>
+        </div>
+        <div class="form-group" *ngIf="paymentDto && paymentDto.paymentMethodId != '176d7072-19f1-11eb-a86b-50e549398ade1'">
+          <input type="hidden" name="bankId" formControlName="bankId" [value]="''" />
         </div>
     </form>
     <button type="button" class="btn btn-primary mr-2 mt-15" (click)="onClickDone()" [disabled]="(formGroup.invalid || submit === true)">

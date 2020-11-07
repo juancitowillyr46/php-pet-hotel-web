@@ -85,6 +85,10 @@ export class PaymentsMaintainerComponent extends BaseTableComponent implements O
         size: 'lg'
       }
     );
+
+    ref.componentInstance.dataModal = {
+      id: id
+    };
   }
 
 }

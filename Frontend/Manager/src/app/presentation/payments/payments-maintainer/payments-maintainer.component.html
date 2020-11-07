@@ -52,7 +52,7 @@
                             <tbody>
                             <tr *ngFor="let row of dataRows">
                               <td width="14%">
-                                {{ row.id }}
+                                {{ row.ticket }}
                               </td>
                               <td width="14%">
                                 {{ row.paymentMethodName }}
@@ -61,8 +61,16 @@
                                 {{ row.total }}
                               </td>  
                               <td width="14%">
-                                <a class="badge badge-success-lighten">{{ row.stateName }}</a>
-                                
+                                <a class="badge badge-warning-lighten" *ngIf="row.stateId === '1cca03ea-07dc-11eb-ab06-50e549398ade6'">
+                                  <div class="text-dark">
+                                    {{ row.stateName }}
+                                  </div>
+                                </a>
+                                <a class="badge badge-success-lighten" *ngIf="row.stateId === '1cca03ea-07dc-11eb-ab06-50e549398ade5'">
+                                  <div class="text-white">
+                                    {{ row.stateName }}
+                                  </div>
+                                </a>
                               </td>                         
                               <!-- <td width="14%">
                                 {{ row.activeName }}

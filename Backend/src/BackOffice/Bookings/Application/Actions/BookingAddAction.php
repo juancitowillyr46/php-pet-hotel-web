@@ -1,19 +1,16 @@
 <?php
-namespace App\BackOffice\Payments\Application\Actions;
+namespace App\BackOffice\Bookings\Application\Actions;
 
 use Exception;
 use Psr\Http\Message\ResponseInterface as Response;
 
-class PaymentEditAction extends PaymentsAction
+class BookingAddAction extends BookingsAction
 {
     protected function action(): Response
     {
         try {
-
-            $argUuid = $this->resolveArg('uuid');
             $bodyParsed = $this->getFormData();
-            return $this->commandSuccess($this->paymentService->executeEditState((array)$bodyParsed, $argUuid));
-
+            return $this->commandSuccess($this->bookingService->executeAdd((array)$bodyParsed));
         } catch (Exception $ex) {
             return $this->commandError($ex);
         }

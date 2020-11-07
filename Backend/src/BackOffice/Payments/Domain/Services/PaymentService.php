@@ -37,6 +37,13 @@ class PaymentService extends BaseService
         return $this->paymentEntity->getResponseDataId();
     }
 
+    public function executeEditState(array $request, string $uuid): object {
+        $this->compareArgs($request['id'], $uuid);
+        $formData = $this->setFormDataState($request);
+        $this->edit((array)$formData, $uuid);
+        return $this->paymentEntity->getResponseDataId();
+    }
+
     public function executeRemove(string $uuid): object {
         $this->remove($uuid);
         $this->paymentEntity->setUuid($uuid);
@@ -76,16 +83,35 @@ class PaymentService extends BaseService
         return $this->paymentEntity;
     }
 
+    public function setFormDataState(array $request): PaymentEntity {
+
+        $stateId = $this->paymentRepository->getAttrByUuidModel(new DataMasterModel(), $request['stateId'], 'id_row');
+        $this->paymentEntity->setStateId($stateId);
+
+        if($request['bankId'] != '') {
+            $bankId = $this->paymentRepository->getAttrByUuidModel(new DataMasterModel(), $request['bankId'], 'id_row');
+            $this->paymentEntity->setBankId($bankId);
+        }
+
+        $this->paymentEntity->payloadState((object)$request);
+        return $this->paymentEntity;
+    }
+
     public function getPaymentDto(array $row): object {
-        $paymentMethod = $this->getRowByIdModel(new DataMasterModel(), $row['payment_method_id']);
 
-        $state = $this->getRowByIdModel(new DataMasterModel(), $row['state_id']);
+        $paymentMethod = $this->getRowByIdModelByTable(new DataMasterModel(), $row['payment_method_id'], 'TABLE_PAYMENT_METHOD');
         $row['payment_method_name'] = $paymentMethod['name'];
-        $row['state_name'] = $state['name'];
+        $row['payment_method_id'] = $paymentMethod['uuid'];
 
-        $bank = $this->getRowByIdModel(new DataMasterModel(), $row['bank_id']);
+        $state = $this->getRowByIdModelByTable(new DataMasterModel(), $row['state_id'], 'TABLE_PAYMENT_STATE');
+        $row['state_name'] = $state['name'];
+        $row['state_id'] = $state['uuid'];
+
+
         if($row['bank_id'] > 0){
+            $bank = $this->getRowByIdModelByTable(new DataMasterModel(), $row['bank_id'], 'TABLE_BANKS');
             $row['bank_name'] = $bank['name'];
+            $row['bank_id'] = $bank['uuid'];
         }
 
         return $this->paymentMapper->autoMapper->map($row, PaymentDto::class);

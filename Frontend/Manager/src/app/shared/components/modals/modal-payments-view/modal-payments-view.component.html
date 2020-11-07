@@ -9,8 +9,8 @@
   <div class="modal-body">
 
  
-        <div class="row">
-            <div class="col-sm-6 pb-4">
+        <div class="row" *ngIf="row">
+            <div class="col-sm-6 pb-1">
 
                 <div class="media align-items-center">
                     <!-- Logo -->
@@ -18,31 +18,32 @@
                         <img src="http://localhost:4200/assets/img/core-img/logo.png" alt="">
                     </div>
                 </div>
-
+<!-- 
                 <div class="mb-1 font-15">Dirección</div>
                 <div class="mb-1 font-15">correo</div>
-                <div class="font-15">Telefono</div>
+                <div class="font-15">Telefono</div> -->
 
             </div>
 
-            <div class="col-sm-6 text-right pb-4">
+            <div class="col-sm-6 text-right pb-1">
 
-                <h6 class="font-15 mb-3">INVOICE #43cdb438-1a4b-11eb-811f-50e549398ade</h6>
-                <div class="mb-1 font-15">Fecha: 2020-10-02 17:40</div>
+                <h6 class="font-15 mb-3">INVOICE #{{row.ticket}}</h6>
+                <div class="mb-1 font-15">Fecha: {{ row.createdAt }}</div>
 
             </div>
         </div>
 
         <hr class="mb-4">
 
-        <div class="row">
+        <div class="row" *ngIf="row">
             <div class="col-sm-6 mb-4">
                 <div class="mb-2">Emitido a:</div>
-                <div class="font-14 mb-1">Nombre y apellidos: Juan Rodas</div>
-                <div class="font-14 mb-1">Documento: 45890924</div>
-                <div class="font-14 mb-1">Correo: jrodas@pethotel.pe</div>
-                <div class="font-14 mb-1">Teléfono: 994756636</div>
-                <div class="font-14 mb-1">Dirección: Mz A-1 Lote 2 Simon</div>
+                <div class="font-14 mb-1">Nombres: {{ row.billingFirstName }}</div>
+                <div class="font-14 mb-1">Apellidos: {{ row.billingLastName }}</div>
+                <div class="font-14 mb-1">Documento: {{ row.billingLastName }}</div>
+                <div class="font-14 mb-1">Correo: {{ row.billingEmail }}</div>
+                <div class="font-14 mb-1">Teléfono: {{ row.billingPhone }}</div>
+                <div class="font-14 mb-1">Dirección: {{ row.billingAddress }}</div>
             </div>
             <div class="col-sm-6 mb-4">
                 <div class="mb-2">Detalle del pago:</div>
@@ -50,26 +51,28 @@
                     <tbody>
                         <tr>
                             <td class="pr-3 font-14">Total pago:</td>
-                            <td class="font-14">$6,095.25</td>
+                            <td class="font-14">{{row.total | currency:'S/':'code'}}</td>
                         </tr>
                         <tr>
-                            <td class="pr-3 font-14">Tipo de pago:</td>
-                            <td class="font-14">Deposito bancario</td>
+                            <td class="pr-3 font-14">Medio de pago:</td>
+                            <td class="font-14">{{ row.paymentMethodName }}</td>
                         </tr>
-                        <tr>
+                        <tr *ngIf="row.bankId">
                             <td class="pr-3 font-14">Banco / Cta:</td>
-                            <td class="font-14">1516546546546546</td>
+                            <td class="font-14">{{ row.paymentMethodName }}</td>
                         </tr>
                         <tr>
                             <td class="pr-3 font-14">Estado:</td>
-                            <td class="font-14">Pagado</td>
+                            <td class="font-14">
+                                {{ row.stateName }}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <div class="table-responsive mb-4">
+        <div class="table-responsive mb-4" *ngIf="row">
             <table class="table m-0">
                 <thead>
                     <tr>
@@ -88,47 +91,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr *ngFor="let item of row.orders">
                         <td class="py-3">
-                            Servicio 1
-                            
+                            {{item.serviceName}}
                         </td>
                         <td class="py-3">
-                            $50.00
+                            {{item.price | currency:'S/':'code'}}
                         </td>
                         <td class="py-3">
-                            63
+                            {{item.quantity}}
                         </td>
                         <td class="py-3">
-                            $3,150.00
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="py-3">
-                            Servicio 2
-                            
-                        </td>
-                        <td class="py-3">
-                            $47.95
-                        </td>
-                        <td class="py-3">
-                            36
-                        </td>
-                        <td class="py-3">
-                            $1,726.20
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" class="text-right py-3">
-                            <!-- Subtotal:<br> -->
-                            <!-- Tax(25%):<br> -->
-                            <span class="d-block text-big mt-2">Total:</span>
-                        </td>
-                        <td class="py-3">
-                            <span class="d-block text-big mt-2">$6,095.25</span>
-                            <!-- $4,876.20<br>
-                            $1,219.05<br> -->
-                            
+                            {{item.subtotal | currency:'S/':'code'}}
                         </td>
                     </tr>
                 </tbody>

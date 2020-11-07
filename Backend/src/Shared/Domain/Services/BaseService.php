@@ -112,6 +112,12 @@ class BaseService implements ServiceInterface
             $table = 'TABLE_BLOCKED_USER';
         } else if($type == 'is-booked') {
             $table = 'TABLE_IS_BOOKED';
+        } else if($type == 'payment-state') {
+            $table = 'TABLE_PAYMENT_STATE';
+        } else if($type == 'payment-state') {
+            $table = 'TABLE_PAYMENT_STATE';
+        } else if($type == 'banks') {
+            $table = 'TABLE_BANKS';
         }
 
         $common = $dataMaster::all()->where('type', '=' ,$table)->toArray();
@@ -122,10 +128,9 @@ class BaseService implements ServiceInterface
             }
         } else {
             foreach ($common as $item) {
-                $listCommon[] = ['value' => $item['id'], 'text' => $item['name']];
+                $listCommon[] = ['value' => $item['uuid'], 'text' => $item['name']];
             }
         }
-
 
         return $listCommon;
     }
@@ -137,6 +142,14 @@ class BaseService implements ServiceInterface
             $listCommon[] = ['value' => $item['uuid'], 'text' => $item['name']];
         }
         return $listCommon;
+    }
+
+    public function getRowByIdModelByTable(Model $model, int $id, string $table): array {
+        $find = $this->baseRepository->getRowByIdModelByTable($model, $id, $table);
+        if(!$find) {
+            throw new FindActionException();
+        }
+        return $find;
     }
 
 }

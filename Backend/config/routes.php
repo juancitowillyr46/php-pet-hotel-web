@@ -90,15 +90,23 @@ return function (App $app) {
             $group->get('/{uuid}', \App\BackOffice\Payments\Application\Actions\PaymentFindAction::class);
             $group->get('', \App\BackOffice\Payments\Application\Actions\PaymentFindAllAction::class);
             $group->put('/{uuid}', \App\BackOffice\Payments\Application\Actions\PaymentEditAction::class);
+            $group->put('/{uuid}/update-state', \App\BackOffice\Payments\Application\Actions\PaymentEditStateAction::class);
             $group->delete('/{uuid}', \App\BackOffice\Payments\Application\Actions\PaymentRemoveAction::class);
         })->add(AuthValidateTokenMiddleware::class);
+
+        $group->group('/bookings', function (RouteCollectorProxy $group) {
+            $group->post('', \App\BackOffice\Bookings\Application\Actions\BookingAddAction::class);
+            $group->get('/{uuid}', \App\BackOffice\Bookings\Application\Actions\BookingFindAction::class);
+            $group->get('', \App\BackOffice\Bookings\Application\Actions\BookingFindAllAction::class);
+            $group->put('/{uuid}', \App\BackOffice\Bookings\Application\Actions\BookingEditAction::class);
+            $group->delete('/{uuid}', \App\BackOffice\Bookings\Application\Actions\BookingRemoveAction::class);
+        })->add(AuthValidateTokenMiddleware::class);
+
 
         $group->group('/commons', function (RouteCollectorProxy $group) {
             $group->get('/data-master/{type}', \App\BackOffice\DataMaster\Application\Actions\DataMasterCommonAction::class);
             $group->get('/roles', \App\BackOffice\Roles\Application\Actions\RoleCommonAction::class);
             $group->get('/type-services', \App\BackOffice\Services\Application\Actions\ServiceTypeCommonAction::class);
-//            $group->get('/is-booked', \App\BackOffice\DataMaster\Application\Actions\DataMasterCommonAction::class);
-
         })->add(AuthValidateTokenMiddleware::class);
 
 //        $group->group('/categories', function (RouteCollectorProxy $group) {

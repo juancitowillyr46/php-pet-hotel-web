@@ -30,10 +30,13 @@ export class ModalCustomersViewComponent extends BaseModalComponent implements O
   ngOnInit(): void {
     const that = this;
     that.loadData = true;
-    that.customerGetUseCase.execute('0bd8324c-1979-11eb-a399-50e549398ade').subscribe( res => {
-      that.row = res;
-      that.loadData = false;
-    });
+    if(that.dataModal.id != ''){ 
+      that.customerGetUseCase.execute(that.dataModal.id).subscribe( res => {
+        that.row = res;
+        that.loadData = false;
+      });
+    }
+    
   }
 
 }

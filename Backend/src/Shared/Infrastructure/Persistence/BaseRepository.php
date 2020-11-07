@@ -118,4 +118,13 @@ class BaseRepository implements RepositoryInterface
         $find = $model::all()->find($id);
         return ($find)? $find->toArray() : null;
     }
+
+    /*
+* Get Row(Array) by Uuid with model
+* */
+    public function getRowByIdModelByTable(Model $model, int $id, string $table): ?array {
+        $find = $model::all()->where('type', '=' ,$table)->where('id_row', '=' ,$id)->first();
+        return ($find)? $find->toArray() : null;
+    }
+
 }

@@ -3,7 +3,8 @@ import { FormBuilder } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonAuditStatusUseCase } from 'src/app/domain/commons/usecase/common-audit-status.usecase';
 import { CustomerDto } from 'src/app/domain/customers/model/customer.dto';
-// import { CustomerGetUseCase } from 'src/app/domain/customers/usecase/customer-get.usecase';
+import { PaymentDto } from 'src/app/domain/payments/model/payment.dto';
+import { PaymentGetUseCase } from '../../../../domain/payments/usecase/payment-get.usecase';
 
 import { BaseModalComponent } from '../base-modal.component';
 
@@ -14,10 +15,12 @@ import { BaseModalComponent } from '../base-modal.component';
 })
 export class ModalPaymentsViewComponent extends BaseModalComponent implements OnInit {
 
-  public row: CustomerDto;
+  public row: PaymentDto;
+
+  public dataModal: any;
 
   constructor(
-    // private customerGetUseCase: CustomerGetUseCase,
+    private paymentGetUseCase: PaymentGetUseCase,
     public formBuilder: FormBuilder,
     public modalService: NgbModal,
     public commonAuditStatusUseCase: CommonAuditStatusUseCase
@@ -28,6 +31,12 @@ export class ModalPaymentsViewComponent extends BaseModalComponent implements On
 
   ngOnInit(): void {
     const that = this;
+    if(that.dataModal.id != ''){
+      that.paymentGetUseCase.execute(that.dataModal.id).subscribe(res => {
+        //console.log(res);
+        that.row = res;
+      });
+    } 
   }
 
 
