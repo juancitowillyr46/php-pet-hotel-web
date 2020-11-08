@@ -95,6 +95,7 @@ class BaseRepository implements RepositoryInterface
         return $count > 0;
     }
 
+
     /*
     * Get Id by Uuid with model
     * */
@@ -109,6 +110,14 @@ class BaseRepository implements RepositoryInterface
     public function getAttrByUuidModel(Model $model, string $uuid, string $attr) {
         $find = $model::all()->where('uuid', '=' ,$uuid)->first();
         return ($find)? $find->getAttribute($attr) : null;
+    }
+
+    /*
+    * Ubicar un recurso relacionado
+    * */
+    public function getAttrByUuidModelWithAttr(Model $model, $key, $value): ?array {
+        $find = $model::all()->where($key, '=' ,$value)->first();
+        return ($find)? $find->toArray() : null;
     }
 
     /*

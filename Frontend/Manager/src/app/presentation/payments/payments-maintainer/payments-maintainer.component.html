@@ -61,12 +61,22 @@
                                 {{ row.total }}
                               </td>  
                               <td width="14%">
-                                <a class="badge badge-warning-lighten" *ngIf="row.stateId === '1cca03ea-07dc-11eb-ab06-50e549398ade6'">
+                                <a class="badge badge-pill badge-warning" *ngIf="row.stateName === 'PENDIENTE'">
                                   <div class="text-dark">
                                     {{ row.stateName }}
                                   </div>
                                 </a>
-                                <a class="badge badge-success-lighten" *ngIf="row.stateId === '1cca03ea-07dc-11eb-ab06-50e549398ade5'">
+                                <a class="badge badge-pill badge-success" *ngIf="row.stateName === 'CONFIRMADO'">
+                                  <div class="text-white">
+                                    {{ row.stateName }}
+                                  </div>
+                                </a>
+                                <a class="badge badge-pill badge-danger" *ngIf="row.stateName === 'CANCELADA'">
+                                  <div class="text-white">
+                                    {{ row.stateName }}
+                                  </div>
+                                </a>
+                                <a class="badge badge-pill badge-secondary" *ngIf="row.stateName === 'TERMINADA'">
                                   <div class="text-white">
                                     {{ row.stateName }}
                                   </div>

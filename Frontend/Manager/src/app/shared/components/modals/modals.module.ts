@@ -21,6 +21,8 @@ import { ModalCustomersViewComponent } from './modal-customers-view/modal-custom
 import { ModalPaymentsViewComponent } from './modal-payments-view/modal-payments-view.component';
 import { ModalPaymentsComponent } from './modal-payments/modal-payments.component';
 import { ModalKennelsComponent } from './modal-kennels/modal-kennels.component';
+import { ModalBookingsComponent } from './modal-bookings/modal-bookings.component';
+import { ModalBookingsViewComponent } from './modal-bookings-view/modal-bookings-view.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,15 @@ import { ModalKennelsComponent } from './modal-kennels/modal-kennels.component';
     // ModalCustomersComponent, 
     // ModalRolesComponent,
     // InputSelectDirective, 
-    ModalServicesComponent, ModalCustomersComponent, ModalPetsComponent, ModalCustomersViewComponent, ModalPaymentsViewComponent, ModalPaymentsComponent, ModalKennelsComponent
+    ModalServicesComponent, 
+    ModalCustomersComponent, 
+    ModalPetsComponent, 
+    ModalCustomersViewComponent, 
+    ModalPaymentsViewComponent, 
+    ModalPaymentsComponent, 
+    ModalKennelsComponent,
+    ModalBookingsComponent,
+    ModalBookingsViewComponent
   ],
   imports: [
     CommonModule,

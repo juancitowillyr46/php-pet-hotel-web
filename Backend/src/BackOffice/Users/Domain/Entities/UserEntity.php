@@ -140,6 +140,11 @@ class UserEntity extends Audit
             $validate = new UserActionRequestSchema();
             $validate->getMessages((array)$formData);
             $this->identifiedResource($formData);
+
+            if(!property_exists($formData, "id")) {
+                $this->setPassword(SecurityPassword::encryptPassword($formData->password));
+            }
+
             $this->setUsername($formData->username);
             $this->setEmail($formData->email);
             $this->setActive($formData->active);

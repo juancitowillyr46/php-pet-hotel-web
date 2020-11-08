@@ -32,6 +32,12 @@ class UserActionRequestSchema extends BaseValidatorRequest
                     'max' => 50
                 ])
             ],
+            'password' => [
+                new Required(),
+                new Length([
+                    'min' => 8
+                ])
+            ],
             'roleId' => [
                 new Required(),
             ],

@@ -1,6 +1,7 @@
 <?php
 namespace App\BackOffice\Payments\Domain\Services;
 
+use App\BackOffice\Bookings\Domain\Entities\BookingModel;
 use App\BackOffice\Customers\Domain\Entities\CustomerModel;
 use App\BackOffice\DataMaster\Domain\Entities\DataMasterModel;
 use App\BackOffice\Payments\Domain\Entities\PaymentDto;
@@ -68,9 +69,9 @@ class PaymentService extends BaseService
     public function setFormData(array $request): PaymentEntity {
 
         $bankId = $this->paymentRepository->getIdByUuidModel(new DataMasterModel(), $request['bankId']);
-        $paymentMethodId = $this->paymentRepository->getIdByUuidModel(new DataMasterModel(), $request['paymentMethodId']);
-        $stateId = $this->paymentRepository->getIdByUuidModel(new DataMasterModel(), $request['stateId']);
-        $bookingId = 2; //$this->paymentRepository->getIdByUuidModel(new DataMasterModel(), $request['bookingId'])
+        $paymentMethodId = $this->getAttrByUuidModel(new DataMasterModel(), $request['paymentMethodId'], 'id_row');
+        $stateId = $this->paymentRepository->getAttrByUuidModel(new DataMasterModel(), $request['stateId'], 'id_row');
+        $bookingId = $this->paymentRepository->getIdByUuidModel(new BookingModel(), $request['bookingId']);
         $customerId = $this->paymentRepository->getIdByUuidModel(new CustomerModel(), $request['customerId']);
 
         $this->paymentEntity->setBankId($bankId);

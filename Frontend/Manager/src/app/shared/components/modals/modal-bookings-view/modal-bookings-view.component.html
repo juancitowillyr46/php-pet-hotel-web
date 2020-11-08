@@ -1,0 +1,71 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Reserva 
+      <fa-icon [icon]="['fas', 'spinner']" class="mr-1" [pulse]="true" *ngIf="loadData"></fa-icon>
+    </h5>
+    <button type="button" class="close" (click)="closeModal('CLOSE')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+        <li [ngbNavItem]="1">
+          <a ngbNavLink><fa-icon [icon]="['fas', 'bed']" class="mr-1"></fa-icon> Detalle</a>
+          <ng-template ngbNavContent>
+            <div class="w-100 d-inline-block" style="vertical-align: top;">
+                <table class="table table-sm p-0" *ngIf="row">
+                    <!-- <tr>
+                        <td style="border-top: 0 !important;">Foto</td><td style="border-top: 0 !important;">
+                            <img src="http://localhost:4200/assets/img/shop-img/1.png" alt="contact-img" title="contact-img" class="round mr-3 product-thumb">
+                        </td>
+                    </tr> -->
+                    <tr>
+                        <td style="border-top: 0 !important;">Canil</td>
+                        <td style="border-top: 0 !important;">{{row.kennelName}}</td>
+                    </tr>
+                    <tr>
+                        <td>Mascota</td><td>{{row.petName}}</td>
+                    </tr>
+                    <tr>
+                        <td>Dueño</td><td>{{row.customerName}}</td>
+                    </tr>
+                    <tr>
+                        <td>Fecha inicio</td><td>{{row.dateTo}}</td>
+                    </tr>
+                    <tr>
+                        <td>Fecha fin</td><td>{{row.dateFrom}}</td>
+                    </tr>
+                    <tr>
+                        <td>Estado</td>
+                        <td>
+                            <a class="badge badge-pill badge-warning" *ngIf="row.stateName === 'PENDIENTE'">
+                                <div class="text-dark">
+                                  {{ row.stateName }}
+                                </div>
+                              </a>
+                              <a class="badge badge-pill badge-success" *ngIf="row.stateName === 'CONFIRMADO'">
+                                <div class="text-white">
+                                  {{ row.stateName }}
+                                </div>
+                              </a>
+                              <a class="badge badge-pill badge-danger" *ngIf="row.stateName === 'CANCELADA'">
+                                <div class="text-white">
+                                  {{ row.stateName }}
+                                </div>
+                              </a>
+                              <a class="badge badge-pill badge-secondary" *ngIf="row.stateName === 'TERMINADA'">
+                                <div class="text-white">
+                                  {{ row.stateName }}
+                                </div>
+                              </a>
+                        </td>
+                    </tr>
+                </table>
+              </div>
+          </ng-template>
+        </li>
+      </ul>
+      
+      <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  </div>
+  

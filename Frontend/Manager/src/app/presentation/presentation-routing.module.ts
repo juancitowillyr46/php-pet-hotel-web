@@ -49,6 +49,12 @@ const routes: Routes = [
         loadChildren: () => import('./datamaster/data-master.module')
         .then(m => m.DataMasterModule)
         // resolve
+      },
+      {
+        path: 'bookings',
+        loadChildren: () => import('./bookings/bookings.module')
+        .then(m => m.BookingsModule)
+        // resolve
       }
     ]
   },

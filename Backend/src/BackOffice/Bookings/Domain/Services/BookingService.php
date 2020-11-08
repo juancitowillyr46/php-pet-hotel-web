@@ -39,6 +39,13 @@ class BookingService extends BaseService
         return $this->bookingEntity->getResponseDataId();
     }
 
+    public function executeEditState(array $request, string $uuid): object {
+        $this->compareArgs($request['id'], $uuid);
+        $formData = $this->setFormDataState($request);
+        $this->edit((array)$formData, $uuid);
+        return $this->bookingEntity->getResponseDataId();
+    }
+
     public function executeRemove(string $uuid): object {
         $this->remove($uuid);
         $this->bookingEntity->setUuid($uuid);
@@ -73,10 +80,17 @@ class BookingService extends BaseService
         return $this->bookingEntity;
     }
 
+    public function setFormDataState(array $request): BookingEntity {
+        $stateBookingId = $this->bookingRepository->getAttrByUuidModel(new DataMasterModel(), $request['stateId'], 'id_row');
+        $this->bookingEntity->setStateId($stateBookingId);
+        $this->bookingEntity->payloadState((object)$request);
+        return $this->bookingEntity;
+    }
+
     public function getBookingDto(array $row): object {
         $kennel = $this->getRowByIdModel(new KennelModel(), $row['kennel_id']);
-        $row['kennel_id'] = $kennel['name'];
-        $row['kennel_name'] = $kennel['uuid'];
+        $row['kennel_id'] = $kennel['uuid'];
+        $row['kennel_name'] = $kennel['name'];
 
         $pet = $this->getRowByIdModel(new PetModel(), $row['pet_id']);
         $row['pet_id'] = $pet['uuid'];

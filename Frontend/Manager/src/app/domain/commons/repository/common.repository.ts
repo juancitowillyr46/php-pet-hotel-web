@@ -48,6 +48,11 @@ export class CommonRepository {
         return that.dataService.get(that.resource + 'data-master/banks');
     }
 
+    getCommonBookingState(): Observable<ResponseDataDto<CommonDto[]>> { 
+        const that = this;
+        return that.dataService.get(that.resource + 'data-master/booking-state');
+    }
+
     // getCommonCategories(): Observable<ResponseDataDto<CommonDto[]>> {
     //     const that = this;
     //     return that.dataService.get(that.resource + 'categories');

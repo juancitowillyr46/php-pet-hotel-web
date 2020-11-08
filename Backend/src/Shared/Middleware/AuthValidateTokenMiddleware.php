@@ -1,10 +1,6 @@
 <?php
-
-
 namespace App\Shared\Middleware;
 
-
-use App\BackOffice\Security\Domain\Services\BlockedUserService;
 use App\BackOffice\Security\Domain\Services\SecurityService;
 use App\BackOffice\Users\Domain\Services\UserService;
 use App\Shared\Action\ActionError;

@@ -2,6 +2,7 @@
 namespace App\BackOffice\Security\Domain\Entities;
 
 use App\BackOffice\Security\Domain\Exceptions\LoginActionRequestSchema;
+use App\BackOffice\Security\Domain\Exceptions\RegisterWebActionSchema;
 use App\Shared\Domain\Entities\Audit;
 use App\Shared\Utility\SecurityPassword;
 use Exception;
@@ -58,5 +59,16 @@ class LoginEntity extends Audit
             throw new Exception($ex->getMessage(), $ex->getCode());
         }
 
+    }
+
+    public function payloadRegister(object $formData): void {
+        try {
+
+            $validate = new RegisterWebActionSchema();
+            $validate->getMessages((array)$formData);
+
+        } catch(Exception $ex) {
+            throw new Exception($ex->getMessage(), $ex->getCode());
+        }
     }
 }

@@ -1,6 +1,6 @@
 <div class="modal-header">
     <h5 class="modal-title" id="exampleModalLabel">Pago 
-      <!-- <fa-icon [icon]="['fas', 'spinner']" class="mr-1" [pulse]="true" *ngIf="loadData"></fa-icon> -->
+      <fa-icon [icon]="['fas', 'spinner']" class="mr-1" [pulse]="true" *ngIf="loadData"></fa-icon>
     </h5>
     <button type="button" class="close" (click)="closeModal('CLOSE')">
       <span aria-hidden="true">&times;</span>
@@ -11,13 +11,14 @@
  
         <div class="row" *ngIf="row">
             <div class="col-sm-6 pb-1">
-
-                <div class="media align-items-center">
-                    <!-- Logo -->
+                <h6 class="font-15 mb-3">INVOICE #{{row.ticket}}</h6>
+                <div class="mb-1 font-15">Fecha: {{ row.createdAt }}</div>
+                <!-- <div class="media align-items-center">
+                    
                     <div class="card-body-login mb-30">
                         <img src="http://localhost:4200/assets/img/core-img/logo.png" alt="">
                     </div>
-                </div>
+                </div> -->
 <!-- 
                 <div class="mb-1 font-15">Dirección</div>
                 <div class="mb-1 font-15">correo</div>
@@ -25,12 +26,12 @@
 
             </div>
 
-            <div class="col-sm-6 text-right pb-1">
+            <!-- <div class="col-sm-6 text-right pb-1">
 
                 <h6 class="font-15 mb-3">INVOICE #{{row.ticket}}</h6>
                 <div class="mb-1 font-15">Fecha: {{ row.createdAt }}</div>
 
-            </div>
+            </div> -->
         </div>
 
         <hr class="mb-4">
@@ -40,7 +41,7 @@
                 <div class="mb-2">Emitido a:</div>
                 <div class="font-14 mb-1">Nombres: {{ row.billingFirstName }}</div>
                 <div class="font-14 mb-1">Apellidos: {{ row.billingLastName }}</div>
-                <div class="font-14 mb-1">Documento: {{ row.billingLastName }}</div>
+                <div class="font-14 mb-1">Documento: {{ row.billingDni }}</div>
                 <div class="font-14 mb-1">Correo: {{ row.billingEmail }}</div>
                 <div class="font-14 mb-1">Teléfono: {{ row.billingPhone }}</div>
                 <div class="font-14 mb-1">Dirección: {{ row.billingAddress }}</div>

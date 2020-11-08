@@ -2,6 +2,7 @@
 namespace App\BackOffice\Bookings\Domain\Entities;
 
 use App\BackOffice\Bookings\Domain\Exceptions\BookingActionRequestSchema;
+use App\BackOffice\Bookings\Domain\Exceptions\BookingEditStateSchema;
 use App\Shared\Domain\Entities\Audit;
 use App\Shared\Utility\SecurityPassword;
 use Exception;
@@ -171,5 +172,17 @@ class BookingEntity extends Audit
             throw new Exception($ex->getMessage(), $ex->getCode());
         }
 
+    }
+
+    public function payloadState(object $formData) {
+        try {
+
+            $validate = new BookingEditStateSchema();
+            $this->identifiedResource($formData);
+            $validate->getMessages((array)$formData);
+
+        } catch(Exception $ex) {
+            throw new Exception($ex->getMessage(), $ex->getCode());
+        }
     }
 }

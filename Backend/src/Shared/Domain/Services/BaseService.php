@@ -118,6 +118,8 @@ class BaseService implements ServiceInterface
             $table = 'TABLE_PAYMENT_STATE';
         } else if($type == 'banks') {
             $table = 'TABLE_BANKS';
+        } else if($type == 'booking-state') {
+            $table = 'TABLE_STATE_BOOKING';
         }
 
         $common = $dataMaster::all()->where('type', '=' ,$table)->toArray();
@@ -151,5 +153,14 @@ class BaseService implements ServiceInterface
         }
         return $find;
     }
+
+    public function getAttrByUuidModelWithAttr(Model $model, $key, $value): ?array {
+        return $this->baseRepository->getAttrByUuidModelWithAttr($model, $key, $value);
+    }
+
+    public function getAttrByUuidModel(Model $model, string $uuid, string $attr) {
+        return $this->baseRepository->getAttrByUuidModel($model, $uuid, $attr);
+    }
+
 
 }

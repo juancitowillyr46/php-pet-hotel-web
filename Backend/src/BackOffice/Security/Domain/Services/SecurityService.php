@@ -83,45 +83,8 @@ class SecurityService extends BaseService
         return $blocked;
     }
 
-//    public function executeIsBlocked(array $request): bool {
-//
-//        $user = $this->securityRepository->searchUserByUsername($request['username']);
-//
-//        $blocked = ($login->blocked == 1);
-//
-//        if(is_bool($blocked) && $blocked){
-//            throw new UserBlockedException();
-//        }
-//
-//        return $blocked;
-//
-//    }
-
-
-//    public function __construct(SecurityRepository $securityRepository, LoginEntity $loginEntity, LoginMapper $loginMapper)
-//    {
-//        $this->securityRepository = $securityRepository;
-//        $this->loginEntity = $loginEntity;
-//        $this->loginMapper = $loginMapper;
-//    }
-
-//    function execute(object $bodyParsed): object
-//    {
-//        return new stdClass();
-//    }
-//
-//    function executeArg(string $uuid): object
-//    {
-//        return new stdClass();
-//    }
-//
-//    function executeArgWithBodyParsed(string $uuid, object $bodyParsed): object
-//    {
-//        return new stdClass();
-//    }
-//
-//    function executeCollection(array $query): array
-//    {
-//        return [];
-//    }
+    public function executeRegisterWeb(array $request): bool {
+        $this->loginEntity->payloadRegister((object)$request);
+        return true;
+    }
 }
