@@ -27,7 +27,7 @@ class UserMapper
             return ($source['active'] == true)? 'SI' : 'NO';
         })->forMember('createdAt', function ($source) {
             $time = strtotime($source['created_at']);
-            return date('d-m-Y H:m:s', $time);
+            return date('d-m-Y H:i:s', $time);
         })->forMember('id', function($source){
             return $source['uuid'];
         })->forMember('blocked', function($source){

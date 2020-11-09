@@ -10,6 +10,7 @@ use App\BackOffice\DataMaster\Domain\Entities\DataMasterModel;
 use App\BackOffice\Kennels\Domain\Entities\KennelModel;
 use App\BackOffice\Pets\Domain\Entities\PetModel;
 use App\Shared\Domain\Services\BaseService;
+use Exception;
 use Psr\Log\LoggerInterface;
 
 class BookingService extends BaseService
@@ -70,11 +71,11 @@ class BookingService extends BaseService
     public function setFormData(array $request): BookingEntity {
         $this->bookingEntity->payload((object)$request);
         $kennelId = $this->getIdByUuidModel(new KennelModel(), $request['kennelId']);
-        $stateBookingId = $this->getIdByUuidModel(new DataMasterModel(), $request['stateId']);
+        $bookingStateId = $this->bookingRepository->getAttrByUuidModel(new DataMasterModel(), $request['stateId'], 'id_row');
         $petId = $this->getIdByUuidModel(new PetModel(), $request['petId']);
         $customerId = $this->getIdByUuidModel(new CustomerModel(), $request['customerId']);
         $this->bookingEntity->setKennelId($kennelId);
-        $this->bookingEntity->setStateId($stateBookingId);
+        $this->bookingEntity->setStateId($bookingStateId);
         $this->bookingEntity->setPetId($petId);
         $this->bookingEntity->setCustomerId($customerId);
         return $this->bookingEntity;
@@ -115,4 +116,39 @@ class BookingService extends BaseService
         return $this->bookingMapper->autoMapper->map($row, BookingDto::class);
     }
 
+    /*
+     * Ubica los caniles que se encuentran reservados
+     * */
+    public function getKennelsNotAvailableByDateToAndDateFrom($dateTo, $dateFrom): ?array {
+        return $this->bookingRepository->getModel()::all()
+            ->where('date_to', '=', $dateTo)
+            ->where('date_from', '=', $dateFrom)
+            ->toArray();
+    }
+
+    /*
+    * Verifica si la mascota tiene asociado un canil
+    * */
+    public function getThereKennelAssociatedWithPets($dateTo, $dateFrom, array $pets): int {
+
+        $petsMap = array_map(function ($pet) {
+            return $this->bookingRepository->getIdByUuidModel(new PetModel(), $pet->id);
+        }, $pets);
+
+        $count = $this->bookingRepository->getModel()::all()
+            ->where('date_to', '=', $dateTo)
+            ->where('date_from', '=', $dateFrom)
+            ->whereIn('pet_id', $petsMap)
+            ->count();
+
+        if($count > 0){
+            throw new Exception('los perros ya tienen reservas para las fechas determinadas');
+        }
+
+        return $count;
+    }
+
+    public function getBookingStateForDefault(): string {
+        return "9e3e0581-e0fd-4af9-8699-f7ea3521f1ae";
+    }
 }

@@ -6,6 +6,7 @@ use App\BackOffice\Kennels\Domain\Entities\KennelEntity;
 use App\BackOffice\Kennels\Domain\Entities\KennelMapper;
 use App\BackOffice\Kennels\Infrastructure\Persistence\KennelRepository;
 use App\Shared\Domain\Services\BaseService;
+use Exception;
 use Psr\Log\LoggerInterface;
 
 class KennelService extends BaseService
@@ -62,10 +63,29 @@ class KennelService extends BaseService
     }
 
     public function getKennelDto(array $row): object {
-//        $kennelType = $this->getRowByIdModel(new ServiceTypeModel(), $row['service_type_id']);
-//        $row['service_type_name'] = $kennelType['name'];
         return $this->kennelMapper->autoMapper->map($row, KennelDto::class);
     }
+
+    /*
+    * Busca los caniles disponibles lo cuales no incluyan los ocupados
+    * */
+    public function getKennelsAvailable(array $kennelsNotAvailable, array $pets): array {
+
+        $kennelsAvailableMap = array_map(function ($kennelNotAvailable) {
+            return $kennelNotAvailable['kennel_id'];
+        }, $kennelsNotAvailable);
+
+        $kennelsAvailable = $this->kennelRepository->getModel()::all()
+            ->whereNotIn('id', $kennelsAvailableMap)
+            ->where('is_booked', '=', true);
+
+        if( count($kennelsAvailable->toArray()) < count($pets) ){
+            throw new Exception('No cuenta con mas caniles disponibles');
+        }
+
+        return (!is_null($kennelsAvailable))? $kennelsAvailable->toArray() : [];
+    }
+
 
 
 }

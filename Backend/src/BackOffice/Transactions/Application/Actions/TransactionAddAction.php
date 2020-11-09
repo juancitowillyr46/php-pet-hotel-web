@@ -2,9 +2,12 @@
 namespace App\BackOffice\Transactions\Application\Actions;
 
 use App\BackOffice\DataMaster\Domain\Entities\DataMasterModel;
+use App\BackOffice\Pets\Domain\Entities\PetModel;
 use App\Shared\Utility\JwtCustom;
+use DateTime;
 use Exception;
 use Psr\Http\Message\ResponseInterface as Response;
+use Respect\Validation\Rules\Executable;
 
 class TransactionAddAction extends TransactionsAction
 {
@@ -16,10 +19,10 @@ class TransactionAddAction extends TransactionsAction
 
             $validateSuccess = $this->transactionService->executeAdd((array)$bodyParsed);
 
-            $petsRequest = (array) $bodyParsed->pets;
             $customerRequest = (array) $bodyParsed->customer;
+            $petsRequest = (array) $bodyParsed->pets;
             $paymentRequest = (array) $bodyParsed->payment;
-            $bookingsRequest = (array) $bodyParsed->booking;
+            $bookingRequest = (array) $bodyParsed->booking;
 
             if(is_bool($validateSuccess) && $validateSuccess){
 
@@ -54,12 +57,15 @@ class TransactionAddAction extends TransactionsAction
                 }
 
                 // Validate Booking
+                $kennelsAvailable = $this->getKennelsAvailableForBooking($bookingRequest['dateTo'], $bookingRequest['dateFrom'], $petsRequest);
+                    
                 foreach ($petsRequest as $index => $value) {
-                    $bookingRequest = (array) $bookingsRequest[$index];
+
                     $petRequest = (array) $petsRequest[$index];
+
                     $request = [
-                        "kennelId" => $bookingRequest['kennelId'],
-                        "stateId" => "9e3e0581-e0fd-4af9-8699-f7ea3521f1ae",
+                        "kennelId" => $kennelsAvailable[$index]['uuid'],
+                        "stateId" => $this->bookingService->getBookingStateForDefault(),
                         "petId" => $petRequest['id'],
                         "customerId" => $customerRequest['id'],
                         "dateTo" => $bookingRequest['dateTo'],
@@ -68,12 +74,13 @@ class TransactionAddAction extends TransactionsAction
                         "cancellationNote" => "",
                         "active" => true
                     ];
-                    $success = $this->bookingService->executeAdd($request);
-                    if($success){
-                        $this->payment($paymentRequest, $petsRequest, $customerRequest, $success->id);
+
+                    // Add Payment
+                    $bookingSuccess = $this->bookingService->executeAdd($request);
+                    if(is_object($bookingSuccess)){
+                        $this->addPayment($paymentRequest, $customerRequest, $bookingRequest, $bookingSuccess->id);
                     }
                 }
-
 
             }
 
@@ -86,70 +93,48 @@ class TransactionAddAction extends TransactionsAction
         }
     }
 
-    private function payment($paymentRequest, $petsRequest, $customerRequest, $bookingId) {
+    private function addPayment($payment, $customer, $booking, $bookingId) {
 
         // Validate Payment
-        $countPets = count($petsRequest);
-        $paymentRequest['date'] = date('Y-m-d H:m:s');
-        $paymentRequest['customerId'] = $customerRequest['id'];
-        $paymentRequest['bookingId'] = $bookingId;
+        $payment['date']        = date('Y-m-d H:m:s');
+        $payment['customerId']  = $customer['id'];
+        $payment['bookingId']   = $bookingId;
+        $payment['stateId']     = $this->paymentService->paymentStateDefault($payment['paymentMethodId']);
+        $payment['bankId']      = "";
+        $payment['total']       = $this->transactionService->getTotalTransaction($payment['order'], $booking['dateTo'], $booking['dateFrom']);
+        $paymentSuccess = $this->paymentService->executeAdd($payment);
+        if(is_object($paymentSuccess)){
 
-        // Validate payment method
-        if($paymentRequest['paymentMethodId']){
-
-            $paymentMethodIdRow = $this->paymentService->getAttrByUuidModel(new DataMasterModel(), $paymentRequest['paymentMethodId'], 'id_row');
-            $idRow = (int) $paymentMethodIdRow;
-
-            // Tranferencia Bancaria
-            if($idRow == 1) {
-                $paymentRequest['stateId'] = '1cca03ea-07dc-11eb-ab06-50e549398ade6';
-                // Plin o Lukita
-            } else if($idRow == 2) {
-                $paymentRequest['stateId'] = '1cca03ea-07dc-11eb-ab06-50e549398ade6';
-                // Yape
-            } else if($idRow == 3) {
-                $paymentRequest['stateId'] = '1cca03ea-07dc-11eb-ab06-50e549398ade6';
-                // POS
-            } else if($idRow == 4) {
-                $paymentRequest['stateId'] = '1cca03ea-07dc-11eb-ab06-50e549398ade6';
-            }
-            $paymentRequest['bankId'] = "";
+            // Validate Payment Order
+            $this->addOrderToPayment($paymentSuccess->id, $payment['order'], $booking['dateTo'], $booking['dateFrom']);
         }
 
-        $total = 0;
+    }
 
-        foreach ($paymentRequest['order'] as $order) {
-            $order = (array) $order;
+    /*
+    * Caniles disponibles para la reserva
+    * */
+    private function getKennelsAvailableForBooking($dateTo, $dateFrom, $pets): array {
 
-            $quantity = 1;
-            if($order['serviceId'] == '1fdcf8ea-199c-11eb-aed1-50e549398ade'){
-                // TODO: sacar los días entre dos fechas
-                $quantity = 2;
-            }
+        $this->bookingService->getThereKennelAssociatedWithPets($dateTo, $dateFrom, $pets);
 
-            $order['quantity'] = $quantity;
+        $kennelsNotAvailable = $this->bookingService->getKennelsNotAvailableByDateToAndDateFrom($dateTo, $dateFrom);
+
+        return $this->kennelService->getKennelsAvailable($kennelsNotAvailable, $pets);
+    }
+
+    /*
+    * Relacionar los servicios con el pago
+    * */
+    private function addOrderToPayment($paymentId, $order, $dateTo, $dateFrom) {
+        foreach ($order as $item) {
+            $order = (array) $item;
+            $order['quantity'] = $this->transactionService->calculateTheDaysAccommodation($order, $dateTo, $dateFrom);
             $order['subtotal'] = ($order['quantity'] * $order['price']);
-            $total = $total + $order['subtotal'];
-        }
-
-        $paymentRequest['total'] = $total;
-
-        $success = $this->paymentService->executeAdd($paymentRequest);
-
-        foreach ($paymentRequest['order'] as $order) {
-            $order = (array) $order;
-
-            $quantity = 1;
-            if($order['serviceId'] == '1fdcf8ea-199c-11eb-aed1-50e549398ade'){
-                // TODO: sacar los días entre dos fechas
-                $quantity = 2;
-            }
-
-            $order['quantity'] = $quantity;
-            $order['subtotal'] = ($order['quantity'] * $order['price']);
-            $order['paymentId'] = $success->id;
+            $order['paymentId'] = $paymentId;
             $order['active'] = true;
             $this->paymentOrderService->executeAdd($order);
         }
     }
+
 }

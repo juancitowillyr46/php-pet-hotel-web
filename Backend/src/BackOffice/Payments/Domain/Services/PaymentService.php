@@ -118,5 +118,25 @@ class PaymentService extends BaseService
         return $this->paymentMapper->autoMapper->map($row, PaymentDto::class);
     }
 
+    public function paymentStateDefault(string $paymentMethodId) {
+        $paymentMethodIdRow = $this->paymentRepository->getAttrByUuidModel(new DataMasterModel(), $paymentMethodId, 'id_row');
+        $idRow = (int) $paymentMethodIdRow;
+
+        $stateId = "";
+        // Tranferencia Bancaria
+        if($idRow == 1) {
+            $stateId = '1cca03ea-07dc-11eb-ab06-50e549398ade6';
+            // Plin o Lukita
+        } else if($idRow == 2) {
+            $stateId = '1cca03ea-07dc-11eb-ab06-50e549398ade6';
+            // Yape
+        } else if($idRow == 3) {
+            $stateId = '1cca03ea-07dc-11eb-ab06-50e549398ade6';
+            // POS
+        } else if($idRow == 4) {
+            $stateId = '1cca03ea-07dc-11eb-ab06-50e549398ade6';
+        }
+        return $stateId;
+    }
 
 }
