@@ -20,7 +20,8 @@ class PetDto
     public string $veterinaryPhone;
     public string $treatments;
     public string $lastVaccine;
-    public string $isAgressive;
+    public bool $isAgressive;
+    public string $isAgressiveName;
     public string $observation;
     public string $lastZeal;
     public string $other;

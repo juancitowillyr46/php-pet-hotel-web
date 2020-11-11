@@ -78,9 +78,11 @@ class UserService extends BaseService
     public function executeMe(string $uuid): object {
         $row = $this->read($uuid);
         $role = $this->getRowByIdModel(new RoleModel(), $row['role_id']);
-        $row['role_name'] = $role['name'];
-        $row['role_id'] = $role['uuid'];
+        $row['role_name']    = $role['name'];
+        $row['role_id']      = $role['uuid'];
         $row['role_modules'] = $role['modules'];
+        $row['customer_id']  = (!is_null($row['customer']))? $row['customer']['uuid'] : '';
+        $row['image'] = "";
         return $this->userMapper->autoMapper->map($row, UserInfoDto::class);
     }
 

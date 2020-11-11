@@ -41,6 +41,8 @@ class UserMapper
             new CamelCaseNamingConvention()
         )->forMember('role', function ($source) {
             return $source['user_type']['name'];
+        })->forMember('id', function($source){
+            return $source['uuid'];
         })->forMember('email', function($source){
             return $source['email'];
         })->forMember('fullname', function($source){

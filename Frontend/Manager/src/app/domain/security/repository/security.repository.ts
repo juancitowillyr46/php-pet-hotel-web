@@ -21,7 +21,7 @@ export class SecurityRepository {
 
     signIn(signIn: SignInDto): Observable<ResponseDataDto<AccessTokenDto>> {
         const that = this;
-        return that.dataService.post(that.resource + 'login/manager', signIn);
+        return that.dataService.post(that.resource + 'manager/login', signIn);
     }
 
     me(): Observable<ResponseDataDto<MeDto>> {

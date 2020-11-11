@@ -56,6 +56,12 @@ class PaymentService extends BaseService
         return $this->getPaymentDto($getRow);
     }
 
+    public function executeGetByBookingId(string $bookingId) {
+        $id = $this->paymentRepository->getIdByUuidModel(new BookingModel(), $bookingId);
+        $getRow = $this->paymentRepository->getModel()::all()->where('booking_id', '=', $id)->first();
+        return $this->getPaymentDto($getRow->toArray());
+    }
+
     public function executeGetAll(array $query): object {
         $getRows = $this->getAllRows($query, true);
         $list = [];

@@ -1,3 +1,5 @@
+import { PaymentDto } from '../../payments/model/payment.dto';
+
 export interface BookingDto {
     id: string;
     kennelId: string;
@@ -15,4 +17,5 @@ export interface BookingDto {
     active: string;
     activeName: string;
     createdAt: string;
+    payment: PaymentDto;
 }

@@ -19,13 +19,32 @@ class UserInfoAction extends UsersAction
             $token = $authorization[1];
             $jwtCustom = new JwtCustom();
             $verify = $jwtCustom->decodeToken($token);
-            $id = $verify->data->id;
 
-            $success = $this->userService->executeMe($id);
-            if($success){
-                $success->roleModules = $this->moduleService->executeModuleMenu($success->roleModules);
+            $id = $verify->data->id;
+            //$roleId = $verify->data->roleId;
+
+            $successUser = $this->userService->executeMe($id);
+            //$successUser->roleModules = [];
+            $successUser->pets = [];
+            $successUser->customer = new \stdClass();
+            //$successUser->customerId = "";
+
+            if(is_object($successUser) && ($successUser->roleId != "d2a466ae-d711-496c-9808-ad51abf76175")){
+                $successUser->roleModules = $this->moduleService->executeModuleMenu($successUser->roleModules);
+            } else {
+                $successUser->roleModules = [];
             }
-            return $this->commandSuccess($success);
+
+            if($successUser->customerId != ""){
+                $successUser->customer = $this->customerService->executeGet($successUser->customerId);
+            }
+
+            if(is_object($successUser->customer)){
+                $successUser->pets = $this->petService->executeGetAllByIdCustomer(['size' => 100, 'page' => 1, 'customerId' => $successUser->customerId]);
+            }
+
+            return $this->commandSuccess($successUser);
+
         } catch (Exception $ex) {
             return $this->commandError($ex);
         }

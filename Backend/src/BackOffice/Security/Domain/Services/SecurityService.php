@@ -3,6 +3,7 @@
 
 namespace App\BackOffice\Security\Domain\Services;
 
+use App\BackOffice\Roles\Domain\Entities\RoleModel;
 use App\BackOffice\Security\Domain\Entities\LoginDto;
 use App\BackOffice\Security\Domain\Entities\LoginEntity;
 use App\BackOffice\Security\Domain\Entities\LoginMapper;
@@ -56,10 +57,13 @@ class SecurityService extends BaseService
             throw new PasswordIncorrectException();
         }
 
+        $role = $this->securityRepository->getRowByIdModel(new RoleModel(), $user['role_id']);
+
         $loginDto = new LoginDto();
         $loginDto->setId($user['uuid']);
         $loginDto->setEmail($user['email']);
         $loginDto->setUsername($user['username']);
+        $loginDto->setRoleId($role['uuid']);
 
         $jwt = new JwtCustom();
         $token = $jwt->geToken($loginDto);

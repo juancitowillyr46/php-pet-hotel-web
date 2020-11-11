@@ -1,6 +1,7 @@
 <?php
 namespace App\BackOffice\Bookings\Domain\Entities;
 
+use App\BackOffice\Payments\Domain\Entities\PaymentModel;
 use App\BackOffice\Roles\Domain\Entities\RoleModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -31,5 +32,14 @@ class BookingModel extends Model
         'deleted_by',
         'active'
     ];
+
+    protected $with = ['payment'];
+
     use SoftDeletes;
+
+    public function payment()
+    {
+        return $this->belongsTo(PaymentModel::class, 'booking_id', 'id');
+    }
+
 }

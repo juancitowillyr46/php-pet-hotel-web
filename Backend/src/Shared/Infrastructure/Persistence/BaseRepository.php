@@ -1,7 +1,7 @@
 <?php
 namespace App\Shared\Infrastructure\Persistence;
 
-use App\BackOffice\Purchases\Domain\Entities\PurchaseModel;
+//use App\BackOffice\Purchases\Domain\Entities\PurchaseModel;
 use App\Shared\Domain\Entities\PaginateEntity;
 use App\Shared\Domain\Repository\RepositoryInterface;
 use App\Shared\Exception\Commands\FindActionException;

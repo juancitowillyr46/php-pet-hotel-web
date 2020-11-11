@@ -64,6 +64,103 @@
               </div>
           </ng-template>
         </li>
+        <li [ngbNavItem]="2">
+          <a ngbNavLink><fa-icon [icon]="['fas', 'shopping-cart']" class="mr-1"></fa-icon> Pago</a>
+          <ng-template ngbNavContent>
+            <div class="w-100 d-inline-block" style="vertical-align: top;">
+                <table class="table table-sm p-0" *ngIf="row">
+                  <tr>
+                    <td style="border-top: 0 !important;">Ticket</td>
+                    <td style="border-top: 0 !important;">#{{ row.payment.ticket }}</td>
+                  </tr>
+                  <tr>
+                      <td>Fecha</td>
+                      <td>{{row.payment.createdAt}}</td>
+                  </tr>
+                  <tr>
+                      <td>Medio de Pago</td>
+                      <td>{{row.payment.paymentMethodName}}</td>
+                  </tr>
+                  <tr>
+                    <td>Total</td>
+                    <td>{{row.payment.total}}</td>
+                  </tr>
+                  <tr>
+                      <td style="border-bottom: 0 !important;">Estado</td>
+                      
+                      <td style="border-bottom: 0 !important;">
+                        <a class="badge badge-pill badge-warning" *ngIf="row.payment.stateName === 'PENDIENTE'">
+                          <div class="text-dark">
+                            {{ row.payment.stateName }}
+                          </div>
+                        </a>
+                        <a class="badge badge-pill badge-success" *ngIf="row.payment.stateName === 'CONFIRMADO'">
+                          <div class="text-white">
+                            {{ row.payment.stateName }}
+                          </div>
+                        </a>
+                        <a class="badge badge-pill badge-danger" *ngIf="row.payment.stateName === 'CANCELADA'">
+                          <div class="text-white">
+                            {{ row.payment.stateName }}
+                          </div>
+                        </a>
+                        <a class="badge badge-pill badge-secondary" *ngIf="row.payment.stateName === 'TERMINADA'">
+                          <div class="text-white">
+                            {{ row.payment.stateName }}
+                          </div>
+                        </a>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td colspan="2"></td>
+                  </tr>
+                  <tr>
+                      <td colspan="2" style="border-top: 0 !important;">Detalle</td>
+                  </tr>
+                  <tr>
+                    <td  class="p-0" colspan="2">
+                      <table class="table m-0">
+                        <thead>
+                            <tr>
+                                <th class="py-3" width="70%">
+                                    Servicio
+                                </th>
+                                <th class="py-3" width="30%">
+                                    Precio
+                                </th>
+                                <th class="py-3" width="30%">
+                                    Cantidad
+                                </th>
+                                <th class="py-3" width="30%">
+                                    Subtotal
+                                </th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            <tr *ngFor="let item of row.payment.orders">
+                                <td class="py-3">
+                                    {{item.serviceName}}
+                                </td>
+                                <td class="py-3">
+                                    {{item.price | currency:'S/':'code'}}
+                                </td>
+                                <td class="py-3">
+                                    {{item.quantity}}
+                                </td>
+                                <td class="py-3">
+                                    {{item.subtotal | currency:'S/':'code'}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </td>
+                  </tr>
+                </table>
+                
+              </div>
+          </ng-template>
+        </li>
       </ul>
       
       <div [ngbNavOutlet]="nav" class="mt-2"></div>

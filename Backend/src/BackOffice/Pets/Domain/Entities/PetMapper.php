@@ -30,7 +30,7 @@ class PetMapper
             return date('d-m-Y H:i:s', $time);
         })->forMember('id', function($source){
             return $source['uuid'];
-        })->forMember('isAgressive', function ($source) {
+        })->forMember('isAgressiveName', function ($source) {
             return ($source['is_agressive'] == true)? 'SI' : 'NO';
         });
 

@@ -6,7 +6,7 @@ class LoginDto
     public string $id;
     public string $username;
     public string $email;
-
+    public string $roleId;
     /**
      * @return string
      */
@@ -55,5 +55,20 @@ class LoginDto
         $this->email = $email;
     }
 
+    /**
+     * @return string
+     */
+    public function getRoleId(): string
+    {
+        return $this->roleId;
+    }
+
+    /**
+     * @param string $roleId
+     */
+    public function setRoleId(string $roleId): void
+    {
+        $this->roleId = $roleId;
+    }
 
 }

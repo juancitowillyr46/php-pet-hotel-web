@@ -1,6 +1,7 @@
 <?php
 namespace App\BackOffice\Customers\Domain\Entities;
 
+use App\BackOffice\Pets\Domain\Entities\PetModel;
 use App\BackOffice\Roles\Domain\Entities\RoleModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -32,5 +33,13 @@ class CustomerModel extends Model
         'deleted_by',
         'active'
     ];
+
+    // protected $with = ['pets'];
+
     use SoftDeletes;
+//
+//    public function pets()
+//    {
+//        return $this->hasMany(PetModel::class, 'customer_id', 'id');
+//    }
 }

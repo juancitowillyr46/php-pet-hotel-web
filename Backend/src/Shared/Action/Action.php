@@ -69,7 +69,9 @@ abstract class Action
 
     protected function respond(ActionPayload $payload): Response
     {
-        $json = json_encode($payload, JSON_PRETTY_PRINT);
+        // JSON_PRETTY_PRINT
+        // JSON_PARTIAL_OUTPUT_ON_ERROR
+        $json = json_encode($payload, JSON_PARTIAL_OUTPUT_ON_ERROR);
         $this->response->getBody()->write($json);
 
         return $this->response

@@ -14,9 +14,9 @@ return function (App $app) {
     $app->group('/api', function (RouteCollectorProxy $group) {
 
         $group->group('/security', function (RouteCollectorProxy $group) {
-            $group->post('/register/web', \App\BackOffice\Security\Application\Actions\RegisterWebAction::class);
-            $group->post('/login/web', \App\BackOffice\Security\Application\Actions\LoginWebAction::class);
-            $group->post('/login/manager', \App\BackOffice\Security\Application\Actions\LoginManagerAction::class);
+            $group->post('/web/register', \App\BackOffice\Security\Application\Actions\RegisterWebAction::class);
+            $group->post('/web/login', \App\BackOffice\Security\Application\Actions\LoginWebAction::class);
+            $group->post('/manager/login', \App\BackOffice\Security\Application\Actions\LoginManagerAction::class);
             $group->get('/me', \App\BackOffice\Users\Application\Actions\UserInfoAction::class)->add(AuthValidateTokenMiddleware::class);
             $group->post('/transaction', \App\BackOffice\Transactions\Application\Actions\TransactionAddAction::class)
                 ->add(AuthValidateTokenMiddleware::class);
@@ -95,6 +95,7 @@ return function (App $app) {
             $group->put('/{uuid}', \App\BackOffice\Payments\Application\Actions\PaymentEditAction::class);
             $group->put('/{uuid}/update-state', \App\BackOffice\Payments\Application\Actions\PaymentEditStateAction::class);
             $group->delete('/{uuid}', \App\BackOffice\Payments\Application\Actions\PaymentRemoveAction::class);
+            $group->get('/booking/{uuid}', \App\BackOffice\Payments\Application\Actions\PaymentRemoveAction::class);
         })->add(AuthValidateTokenMiddleware::class);
 
         $group->group('/bookings', function (RouteCollectorProxy $group) {
