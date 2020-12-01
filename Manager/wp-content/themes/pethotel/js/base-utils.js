@@ -87,7 +87,7 @@ Handlebars.registerHelper('ifnoteq', function (a, b, options) {
         
         setTimeout(() => {
             $("#modal-error").fadeOut();
-        }, 2000);
+        }, 5000);
         // alert(response.responseJSON.error.message);
     }
 

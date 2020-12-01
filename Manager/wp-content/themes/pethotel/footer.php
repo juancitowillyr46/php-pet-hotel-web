@@ -114,8 +114,8 @@
   <script src="<?php echo get_template_directory_uri(); ?>/js/swiper-bundle.min.js"></script>
   <script src="<?php echo get_template_directory_uri(); ?>/js/jquery-ui.min.js"></script>
   <script src="<?php echo get_template_directory_uri(); ?>/js/cropper.min.js"></script>
-  <script src="https://momentjs.com/downloads/moment.js"></script>
-  <script src="http://isaaccambron.com/twix.js/twix.js/dist/twix.min.js"></script>
+  <script src="<?php echo get_template_directory_uri(); ?>/js/moment.min.js"></script>
+  <script src="<?php echo get_template_directory_uri(); ?>/js/twix.min.js"></script>
   <script src="<?php echo get_template_directory_uri(); ?>/js/base-http.js"></script>
   <script src="<?php echo get_template_directory_uri(); ?>/js/main.js"></script>
   <script src="<?php echo get_template_directory_uri(); ?>/js/jquery.validate.min.js"></script>
