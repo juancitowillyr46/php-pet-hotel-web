@@ -58,7 +58,7 @@ class BaseRepository implements RepositoryInterface
 
     public function getAllRows(?array $query, bool $usingPaginate): object
     {
-        if($usingPaginate){
+        if($usingPaginate == true){
             $findAll = $this->getModel()::all()
                 ->sortByDesc('id')
                 ->skip(((int)$query['page'] - 1) * $query['size'])

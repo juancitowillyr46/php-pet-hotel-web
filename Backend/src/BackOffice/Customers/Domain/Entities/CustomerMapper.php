@@ -30,6 +30,8 @@ class CustomerMapper
             return date('d-m-Y H:i:s', $time);
         })->forMember('id', function($source){
             return $source['uuid'];
+        })->forMember('addressReference', function($source){
+            return ($source['address_reference'] == null)? "" : $source['address_reference'];
         });
 
     }

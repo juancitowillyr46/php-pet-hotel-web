@@ -1,0 +1,600 @@
+#userPayment{
+  position: relative;
+  margin: 0 auto;
+
+  .ms-wrap-section{
+    width: 90%;
+    position: relative;
+    margin: 0 auto;
+    padding: 80px 0;
+
+    .ms-step-list{
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      position: relative;
+      margin-bottom: 30px;
+      width: 100%;
+      max-width: 780px;
+      margin-left: auto;
+      margin-right: auto;
+
+      &:before{
+        content: "";
+        display: block;
+        width: calc(100% - 90px);
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 1px;
+        background-color: #c2d1d9;
+        position: absolute;
+      }
+      
+      li{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+        .ms-number{
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: #c2d1d9;
+          border-radius: 100%;
+          color: #FFF;
+          font-weight: 600;
+        }
+        .ms-detail{
+          display: block;
+          line-height: 1.2;
+          width: 70px;
+          text-align: center;
+          font-size: 12px;
+          margin-top: 5px;
+          color: #c2d1d9;
+        }
+        &.active{
+          .ms-number{
+            background-color: $primario;
+          }
+          .ms-detail{
+            color: $primario;
+          }
+        }
+        &.checked{
+          .ms-number{
+            background-color: $secundario;
+          }
+          .ms-detail{
+            color: $primario;
+          }
+        }
+      }
+    }
+
+    .ms-header-step{
+      margin-bottom: 20px;
+      .ms-title{
+        font-size: 23px;
+        font-weight: bold;
+        color: $secundario;
+        text-align: center;
+        text-transform: uppercase;
+      }
+    }
+
+    .ms-tab-item{
+      overflow: hidden;
+      border-radius: 6px;
+      box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.25);
+      margin-bottom: 10px;
+      background-color: #FFF;
+      .ms-tab-header{
+        background-color: $primario;
+        width: 100%;
+        display: block;
+        font-weight: 600;
+        color: $secundario;
+        font-size: 17px;
+        padding: 13px 15px;
+        padding-right: 35px;
+        position: relative;
+        &:after{
+          content: "\e903";
+          font-family: 'ms-icons' !important;
+          display: inline-block;
+          position: absolute;
+          top: 50%;
+          right: 15px;
+          font-size: 14px;
+          font-weight: normal;
+          transform: translateY(-50%) rotate(90deg);
+          transition: all .3s;
+        }
+      }
+
+      .ms-tab-body{
+        padding: 0 15px;
+        color: #6d7a7c;
+        .ms-panel{
+          .ms-panel-header{
+            padding: 20px 0 15px 0;
+            font-weight: 600;
+            font-size: 17px;
+            border-bottom: 1px solid $secundario;
+            margin-bottom: 20px;
+          }
+        }
+
+        .ms-label{
+          display: block;
+          margin-bottom: 10px;
+          font-size: 14px;
+          color: #8a9299;
+        }
+
+        .ms-wrap-inputs{
+          .ms-form-input{
+            margin-bottom: 15px;
+            position: relative;
+            select,
+            textarea,
+            input{
+              width: 100%;
+              min-height: 45px;
+              border: 1px solid #bacccf;
+              padding: 0 15px;
+              background-color: #f0f5f9;
+              border-radius: 6px;
+              font-size: 15px;
+
+              &.error{
+                border: 1px solid #ffbcb7;
+                background-color: #fdeee9;
+              }
+            }
+
+            label.error{
+              display: none !important;
+            }
+
+            select{
+              background-image: url('../img/sprite.png');
+              background-repeat: no-repeat;
+              background-position: bottom right;
+            }
+
+            textarea{
+              resize: none;
+              padding: 15px;
+              font-family: 'Carnas';
+            }
+
+            .ms-min-title{
+              font-size: 14px;
+            }
+
+            .ms-wrap-opt{
+              display: flex;
+              align-items: center;
+              margin-top: 10px;
+              li{
+                margin-right: 10px;
+                input{
+                  display: none;
+                  &:checked + label{
+                    &:after{
+                      opacity: 1;
+                    }
+                  }
+                }
+
+                label{
+                  position: relative;
+                  padding-right: 30px;
+                  display: inline-block;
+                  &:before{
+                    content: "";
+                    display: block;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 100%;
+                    border: 1px solid #bacccf;
+                    background-color: #f0f5f9;
+                    position: absolute;
+                    right: 0;
+                    top: 50%;
+                    transform: translateY(-50%);
+                  }
+
+                  &:after{
+                    content: "";
+                    display: block;
+                    background-color: #7a878a;
+                    border-radius: 100%;
+                    width: 8px;
+                    height: 8px;
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    right: 7px;
+                    transition: all .3s;
+                    opacity: 0;
+                  }
+                }
+              }
+            }
+
+            .ui-datepicker{
+              margin-left: 0;
+              top: auto !important;
+              left: 0 !important;
+              bottom: 45px !important;
+
+              @media screen and (min-width: 1024px){
+                padding: 5px;
+                border-radius: 8px;
+                td {
+                  border: 0;
+                  padding: 1px;
+                  font-size: 13.5px;
+                }
+
+                .ui-datepicker-title {
+                  font-size: 15px;
+                }
+
+                .ui-datepicker-next,
+                .ui-datepicker-prev {
+                  height: 1.8em;
+                  top: 2px !important;
+                  width: 1.8em;
+                }
+              }
+            }
+          }
+        }
+
+        &.padding{
+          padding-top: 30px;
+          padding-bottom: 30px;
+        }
+
+        .ms-panel-body{
+          .ms-wrap-img{
+            margin-bottom: 35px;
+            .ms-img-pf{
+              margin-bottom: 0;
+            }
+            .ms-img-size{
+              display: block;
+              margin-top: 5px;
+            }
+          }
+        }
+      }
+
+      &.active{
+        .ms-tab-header{
+          &:after{
+            transform: translateY(-50%) rotate(-90deg);
+          }
+        }
+      }
+    }
+
+    .ms-wrap-chk{
+      margin-top: 20px;
+      max-width: 710px;
+      margin-left: auto;
+      margin-right: auto;
+      label{
+        cursor: pointer;
+      }
+      input{
+        display: none;
+        &:checked + label{
+          &:after{
+            opacity: 1;
+          }
+        }
+      }
+
+      label{
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        font-size: 15px;
+        line-height: 1.6;
+        color: #6d7a7c;
+
+        &:before{
+          content: "";
+          display: block;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 20px;
+          height: 20px;
+          border: 1px solid #bacccf;
+          border-radius: 6px;
+          background-color: #FFF;
+        }
+
+        &:after{
+          content: "\e909";
+          font-family: 'ms-icons' !important;
+          display: flex;
+          width: 22px;
+          height: 22px;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          top: 0;
+          left: 0;
+          transition: all .3s;
+          opacity: 0;
+        }
+      }
+    }
+
+    .ms-wrap-btn{
+      margin-top: 15px;
+      text-align: center;
+      .ms-btn{
+        margin: 0 5px;
+      }
+    }
+
+    .ms-wrap-ft{
+      width: 100%;
+      max-width: 710px;
+      margin: 0 auto;
+    }
+  }
+
+  #userProfile{
+    .ms-wrap-section{
+      width: 100% !important;
+      padding: 0 !important;
+      max-width: 710px !important;
+      margin-bottom: 20px;
+    }
+  }
+
+  @media screen and (min-width: 375px){
+    .ms-wrap-section{
+      .ms-header-step{
+        .ms-title{
+          font-size: 27px;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 768px){
+    .ms-wrap-section{
+      .ms-step-list{
+        margin-bottom: 40px;
+        li{
+          .ms-number{
+            width: 50px;
+            height: 50px;
+            font-size: 18px;
+          }
+          .ms-detail{
+            font-size: 16px;
+            width: 100px;
+            font-weight: 600;
+            margin-top: 10px;
+          }
+        }
+      }
+
+      .ms-header-step{
+        .ms-title {
+          font-size: 53px;
+          margin-bottom: 45px;
+          letter-spacing: 3px;
+        }
+      }
+
+      .ms-tab-item{
+        margin-bottom: 20px;
+        .ms-tab-header {
+          font-size: 22px;
+          padding: 16px 30px;
+          padding-right: 50px;
+          .ms-tab-header{
+            &:after {
+              right: 20px;
+              font-size: 16px;
+            }
+          }
+        }
+
+        .ms-tab-body {
+          padding: 0 30px;
+          padding-bottom: 20px;
+
+          &.padding{
+            padding-top: 50px;
+          }
+
+          .ms-panel{
+            .ms-panel-header {
+              padding: 30px 0 23px 0;
+              margin-bottom: 40px;
+              font-size: 22px;
+            }
+
+            .ms-panel-body{
+              display: flex;
+              align-items: flex-start;
+              justify-content: flex-start;
+              .ms-wrap-img{
+                margin-left: 0;
+                margin-right: 0;
+                width: 125px;
+                height: 125px;
+                flex-shrink: 0;
+                .ms-img-pf{
+                  margin-bottom: 0;
+                }
+
+                .ms-img-size{
+                  text-align: center;
+                }
+              }
+
+              .ms-wrap-inputs{
+                flex-shrink: 0;
+                width: 100%;
+                max-width: 480px;
+                margin-left: auto;
+                justify-content: space-between;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: flex-start;
+                .ms-label{
+                  width: 100%;
+                }
+
+                .ms-form-input{
+                  width: 100%;
+                  &:not(.small),
+                  &:not(.full),
+                  &:not(.mediun){
+                    max-width: 325px;
+                  }
+
+                  &.small{
+                    max-width: 140px;
+                    &.mediun{
+                      max-width: 48%;
+                    }
+                  }
+
+                  &.full{
+                    max-width: 100%;
+                  }
+
+                  &.margin{
+                    margin-left: 15px;
+                    margin-right: auto;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .ms-wrap-btn{
+        margin-top: 50px;
+        .ms-btn.lg{
+          min-width: 310px;
+          font-size: 17px;
+          padding-top: 26px;
+          padding-bottom: 26px;
+        }
+
+        .ms-btn{
+          min-width: 217px;
+          font-size: 17px;
+          padding-top: 18px;
+          padding-bottom: 18px;
+        }
+      }
+
+      .ms-wrap-chk {
+        margin-top: 40px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 991px){
+    .ms-wrap-section{
+      .ms-tab-item{
+        .ms-tab-body {
+          .ms-panel{
+            .ms-panel-body{
+              .ms-wrap-img{
+                width: 140px;
+                height: 140px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 1440px){
+    .ms-wrap-section{
+      padding-top: 160px;
+    }
+  }
+}
+
+.ms-msg-note{
+  width: 100%;
+  max-width: 710px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffe0a2;
+  border: 1px solid #ffa727;
+  border-radius: 6px;
+  box-shadow: 0px 0px 6px 0px rgba(0,0,0,.25);
+  background-repeat: repeat;
+  background-position: 0 0;
+  color: #333;
+  a{
+    color: #2196F3;
+  }
+}
+
+.type-method-error,
+//.msg-error-terms,
+.errorx{
+  border: 1px solid #ffbcb7;
+  background-color: #fdeee9;
+  display: block;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+#userPayment .ms-wrap-section .ms-tab-item .ms-tab-body{
+  .ms-wrap-inputs{
+    &.ms-flex{
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      .ms-label,
+      .ms-form-input{
+        width: 100%;
+      }
+    }
+    .ms-form-input{
+      &.ms-md{
+        width: 49%;
+        @media screen and (min-width: 768px){
+          &.small-33{
+            width: 24% !important;
+          }
+        }
+      }
+
+      @media screen and (min-width: 768px){
+        &.small-33{
+          width: 45% !important;
+        }
+      }
+    }
+  }
+}

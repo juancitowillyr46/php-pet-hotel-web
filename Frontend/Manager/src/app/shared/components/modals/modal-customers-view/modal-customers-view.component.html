@@ -20,7 +20,9 @@
                         </td>
                     </tr> -->
                     <tr>
-                        <td style="border-top: 0 !important;">Foto</td><td style="border-top: 0 !important;"><img src="http://localhost:4200/assets/img/shop-img/1.png" alt="contact-img" title="contact-img" class="round mr-3 product-thumb"></td>
+                        <td style="border-top: 0 !important;">Foto</td><td style="border-top: 0 !important;">
+                            <img *ngIf="row.image != ''" [src]="row.image" alt="contact-img" title="contact-img" class="round mr-3 product-thumb">
+                        </td>
                     </tr>
                     <tr>
                         <td>Nombres</td><td>{{row.firstName}}</td>
@@ -76,7 +78,9 @@
                                 </td>
                             </tr> -->
                             <tr>
-                                <td style="border-top: 0 !important;">Foto</td><td style="border-top: 0 !important;"><img [src]="pet.image" alt="contact-img" title="contact-img" class="round mr-3 product-thumb"></td>
+                                <td style="border-top: 0 !important;">Foto</td><td style="border-top: 0 !important;">
+                                    <img *ngIf="pet.image != ''" [src]="pet.image" alt="contact-img" title="contact-img" class="round mr-3 product-thumb">
+                                </td>
                             </tr>
                             <tr>
                                 <td>Edad</td><td>{{pet.age}}</td>

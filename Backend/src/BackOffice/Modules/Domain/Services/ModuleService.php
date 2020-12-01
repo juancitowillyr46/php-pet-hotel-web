@@ -63,32 +63,32 @@ class ModuleService extends BaseService
         if(count($modules) > 0){
 
             $modulesParents = array_filter($modules, function($obj){
-                if(isset($obj['is_parent'])){
-                    $isParent = (bool) $obj['is_parent'];
-                    if($isParent === false){
+                if(isset($obj['parent_id'])){
+                    $isParent = $obj['parent_id'];
+                    if($isParent > 0){
                         return false;
                     }
                 }
                 return true;
             });
 
-            $modulesChildren = array_filter($modules, function($obj) {
-                if(isset($obj['is_children'])){
-                    $isChildren = $obj['is_children'];
-                    if($isChildren === 0){
-                        return false;
-                    }
-                }
-                return true;
-            });
+//            $modulesChildren = array_filter($modules, function($obj) {
+//                if(isset($obj['parent_id'])){
+//                    $isChildren = $obj['parent_id'];
+//                    if($isChildren > 0){
+//                        return false;
+//                    }
+//                }
+//                return true;
+//            });
 
 
             if(count($modulesParents) > 0){
                 foreach($modulesParents as $parent) {
                     $subMenu = [];
-                    if(count($modulesChildren) > 0){
-                        foreach ($modulesChildren as $permission) {
-                            if($parent['id'] === $permission['parent_id']){
+                    if(count($modules) > 0){
+                        foreach ($modules as $permission) {
+                            if($parent['id'] == $permission['parent_id']){
                                 $subMenu[] = $this->getModuleMenuDto($permission, []);
                             }
                         }
@@ -124,8 +124,8 @@ class ModuleService extends BaseService
         $userMenuDto->setId($row['uuid']);
         $userMenuDto->setSlug(($row['slug'] != "")? $row['slug']: '' );
         $userMenuDto->setIcon(($row['icon'] != "")? $row['icon']: '' );
-        $userMenuDto->setIsParent(($row['is_parent'] != "")? $row['is_parent']: '' );
-        $userMenuDto->setIsChildren(($row['is_children'] != "")? $row['is_children']: '' );
+        $userMenuDto->setIsParent(($row['parent_id'] == 0));
+        $userMenuDto->setIsChildren(($row['parent_id'] > 0));
         $userMenuDto->setOrder(($row['order'] != -1)? $row['order']: 0 );
         $userMenuDto->setName($row['name']);
         if(count($submenu) > 0){

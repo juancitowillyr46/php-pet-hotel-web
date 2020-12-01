@@ -1,0 +1,194 @@
+#userProfile{
+  position: relative;
+  margin: 0 auto;
+
+  .ms-wrap-section{
+    width: 90%;
+    max-width: 650px;
+    position: relative;
+    margin: 0 auto;
+    padding: 80px 0;
+    @media screen and (min-width:1024px){
+      padding: 140px 0;
+    }
+
+    @media screen and (min-width:1440px){
+      padding-top: 160px;
+    }
+
+    .ms-user-info{
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .ms-input{
+        display: inline-block;
+        color: #6c6c6c;
+        font-size: 14px;
+        position: relative;
+        &.user{
+          margin-bottom: 10px;
+          span{
+            font-weight: 600;
+            font-size: 17px;
+          }
+        }
+
+        .ms-edit{
+          position: absolute;
+          bottom: 0;
+          right: -40px;
+        }
+      }
+
+      @media screen and (min-width:768px){
+        .ms-input{
+          font-size: 17px;
+          &.user{
+            span{
+              font-size: 22px;
+            }
+          }
+        }
+      }
+    }
+
+    .ms-dog-list{
+      margin-top: 30px;
+      position: relative;
+
+      .ms-dogs{
+        li{
+          margin-bottom: 20px;
+          position: relative;
+          &:last-child{
+            margin-bottom: 0;
+          }
+
+          .ms-card{
+            border-radius: 30px;
+            border: 2px solid transparent;
+            text-align: center;
+            color: #6c6c6c;
+            padding: 25px;
+            background-color: #efefef;
+            box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
+            transition: all .3s;
+            position: relative;
+            cursor: pointer;
+
+            .ms-wrap-img{
+              border-radius: 100%;
+              border: 8px solid $primario;
+              overflow: hidden;
+              position: relative;
+              width: 62px;
+              height: 62px;
+              img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                position: absolute;
+                top: 0;
+                left: 0;
+              }
+            }
+
+            .ms-can-info{
+              .ms-name{
+                font-weight: 600;
+                font-size: 18px;
+                margin: 7px 0 5px 0;
+              }
+              span{
+                display: block;
+                font-size: 15px;
+              }
+
+              @media screen and (min-width:768px){
+                .ms-name{
+                  font-size: 22px;
+                }
+                span{
+                  font-size: 17px;
+                }
+              }
+            }
+
+            .ms-edit{
+              width: 35px;
+              height: 35px;
+              border-radius: 100%;
+              transition: all .3s;
+              position: absolute;
+              top: 10px;
+              right: 10px;
+            }
+
+            &:hover{
+              border-color: $secundario;
+              .ms-edit{
+                background-color: #e5e5e5;
+                &:before{
+                  background-position: -7px -305px;
+                }
+              }
+            }
+          }
+
+          .ms-delete{
+            position: absolute;
+            top: 12px;
+            right: 70px;
+            color: #717171;
+            font-size: 20px;
+            width: 35px;
+            height: 35px;
+            border-radius: 100%;
+            &:hover{
+              background-color: #e5e5e5;
+              color: $primario
+            }
+
+            &:after{
+              right: -65px;
+            }
+          }
+
+          .ms-wrap-chk{
+            margin: 0;
+            position: absolute;
+            top: 25px;
+            left: 30px;
+          }
+        }
+
+        @media screen and (min-width:768px){
+          margin-left:-15px;
+          margin-right: -15px;
+          display: flex;
+          flex-wrap: wrap;
+          li{
+            width: 50%;
+            padding: 0 15px;
+          }
+        }
+      }
+
+      .ms-wrap-btn{
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      @media screen and (min-width:768px){
+        margin-top: 60px;
+        .ms-wrap-btn{
+          position: absolute;
+          bottom: 15px;
+          right: -80px;
+        }
+      }
+    }
+  }
+}
+

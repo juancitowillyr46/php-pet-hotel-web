@@ -27,7 +27,7 @@ class KennelActionRequestSchema extends BaseValidatorRequest
                 new Required(),
             ],
             'isBooked' => [
-                new Type('bool')
+                new Required(),
             ],
             'active' => [
                 new Type('bool')

@@ -1,0 +1,356 @@
+#userPayment{
+  .ms-wrap-section{
+    .payment{
+      &.ms-wrap-ft{
+        .ms-panel{
+          padding-top: 10px;
+        }
+      }
+    }
+
+    .ms-payment-list{
+      padding-bottom: 40px;
+      .ms-wrap-radio{
+        position: relative;
+        padding-left: 30px;
+        font-weight: 600;
+        font-size: 16px;
+
+        input{
+          display: none;
+          &:checked + label{
+            &:after{
+              opacity: 1;
+            }
+            &:before{
+              border-color: $primario;
+              background-color: $primario;
+            }
+          }
+        }
+
+        label{
+          cursor: pointer;
+          &:before{
+            content: "";
+            display: block;
+            width: 18px;
+            height: 18px;
+            border: 1px solid #bfbfbf;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 100%;
+            transition: all .3s;
+          }
+
+          &:after{
+            content: "";
+            display: block;
+            width: 10px;
+            height: 10px;
+            border-radius: 100%;
+            background-color: $secundario;
+            border-radius: 100%;
+            left: 5px;
+            top: 5px;
+            position: absolute;
+            transition: all .3s;
+            opacity: 0;
+          }
+        }
+      }
+
+      >li{
+        padding: 15px 0;
+        border-bottom: 1px solid #bdd2da;
+        &:last-child{
+          padding-bottom: 0;
+          border-bottom: 0;
+        }
+
+        &:first-child{
+          padding-top: 0;
+        }
+      }
+    }
+
+    .ms-payment-banks{
+      margin: 15px 0;
+      li{
+        margin: 10px 0;
+      }
+
+      .ms-item{
+        font-size: 14px;
+        padding-left: 65px;
+        position: relative;
+        strong{
+          font-weight: 600;
+        }
+
+        &:before{
+          background: url('../img/paymaent.png') no-repeat;
+          width: 52px;
+          height: 52px;
+          display: block;
+          position: absolute;
+          top: 2px;
+          left: 0;
+        }
+
+        &.bbv-icon{
+          &:before{
+            content: "";
+            background-position: -1px -1px;
+          }
+        }
+
+        &.bcp-icon{
+          &:before{
+            content: "";
+            background-position: -54px -1px;
+          }
+        }
+
+        &.interbank-icon{
+          &:before{
+            content: "";
+            background-position: -107px -1px;
+          }
+        }
+
+        &.scotia-icon{
+          &:before{
+            content: "";
+            background-position: -161px -1px;
+          }
+        }
+
+        &.yape-icon{
+          &:before{
+            content: "";
+            background-position: -214px 0;
+          }
+        }
+      }
+    }
+
+    .ms-wrap-file-upload{
+      input{
+        display: none;
+      }
+      label{
+        display: inline-block;
+        width: auto;
+        padding: 10px 20px;
+        border-radius: 50px;
+        border: 1px solid #bdd2da;
+        background-color: #bdd2da;
+        text-transform: uppercase;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 12px;
+        color: #FFF;
+        color: #6d7e88;
+        margin-top: 5px;
+        cursor: pointer;
+      }
+
+      span{
+        display: block;
+      }
+
+      &.padding{
+        padding-left: 65px;
+      }
+    }
+
+    .ms-wrap-radio{
+      .ms-small-text{
+        display: block;
+        font-size: 14px;
+        font-weight: normal;
+      }
+    }
+
+    @media screen and (min-width: 768px){
+      .ms-wrap-ft{
+        &.payment{
+          .ms-wrap-inputs{
+            margin: 0 auto;
+          }
+
+          .ms-payment-list{
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            .ms-payment-banks{
+              width: 100%;
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: space-between;
+              li{
+                width: 48%;
+              }
+
+              &.nowrap{
+                li{
+                  width: 100%;
+                }
+              }
+            }
+          }
+
+          .ms-payment-banks{
+            .ms-item{
+              &.flex{
+                display: flex;
+                align-items: flex-start;
+                .ms-wrap-file-upload{
+                  margin: 0;
+                  margin-left: 20px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.step4{
+    @media screen and (min-width: 768px){
+      .ms-wrap-section{
+        .ms-tab-item{
+          .ms-tab-body{
+            .ms-panel{
+              .ms-panel-body{
+                .ms-wrap-inputs {
+                  max-width: 520px;
+                }
+              }
+            }
+          }
+        }
+
+        .ms-wrap-ft.payment{
+          .ms-payment-list{
+            max-width: 520px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.ms-payment-detail{
+  width: 100%;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px dashed #ddd;
+  display: flex;
+  justify-content: space-between;
+  a{
+    font-size: 14px;
+    color: #2196f3;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+}
+
+.ms-table-pt{
+  width: 100%;
+  border: 0;
+  padding: 0;
+  border-spacing: 0;
+  border-collapse: collapse;
+  thead{
+    tr{
+      th{
+        padding: 8px;
+        border-bottom: 1px solid #008192;
+        text-align: left;
+        background-color: #008192;
+        color: #FFF;
+      }
+    }
+  }
+
+  tbody{
+    tr{
+      td{
+        padding: 8px;
+        border-top: 1px solid #ddd;
+      }
+    }
+  }
+  &.ms-border{
+    thead{
+      tr{
+        th{
+          border: 1px solid #008192;
+        }
+      }
+    }
+
+    tbody{
+      tr{
+        td{
+          border: 1px solid #ddd;
+        }
+      }
+    }
+  }
+}
+
+.ms-payment-list{
+  .ms-wrap-checkbox{
+    input{
+      display: none;
+    }
+
+    label{
+      cursor: pointer;
+      position: relative;
+      padding-left: 30px;
+      font-weight: 600;
+      font-size: 16px;
+      &:before{
+        content: "";
+        display: block;
+        width: 18px;
+        height: 18px;
+        border: 1px solid #bfbfbf;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 4px;
+        transition: all .3s;
+      }
+      &:after{
+        content: "\e909";
+        font-family: 'ms-icons'!important;
+        display: flex;
+        width: 20px;
+        height: 20px;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: all .3s;
+        opacity: 0;
+        font-size: 12px;
+      }
+    }
+
+    input:checked+label:after{
+      opacity: 1;
+    }
+  }
+}

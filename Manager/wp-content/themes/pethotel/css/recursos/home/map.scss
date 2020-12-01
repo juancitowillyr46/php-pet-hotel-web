@@ -1,0 +1,116 @@
+#ubicacion{
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  background-color: $secundario;
+  min-height: 250px;
+
+  &:before{
+    content: "";
+    display: block;
+    width: 100%;
+    background-image: url("../img/sprite.png");
+    background-position: -10px -38px;
+    height: 17px;
+    background-repeat: repeat-x;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  /*&:after{
+    content: "";
+    display: block;
+    padding-bottom: 60%;
+  }*/
+
+  .ms-wrap-img{
+    //position: absolute;
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    /*display: flex;
+    align-items: center;
+    justify-content: center;*/
+    img{
+      top: 50%;
+      left: 50%;
+      width: auto;
+      transform: translate(-50%,-50%);
+      object-fit: cover;
+      position: absolute;
+      z-index: 0;
+    }
+  }
+
+  .ms-address{
+    border-radius: 50px;
+    background-color: rgba(0, 129, 146, 0.8);
+    color: #FFF;
+    padding: 20px 40px;
+    position: absolute;
+    text-transform: uppercase;
+    font-weight: 600;
+    min-width: 270px;
+    text-align: center;
+    font-size: 16px;
+    /*margin-top: -15px;
+    margin-left: -460px;*/
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: -75px;
+    z-index: 1;
+    /*&:after{
+      content: "";
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: 19px solid #33887d;
+      border-right: 23px solid transparent;
+      position: absolute;
+      right: -17px;
+      bottom: 15px;
+    }*/
+
+    &:after{
+      content: "";
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: 23px solid #33887d;
+      border-right: 19px solid transparent;
+      position: absolute;
+      bottom: -15px;
+      left: 30px;
+    }
+  }
+
+  @media screen and (min-width: 1024px){
+    height: 340px;
+    .ms-wrap-img{
+      img{
+        width: 100%;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1440px){
+    height: 360px;
+
+    .ms-address {
+      margin-top: -21px;
+      margin-left: -320px;
+      &:after{
+        border-top: 19px solid #33887d;
+        border-right: 23px solid transparent;
+        left: auto;
+        right: -17px;
+        bottom: 12px;
+        transform: rotate(10deg);
+      }
+    }
+  }
+}

@@ -23,13 +23,16 @@ class ServiceModel extends Model
         'image',
         'price',
         'service_type_id',
+        'plan_id',
+        'visible_id',
         'created_at',
         'created_by',
         'updated_at',
         'updated_by',
         'deleted_at',
         'deleted_by',
-        'active'
+        'active',
+        'order'
     ];
     use SoftDeletes;
 }

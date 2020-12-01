@@ -1,0 +1,78 @@
+@font-face {
+    font-family: 'Carnas';
+    src: url('Carnas-Black.eot');
+    src: url('Carnas-Black.eot?#iefix') format('embedded-opentype'),
+        url('Carnas-Black.woff2') format('woff2'),
+        url('Carnas-Black.woff') format('woff'),
+        url('Carnas-Black.ttf') format('truetype'),
+        url('Carnas-Black.svg#Carnas-Black') format('svg');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Carnas';
+    src: url('Carnas-ExtraBold.eot');
+    src: url('Carnas-ExtraBold.eot?#iefix') format('embedded-opentype'),
+        url('Carnas-ExtraBold.woff2') format('woff2'),
+        url('Carnas-ExtraBold.woff') format('woff'),
+        url('Carnas-ExtraBold.ttf') format('truetype'),
+        url('Carnas-ExtraBold.svg#Carnas-ExtraBold') format('svg');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Carnas';
+    src: url('Carnas-Medium.eot');
+    src: url('Carnas-Medium.eot?#iefix') format('embedded-opentype'),
+        url('Carnas-Medium.woff2') format('woff2'),
+        url('Carnas-Medium.woff') format('woff'),
+        url('Carnas-Medium.ttf') format('truetype'),
+        url('Carnas-Medium.svg#Carnas-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Carnas';
+    src: url('Carnas-Light.eot');
+    src: url('Carnas-Light.eot?#iefix') format('embedded-opentype'),
+        url('Carnas-Light.woff2') format('woff2'),
+        url('Carnas-Light.woff') format('woff'),
+        url('Carnas-Light.ttf') format('truetype'),
+        url('Carnas-Light.svg#Carnas-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Carnas';
+    src: url('Carnas-Bold.eot');
+    src: url('Carnas-Bold.eot?#iefix') format('embedded-opentype'),
+        url('Carnas-Bold.woff2') format('woff2'),
+        url('Carnas-Bold.woff') format('woff'),
+        url('Carnas-Bold.ttf') format('truetype'),
+        url('Carnas-Bold.svg#Carnas-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Carnas';
+    src: url('Carnas-Regular.eot');
+    src: url('Carnas-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Carnas-Regular.woff2') format('woff2'),
+        url('Carnas-Regular.woff') format('woff'),
+        url('Carnas-Regular.ttf') format('truetype'),
+        url('Carnas-Regular.svg#Carnas-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

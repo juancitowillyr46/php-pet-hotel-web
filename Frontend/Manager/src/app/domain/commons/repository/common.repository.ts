@@ -23,6 +23,11 @@ export class CommonRepository {
         return that.dataService.get(that.resource + 'data-master/audit-status');
     }
 
+    getCommonAuditStatusId(): Observable<ResponseDataDto<CommonDto[]>> {
+        const that = this;
+        return that.dataService.get(that.resource + 'data-master/audit-status-id');
+    }
+
     getCommonBlockedUser(): Observable<ResponseDataDto<CommonDto[]>> {
         const that = this;
         return that.dataService.get(that.resource + 'data-master/blocked-user');
@@ -52,6 +57,17 @@ export class CommonRepository {
         const that = this;
         return that.dataService.get(that.resource + 'data-master/booking-state');
     }
+
+    getCommonIsVisible(): Observable<ResponseDataDto<CommonDto[]>> { 
+        const that = this;
+        return that.dataService.get(that.resource + 'data-master/is-visible');
+    }
+
+    getCommonPlans(): Observable<ResponseDataDto<CommonDto[]>> { 
+        const that = this;
+        return that.dataService.get(that.resource + 'data-master/plans');
+    }
+
 
     // getCommonCategories(): Observable<ResponseDataDto<CommonDto[]>> {
     //     const that = this;

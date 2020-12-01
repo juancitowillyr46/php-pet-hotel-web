@@ -53,9 +53,9 @@ class PaymentActionRequestSchema extends BaseValidatorRequest
             'total' => [
                 new Required(),
             ],
-            'bookingId' => [
-                new Required(),
-            ],
+//            'bookingId' => [
+//                new Required(),
+//            ],
             'customerId' => [
                 new Required(),
             ],

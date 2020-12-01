@@ -11,6 +11,7 @@ class PetEntity extends Audit
 {
     public string $name;
     public string $age;
+    public string $age_type;
     public string $gender;
     public string $race;
     public string $image;
@@ -22,11 +23,11 @@ class PetEntity extends Audit
     public string $veterinary_phone;
     public string $treatments;
     public string $last_vaccine;
-    public bool $is_agressive;
+    public int $is_agressive;
     public string $observation;
+    public string $init_zeal;
     public string $last_zeal;
     public string $other;
-
 
     /**
      * @return string
@@ -237,20 +238,55 @@ class PetEntity extends Audit
     }
 
     /**
-     * @return bool
+     * @return int
      */
-    public function isIsAgressive(): bool
+    public function getIsAgressive(): int
     {
         return $this->is_agressive;
     }
 
     /**
-     * @param bool $is_agressive
+     * @param int $is_agressive
      */
-    public function setIsAgressive(bool $is_agressive): void
+    public function setIsAgressive(int $is_agressive): void
     {
         $this->is_agressive = $is_agressive;
     }
+
+    /**
+     * @return string
+     */
+    public function getAgeType(): string
+    {
+        return $this->age_type;
+    }
+
+    /**
+     * @param string $age_type
+     */
+    public function setAgeType(string $age_type): void
+    {
+        $this->age_type = $age_type;
+    }
+
+
+//    /**
+//     * @return bool
+//     */
+//    public function isIsAgressive(): bool
+//    {
+//        return $this->is_agressive;
+//    }
+//
+//    /**
+//     * @param bool $is_agressive
+//     */
+//    public function setIsAgressive(bool $is_agressive): void
+//    {
+//        $this->is_agressive = $is_agressive;
+//    }
+
+
 
     /**
      * @return string
@@ -266,6 +302,22 @@ class PetEntity extends Audit
     public function setObservation(string $observation): void
     {
         $this->observation = $observation;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInitZeal(): string
+    {
+        return $this->init_zeal;
+    }
+
+    /**
+     * @param string $init_zeal
+     */
+    public function setInitZeal(string $init_zeal): void
+    {
+        $this->init_zeal = $init_zeal;
     }
 
     /**
@@ -311,6 +363,7 @@ class PetEntity extends Audit
             $this->identifiedResource($formData);
             $this->setName($formData->name);
             $this->setAge($formData->age);
+            $this->setAgeType($formData->ageType);
             $this->setGender($formData->gender);
             $this->setRace($formData->race);
             $this->setImage($formData->image);
@@ -321,8 +374,8 @@ class PetEntity extends Audit
             $this->setVeterinaryPhone($formData->veterinaryPhone);
             $this->setTreatments($formData->treatments);
             $this->setLastVaccine($formData->lastVaccine);
-            $this->setIsAgressive($formData->isAgressive);
             $this->setObservation($formData->observation);
+            $this->setInitZeal($formData->initZeal);
             $this->setLastZeal($formData->lastZeal);
             $this->setOther($formData->other);
             $this->setActive($formData->active);

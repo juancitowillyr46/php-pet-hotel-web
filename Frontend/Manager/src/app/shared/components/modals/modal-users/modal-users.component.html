@@ -43,15 +43,15 @@
             </select>
             <label *ngIf="formGroup.controls.blocked.errors && formGroup.controls.blocked.value" id="blocked" class="error mt-2 text-danger" for="blocked">Campo obligatorio.</label>
         </div>
-        <div class="form-group" *ngIf="dataDto">
+        <!-- <div class="form-group" *ngIf="dataDto">
             <label for="active">Activo: {{ dataDto.activeName }}</label>
-            <input type="hidden" formControlName="active">
+            <input type="hidden" formControlName="active"> -->
             <!-- <select id="active" class="form-control" formControlName="active">
                 <option value="">--SELECCIONE--</option>
                 <option value [value]="item.value" *ngFor="let item of commonAuditStatus">{{item.text}}</option>
             </select>
             <label *ngIf="formGroup.controls.active.errors && formGroup.controls.active.value" id="active" class="error mt-2 text-danger" for="active">Campo obligatorio.</label> -->
-        </div>
+        <!-- </div> -->
 
         
 

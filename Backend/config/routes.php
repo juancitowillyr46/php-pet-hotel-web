@@ -17,9 +17,11 @@ return function (App $app) {
             $group->post('/web/register', \App\BackOffice\Security\Application\Actions\RegisterWebAction::class);
             $group->post('/web/login', \App\BackOffice\Security\Application\Actions\LoginWebAction::class);
             $group->post('/manager/login', \App\BackOffice\Security\Application\Actions\LoginManagerAction::class);
+            $group->get('/search', \App\BackOffice\Transactions\Application\Actions\TransactionFindAllAction::class);
             $group->get('/me', \App\BackOffice\Users\Application\Actions\UserInfoAction::class)->add(AuthValidateTokenMiddleware::class);
             $group->post('/transaction', \App\BackOffice\Transactions\Application\Actions\TransactionAddAction::class)
                 ->add(AuthValidateTokenMiddleware::class);
+            $group->get('/transaction/mailling', \App\BackOffice\Transactions\Application\Actions\TransactionMaillingsAction::class);
         });
 
         $group->group('/modules', function (RouteCollectorProxy $group) {
@@ -113,6 +115,13 @@ return function (App $app) {
             $group->get('/type-services', \App\BackOffice\Services\Application\Actions\ServiceTypeCommonAction::class);
         })->add(AuthValidateTokenMiddleware::class);
 
+        $group->group('/contacts', function (RouteCollectorProxy $group) {
+            $group->post('', \App\BackOffice\Contacts\Application\Actions\ContactAddAction::class);
+            $group->get('/{uuid}', \App\BackOffice\Contacts\Application\Actions\ContactFindAction::class)->add(AuthValidateTokenMiddleware::class);
+            $group->get('', \App\BackOffice\Contacts\Application\Actions\ContactFindAllAction::class)->add(AuthValidateTokenMiddleware::class);
+            $group->put('/{uuid}', \App\BackOffice\Contacts\Application\Actions\ContactEditAction::class)->add(AuthValidateTokenMiddleware::class);
+            $group->delete('/{uuid}', \App\BackOffice\Contacts\Application\Actions\ContactRemoveAction::class)->add(AuthValidateTokenMiddleware::class);
+        });
 
     });
 

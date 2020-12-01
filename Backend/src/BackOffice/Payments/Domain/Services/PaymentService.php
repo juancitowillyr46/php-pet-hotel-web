@@ -56,10 +56,23 @@ class PaymentService extends BaseService
         return $this->getPaymentDto($getRow);
     }
 
+    public function executeGetBookingIds(int $paymentId): array {
+        $payment = $this->paymentRepository->getModel()::find($paymentId);
+        $bookingId = [];
+        foreach ($payment->bookings as $booking) {
+            $bookingId[] = $booking->toArray();
+        }
+        return $bookingId;
+    }
+
+
     public function executeGetByBookingId(string $bookingId) {
-        $id = $this->paymentRepository->getIdByUuidModel(new BookingModel(), $bookingId);
-        $getRow = $this->paymentRepository->getModel()::all()->where('booking_id', '=', $id)->first();
-        return $this->getPaymentDto($getRow->toArray());
+
+        //$payment = $this->paymentRepository->getModel()::find($paymentId);
+
+//        $id = $this->paymentRepository->getIdByUuidModel(new BookingModel(), $bookingId);
+//        $getRow = $this->paymentRepository->getModel()::all()->where('booking_id', '=', $id)->first();
+//        return $this->getPaymentDto($getRow->toArray());
     }
 
     public function executeGetAll(array $query): object {
@@ -77,13 +90,13 @@ class PaymentService extends BaseService
         $bankId = $this->paymentRepository->getIdByUuidModel(new DataMasterModel(), $request['bankId']);
         $paymentMethodId = $this->getAttrByUuidModel(new DataMasterModel(), $request['paymentMethodId'], 'id_row');
         $stateId = $this->paymentRepository->getAttrByUuidModel(new DataMasterModel(), $request['stateId'], 'id_row');
-        $bookingId = $this->paymentRepository->getIdByUuidModel(new BookingModel(), $request['bookingId']);
+        //$bookingId = $this->paymentRepository->getIdByUuidModel(new BookingModel(), $request['bookingId']);
         $customerId = $this->paymentRepository->getIdByUuidModel(new CustomerModel(), $request['customerId']);
 
         $this->paymentEntity->setBankId($bankId);
         $this->paymentEntity->setPaymentMethodId($paymentMethodId);
         $this->paymentEntity->setStateId($stateId);
-        $this->paymentEntity->setBookingId($bookingId);
+        //$this->paymentEntity->setBookingId($bookingId);
         $this->paymentEntity->setCustomerId($customerId);
         $this->paymentEntity->payload((object)$request);
 
@@ -95,7 +108,7 @@ class PaymentService extends BaseService
         $stateId = $this->paymentRepository->getAttrByUuidModel(new DataMasterModel(), $request['stateId'], 'id_row');
         $this->paymentEntity->setStateId($stateId);
 
-        if($request['bankId'] != '') {
+        if($request['bankId'] != '' && $request['bankId'] != '0') {
             $bankId = $this->paymentRepository->getAttrByUuidModel(new DataMasterModel(), $request['bankId'], 'id_row');
             $this->paymentEntity->setBankId($bankId);
         }

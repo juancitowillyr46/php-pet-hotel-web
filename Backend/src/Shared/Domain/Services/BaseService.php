@@ -42,6 +42,15 @@ class BaseService implements ServiceInterface
         return $this->baseRepository->edit($request, $id);
     }
 
+    public function editState(array $request, string $uuid): bool
+    {
+        $id = $this->baseRepository->getIdByUuid($uuid);
+//        $request['active'] = $id;
+//        $request['updated_at'] = date('Y-m-d H:i:s');
+//        $request['updated_by'] = 'ADMIN';
+        return $this->baseRepository->edit($request, $id);
+    }
+
     public function remove(string $uuid): bool
     {
         $id = $this->baseRepository->getIdByUuid($uuid);
@@ -57,7 +66,7 @@ class BaseService implements ServiceInterface
         return $this->baseRepository->read($id);
     }
 
-    public function getAllRows(?array $query, bool $usingPaginate): object
+    public function getAllRows(?array $query, bool $usingPaginate = true): object
     {
         $this->validatePagerParameters($query);
         return $this->baseRepository->getAllRows($query, $usingPaginate);
@@ -97,6 +106,8 @@ class BaseService implements ServiceInterface
             throw new Exception('Parameter not allowed');
         } else if( (int) $query['size'] < 1) {
             throw new Exception('Parameter not allowed');
+        } else if( (int) $query['usingPaginate'] < 0 && $query['usingPaginate'] > 1) {
+            throw new Exception('Parameter not allowed');
         }
 
     }
@@ -114,17 +125,26 @@ class BaseService implements ServiceInterface
             $table = 'TABLE_IS_BOOKED';
         } else if($type == 'payment-state') {
             $table = 'TABLE_PAYMENT_STATE';
-        } else if($type == 'payment-state') {
-            $table = 'TABLE_PAYMENT_STATE';
         } else if($type == 'banks') {
             $table = 'TABLE_BANKS';
         } else if($type == 'booking-state') {
             $table = 'TABLE_STATE_BOOKING';
+        } else if($type == 'payment-method') {
+            $table = 'TABLE_PAYMENT_METHOD';
+        } else if($type == 'audit-status-id') {
+            $table = 'TABLE_STATE_AUDIT';
+        } else if($type == 'plans') {
+            $table = 'TABLE_PLAN_SERVICE';
+        } else if($type == 'is-visible') {
+            $table = 'TABLE_STATE_VISIBLE';
+        } else if($type == 'districts') {
+            $table = 'TABLE_DISTRICT';
         }
+
 
         $common = $dataMaster::all()->where('type', '=' ,$table)->toArray();
 
-        if($type == 'audit-status' || $type == 'blocked-user' || $type == 'is-booked'){
+        if($type == 'audit-status'){ //|| $type == 'is-booked'  || $type == 'blocked-user'
             foreach ($common as $item) {
                 $listCommon[] = ['value' => $item['id_row'] == 1, 'text' => $item['name']];
             }

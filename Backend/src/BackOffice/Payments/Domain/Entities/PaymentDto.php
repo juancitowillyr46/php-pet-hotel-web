@@ -24,4 +24,5 @@ class PaymentDto
     public string $stateName;
     public string $stateId;
     public string $bankName;
+    public string $screenVoucher;
 }

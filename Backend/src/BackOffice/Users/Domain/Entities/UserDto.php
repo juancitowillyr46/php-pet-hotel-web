@@ -17,7 +17,7 @@ class UserDto
     public string $roleName;
 
     public string $createdAt;
-    public bool $blocked;
+    public string $blocked;
     public string $blockedName;
 
 //    public string $fullName;

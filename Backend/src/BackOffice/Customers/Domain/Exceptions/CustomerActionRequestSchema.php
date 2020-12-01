@@ -26,13 +26,22 @@ class CustomerActionRequestSchema extends BaseValidatorRequest
             'lastName' => [
                 new Required(),
             ],
+            'email' => [
+                new Required(),
+            ],
             'phone' => [
+                new Required(),
+            ],
+            'districtId' => [
                 new Required(),
             ],
             'address' => [
                 new Required(),
             ],
             'addressOptional' => [
+                new Required(),
+            ],
+            'addressReference' => [
                 new Required(),
             ],
             'comments' => [

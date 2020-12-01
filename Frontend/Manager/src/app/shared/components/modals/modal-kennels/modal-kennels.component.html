@@ -8,6 +8,8 @@
   </div>
   <div class="modal-body">
     <form [formGroup]="formGroup" novalidate >
+
+        <input type="hidden" name="active" id="active" formControlName="active" value="true">
         <div class="form-group">
             <label for="treatments">Código:</label>
             <input type="text" class="form-control" id="num" placeholder="Ingrese código"
@@ -33,21 +35,21 @@
             >
         </div>
         <div class="form-group">
-            <label for="isBooked">Reservado:</label>
+            <label for="isBooked">Mostrar en la Web:</label>
             <select id="isBooked" class="form-control" formControlName="isBooked">
                 <option value="">--SELECCIONE--</option>
                 <option [value]="item.value" *ngFor="let item of commonIsBooked">{{item.text}}</option>
             </select>
             <label *ngIf="formGroup.controls.isBooked.errors && formGroup.controls.isBooked.value" id="isBooked" class="error mt-2 text-danger" for="isBooked">Campo obligatorio.</label>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="active">Activo:</label>
             <select id="active" class="form-control" formControlName="active">
                 <option value="">--SELECCIONE--</option>
                 <option [value]="item.value" *ngFor="let item of commonAuditStatus">{{item.text}}</option>
             </select>
             <label *ngIf="formGroup.controls.active.errors && formGroup.controls.statactiveeId.value" id="active" class="error mt-2 text-danger" for="active">Campo obligatorio.</label>
-        </div>
+        </div> -->
     </form>
     <button type="button" class="btn btn-primary mr-2 mt-15" (click)="onClickDone()" [disabled]="(formGroup.invalid || submit === true)">
         <fa-icon [icon]="['fas', 'spinner']" class="mr-1" [pulse]="true" *ngIf="submit"></fa-icon>

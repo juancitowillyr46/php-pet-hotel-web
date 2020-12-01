@@ -8,14 +8,26 @@
   </div>
   <div class="modal-body">
     <form [formGroup]="formGroup" novalidate >
+      <input type="hidden" name="active" id="active" formControlName="active" value="true">
+
       <div class="form-group">
-          <label for="providerId">Tipo de Servicio:</label>
-          <select id="providerId" class="form-control mb-3" formControlName="serviceTypeId">
+          <label for="serviceTypeId">Tipo de Servicio:</label>
+          <select id="serviceTypeId" class="form-control mb-3" formControlName="serviceTypeId">
               <option disabled selected>-- SELECCIONE --</option>
               <option [value]="item.value" *ngFor="let item of commonTypeService">{{item.text}}</option>
           </select>
           <label *ngIf="formGroup.get('serviceTypeId').errors && formGroup.get('serviceTypeId').value" id="serviceTypeId" class="error mt-2 text-danger" for="serviceTypeId">Campo obligatorio.</label>
       </div>
+
+        <div class="form-group">
+            <label for="planId">Plan:</label>
+            <select id="planId" class="form-control" formControlName="planId">
+                <option value="">--SELECCIONE--</option>
+                <option value [value]="item.value" *ngFor="let item of commonPlans">{{item.text}}</option>
+            </select>
+            <label *ngIf="formGroup.controls.planId.errors && formGroup.controls.planId.value" id="planId" class="error mt-2 text-danger" for="planId">Campo obligatorio.</label>
+        </div>
+
       <div class="form-group">
           <label for="name">Nombre:</label>
           <input type="text" class="form-control" id="name" placeholder="Ingrese nombre del servicio"
@@ -56,13 +68,14 @@
     </div>
 
       <div class="form-group">
-          <label for="active">Disponible:</label>
-          <select id="active" class="form-control" formControlName="active">
+          <label for="visibleId">Visible en la Web:</label>
+          <select id="visibleId" class="form-control" formControlName="visibleId">
               <option value="">--SELECCIONE--</option>
-              <option value [value]="item.value" *ngFor="let item of commonAuditStatus">{{item.text}}</option>
+              <option value [value]="item.value" *ngFor="let item of commonIsVisible">{{item.text}}</option>
           </select>
-          <label *ngIf="formGroup.controls.active.errors && formGroup.controls.active.value" id="active" class="error mt-2 text-danger" for="active">Campo obligatorio.</label>
+          <label *ngIf="formGroup.controls.visibleId.errors && formGroup.controls.visibleId.value" id="visibleId" class="error mt-2 text-danger" for="visibleId">Campo obligatorio.</label>
       </div>
+      
     </form>
     <button type="button" class="btn btn-primary mr-2 mt-15" (click)="onClickDone()" [disabled]="(formGroup.invalid || submit === true)">
         <fa-icon [icon]="['fas', 'spinner']" class="mr-1" [pulse]="true" *ngIf="submit"></fa-icon>

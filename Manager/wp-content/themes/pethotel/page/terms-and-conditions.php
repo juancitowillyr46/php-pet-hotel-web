@@ -1,0 +1,28 @@
+<?php 
+/*Template Name: Template Terms and Conditions*/
+get_header(); ?>
+<section id="default" class="ms-animate">
+  <div data-real-type="background" data-img="<?php echo get_template_directory_uri(); ?>/img/patron_huesos.png">
+    <div class="ms-header-section bg-pr pt-white" data-real-type="background" data-img="<?php echo get_template_directory_uri(); ?>/img/patron_white.png">
+      <h2 class="ms-title">Términos y condiciones</h2>
+    </div>
+
+    <div class="ms-wrap-section">
+      <p>“Pet Hotel” es una buena alternativa para que las mascotas puedan disfrutar de ambientes y cuidados adecuados ya que cuenta con todos los lineamientos que exige la ley que regula el régimen jurídico de canes (27596), buscando bajo este concepto, impedir el maltrato a los animales, así como fomentar el respeto a la vida y bienestar.</p>
+      <p><strong>Vacunas:</strong> Todas las mascotas que ingresen a Pet Hotel, deben tener sus vacunas al día, para esto se solicita llenar la cartilla de registro con los datos de la certificación de vacunación correspondiente a Antirrábica, Octuple y KC. Por la seguridad de las demás mascotas, Pet Hotel se reserva el derecho de cancelar cualquier reserva si no se cumple con este requisito.</p>
+      <p><strong>Antiparasitario:</strong> Es responsabilidad de los dueños aplicar un tratamiento antiparasitario interno y externo anti pulgas y garrapatas antes de ingresar a su mascota a Pet Hotel, para asegurar que la mascota esté libre de parásitos externos. Estos datos tambien deben ser registrados en la cartilla de tu mascota. </p>
+      <p><strong>Enfermedades preexistentes:</strong> En caso que su mascota padezca alguna enfermedad o situaciones de salud previa al ingreso, es responsabilidad de los dueños informarlas al momento del ingreso y en la cartilla de registro. Pet Hotel no se responsabiliza por situaciones médicas que le puedan ocurrir a la mascota producto de esas condiciones no informadas con antelación.</p>
+      <p><strong>Situaciones médicas o accidente durante la estadía:</strong> En caso que durante la estadía de la mascota, ésta presente alguna situación médica o sufra algún accidente inesperado, Pet Hotel se comunicará de inmediato con los dueños para decidir en conjunto los pasos a seguir. Si no se puede establecer comunicación, el propietario faculta a Pet Hotel para llevar a la mascota al veterinario a su costo y cargo. Para esto es importante dejar en la cartilla de registro todos los contactos en caso de emergencias.</p>
+      <p><strong>Registro nacional de mascotas:</strong> Es responsabilidad de los propietarios tener inscrita a su mascota en el registro nacional de mascotas, Pet Hotel no se responsabiliza si el perro no cuenta con este registro.</p>
+      <p><strong>Casos de Abandono:</strong> En caso que una mascota no sea retirada en la fecha acordada sin previo aviso o contacto, Pet Hotel se reserva el derecho de presentar una denuncia ante la autoridad correspondiente según lo define el Artículo 12 de la ley 21.020 conocida como Ley Cholito.</p>
+      <p><strong>Mascotas agresivas o con carácter especial:</strong> Es responsabilidad del dueño indicar en la cartilla de registro en caso de mascotas agresivas o con carácter complicado que puedan poner en riesgo a otros perros o personal del hotel a cargo de los perros. El dueño de la mascota acepta indemnizar en su totalidad a Pet Hotel por eventuales gastos relacionados con daños, lesiones y pérdidas que la mascota cause a las instalaciones, a otras mascotas hospedadas en el hotel o al personal.</p>
+      <p><strong>Hembras en celo:</strong> Por seguridad de las hembras, si se encuentran en celo debe ser expresamente informado en la cartilla de registro y al personal a cargo. En caso de no aviso por parte de los dueños, Pet Hotel no se responsabiliza por cruces inesperados.</p>
+      <p><strong>Formas de pago y reserva:</strong> Las reservas se realizan con un depósito o transferencia del 100% del total de la estadía y servicios. En caso de anulaciones antes de los 7 días se devolverá el total del depósito, antes de 48 horas el 50% y menos de eso no habrá devolución del depósito por la reserva.</p>
+      <p><strong>Horarios de Atención:</strong> Check In de 8:00 a 20:00hrs y Check Out hasta las 17:00hrs. Cualquier retiro posterior a las 17:00hrs sin previa coordinación estará afecto a cargos por Late Check Out. En caso de requerir un horario de transporte distinto al gratuito ofrecido por Pet Hotel, consultar el precio de la movilidad, o de lo contrario deberá hacerse cargo del traslado de su mascota. En caso de ingresos en horarios de emergencia, contactarse con la administración del Hotel.</p>
+      <p><strong>Traslados:</strong> Los traslados deben ser organizados con al menos 1 día de anticipación para asegurar disponibilidad, los mismos que serán gratuitos en los horarios y rutas establecidas por Pet Hotel para los servicios de hospedaje y Doggy School, fuera de los horarios, rutas  o para cualquier otro servicio, deberá coordinar el precio con el área de administración, caso contrario,  el dueño o encargado del perro deberá hacerse cargo de los traslados.</p>
+      <p><strong>Alimentación:</strong> La alimentación se realizará con horarios establecidos. Es indispensable traer su propia comida para cuidar la salud de su mascota, no causarle problemas estomacales o que se sienta enfermo durante su estadía.</p>
+      <p><strong>Otras consideraciones:</strong> Pet Hotel proporciona camas confortables y limpias para cada visita, pero sabemos que las mascotas se sienten más seguras con su propio olor, por lo que se les aconseja traer su cama y/o juguetes para que se sientan como en casa.</p>
+    </div>
+  </div>
+</section>
+<?php get_footer();?>

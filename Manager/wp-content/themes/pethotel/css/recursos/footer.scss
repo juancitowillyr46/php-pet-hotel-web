@@ -1,0 +1,177 @@
+#footer{
+  background-color: #404140;
+  position: relative;
+  padding-top: 20px;
+
+  &:not(.bf){
+    &:after{
+      content: "";
+      display: block;
+      width: 100%;
+      background-image: url("../img/sprite.png");
+      background-position: -10px 0;
+      height: 17px;
+      background-repeat: repeat-x;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  .ms-wrap-footer{
+    margin: 0 auto;
+    position: relative;
+    width: 90%;
+    max-width: 1045px;
+    padding: 30px 0 15px 0;
+    text-align: center;
+
+    .ms-footer-logo{
+      display: block;
+      width: 250px;
+      margin: 0 auto;
+      line-height: 0;
+      img{
+        max-width: 100%;
+      }
+    }
+
+    .ms-footer-menu{
+      margin: 15px 0;
+      li{
+        margin: 5px 0;
+        a{
+          color: #FFF;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          font-size: 12px;
+          font-weight: 600;
+          transition: all .3s;
+          &:hover{
+            color: $secundario;
+          }
+        }
+      }
+    }
+
+    .ms-wrap-social{
+      margin-top: 25px;
+      .ms-title{
+        color: #FFF;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+
+      .ms-social-media{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        li{
+          margin: 0 5px;
+          a{
+            text-indent: -999999px;
+            position: relative;
+            width: 40px;
+            height: 40px;
+            display: block;
+            font-size: 18px;
+            &:before{
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-family: 'ms-icons' !important;
+              text-indent: 0;
+              font-weight: normal;
+              transition: all .3s;
+              color: #FFF;
+            }
+
+            &:hover{
+              &:before{
+                color: $primario;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .ms-copyright{
+    border-top: 1px solid #525352;
+    color: #8e8e8e;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 12px;
+  }
+
+  @media screen and (min-width: 991px){
+    .ms-wrap-footer{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 50px 0;
+      .ms-footer-logo{
+        margin: 0;
+      }
+
+      .ms-wrap-social{
+        .ms-title{
+          text-align: left;
+          padding-left: 15px;
+          letter-spacing: 2px;
+        }
+      }
+
+      .ms-footer-menu{
+        li{
+          a {
+            letter-spacing: 2px;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 1330px){
+    .ms-wrap-footer{
+      .ms-footer-logo{
+        width: 360px;
+        margin-left: -110px !important;
+      }
+
+      .ms-footer-menu{
+        margin-left: -50px;
+        li {
+          margin: 20px 0;
+          a{
+            font-size: 13px;
+          }
+        }
+      }
+
+      .ms-wrap-social{
+        .ms-social-media{
+          li {
+            margin-right: 25px;
+            &:last-child{
+              margin-right: 0;
+            }
+          }
+        }
+      }
+    }
+
+    .ms-copyright{
+      padding: 35px 0;
+    }
+  }
+}

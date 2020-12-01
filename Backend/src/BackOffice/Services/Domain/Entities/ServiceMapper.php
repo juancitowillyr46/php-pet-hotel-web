@@ -30,6 +30,8 @@ class ServiceMapper
             return date('d-m-Y H:i:s', $time);
         })->forMember('id', function($source){
             return $source['uuid'];
+        })->forMember('image', function($source){
+            return "";
         });
 
     }

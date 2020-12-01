@@ -7,7 +7,7 @@ use Firebase\JWT\JWT;
 
 class JwtCustom
 {
-    private string $exp = "+60 minutes";
+    private string $exp = "+240 minutes";
     private string $secretKey = '12345678';
 
     public function geToken($userData): string

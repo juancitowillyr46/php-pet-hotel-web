@@ -1,6 +1,7 @@
 <?php
 namespace App\BackOffice\Kennels\Domain\Services;
 
+use App\BackOffice\DataMaster\Domain\Entities\DataMasterModel;
 use App\BackOffice\Kennels\Domain\Entities\KennelDto;
 use App\BackOffice\Kennels\Domain\Entities\KennelEntity;
 use App\BackOffice\Kennels\Domain\Entities\KennelMapper;
@@ -59,10 +60,15 @@ class KennelService extends BaseService
 
     public function setFormData(array $request): KennelEntity {
         $this->kennelEntity->payload((object)$request);
+        $isBookingId = $this->kennelRepository->getAttrByUuidModel(new DataMasterModel(), $request['isBooked'], 'id_row');
+        $this->kennelEntity->setIsBooked($isBookingId);
         return $this->kennelEntity;
     }
 
     public function getKennelDto(array $row): object {
+        $isBooking = $this->getRowByIdModelByTable(new DataMasterModel(), $row['is_booked'], 'TABLE_IS_BOOKED');
+        $row['is_booked'] = $isBooking['uuid'];
+        $row['is_booked_name'] = $isBooking['name'];
         return $this->kennelMapper->autoMapper->map($row, KennelDto::class);
     }
 
@@ -77,7 +83,7 @@ class KennelService extends BaseService
 
         $kennelsAvailable = $this->kennelRepository->getModel()::all()
             ->whereNotIn('id', $kennelsAvailableMap)
-            ->where('is_booked', '=', true);
+            ->where('is_booked', '=', 1);
 
         if( count($kennelsAvailable->toArray()) < count($pets) ){
             throw new Exception('No cuenta con mas caniles disponibles');
@@ -86,6 +92,22 @@ class KennelService extends BaseService
         return (!is_null($kennelsAvailable))? $kennelsAvailable->toArray() : [];
     }
 
+    public function getKennelsAvailableSearch(array $kennelsNotAvailable): array {
+
+        $kennelsAvailableMap = array_map(function ($kennelNotAvailable) {
+            return $kennelNotAvailable['kennel_id'];
+        }, $kennelsNotAvailable);
+
+        $kennelsAvailable = $this->kennelRepository->getModel()::all()
+            ->whereNotIn('id', $kennelsAvailableMap)
+            ->where('is_booked', '=', 1);
+
+//        if( count($kennelsAvailable->toArray()) < count($pets) ){
+//            throw new Exception('No cuenta con mas caniles disponibles');
+//        }
+
+        return (!is_null($kennelsAvailable))? $kennelsAvailable->toArray() : [];
+    }
 
 
 }

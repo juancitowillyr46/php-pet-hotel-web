@@ -1,0 +1,64 @@
+.ms-header-section{
+  padding: 60px 15px 70px 15px;
+  position: relative;
+  overflow: hidden;
+  background-repeat: repeat;
+  background-position: 0 0;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 50% 100%, 0% 75%);
+
+  .ms-title{
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 30px;
+    color: #FFF;
+  }
+
+  .ms-bgx{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+	}
+	
+	&.bg-sc{
+		background-color: $secundario;
+	}
+
+	&.bg-pr{
+		background-color: $primario;
+	}
+
+	/*&.pt-white{
+		background-image: url("../img/patron_white.png");
+	}*/
+
+	&.pt-black{
+		background-image: url("../img/patron_black.png");
+  }
+  
+  @media screen and (min-width: 640px){
+    padding: 8% 15px 12% 15px;
+    .ms-title{
+      font-size: 40px;
+    }
+  }
+  
+  @media screen and (min-width: 1024px){
+    .ms-title{
+      font-size: 50px;
+    }
+  }
+
+  @media screen and (min-width: 1024px){
+    padding: 110px 15px 15px;
+    height: 300px;
+    .ms-title{
+      font-size: 60px;
+    }
+  }
+}
+
+.success-anonymus{
+  display: none;
+}

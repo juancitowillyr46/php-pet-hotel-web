@@ -37,6 +37,12 @@ class ServiceActionRequestSchema extends BaseValidatorRequest
             ],
             'price' => [
                 new Required(),
+            ],
+            'visibleId' => [
+                new Required(),
+            ],
+            'planId' => [
+                new Required(),
             ]
         ], $data);
 

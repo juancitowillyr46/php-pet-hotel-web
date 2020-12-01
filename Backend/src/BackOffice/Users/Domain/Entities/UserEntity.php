@@ -2,6 +2,7 @@
 namespace App\BackOffice\Users\Domain\Entities;
 
 use App\BackOffice\Users\Domain\Exceptions\UserActionRequestSchema;
+use App\BackOffice\Users\Domain\Exceptions\UserEditActionRequestSchema;
 use App\BackOffice\Users\Domain\Exceptions\UserEditPasswordRequestSchema;
 use App\Shared\Domain\Entities\Audit;
 use App\Shared\Utility\SecurityPassword;
@@ -14,7 +15,7 @@ class UserEntity extends Audit
     public string $password;
     public int $role_id;
     public string $email;
-    public bool $blocked;
+    public int $blocked;
     public string $first_name;
     public string $last_name;
 
@@ -118,27 +119,49 @@ class UserEntity extends Audit
     }
 
     /**
-     * @return bool
+     * @return int
      */
-    public function isBlocked(): bool
+    public function getBlocked(): int
     {
         return $this->blocked;
     }
 
     /**
-     * @param bool $blocked
+     * @param int $blocked
      */
-    public function setBlocked(bool $blocked): void
+    public function setBlocked(int $blocked): void
     {
         $this->blocked = $blocked;
     }
+
+//    /**
+//     * @return bool
+//     */
+//    public function isBlocked(): bool
+//    {
+//        return $this->blocked;
+//    }
+//
+//    /**
+//     * @param bool $blocked
+//     */
+//    public function setBlocked(bool $blocked): void
+//    {
+//        $this->blocked = $blocked;
+//    }
 
     public function payload(object $formData): void {
 
         try {
 
-            $validate = new UserActionRequestSchema();
-            $validate->getMessages((array)$formData);
+            if(!property_exists($formData, "id")) {
+                $validate = new UserActionRequestSchema();
+                $validate->getMessages((array)$formData);
+            } else {
+                $validate = new UserEditActionRequestSchema();
+                $validate->getMessages((array)$formData);
+            }
+
             $this->identifiedResource($formData);
 
             if(!property_exists($formData, "id")) {
@@ -148,13 +171,13 @@ class UserEntity extends Audit
             $this->setUsername($formData->username);
             $this->setEmail($formData->email);
             $this->setActive($formData->active);
-            $this->setBlocked($formData->blocked);
 
         } catch(Exception $ex) {
             throw new Exception($ex->getMessage(), $ex->getCode());
         }
 
     }
+
 
     public function payloadPassword(object $formData): void {
 
@@ -170,4 +193,5 @@ class UserEntity extends Audit
         }
 
     }
+
 }

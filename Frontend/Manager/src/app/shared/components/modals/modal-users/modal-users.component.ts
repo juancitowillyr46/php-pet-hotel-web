@@ -111,7 +111,7 @@ export class ModalUsersComponent extends BaseModalComponent implements OnInit  {
     let object: UserStoreDto = that.formGroup.value;
 
     object.active = (that.formGroup.controls.active.value == 'true' || that.formGroup.controls.active.value == true)? true : false;
-    object.blocked = (that.formGroup.controls.blocked.value == 'true' || that.formGroup.controls.blocked.value == true)? true : false;
+    // object.blocked = (that.formGroup.controls.blocked.value == 'true' || that.formGroup.controls.blocked.value == true)? true : false;
 
     that.formGroup.disable();
 

@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servicios</title>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js" crossorigin="anonymous"></script>
-    <script src="./base-service.js"></script>
+    <script src="http://www.pethotelshangrila.pe/wp-content/themes/pethotel/js/jquery.js"></script>
+    <script src="http://www.pethotelshangrila.pe/wp-content/themes/pethotel/js/jquery.validate.min.js"></script>
+    <script src="http://www.pethotelshangrila.pe/wp-content/themes/pethotel/js/handlebars.js"></script>
+    <script src="./base-service.test.js"></script>
 </head>
 <body>
     <table border="1" width="100%">
@@ -20,7 +21,7 @@
                 <form id="frm-login">
                     <input type="email" placeholder="Correo" id="emailRegister" name="username" required>
                     <input type="password" placeholder="Contraseña" id="passwordRegister" name="password" class="ms-pass" required>
-                    <button id="btn-login">Login</button>
+                    <button id="btn-login" type="submit">Login</button>
                 </form>
                 <pre id="login"></pre>
             </td>
@@ -41,6 +42,7 @@
             <td>
                 <div id="me"></div>
                 <p id="info-logout">execute Login</p>
+                <img id="user-image"> 
                 <table>
 
                 </table>
@@ -48,12 +50,20 @@
             </td>
         </tr>
         <tr>
-            <td>Update User Info</td>
+            <td>Update Customer Info</td>
             <td>
-                <form id="frm-edit-user">
-                    <input type="text" placeholder="Nombres completos" id="firstName" name="firstName" required>
-                    <input type="text" placeholder="Dirección" id="address" class="ms-pass" name="address" required>
-                    <button id="btn-edit-user">Edit user</button>
+                <form id="frm-edit-customer">
+                    <input type="hidden" id="id" name="id">
+                    <input type="text" id="firstName" name="firstName" required>
+                    <input type="hidden" id="lastName" name="lastName">
+                    <input type="hidden" id="phone" name="phone">
+                    <input type="text" id="address" class="ms-pass" name="address" required>
+                    <input type="hidden" id="addressOptional" name="addressOptional">
+                    <input type="hidden" id="comments" name="comments">
+                    <input type="hidden" id="userId" name="userId">
+                    <input type="hidden" id="active" name="active">
+                    <input type="hidden" id="image" name="image">
+                    <button id="btn-edit-user">Edit Customer</button>
                 </form>
             </td>
         </tr>
@@ -101,6 +111,168 @@
                     <br>
                     <button id="btn-edit-pet">Edit Pet</button>
                 </form>
+            </td>
+        </tr>
+        <tr>
+            <td>Paso Realiza Booking</td>
+            <td>
+                <form id="frm-store-booking">
+                    <input type="text" name="dateTo" id="dateTo" value="2020-11-14" required>
+                    <input type="text" name="dateFrom" id="dateFrom" value="2020-11-15" required>
+                    <input type="text" name="numPets" id="numPets" value="2">
+                    <button id="save-step-booking" type="button">Reservar</button>
+                </form>
+            </td>
+        </tr>
+       
+        <tr>
+            <td>Paso Registra Pets</td>
+            <td>
+                
+                <script id="store-pet-template" type="text/x-custom-template">
+                    {{#with pets}}
+                        <form id="frm-store-pet-{{index}}">
+                            <input type="hidden" id="id" name="id" required><br>
+                            
+        
+                            Image:<input type="file" class="ms-pass" accept="image/*">
+                            <img> 
+                            <input type="hidden" id="image" class="ms-pass" name="image" required>
+                            <br> 
+                            <br> 
+        
+                            Name:<input type="text" id="name" class="ms-pass" name="name" required><br>
+                            Age:<input type="text" id="age" name="age" required><br>
+                            Gender:<input type="text" id="gender" class="ms-pass" name="gender" required><br>
+                            Race:<input type="text" id="race" class="ms-pass" name="race" required><br>
+                            
+                            Size:<input type="text" id="size" class="ms-pass" name="size" ><br>
+                            Weight:<input type="text" id="weight" class="ms-pass" name="weight" ><br>
+                            Diseases:<input type="text" id="diseases" class="ms-pass" name="diseases" ><br>
+                            Veterinary:<input type="text" id="veterinary" class="ms-pass" name="veterinary" required><br>
+                            VeterinaryPhone:<input type="text" id="veterinaryPhone" class="ms-pass" name="veterinaryPhone"><br>
+                            Treatments:<input type="text" id="treatments" class="ms-pass" name="treatments"><br>
+                            LastVaccine:<input type="text" id="lastVaccine" class="ms-pass" name="lastVaccine"><br>
+                            
+                            
+                            IsAgressive:<br>
+                            <input type="radio" value="true" id="isAgressive1" class="ms-pass" name="isAgressive"><br>
+                            <input type="radio" value="false" id="isAgressive2" class="ms-pass" name="isAgressive"><br>
+        
+                            
+                            Observation:<input type="text" id="observation" class="ms-pass" name="observation"><br>
+                            LastZeal:<input type="text" id="lastZeal" class="ms-pass" name="lastZeal"><br>
+                            Other:<input type="text" id="other" class="ms-pass" name="other"><br>
+                            <input type="hidden" id="active" class="ms-pass" name="active"><br>
+                            
+                        </form>
+                    {{/with}}
+                </script>
+                <div class="container-pets-add">
+
+                </div>
+                <button id="save-step-pets">Continuar paso 2 </button>
+            </td>
+        </tr>
+        <tr>
+            <td>Proceso de pago paso 2</td>
+            <td>
+                <form id="frm-store-customer">
+
+                    <input type="hidden" id="id" name="id" required>
+                    <input type="hidden" id="userId" name="userId" required>
+                    
+                    Image:
+                    <input type="file" class="ms-pass" accept="image/*">
+                    <img> 
+                    <input type="hidden" id="image" class="ms-pass" name="image" required>
+                    <br> 
+
+                    Nombres:<input type="text" id="firstName" class="ms-pass" name="firstName" required><br>
+                    <input type="hidden" id="lastName" name="lastName" required><br>
+                    Teléfono:<input type="text" id="phone" class="ms-pass" name="phone" required><br>
+                    Dirección:<input type="text" id="address" class="ms-pass" name="address" required><br>
+                    
+                    Dirección opcional:<input type="text" id="addressOptional" class="ms-pass" name="addressOptional" ><br>
+                    Comments:<input type="text" id="comments" class="ms-pass" name="comments" ><br>
+
+                   
+                    <input type="hidden" id="active" class="ms-pass" name="active" value="true"><br>
+                    
+                </form>
+                <button id="save-step-customer">Continuar paso 3 </button>
+            </td>
+        </tr>
+        <tr>
+            <td>Proceso de pago paso 3</td>
+            <td>
+                <form id="frm-store-services">
+
+                    <script id="store-service-template" type="text/x-custom-template">
+                        {{#each rows}}
+                            {{name}}<input type="checkbox" name="services" id="service_{{id}}" value="{{id}}"><br>
+                        {{/each}}
+                    </script>
+                    <div class="container-services-add"></div>
+                    <!-- Servicios<br>
+
+                    Hospedaje <input type="checkbox" name="services" id="service_1" value="1" required checked>
+                    Servicio 2 <input type="checkbox" name="services" id="service_2" value="2">
+                    Paquete 1 <input type="checkbox" name="services" id="service_3" value="3"> -->
+
+                    <div>
+                        Precio<span class="price_total"></span>
+                    </div>
+
+                    
+                </form>
+                <button id="save-step-services">Continuar paso 4 </button>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>Proceso de pago paso 4</td>
+            <td>
+                <form id="frm-store-payment">
+                    <div class="ms-panel-body">
+                        <div class="ms-wrap-inputs">
+                          <span class="ms-label">Campo obligartorio*</span><br>
+                          <input type="hidden" name="order" id="order">
+                          <input type="hidden" name="active" id="active">
+                          <input type="hidden" name="total" id="total">
+                          <input type="hidden" name="customerId" id="customerId">
+                          <input type="hidden" name="stateId" id="stateId">
+                          <input type="hidden" name="date" id="date">
+                          Nombre:<div class="ms-form-input small mediun"><input type="text" id="billingFirstName" name="billingFirstName" placeholder="Nombre*" required></div><br>
+                          Apellidos<div class="ms-form-input small mediun"><input type="text" id="billingLastName" name="billingLastName" placeholder="Apellido*" required></div><br>
+                          DNI:<div class="ms-form-input small mediun"><input type="text" id="billingDni" placeholder="billingDni"></div><br>
+                          Teléfono:<div class="ms-form-input small mediun"><input type="text" id="billingPhone" name="billingPhone" placeholder="Teléfono"></div><br>
+                          Correo:<div class="ms-form-input full"><input type="email" id="billingEmail" name="billingEmail" placeholder="Correo"></div><br>
+                          Dirección:<div class="ms-form-input full"><input type="text" id="billingAddress" name="billingAddress" placeholder="Dirección de facturación"></div><br>
+                        </div>
+                      </div>
+
+                      <script id="store-payment-method-template" type="text/x-custom-template">
+                        {{#each data}}
+                            {{text}}<input type="radio" name="paymentMethodId" id="paymentMethodId_{{value}}" value="{{value}}"><br>
+                        {{/each}}
+                       </script>
+                       <div class="container-payment-method-add"></div>
+
+                      <!-- Transferencia bancaria:<input type="radio" value="1" id="paymentMethodId1" class="ms-pass" name="paymentMethodId" required> <br>
+                      Plin y Lukita:<input type="radio" value="2" id="paymentMethodId2" class="ms-pass" name="paymentMethodId" required><br>
+                      Yape:<input type="radio" value="3" id="paymentMethodId2" class="ms-pass" name="paymentMethodId" required><br>
+                      Envío POS:<input type="radio" value="4" id="paymentMethodId2" class="ms-pass" name="paymentMethodId" required><br> -->
+
+                    <input type="file" class="ms-pass" accept="image/*">
+                    <img> 
+                    <input type="hidden" id="image" class="ms-pass" name="image" required>
+                    <br> 
+
+                      
+                </form>
+                <button id="save-step-payment">Finalizar </button>
+                
             </td>
         </tr>
     </table>

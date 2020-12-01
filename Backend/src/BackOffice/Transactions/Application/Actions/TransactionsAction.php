@@ -8,11 +8,13 @@ use App\BackOffice\Payments\Domain\Services\PaymentOrderService;
 use App\BackOffice\Payments\Domain\Services\PaymentService;
 use App\BackOffice\Pets\Domain\Services\PetService;
 use App\BackOffice\Transactions\Domain\Services\TransactionService;
+use App\BackOffice\Users\Domain\Services\UserService;
 use App\Shared\Action\Action;
 use Psr\Log\LoggerInterface;
 
 abstract class TransactionsAction extends Action
 {
+    public UserService $userService;
     public TransactionService $transactionService;
     public CustomerService $customerService;
     public PetService $petService;
@@ -29,7 +31,8 @@ abstract class TransactionsAction extends Action
         PaymentService $paymentService,
         PaymentOrderService $paymentOrderService,
         BookingService $bookingService,
-        KennelService $kennelService
+        KennelService $kennelService,
+        UserService $userService
     )
     {
         $this->customerService = $customerService;
@@ -39,6 +42,7 @@ abstract class TransactionsAction extends Action
         $this->paymentOrderService = $paymentOrderService;
         $this->bookingService = $bookingService;
         $this->kennelService = $kennelService;
+        $this->userService = $userService;
         parent::__construct($logger);
     }
 }

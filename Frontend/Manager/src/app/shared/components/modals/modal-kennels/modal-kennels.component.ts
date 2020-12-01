@@ -67,7 +67,7 @@ export class ModalKennelsComponent extends BaseModalComponent implements OnInit 
     that.formGroup = that.buildingForm({
       num: ['', [Validators.required]],
       name: ['', [Validators.required]],
-      isBooked: [true, [Validators.required]],
+      isBooked: ['', [Validators.required]],
       active: [true, [Validators.required]]
     });
   }
@@ -83,7 +83,7 @@ export class ModalKennelsComponent extends BaseModalComponent implements OnInit 
     let object: KennelStoreDto = that.formGroup.value;
 
     object.active = (that.formGroup.controls.active.value == 'true' || that.formGroup.controls.active.value == true)? true : false;
-    object.isBooked = (that.formGroup.controls.isBooked.value == 'true' || that.formGroup.controls.isBooked.value == true)? true : false;
+    //object.isBooked = (that.formGroup.controls.isBooked.value == 'true' || that.formGroup.controls.isBooked.value == true)? true : false;
 
     that.formGroup.disable();
 

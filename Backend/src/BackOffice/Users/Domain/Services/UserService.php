@@ -2,6 +2,7 @@
 namespace App\BackOffice\Users\Domain\Services;
 
 //use App\BackOffice\Roles\Domain\Entities\RoleModel;
+use App\BackOffice\DataMaster\Domain\Entities\DataMasterModel;
 use App\BackOffice\Roles\Domain\Entities\RoleModel;
 use App\BackOffice\Users\Domain\Entities\UserDto;
 use App\BackOffice\Users\Domain\Entities\UserEntity;
@@ -89,7 +90,12 @@ class UserService extends BaseService
 
     public function setFormData(array $request): UserEntity {
         $this->userEntity->setRoleId($this->getIdByUuidModel(new RoleModel(), $request['roleId'])); // Role Id
+
+        $blockedId = $this->userRepository->getAttrByUuidModel(new DataMasterModel(), $request['blocked'], 'id_row');
+
         $this->userEntity->payload((object)$request);
+        $this->userEntity->setBlocked($blockedId);
+
         $this->validateDuplicateRow();
         return $this->userEntity;
     }
@@ -120,6 +126,11 @@ class UserService extends BaseService
         $role = $this->getRowByIdModel(new RoleModel(), $row['role_id']);
         $row['role_id'] = $role['uuid'];
         $row['role_name'] = $role['name'];
+
+        $blocked = $this->getRowByIdModelByTable(new DataMasterModel(), $row['blocked'], 'TABLE_BLOCKED_USER');
+        $row['blocked'] = $blocked['uuid'];
+        $row['blocked_name'] = $blocked['name'];
+
         return $this->userMapper->autoMapper->map($row, UserDto::class);
     }
 

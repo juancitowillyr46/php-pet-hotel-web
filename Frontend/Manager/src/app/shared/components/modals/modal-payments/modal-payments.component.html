@@ -8,6 +8,15 @@
   </div>
   <div class="modal-body">
     <form [formGroup]="formGroup" novalidate >
+        
+        <div class="form-group">
+            <label for="stateId">Voucher:</label>
+            <div *ngIf="paymentDto" style="text-align: center;">
+              <img [src]="paymentDto['screenVoucher']" *ngIf="paymentDto['screenVoucher'] != ''">
+            </div>
+        </div>
+ 
+        
         <div class="form-group">
             <label for="stateId">Estado del pago:</label>
             <select id="stateId" class="form-control" formControlName="stateId">
@@ -28,6 +37,7 @@
         <div class="form-group" *ngIf="paymentDto && paymentDto.paymentMethodId != '176d7072-19f1-11eb-a86b-50e549398ade1'">
           <input type="hidden" name="bankId" formControlName="bankId" [value]="''" />
         </div>
+        
     </form>
     <button type="button" class="btn btn-primary mr-2 mt-15" (click)="onClickDone()" [disabled]="(formGroup.invalid || submit === true)">
         <fa-icon [icon]="['fas', 'spinner']" class="mr-1" [pulse]="true" *ngIf="submit"></fa-icon>

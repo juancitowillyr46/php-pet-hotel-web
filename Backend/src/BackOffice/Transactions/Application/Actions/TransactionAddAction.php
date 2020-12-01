@@ -1,8 +1,13 @@
 <?php
 namespace App\BackOffice\Transactions\Application\Actions;
 
+use App\BackOffice\Bookings\Domain\Entities\BookingModel;
 use App\BackOffice\DataMaster\Domain\Entities\DataMasterModel;
+use App\BackOffice\Payments\Domain\Entities\PaymentModel;
 use App\BackOffice\Pets\Domain\Entities\PetModel;
+use App\BackOffice\Users\Domain\Entities\UserModel;
+use App\Shared\Utility\EmailTplBooking;
+use App\Shared\Utility\EmailUtil;
 use App\Shared\Utility\JwtCustom;
 use DateTime;
 use Exception;
@@ -11,43 +16,65 @@ use Respect\Validation\Rules\Executable;
 
 class TransactionAddAction extends TransactionsAction
 {
+    public string $paymentUuid;
+
     protected function action(): Response
     {
         try {
-            // Validate data
+
             $bodyParsed = $this->getFormData();
 
             $validateSuccess = $this->transactionService->executeAdd((array)$bodyParsed);
 
             $customerRequest = (array) $bodyParsed->customer;
-            $petsRequest = (array) $bodyParsed->pets;
-            $paymentRequest = (array) $bodyParsed->payment;
-            $bookingRequest = (array) $bodyParsed->booking;
+            $petsRequest     = (array) $bodyParsed->pets;
+            $paymentRequest  = (array) $bodyParsed->payment;
+            $bookingRequest  = (array) $bodyParsed->booking;
+            $orderRequest    = (array) $bodyParsed->order;
+
+            $bookingsUuid = [];
+
+            // State Audit
+            $activeId = $this->transactionService->stateAudit();
 
             if(is_bool($validateSuccess) && $validateSuccess){
 
-                // Validate User
+                // -- Validate User -- //
                 $authorization = explode(' ', (string)$this->request->getHeaderLine('Authorization'));
                 $token = $authorization[1];
                 $jwtCustom = new JwtCustom();
                 $verify = $jwtCustom->decodeToken($token);
-                $id = $verify->data->id;
+                $userUuid = $verify->data->id;
+                $userIdInt = $this->userService->getIdByUuidModel(new UserModel(), $userUuid);
+                // -- Validate User -- //
 
-                // Validate Customer
-                $customerRequest['userId'] = $id;
+                // -- Validate Customer -- //
+                $getCustomer = $this->transactionService->getIdCustomer($userIdInt);
+
+                $customerRequest['userId'] = $userUuid;
+                $customerRequest['active'] = $activeId == 1;
+                $customerRequest['id'] = ($getCustomer != null)? $getCustomer['uuid'] : "";
+
                 if($customerRequest['id'] == ""){
-                    $this->customerService->executeAdd($customerRequest);
+                    unset($customerRequest['id']);
+                    $successCustomer = $this->customerService->executeAdd($customerRequest);
+                    $customerRequest['id'] = $successCustomer->id;
                 } else {
                     $this->customerService->executeEdit($customerRequest, $customerRequest['id']);
                 }
+                // -- Validate Customer -- //
 
-                // Validate Pets
-                foreach ($petsRequest as $petRequest) {
-                    $petRequest = (array) $petRequest;
+                // -- Validate Pets -- //
+                foreach ($petsRequest as $index => $value) {
+                    $petRequest = (array) $petsRequest[$index];
+                    $petRequest['active'] = $activeId == 1;
                     $petRequest['customerId'] = $customerRequest['id'];
+
                     if($petRequest['id'] == ""){
                         unset($petRequest['id']);
-                        $this->petService->executeAdd($petRequest);
+                        $successPet = $this->petService->executeAdd($petRequest);
+//                        $petRequest['id'] = $successPet->id;
+                        $petsRequest[$index]->id = $successPet->id;
                     } else {
                         $pet = $this->petService->executeGet($petRequest['id']);
                         if(!is_null($pet)){
@@ -55,10 +82,13 @@ class TransactionAddAction extends TransactionsAction
                         }
                     }
                 }
+                // -- Validate Pets -- //
 
                 // Validate Booking
                 $kennelsAvailable = $this->getKennelsAvailableForBooking($bookingRequest['dateTo'], $bookingRequest['dateFrom'], $petsRequest);
-                    
+
+                $listBookingUuid = [];
+
                 foreach ($petsRequest as $index => $value) {
 
                     $petRequest = (array) $petsRequest[$index];
@@ -72,17 +102,56 @@ class TransactionAddAction extends TransactionsAction
                         "dateFrom" => $bookingRequest['dateFrom'],
                         "cancellationDate" => "",
                         "cancellationNote" => "",
-                        "active" => true
+                        "active" => $activeId == 1
                     ];
 
                     // Add Payment
                     $bookingSuccess = $this->bookingService->executeAdd($request);
                     if(is_object($bookingSuccess)){
-                        $this->addPayment($paymentRequest, $customerRequest, $bookingRequest, $bookingSuccess->id);
+                        $paymentRequest['order'] = $orderRequest;
+                        $paymentRequest['active'] = $activeId == 1;
+                        $listBookingUuid[] = $bookingSuccess->id;
+                        $bookingsUuid[] = $bookingSuccess->id;
                     }
                 }
 
+                if(count($listBookingUuid) > 0) {
+                    $this->addPayment($paymentRequest, $customerRequest, $bookingRequest, $listBookingUuid);
+                }
+
             }
+
+
+            $pets = [];
+            foreach ($bookingsUuid as $booking) {
+                // Booking Get Register
+                $getBookingSuccess = (array) $this->bookingService->executeGet($booking);
+                if(count($getBookingSuccess) > 0){
+                    // Pet Get Register
+                    $successPets = (array) $this->petService->executeGet($getBookingSuccess['petId']);
+                    $pets[] = $successPets['name'];
+                }
+
+            }
+
+            // Payment Register
+            $services = [];
+            $paymentSuccess = $this->paymentService->executeGet($this->paymentUuid);
+            if(is_object($paymentSuccess)){
+                $services = (array) $this->paymentOrderService->executeGetAllDetail(['paymentId' => $this->paymentUuid]);
+            }
+
+            $subject = 'Reserva registrada';
+            $emailTpl = new EmailTplBooking();
+            $emailTpl->setCheckIn($bookingRequest['dateFrom']);
+            $emailTpl->setCheckOut($bookingRequest['dateTo']);
+            $emailTpl->setServices($services);
+            $emailTpl->setTotal($paymentSuccess->total);
+            $emailTpl->setPets($pets);
+            $body = $emailTpl->getContent();
+
+            $witMailer = new EmailUtil($this->logger);
+            $witMailer->sendEmail($customerRequest['email'], $customerRequest['firstName'] , $subject, $body);
 
             return $this->commandSuccess($this->transactionService->executeAdd((array)$bodyParsed));
 
@@ -93,20 +162,37 @@ class TransactionAddAction extends TransactionsAction
         }
     }
 
-    private function addPayment($payment, $customer, $booking, $bookingId) {
+    private function addPayment($payment, $customer, $booking, $listBookingUuid) {
+
+        $numPets = (int) $booking['numPets'];
+        $numDays = $this->transactionService->getDateDayDiff($booking['dateFrom'], $booking['dateTo']);
+
+        $paymentUuid = "";
 
         // Validate Payment
         $payment['date']        = date('Y-m-d H:m:s');
         $payment['customerId']  = $customer['id'];
-        $payment['bookingId']   = $bookingId;
         $payment['stateId']     = $this->paymentService->paymentStateDefault($payment['paymentMethodId']);
         $payment['bankId']      = "";
-        $payment['total']       = $this->transactionService->getTotalTransaction($payment['order'], $booking['dateTo'], $booking['dateFrom']);
-        $paymentSuccess = $this->paymentService->executeAdd($payment);
+        $payment['total']       = $this->transactionService->getTotalTransaction($payment['order'], $numDays, $numPets);
+        $paymentSuccess         = $this->paymentService->executeAdd($payment);
         if(is_object($paymentSuccess)){
+            $paymentUuid = $paymentSuccess->id;
+            $this->paymentUuid = $paymentSuccess->id;
+            $this->addOrderToPayment($paymentSuccess->id, $payment['order'], $numDays, $numPets);
+        }
 
-            // Validate Payment Order
-            $this->addOrderToPayment($paymentSuccess->id, $payment['order'], $booking['dateTo'], $booking['dateFrom']);
+        if($paymentUuid != "") {
+
+            $paymentId = $this->paymentService->getIdByUuidModel(new PaymentModel(), $paymentUuid);
+
+            $listBookingIds = [];
+            foreach ($listBookingUuid as $uuid) {
+                $listBookingIds[] = $this->bookingService->getIdByUuidModel(new BookingModel(),$uuid);
+            }
+
+            $paymentModel = PaymentModel::find($paymentId);
+            $paymentModel->bookings()->sync($listBookingIds);
         }
 
     }
@@ -120,21 +206,36 @@ class TransactionAddAction extends TransactionsAction
 
         $kennelsNotAvailable = $this->bookingService->getKennelsNotAvailableByDateToAndDateFrom($dateTo, $dateFrom);
 
-        return $this->kennelService->getKennelsAvailable($kennelsNotAvailable, $pets);
+        $getKennels = array_values($this->kennelService->getKennelsAvailable($kennelsNotAvailable, $pets));
+
+        return $getKennels;
     }
 
     /*
     * Relacionar los servicios con el pago
     * */
-    private function addOrderToPayment($paymentId, $order, $dateTo, $dateFrom) {
+    private function addOrderToPayment($paymentId, $order, $numDays, $numPets) {
+
         foreach ($order as $item) {
             $order = (array) $item;
-            $order['quantity'] = $this->transactionService->calculateTheDaysAccommodation($order, $dateTo, $dateFrom);
-            $order['subtotal'] = ($order['quantity'] * $order['price']);
-            $order['paymentId'] = $paymentId;
-            $order['active'] = true;
-            $this->paymentOrderService->executeAdd($order);
+
+            // Service Hospedaje
+            if($order['serviceId'] == '1fdcf8ea-199c-11eb-aed1-50e549398ade') {
+                for($i = 1; $i <= $numPets; $i++){
+                    $order['quantity']  = $numDays;
+                    $order['subtotal']  = ($numDays * $order['price']);
+                    $order['paymentId'] = $paymentId;
+                    $order['active']    = $this->transactionService->stateAudit() == 1;
+                    $this->paymentOrderService->executeAdd($order);
+                }
+            } else {
+                $order['subtotal']  = ($order['quantity'] * $order['price']);
+                $order['paymentId'] = $paymentId;
+                $order['active']    = $this->transactionService->stateAudit() == 1;
+                $this->paymentOrderService->executeAdd($order);
+            }
         }
+
     }
 
 }

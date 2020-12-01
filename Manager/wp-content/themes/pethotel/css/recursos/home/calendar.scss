@@ -1,0 +1,457 @@
+.ms-calendar{
+  width: 90%;
+  margin: 0 auto;
+  z-index: 3;
+  bottom: 40px;
+  position: absolute;
+  right: 0;
+  left: 0;
+  .ms-wrap-calendar{
+    position: relative;
+    padding: 15px ;
+    &:before{
+      content: "";
+      width: 100%;
+      height: 50%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: $secundario;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+
+    &:after{
+      content: "";
+      width: 100%;
+      height: 50%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background-color: #418090;
+      border-bottom-right-radius: 20px;
+      border-bottom-left-radius: 20px;
+    }
+
+    .ms-bg-calendar{
+      background-color: rgba(#e0ffe2,0.33);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      width: calc(100% - 16px);
+      height: calc(100% - 18px);
+      z-index: 2;
+      border-radius: 20px;
+    }
+
+    .ms-border-calendar{
+      border-radius: 15px;
+      background-color: #FFF;
+      position: relative;
+      z-index: 3;
+      padding: 20px 15px;
+    }
+
+    .ms-calendar-info{
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      .ms-item{
+        padding: 0 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        position: relative;
+
+        button{
+          background-color: transparent;
+        }
+
+        .ms-item-title{
+          font-size: 10px;
+          font-weight: 600;
+          text-transform: uppercase;
+          display: block;
+          color: $secundario;
+          letter-spacing: 1px;
+        }
+        .ms-item-count,
+        .ms-item-date{
+          display: flex;
+          align-items: center;
+          font-size: 34px;
+          font-weight: 600;
+          color: $primario;
+          .ms-item-month{
+            font-weight: normal;
+            font-size: 12px;
+            display: inline-block;
+            padding-left: 5px;
+            color: $secundario;
+            position: relative;
+            margin-top: -10px;
+            &:after{
+              content: ">";
+              display: block;
+              position: absolute;
+              transform: rotate(90deg);
+              top: 12px;
+              left: 9px;
+              color: $primario;
+            }
+          }
+        }
+      }
+
+      label.error{
+        display: none !important;
+      }
+    }
+  }
+
+  .ms-btn{
+    background-color: $secundario;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    color: #fff;
+    position: relative;
+    border-radius: 50px;
+    box-shadow: inset 0px 1px 0px $secundario, 0px 5px 0px 0px $tercero;
+    padding: 13px 30px;
+    width: 100%;
+    margin-top: 10px;
+
+    &:active{
+      top:7px;
+      box-shadow: inset 0px 1px 0px $secundario, inset 0px -1px 0px $secundario;
+      color: $tercero;
+      text-shadow: 0px 1px 1px rgba(255,255,255,0.3);
+    }
+  }
+
+  .ms-bg-a{
+    width: 0;
+    height: 0;
+    border-top: 15px solid $secundario;
+    border-left: 20px solid transparent;
+    top: 50%;
+    position: absolute;
+    left: 0;
+    z-index: 1;
+  }
+
+  .ms-bg-b{
+    width: 0;
+    height: 0;
+    border-top: 15px solid $secundario;
+    border-right: 20px solid transparent;
+    top: 50%;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+  }
+
+  #endDate,
+  #startDate{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+
+  .ui-datepicker{
+    position: absolute !important;
+    left: 0 !important;
+    top: 100% !important;
+  }
+
+  .ms-count-list{
+    width: 100%;
+    border-radius: 6px;
+    background: #008192;
+    color: #FFF;
+    text-align: center;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 2;
+    overflow: hidden;
+    display: none;
+
+    li{
+      font-size: 15px;
+      a{
+        padding: 7px 5px;
+        display: block;
+        cursor: pointer;
+        transition: all .3s;
+        &:hover{
+          background-color: rgba(0,0,0,0.15);
+        }
+        &.active{
+          background-color: $secundario;
+        }
+      }
+    }
+
+    &.active{
+      display: block;
+      animation: slide-down .3s ease-out;
+    }
+  }
+
+  #petCount{
+    .ms-item-count{
+      position: relative;
+      &:before{
+        content: ">";
+        display: block;
+        position: absolute;
+        transform: translateY(-50%) rotate(90deg);
+        top: 50%;
+        right: 4px;
+        color: $primario;
+        font-size: 12px;
+      }
+    }
+  }
+
+  .ms-pet-calendar{
+    display: none;
+  }
+
+  @media screen and (min-width: 640px){
+    max-width: 740px;
+    .ms-wrap-calendar{
+      .ms-border-calendar{
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding-top: 24px;
+        .ms-btn{
+          width: auto;
+          min-width: 170px;
+          flex-shrink: 0;
+          margin-top: 0;
+        }
+      }
+
+      .ms-calendar-info{
+        width: 100%;
+        justify-content: space-between;
+        .ms-item{
+          padding: 0;
+          width: 33.33%;
+          align-items: center;
+          border-left: 1px solid #ffcc60;
+          &:first-child{
+            border-left: 0;
+          }
+          &:last-child{
+            padding-right: 0;
+          }
+
+          .ms-item-title{
+            font-size: 12px;
+          }
+
+          .ms-item-count,
+          .ms-item-date{
+            font-size: 45px;
+            line-height: 45px;
+            .ms-item-month{
+              margin-right: -5px;
+              padding-left: 10px;
+              font-size: 15px;
+              &:after{
+                top: 18px;
+                left: 15px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .ms-count-list{
+      width: 80%;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+    }
+  }
+
+  @media screen and (min-width: 1024px){
+    max-width: 1040px;
+    bottom: -60px;
+    .ms-wrap-calendar{
+      height: 230px;
+      &:before{
+        border-top-left-radius: 40px;
+        border-top-right-radius: 40px;
+      }
+
+      &:after {
+        border-bottom-right-radius: 40px;
+        border-bottom-left-radius: 40px;
+      }
+
+      .ms-border-calendar{
+        height: 100%;
+        padding-top: 53px;
+        border-radius: 35px;
+        .ms-btn {
+          min-width: 230px;
+          padding: 18px 30px;
+          font-size: 20px;
+          box-shadow: inset 0px 1px 0px #ffa727, 0px 7px 0px 0px #dc8508;
+          margin-right: 20px;
+
+          &.icon-paw:after {
+            font-size: 30px;
+            margin-left: 15px;
+          }
+
+          &:active{
+            box-shadow: inset 0px 1px 0px $secundario, inset 0px -1px 0px $secundario;
+          }
+        }
+      }
+
+      .ms-calendar-info{
+        .ms-item{
+          .ms-item-title{
+            font-size: 17px;
+          }
+
+          .ms-item-count,
+          .ms-item-date {
+            font-size: 75px;
+            line-height: 75px;
+            .ms-item-month{
+              margin-right: -15px;
+              font-size: 20px;
+              &:after{
+                top: 25px;
+                left: 17px;
+              }
+            }
+          }
+        }
+
+        &.open-end-date{
+          .ui-datepicker{
+            left: 35% !important;
+          }
+        }
+      }
+
+      .ms-bg-calendar{
+        border-radius: 40px;
+      }
+    }
+
+    .ui-datepicker{
+      top: 130% !important;
+    }
+
+    .ms-count-list{
+      width: 70%;
+      top: 130%;
+      border-radius: 10px;
+      li{
+        font-size: 17px;
+      }
+    }
+
+    #petCount{
+      .ms-item-count{
+        &:before{
+          font-size: 20px;
+        }
+      }
+    }
+
+    .ms-pet-calendar{
+      position: absolute;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 195px;
+      z-index: -1;
+      .ms-wrap-pet-calendar{
+        position: relative;
+        .pet{
+          width: 160px;
+          height: 200px;
+          .ms-head-pet{
+            position: absolute;
+            top: 0;
+            left: 24px;
+            z-index: 1;
+            width: 160px;
+            transform: translatey(0px);
+            animation: float 1.3s ease-in-out infinite;
+          }
+
+          .ms-body-pet{
+            position: absolute;
+            bottom: 3px;
+          }
+        }
+
+        .ms-bubble-pet{
+          position: absolute;
+          font-weight: 600;
+          font-size: 17px;
+          text-transform: uppercase;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 90px;
+          height: 90px;
+          background-color: #FFF;
+          margin-left: -90px;
+          flex-direction: column;
+          color: $primario;
+          border-radius: 100%;
+          span{
+            font-size: 10px;
+            display: block;
+          }
+
+          &:after{
+            content: "";
+            display: block;
+            background: url('../img/sprite.png') no-repeat -2px -211px;
+            width: 31px;
+            height: 27px;
+            position: absolute;
+            right: 3px;
+            bottom: -10px;
+            transform: rotate(-36deg);
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes float {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(5px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+}

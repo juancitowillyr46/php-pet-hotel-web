@@ -1,0 +1,255 @@
+#default,
+#servicios{
+  position: relative;
+  margin: 0 auto;
+  /*background-image: url("../img/patron_huesos.png");
+  background-position: 0 0;
+  background-repeat: repeat;
+  background-size: 203px;*/
+
+  &:before{
+    content: "";
+    display: block;
+    clip-path: circle(50% at 50% 0);
+  }
+  
+  .ms-wrap-section{
+    width: 90%;
+    padding: 40px 0;
+    margin: 0 auto;
+    max-width: 930px;
+
+    p{
+      font-size: 17px;
+      text-align: center;
+      color: $primario;
+      line-height: 1.4;
+      strong{
+        font-weight: 600;
+      }
+    }
+  }
+
+  .ms-card-list{
+    margin-top: 40px;
+  }
+
+  .ms-card{
+    display: block;
+    background-color: #efefef;
+    border-radius: 25px;
+    overflow: hidden;
+    margin: 15px 0;
+    //background-image: url("../img/patron_black.png");
+    background-repeat: repeat;
+    background-position: 0 0;
+    border: 2px solid transparent;
+    transition: all .4s;
+    position: relative;
+    &:hover{
+      border-color: $primario
+    }
+
+    .ms-card-info{
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 7% 10% 10%;
+      padding-bottom: calc(10% + 45px);
+      text-align: left;
+      background-color: $primario;
+
+      .ms-card-title{
+        font-size: 40px;
+        line-height: 1.1;
+        font-weight: lighter;
+        color: $secundario;
+        margin-bottom: 10px;
+        &.icon-bone{
+          &:before{
+            content: "\e901";
+            display: block;
+            font-family: 'ms-icons' !important;
+            font-size: 70px;
+            line-height: 29px;
+          }
+        }
+      }
+
+      p{
+        font-size: 17px;
+        line-height: 1.4;
+        font-weight: lighter;
+        color: #FFF;
+        text-align: left;
+      }
+
+      .ms-link{
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        position: absolute;
+        bottom: 7%;
+        right: 10%;
+        color: #FFF;
+        transition: all .3s;
+        &.icon-paw{
+          &:after{
+            content: "\e902";
+            font-family: 'ms-icons' !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            border-radius: 100%;
+            background-color: $secundario;
+            height: 45px;
+            width: 45px;
+            margin-left: 10px;
+            color: #FFF;
+            transition: all .3s;
+            font-weight: lighter;
+          }
+        }
+
+        &:hover{
+          color: $secundario;
+          &.icon-paw{
+            &:after{
+              color: $secundario;
+              background-color: #FFF;
+            }
+          }
+        }
+      }
+    }
+
+    .ms-card-img{
+      width: 100%;
+      padding: 30px;
+      img{
+        width: auto;
+        max-width: 90%;
+        display: block;
+        margin: 0 auto;
+      }
+      span{
+        display: block;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 600;
+        margin-top: 15px;
+      }
+    }
+  }
+
+  .ms-btn{
+    &.lg{
+      width: 100%;
+    }
+  }
+
+  @media screen and (min-width: 640px){
+    .ms-wrap-section{
+      p{
+        font-size: 20px;
+        line-height: 1.6;
+      }
+
+      .ms-card-list{
+        display: flex;
+        margin-left: -15px;
+        margin-right: -15px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        li{
+          width: 50%;
+          padding: 0 15px;
+          .ms-card{
+            margin: 0;
+            margin-bottom: 30px;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 768px){
+    .ms-wrap-section{
+      padding-top: 60px;
+      p{
+        font-size: 23px;
+      }
+
+      .ms-card-list{
+        li{
+          .ms-card{
+            .ms-card-img{
+              span{
+                font-size: 24px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .ms-btn.lg {
+      width: 315px !important;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  @media screen and (min-width: 1024px){
+    .ms-wrap-section{
+      padding-top: 80px;
+      p{
+        font-size: 26px;
+      }
+
+      .ms-card-list{
+        margin-top: 80px;
+        li{
+          .ms-card{
+            border: 0;
+            .ms-card-img{
+              span{
+                font-size: 24px;
+              }
+              .ms-sm{
+                max-width: 235px;
+              }
+            }
+
+            .ms-card-info{
+              display: block;
+              transition: all 0.35s ease;
+              transform: translateX(-100%);
+            }
+
+            &:hover{
+              .ms-card-info{
+                transform: translate(0, 0);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .ms-btn.lg {
+      padding-top: 26px;
+      padding-bottom: 26px;
+      font-size: 17px;
+      margin: 45px auto 60px auto;
+      width: 460px !important;
+    }
+  }
+}

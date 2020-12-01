@@ -1,0 +1,109 @@
+#thankyou{
+  position: relative;
+  margin: 0 auto;
+  .ms-wrap-content{
+    padding: 80px 0 50px 0;
+    .ms-wrap-section{
+      width: 90%;
+      max-width: 1044px;
+      position: relative;
+      margin: 0 auto;
+      padding: 30px;
+      border-radius: 6px;
+      box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.25);
+      background-color: #FFF;
+      text-align: center;
+      color: $primario;
+      overflow: hidden;
+
+      &:before{
+        content: "";
+        display: block;
+        background: rgb(255,255,255);
+        background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%);
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60%;
+        position: absolute;
+        z-index: 1;
+      }
+
+      p{
+        font-size: 17px;
+        line-height: 1.6;
+        position: relative;
+        z-index: 2;
+        max-width: 930px;
+        margin-left: auto;
+        margin-right: auto;
+        strong{
+          font-weight: 600;
+        }
+      }
+
+      .ms-title{
+        font-size: 30px;
+        font-weight: bold;
+        color: $secundario;
+        margin: 15px 0 20px 0;
+        position: relative;
+        z-index: 2;
+      }
+
+      .ms-wrap-img{
+        margin: 40px auto 30px auto;
+        position: relative;
+        z-index: 2;
+        img{
+          width: auto;
+          max-width: 100%;
+        }
+      }
+
+      @media screen and (min-width:768px){
+        padding-left: 40px;
+        padding-right: 40px;
+
+        .ms-title{
+          font-size: 38px;
+          letter-spacing: 2px;
+          margin-bottom: 30px;
+        }
+
+        p{
+          font-size: 20px;
+        }
+
+        .ms-wrap-img{
+          margin-top: 70px;
+        }
+      }
+    }
+
+    @media screen and (min-width:1024px){
+      padding: 110px 0 90px 0;
+      .ms-wrap-section{
+        .ms-title{
+          font-size: 48px;
+          letter-spacing: 3px;
+          margin-bottom: 50px;
+          margin-top: 70px;
+        }
+
+        p{
+          font-size: 27px;
+        }
+
+        .ms-wrap-img{
+          margin-top: 100px;
+        }
+      }
+    }
+
+    @media screen and (min-width:1440px){
+      padding: 160px 0 100px 0;
+    }
+  }
+}
+

@@ -1,6 +1,7 @@
 <?php
 namespace App\BackOffice\Payments\Domain\Entities;
 
+use App\BackOffice\Bookings\Domain\Entities\BookingModel;
 use App\BackOffice\Roles\Domain\Entities\RoleModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -28,7 +29,7 @@ class PaymentModel extends Model
         'billing_address',
         'billing_phone',
         'total',
-        'booking_id',
+        //'booking_id',
         'customer_id',
         'created_at',
         'created_by',
@@ -38,5 +39,14 @@ class PaymentModel extends Model
         'deleted_by',
         'active'
     ];
+
     use SoftDeletes;
+
+    //protected $with = ['bookings'];
+
+    public function bookings()
+    {
+        return $this->belongsToMany(BookingModel::class, 'booking_payment', 'payment_id', 'booking_id')->withPivot('payment_id','booking_id');
+//        return $this->belongsToMany(BookingModel::class);
+    }
 }

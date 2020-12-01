@@ -24,14 +24,16 @@ class PetMapper
             new SnakeCaseNamingConvention(),
             new CamelCaseNamingConvention()
         )->forMember('activeName', function ($source) {
-            return ($source['active'] == true)? 'SI' : 'NO';
+            return (boolval($source['active']) == 1)? 'SI' : 'NO';
         })->forMember('createdAt', function ($source) {
             $time = strtotime($source['created_at']);
             return date('d-m-Y H:i:s', $time);
         })->forMember('id', function($source){
             return $source['uuid'];
-        })->forMember('isAgressiveName', function ($source) {
-            return ($source['is_agressive'] == true)? 'SI' : 'NO';
+        })->forMember('initZeal', function($source){
+            return ($source['init_zeal'] != null)?  $source['init_zeal'] :  "";
+        })->forMember('lastZeal', function($source){
+            return ($source['last_zeal'] != null)?  $source['last_zeal'] :  "";
         });
 
     }

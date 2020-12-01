@@ -58,6 +58,15 @@ class BookingService extends BaseService
         return $this->getBookingDto($getRow);
     }
 
+    public function executeGetPaymentIds(int $bookingId): array {
+        $booking = $this->bookingRepository->getModel()::find($bookingId);
+        $paymentId = [];
+        foreach ($booking->payments as $booking) {
+            $paymentId[] = $booking->toArray();
+        }
+        return $paymentId;
+    }
+
     public function executeGetAll(array $query): object {
         $getRows = $this->getAllRows($query, true);
         $list = [];
@@ -119,10 +128,10 @@ class BookingService extends BaseService
     /*
      * Ubica los caniles que se encuentran reservados
      * */
-    public function getKennelsNotAvailableByDateToAndDateFrom($dateTo, $dateFrom): ?array {
+    public function getKennelsNotAvailableByDateToAndDateFrom($dateFrom, $dateTo): ?array {
         return $this->bookingRepository->getModel()::all()
-            ->where('date_to', '=', $dateTo)
             ->where('date_from', '=', $dateFrom)
+            ->where('date_to', '=', $dateTo)
             ->toArray();
     }
 

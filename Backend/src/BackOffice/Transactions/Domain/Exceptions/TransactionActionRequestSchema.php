@@ -28,6 +28,12 @@ class TransactionActionRequestSchema extends BaseValidatorRequest
             ],
             'booking' => [
                 new Required(),
+            ],
+            'terms' => [
+                new Required(),
+            ],
+            'usingContact' => [
+                new Required(),
             ]
         ], $data);
 

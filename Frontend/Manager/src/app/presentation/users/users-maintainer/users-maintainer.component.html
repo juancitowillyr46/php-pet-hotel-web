@@ -41,9 +41,9 @@
                             <thead>
                             <tr>
                               <th scope="col">Usuario</th>
-                              <th scope="col">Role</th>
+                              <!-- <th scope="col">Role</th> -->
                               <th scope="col">Bloqueado</th>
-                              <th scope="col">Activo</th>
+                              <!-- <th scope="col">Activo</th> -->
                               <th scope="col">Fecha creación</th>
                               <th></th>
                             </tr>
@@ -53,16 +53,16 @@
                               <td width="14%">
                                 {{ row.username }}
                               </td>
-                              <td width="14%">
+                              <!-- <td width="14%">
                                 {{ row.roleName }}
-                              </td>
+                              </td> -->
                               <td width="14%">
-                                <div class="badge badge-danger-lighten" *ngIf="row.blocked==true">{{ row.blockedName}}</div>
-                                <div class="badge badge-success-lighten" *ngIf="row.blocked==false">{{ row.blockedName }}</div>
+                                <div class="badge badge-danger-lighten" *ngIf="row.blockedName=='SI'">{{ row.blockedName }}</div>
+                                <div class="badge badge-success-lighten" *ngIf="row.blockedName=='NO'">{{ row.blockedName }}</div>
                               </td>
-                              <td width="14%">
+                              <!-- <td width="14%">
                                 {{ row.activeName }}
-                              </td>
+                              </td> -->
                               <td width="14%">
                                 {{ row.createdAt }}
                               </td>

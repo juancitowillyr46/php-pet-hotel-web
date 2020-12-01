@@ -8,6 +8,7 @@ class CustomerDto
     public string $lastName;
     public string $phone;
     public string $address;
+    public string $addressReference;
     public string $addressOptional;
     public string $comments;
     public string $image;
@@ -15,4 +16,7 @@ class CustomerDto
     public string $activeName;
     public string $createdAt;
     public string $username;
+    public string $email;
+    public string $districtId;
+    public string $districtName;
 }

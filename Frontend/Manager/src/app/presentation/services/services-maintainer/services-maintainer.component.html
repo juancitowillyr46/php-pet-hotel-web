@@ -41,10 +41,11 @@
                             <thead>
                             <tr>
                               <th scope="col">Tipo</th>
+                              <th scope="col">Plan</th>
                               <th scope="col">Nombre</th>
                               <th scope="col">Precio</th>
                               
-                              <th scope="col">Disponible</th>
+                              <th scope="col">Visible en la Web</th>
                               <!-- <th scope="col">Fecha registro</th> -->
                               <th></th>
                             </tr>
@@ -53,15 +54,21 @@
                             <tr *ngFor="let row of dataRows">
                               <td width="14%">
                                 {{ row.serviceTypeName }}
-                              </td>     
+                              </td>   
+                              <td width="14%">
+                                {{ row.planName }}
+                              </td>   
                               <td width="14%">
                                 {{ row.name }}
                               </td>
                               <td width="14%">
-                                {{ row.price | currency:'S/':'code' }}
+                                <b>{{ row.price | currency:'S/':'code' }}</b>
                               </td>                   
                               <td width="14%">
-                                {{ row.activeName }}
+
+                                <div class="badge badge-danger-lighten" *ngIf="row.visibleName=='NO'">{{ row.visibleName}}</div>
+                                <div class="badge badge-success-lighten" *ngIf="row.visibleName=='SI'">{{ row.visibleName }}</div>
+
                               </td>
                               <!-- <td width="14%">
                                 {{ row.createdAt }}

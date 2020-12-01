@@ -26,6 +26,9 @@ class PetActionRequestSchema extends BaseValidatorRequest
             'age' => [
                 new Required(),
             ],
+            'ageType' => [
+                new Required(),
+            ],
             'gender' => [
                 new Required(),
             ],
@@ -60,6 +63,9 @@ class PetActionRequestSchema extends BaseValidatorRequest
                 new Required(),
             ],
             'observation' => [
+                new Required(),
+            ],
+            'initZeal' => [
                 new Required(),
             ],
             'lastZeal' => [

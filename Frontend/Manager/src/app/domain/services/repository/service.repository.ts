@@ -19,7 +19,7 @@ export class ServiceRepository {
 
     getAll(obj: any): Observable<ResponseDataDto<ServiceDto[]>> {
         const that = this;
-        return that.dataService.get(that.resource + '?size='+ obj.size  +'&page=' + obj.page);
+        return that.dataService.get(that.resource + '?size='+ obj.size  +'&page=' + obj.page + '&usingPaginate=1');
     }
     
     get(id: string): Observable<ResponseDataDto<ServiceDto>> {

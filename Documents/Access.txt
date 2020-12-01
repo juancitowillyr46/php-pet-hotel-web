@@ -1,0 +1,10 @@
+ADMIN
+http://manager.pethotelshangrila.pe/#/security/login
+admin@pethotelshangrila.pe
+12345678
+
+USUARIO ya registrado
+prueba2@gmail.com
+12345678
+
+Nuevo Usuario

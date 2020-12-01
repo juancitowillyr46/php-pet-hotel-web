@@ -1,0 +1,121 @@
+#testimonios{
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  background-color: #ececec;
+  //background-image: url("../img/patron_huesos_white.png");
+  background-position: 0 0;
+  background-repeat: repeat;
+  background-size: 203px;
+
+  &:after{
+    content: "";
+    display: block;
+    width: 100%;
+    background-image: url("../img/sprite.png");
+    background-position: -10px 0;
+    height: 17px;
+    background-repeat: repeat-x;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .ms-header-section{
+    padding-top: 57px;
+  }
+
+  .ms-bubble{
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    .ms-wrap-bubble{
+      position: relative;
+      padding: 60px 0 30px 40px;
+      //background-image: url("../img/bubble.png");
+      background-repeat: no-repeat;
+      background-size: 100%;
+
+      &:before{
+        content: "";
+        display: block;
+        background: url("../img/sprite.png") no-repeat -5px -76px;
+        width: 24px;
+        height: 16px;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .ms-wrap-img{
+        width: 48px;
+        height: 48px;
+        border: 8px solid $primario;
+        border-radius: 100%;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        left: 40px;
+        img{
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      p{
+        font-size: 20px;
+        color: $primario;
+        line-height: 1.4;
+        padding-bottom: 15px;
+      }
+      
+      .ms-creator{
+        font-size: 20px;
+        color: $primario;
+      }
+    }
+  }
+
+  .ms-wrap-count{
+    padding-left: 40px;
+    .ms-count{
+      font-size: 14px;
+      color: #979797;
+    }
+
+    .ms-bone-count{
+      .ms-icon-bone{
+        color: #8f8f8f;
+        font-size: 30px;
+        margin-right: 7px;
+        &.active{
+          color: $secundario;
+        }
+      }
+    }
+  }
+
+  .ms-wrap-section{
+    position: relative;
+    padding: 30px 0 50px 0;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  @media screen and (min-width: 640px){
+    .ms-wrap-section{
+      padding: 70px 0;
+    }
+  }
+
+  @media screen and (min-width: 1024px){
+    .ms-header-section{
+      padding-top: 110px;
+    }
+
+    .ms-wrap-section{
+      padding: 110px 0;
+    }
+  }
+}

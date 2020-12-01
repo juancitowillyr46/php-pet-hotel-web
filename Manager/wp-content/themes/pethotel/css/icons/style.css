@@ -1,0 +1,90 @@
+@font-face {
+  font-family: 'ms-icons';
+  src:  url('fonts/ms-icons.eot?991vpb');
+  src:  url('fonts/ms-icons.eot?991vpb#iefix') format('embedded-opentype'),
+    url('fonts/ms-icons.ttf?991vpb') format('truetype'),
+    url('fonts/ms-icons.woff?991vpb') format('woff'),
+    url('fonts/ms-icons.svg?991vpb#ms-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="ms-icon-"], [class*=" ms-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'ms-icons' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ms-icon-loading:before {
+  content: "\e90b";
+}
+.ms-icon-checkmark:before {
+  content: "\e909";
+}
+.ms-icon-picture:before {
+  content: "\e907";
+}
+.ms-icon-add:before {
+  content: "\e908";
+}
+.ms-icon-layout:before {
+  content: "\e906";
+}
+.ms-icon-user:before {
+  content: "\e905";
+}
+.ms-icon-arrow:before {
+  content: "\e904";
+}
+.ms-icon-arrow_calendar:before {
+  content: "\e903";
+}
+.ms-icon-bone:before {
+  content: "\e901";
+}
+.ms-icon-paw:before {
+  content: "\e902";
+}
+.ms-icon-pinterest:before {
+  content: "\e900";
+}
+.ms-icon-google-plus:before {
+  content: "\ea8b";
+}
+.ms-icon-facebook:before {
+  content: "\ea90";
+}
+.ms-icon-instagram:before {
+  content: "\ea92";
+}
+.ms-icon-whatsapp:before {
+  content: "\ea93";
+}
+.ms-icon-twitter:before {
+  content: "\ea96";
+}
+.ms-icon-linkedin:before {
+  content: "\eac9";
+}
+.ms-icon-linkedin2:before {
+  content: "\eaca";
+}
+.ms-icon-eliminar:before {
+  content: "\e90a";
+}
+.ms-icon-eye:before {
+  content: "\e9ce";
+}
+.ms-icon-eye-blocked:before {
+  content: "\e9d1";
+}

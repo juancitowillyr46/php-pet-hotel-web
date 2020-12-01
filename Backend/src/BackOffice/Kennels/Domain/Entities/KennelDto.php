@@ -7,7 +7,7 @@ class KennelDto
     public string $name;
     public string $num;
     public string $description;
-    public bool $isBooked;
+    public string $isBooked;
     public string $isBookedName;
     public bool $active;
     public string $activeName;

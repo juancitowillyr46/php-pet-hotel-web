@@ -2,6 +2,7 @@
 namespace App\BackOffice\Pets\Domain\Services;
 
 use App\BackOffice\Customers\Domain\Entities\CustomerModel;
+use App\BackOffice\DataMaster\Domain\Entities\DataMasterModel;
 use App\BackOffice\Pets\Domain\Entities\PetDto;
 use App\BackOffice\Pets\Domain\Entities\PetEntity;
 use App\BackOffice\Pets\Domain\Entities\PetMapper;
@@ -38,7 +39,10 @@ class PetService extends BaseService
     }
 
     public function executeRemove(string $uuid): object {
-        $this->remove($uuid);
+        //$this->remove($uuid);
+
+        $request['active'] = false;
+        $this->editState($request, $uuid);
         $this->petEntity->setUuid($uuid);
         return $this->petEntity->getResponseDataId();
     }
@@ -63,30 +67,31 @@ class PetService extends BaseService
         $customerId = $this->petRepository->getIdByUuidModel(new CustomerModel(), $query['customerId']);
         $getRows = $this->petRepository->getModel()::all()->where('customer_id', '=', $customerId)->toArray();
         $list = [];
+
         foreach ($getRows as $getRow) {
             $list[] = $this->getPetDto($getRow);
         }
+
         $getRows = $list;
+
         return $getRows;
 
-//        $getRows = $this->getAllRows($query, false);
-//        $list = [];
-//        foreach ($getRows->rows as $getRow) {
-//            $list[] = $this->getPetDto($getRow);
-//        }
-//        $getRows->rows = $list;
-//        return $getRows;
     }
 
     public function setFormData(array $request): PetEntity {
         $this->petEntity->payload((object)$request);
+        $aggresiveId = $this->petRepository->getAttrByUuidModel(new DataMasterModel(), $request['isAgressive'], 'id_row');
+        $this->petEntity->setIsAgressive($aggresiveId);
         $this->petEntity->setCustomerId($this->getIdByUuidModel(new CustomerModel(), $request['customerId'])); // Role Id
         return $this->petEntity;
     }
 
     public function getPetDto(array $row): object {
         $customer = $this->getRowByIdModel(new CustomerModel(), $row['customer_id']);
+        $agressive = $this->getRowByIdModelByTable(new DataMasterModel(), $row['is_agressive'], 'TABLE_STATE_AGRESSIVE');
         $row['customer_name'] = $customer['first_name']." ".$customer['last_name'];
+        $row['is_agressive'] = $agressive['uuid'];
+        $row['is_agressive_name'] = $agressive['name'];
         return $this->petMapper->autoMapper->map($row, PetDto::class);
     }
 

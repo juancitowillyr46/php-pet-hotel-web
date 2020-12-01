@@ -12,7 +12,24 @@ class KennelEntity extends Audit
     public string $name;
     public string $num;
     public string $description;
-    public bool $is_booked;
+    public int $is_booked;
+
+    /**
+     * @return int
+     */
+    public function getIsBooked(): int
+    {
+        return $this->is_booked;
+    }
+
+    /**
+     * @param int $is_booked
+     */
+    public function setIsBooked(int $is_booked): void
+    {
+        $this->is_booked = $is_booked;
+    }
+
 
     /**
      * @return string
@@ -62,21 +79,6 @@ class KennelEntity extends Audit
         $this->description = $description;
     }
 
-    /**
-     * @return bool
-     */
-    public function isIsBooked(): bool
-    {
-        return $this->is_booked;
-    }
-
-    /**
-     * @param bool $is_booked
-     */
-    public function setIsBooked(bool $is_booked): void
-    {
-        $this->is_booked = $is_booked;
-    }
 
     public function payload(object $formData): void {
 
@@ -88,7 +90,7 @@ class KennelEntity extends Audit
             $this->setName($formData->name);
             $this->setDescription($formData->description);
             $this->setNum($formData->num);
-            $this->setIsBooked($formData->isBooked);
+
             $this->setActive($formData->active);
 
         } catch(Exception $ex) {

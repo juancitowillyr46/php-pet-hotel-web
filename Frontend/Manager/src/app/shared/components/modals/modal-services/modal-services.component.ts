@@ -4,6 +4,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BaseModalComponent } from '../base-modal.component';
 import { CommonAuditStatusUseCase } from '../../../../domain/commons/usecase/common-audit-status.usecase';
+// import { CommonAuditStatusIdUseCase } from '../../../../domain/commons/usecase/common-audit-status-id.usecase';
+
+import { CommonIsVisibleUseCase } from '../../../../domain/commons/usecase/common-is-visible.usecase';
+import { CommonPlansUseCase } from '../../../../domain/commons/usecase/common-plans.usecase';
 
 import { ServiceAddUseCase } from '../../../../domain/services/usecase/service-add.usecase';
 import { ServiceEditUseCase } from '../../../../domain/services/usecase/service-edit.usecase';
@@ -11,7 +15,6 @@ import { ServiceGetUseCase } from '../../../../domain/services/usecase/service-g
 import { CommonTypeServiceUseCase } from '../../../../domain/commons/usecase/common-type-service.usecase';
 import { CommonDto } from 'src/app/domain/commons/model/common.dto';
 import { ServiceStoreDto } from 'src/app/domain/services/model/service-store.dto';
-
 
 declare var $: any;
 
@@ -26,6 +29,10 @@ export class ModalServicesComponent extends BaseModalComponent implements OnInit
   public dataModal: any;
   public submit: any = null;
   public commonTypeService: CommonDto[] = [];
+  // public commonAuditStatusId: CommonDto[] = [];
+
+  public commonIsVisible: CommonDto[] = [];
+  public commonPlans: CommonDto[] = [];
   
   constructor(
     private commonTypeServiceUseCase: CommonTypeServiceUseCase,
@@ -34,7 +41,9 @@ export class ModalServicesComponent extends BaseModalComponent implements OnInit
     private serviceEditUseCase: ServiceEditUseCase,
     public formBuilder: FormBuilder,
     public modalService: NgbModal,
-    public commonAuditStatusUseCase: CommonAuditStatusUseCase
+    public commonAuditStatusUseCase: CommonAuditStatusUseCase,
+    public commonIsVisibleUseCase: CommonIsVisibleUseCase,
+    public commonPlansUseCase: CommonPlansUseCase
   ) { 
     super(formBuilder, commonAuditStatusUseCase, modalService);
     const that = this;
@@ -67,6 +76,8 @@ export class ModalServicesComponent extends BaseModalComponent implements OnInit
     const that = this;
     that.formGroup = that.buildingForm({
       serviceTypeId: ['', [Validators.required]],
+      planId: ['', [Validators.required]],
+      visibleId: ['', [Validators.required]],
       name: ['', [Validators.required]],
       description: ['', [Validators.required]], 
       price: [0, [Validators.required]],
@@ -121,6 +132,12 @@ export class ModalServicesComponent extends BaseModalComponent implements OnInit
     const that = this;
     that.commonTypeServiceUseCase.execute().subscribe( res => {
       that.commonTypeService = res;
+    });
+    that.commonIsVisibleUseCase.execute().subscribe( res => {
+      that.commonIsVisible = res;
+    });
+    that.commonPlansUseCase.execute().subscribe( res => {
+      that.commonPlans = res;
     });
   }
 

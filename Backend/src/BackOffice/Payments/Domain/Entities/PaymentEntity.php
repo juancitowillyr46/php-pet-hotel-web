@@ -23,7 +23,7 @@ class PaymentEntity extends Audit
     public string $billing_phone;
     public string $billing_address;
     public float $total;
-    public int $booking_id;
+    //public int $booking_id;
     public int $customer_id;
 
     /**
@@ -202,21 +202,21 @@ class PaymentEntity extends Audit
         $this->billing_address = $billing_address;
     }
 
-    /**
-     * @return int
-     */
-    public function getBookingId(): int
-    {
-        return $this->booking_id;
-    }
-
-    /**
-     * @param int $booking_id
-     */
-    public function setBookingId(int $booking_id): void
-    {
-        $this->booking_id = $booking_id;
-    }
+//    /**
+//     * @return int
+//     */
+//    public function getBookingId(): int
+//    {
+//        return $this->booking_id;
+//    }
+//
+//    /**
+//     * @param int $booking_id
+//     */
+//    public function setBookingId(int $booking_id): void
+//    {
+//        $this->booking_id = $booking_id;
+//    }
 
     /**
      * @return int
@@ -265,6 +265,9 @@ class PaymentEntity extends Audit
     {
         $this->total = $total;
     }
+
+
+
 
     public function payload(object $formData): void {
 

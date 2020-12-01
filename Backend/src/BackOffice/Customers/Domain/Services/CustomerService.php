@@ -1,6 +1,7 @@
 <?php
 namespace App\BackOffice\Customers\Domain\Services;
 
+use App\BackOffice\DataMaster\Domain\Entities\DataMasterModel;
 use App\BackOffice\Roles\Domain\Entities\RoleModel;
 use App\BackOffice\Customers\Domain\Entities\CustomerDto;
 use App\BackOffice\Customers\Domain\Entities\CustomerEntity;
@@ -61,12 +62,28 @@ class CustomerService extends BaseService
     public function setFormData(array $request): CustomerEntity {
         $this->customerEntity->payload((object)$request);
         $this->customerEntity->setUserId($this->getIdByUuidModel(new UserModel(), $request['userId'])); // Role Id
+        if($request['districtId'] != ""){
+            $districtId = $this->getAttrByUuidModel(new DataMasterModel(), $request['districtId'], 'id_row');
+        } else {
+            $districtId = "0";
+        }
+        $this->customerEntity->setDistrictId($districtId);
         return $this->customerEntity;
     }
 
     public function getUserDto(array $row): object {
         $user = $this->getRowByIdModel(new UserModel(), $row['user_id']);
         $row['user_name'] = $user['username'];
+
+        if($row['district_id'] != null && $row['district_id'] != '0'){
+            $districtId = $this->getRowByIdModelByTable(new DataMasterModel(), $row['district_id'], 'TABLE_DISTRICT');
+            $row['district_name'] = $districtId['name'];
+            $row['district_id'] = $districtId['uuid'];
+        }  else {
+            $row['district_name'] = "";
+            $row['district_id'] = "";
+        }
+
         return $this->customerMapper->autoMapper->map($row, CustomerDto::class);
     }
 

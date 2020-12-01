@@ -1,0 +1,131 @@
+#welcome{
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  height: calc(100vh - 95px);
+  @media screen and (min-width: 374px){
+    height: calc(100vh - 220px);
+  }
+
+  @media screen and (min-width: 768px){
+    height: calc(100vh - 95px);
+  }
+
+  &:after{
+    content: "";
+    display: block;
+    width: 100%;
+    background-image: url("../img/sprite.png");
+    background-position: -10px -16px;
+    height: 19px;
+    background-repeat: repeat-x;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+  }
+
+  .ms-slider{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+    .ms-item{
+      img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &:before{
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      background: radial-gradient(ellipse at center, #000 0%,rgba(0,0,0,0.1) 0%, #000 100%);
+      z-index: 2;
+      opacity: 0.33;
+    }
+
+    .ms-icon-nav{
+      width: 50px;
+      height: 50px;
+      border-radius: 100%;
+      text-indent: -999999px;
+      display: none;
+      overflow: hidden;
+      transition: all .3s;
+      color: #FFF;
+      background-color: $primario;
+      font-size: 15px;
+      &:hover{
+        background-color: $secundario;
+      }
+
+      &:before{
+        content: "\e904";
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'ms-icons' !important;
+        text-indent: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      &.swiper-button-next{
+        right: 30px;
+      }
+
+      &.swiper-button-prev{
+        left: 30px;
+        &:before{
+          transform: rotate(-180deg);
+        }
+      }
+
+      @media screen and (min-width: 768px){
+        display: block;
+      }
+    }
+
+    @media screen and (min-width: 1024px){
+      .ms-icon-nav{
+        &.swiper-button-next{
+          right: -70px;
+        }
+
+        &.swiper-button-prev{
+          left: -70px;
+        }
+      }
+
+      &:hover{
+        .ms-icon-nav{
+          font-size: 25px;
+          &.swiper-button-next{
+            width: 75px;
+            height: 75px;
+            right: 40px;
+          }
+  
+          &.swiper-button-prev{
+            width: 75px;
+            height: 75px;
+            left: 40px;
+          }
+        }
+      }
+    }
+  }
+}

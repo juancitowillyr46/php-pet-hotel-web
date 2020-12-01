@@ -15,6 +15,9 @@ class ServiceEntity extends Audit
     public string $image;
     public string $service_type_id;
     public float $price;
+    public int $visible_id;
+    public int $plan_id;
+    public int $order;
 
     /**
      * @return string
@@ -112,9 +115,58 @@ class ServiceEntity extends Audit
         $this->price = $price;
     }
 
+    /**
+     * @return int
+     */
+    public function getVisibleId(): int
+    {
+        return $this->visible_id;
+    }
+
+    /**
+     * @param int $visible_id
+     */
+    public function setVisibleId(int $visible_id): void
+    {
+        $this->visible_id = $visible_id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPlanId(): int
+    {
+        return $this->plan_id;
+    }
+
+    /**
+     * @param int $plan_id
+     */
+    public function setPlanId(int $plan_id): void
+    {
+        $this->plan_id = $plan_id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrder(): int
+    {
+        return $this->order;
+    }
+
+    /**
+     * @param int $order
+     */
+    public function setOrder(int $order): void
+    {
+        $this->order = $order;
+    }
+
     public function payload(object $formData): void {
 
         try {
+
 
             $validate = new ServiceActionRequestSchema();
             $validate->getMessages((array)$formData);
@@ -124,7 +176,7 @@ class ServiceEntity extends Audit
             $this->setMain($formData->main);
             $this->setImage($formData->image);
             $this->setPrice($formData->price);
-            $this->setActive($formData->active);
+            //$this->setOrder($formData->order);
 
         } catch(Exception $ex) {
             throw new Exception($ex->getMessage(), $ex->getCode());

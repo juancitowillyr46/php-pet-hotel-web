@@ -42,8 +42,8 @@
                             <tr>
                               <!-- <th scope="col">Código</th> -->
                               <th scope="col">Nombre</th>
-                              <th scope="col">Reservado</th>
-                              <th scope="col">Disponible</th>
+                              <th scope="col">Disponible en la Web</th>
+                              <!-- <th scope="col">Disponible</th> -->
                               <th scope="col">Fecha registro</th>
                               <!-- <th>Disponible reserva</th> -->
                               <th></th>
@@ -58,12 +58,12 @@
                                 {{ row.name }}
                               </td>  
                               <td width="14%">
-                                <div class="badge badge-danger-lighten" *ngIf="row.isBooked==true">{{ row.isBookedName }}</div>
-                                <div class="badge badge-success-lighten" *ngIf="row.isBooked==false">{{ row.isBookedName }}</div>
+                                <div class="badge badge-danger-lighten" *ngIf="row.isBookedName=='SI'">{{ row.isBookedName }}</div>
+                                <div class="badge badge-success-lighten" *ngIf="row.isBookedName=='NO'">{{ row.isBookedName }}</div>
                               </td>                         
-                              <td width="14%">
+                              <!-- <td width="14%">
                                 {{ row.activeName }}
-                              </td>
+                              </td> -->
                               <td width="14%">
                                 {{ row.createdAt }}
                               </td>

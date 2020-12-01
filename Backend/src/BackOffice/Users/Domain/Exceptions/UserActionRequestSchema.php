@@ -45,7 +45,7 @@ class UserActionRequestSchema extends BaseValidatorRequest
                 new Type('bool')
             ],
             'blocked' => [
-                new Type('bool')
+                new Required(),
             ]
         ], $data);
 

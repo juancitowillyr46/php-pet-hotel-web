@@ -30,10 +30,6 @@ class UserMapper
             return date('d-m-Y H:i:s', $time);
         })->forMember('id', function($source){
             return $source['uuid'];
-        })->forMember('blocked', function($source){
-            return ($source['blocked'])? true : false;
-        })->forMember('blockedName', function($source){
-            return ($source['blocked'] == true)? 'SI' : 'NO';
         });
 
         $this->config->registerMapping('array', UserInfoDto::class)->withNamingConventions(

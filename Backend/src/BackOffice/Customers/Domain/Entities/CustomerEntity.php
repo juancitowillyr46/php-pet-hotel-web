@@ -12,11 +12,15 @@ class CustomerEntity extends Audit
     public string $first_name;
     public string $last_name;
     public string $phone;
+    public int $district_id;
     public string $address;
     public string $address_optional;
+    public string $address_reference;
     public string $comments;
     public string $image;
     public string $user_id;
+    public string $email;
+
 
     /**
      * @return string
@@ -146,6 +150,54 @@ class CustomerEntity extends Audit
         $this->user_id = $user_id;
     }
 
+    /**
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDistrictId(): int
+    {
+        return $this->district_id;
+    }
+
+    /**
+     * @param int $district_id
+     */
+    public function setDistrictId(int $district_id): void
+    {
+        $this->district_id = $district_id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddressReference(): string
+    {
+        return $this->address_reference;
+    }
+
+    /**
+     * @param string $address_reference
+     */
+    public function setAddressReference(string $address_reference): void
+    {
+        $this->address_reference = $address_reference;
+    }
+
     public function payload(object $formData): void {
 
         try {
@@ -156,8 +208,11 @@ class CustomerEntity extends Audit
             $this->setFirstName($formData->firstName);
             $this->setLastName($formData->lastName);
             $this->setPhone($formData->phone);
+            $this->setEmail($formData->email);
+            //$this->setDistrictId($formData->districtId);
             $this->setAddress($formData->address);
             $this->setAddressOptional($formData->addressOptional);
+            $this->setAddressReference($formData->addressReference);
             $this->setComments($formData->comments);
             $this->setImage($formData->image);
             $this->setActive($formData->active);

@@ -6,6 +6,7 @@ class PetDto
     public string $id;
     public string $name;
     public string $age;
+    public string $ageType;
     public string $gender;
     public string $race;
     public string $image;
@@ -20,9 +21,10 @@ class PetDto
     public string $veterinaryPhone;
     public string $treatments;
     public string $lastVaccine;
-    public bool $isAgressive;
+    public string $isAgressive;
     public string $isAgressiveName;
     public string $observation;
+    public string $initZeal;
     public string $lastZeal;
     public string $other;
 }
