@@ -66,6 +66,9 @@ get_header(); ?>
               <li>Las clases deben de ser interdiarias.</li>
               <li>Es indispensable contar con el módulo de obediencia básica completo para proseguir con los demas módulos.</li>
             </ul>
+            <div class="ms-warp-btn">
+              <a href="./step4/?serviceId=f347d6f7-fe4f-4a6d-bc86-3719ee9b9bda" class="ms-btn bg-sc">Comprar</a>
+            </div>
           </div>
         </div>
         
@@ -105,6 +108,9 @@ get_header(); ?>
               <li>El perro debe traer su juguete y alguna prenda o accesorio del dueño.</li>
               <li>Las clases deben ser interdiarias.</li>
             </ul>
+            <div class="ms-warp-btn">
+              <a href="./step4/?serviceId=55031947-2694-4608-8fa9-97d123d238d7" class="ms-btn bg-sc">Comprar</a>
+            </div>
           </div>
         </div>
 
@@ -145,6 +151,9 @@ get_header(); ?>
               <li>El perro debe traer su juguete y alguna prenda o accesorio del dueño.</li>
               <li>Las clases deben de ser interdiarias.</li>
             </ul>
+            <div class="ms-warp-btn">
+              <a href="./step4/?serviceId=7ce10806-c966-41a2-af66-89dfc5725245" class="ms-btn bg-sc">Comprar</a>
+            </div>
           </div>
         </div>
 
@@ -198,6 +207,9 @@ get_header(); ?>
               <li>El perro debe traer su juguete y alguna prenda o accesorio del dueño.</li>
               <li>Las clases deben ser interdiaras.</li>
             </ul>
+            <div class="ms-warp-btn">
+              <a href="./step4/?serviceId=26f66bd3-b44c-4e1f-b819-0345cc21ede8" class="ms-btn bg-sc">Comprar</a>
+            </div>
           </div>
         </div>
 
@@ -235,6 +247,9 @@ get_header(); ?>
               <li>Por la especialización de materia y el público objetivo.</li>
               <li>Las clases deben ser interdiaras.</li>
             </ul>
+            <div class="ms-warp-btn">
+              <a href="./step4/?serviceId=ca201d00-a678-4adf-b39d-bf15f2b022ea" class="ms-btn bg-sc">Comprar</a>
+            </div>
           </div>
         </div>
 
@@ -270,6 +285,9 @@ get_header(); ?>
               <li>Por las muestras de olor y demás elementos involucrados.</li>
               <li>Las clases deben de ser interdiarias.</li>
             </ul>
+            <div class="ms-warp-btn">
+              <a href="./step4/?serviceId=b505e06c-ac3e-48cf-97b5-1fd745633b5d" class="ms-btn bg-sc">Comprar</a>
+            </div>
           </div>
         </div>
 
@@ -312,6 +330,9 @@ get_header(); ?>
               <li>Nado en aguas abiertas.</li>
               <li>8 clases, 2 veces por semana, total: 800 soles.</li>
             </ul>
+            <div class="ms-warp-btn">
+              <a href="./step4/?serviceId=9779fb6b-a007-4bc2-ba50-b7b9ce85040e" class="ms-btn bg-sc">Comprar</a>
+            </div>
           </div>
         </div>
 
@@ -348,6 +369,9 @@ get_header(); ?>
               <li>5 clases = 550 soles.</li>
               <li>Las clases deben ser interdiarias.</li>
             </ul>
+            <div class="ms-warp-btn">
+              <a href="./step4/?serviceId=1ac8de18-7bb3-4a2f-9d56-430fae5b419d" class="ms-btn bg-sc">Comprar</a>
+            </div>
           </div>
         </div>
 
@@ -372,10 +396,7 @@ get_header(); ?>
         <img data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/img/servicios/cam-logo.png" alt="Pet Hotel">
         <p>Contamos con una App móvil que permite monitorear a tu mascota las 24 horas del día, los 7 días de la semana en tiempo real, que incluye cámaras distribuidas una en cada habitación y el resto en el área de jardines, Grooming y recepción. Podrás ver a tu engreído en el momento que lo desees.  Así mismo contamos con Supervisión, asistencia y vigilancia del personal encargado 24 hrs. La App contará con una opción mediante la cual podrás acceder al circuito integrado de cámaras y visualizar cuando desees a tu mascota en tiempo real a través de tu celular.</p>
       </div>
-      <div style="display:block; text-align: center">
-      <a href="/step4/?serviceId=f347d6f7-fe4f-4a6d-bc86-3719ee9b9bda" class="ms-btn bg-sc" data-remove="remove">Comprar</a>
-      </div> 
-      
+
 
       <div class="ms-other-services">
         <h3 class="ms-title">Otros Servicios</h3>

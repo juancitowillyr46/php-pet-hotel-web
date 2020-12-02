@@ -495,11 +495,15 @@ var that = this;
     // Get Payments
     function getMethodsPayments() {
 
-        $(".error-size").hide();
-        
         if($("#frm-store-payment").length > 0) { 
+
+            $(".error-size").hide();
+            disabledButton('save-step-payment', true);
+            
+
             baseGet("commons/data-master/payment-method", '')
             .done(function(response) {
+                disabledButton('save-step-payment', false);
                 if($(".container-payment-method-add").length > 0){
 
                     var theTemplateScript = $("#store-payment-method-template").html();
