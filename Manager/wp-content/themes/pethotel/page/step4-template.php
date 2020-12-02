@@ -4,25 +4,46 @@ get_header(); ?>
 <section id="userPayment" class="ms-animate step4">
   <div data-real-type="background" data-img="<?php echo get_template_directory_uri(); ?>/img/patron_huesos.png">
     <div class="ms-wrap-section">
+      <?php 
+        $matchFound = (array_key_exists("serviceId", $_GET));
+        $home = "http://".$_SERVER['HTTP_HOST'];
 
-      <ul class="ms-step-list">
-        <li class="checked">
-          <a href="/step1" class="ms-number">1</a>
-          <span class="ms-detail">Identifica <br>tu mascota</span>
-        </li>
-        <li class="checked">
-          <a href="/step2" class="ms-number">2</a>
-          <span class="ms-detail">Datos <br>de contacto</span>
-        </li>
-        <li class="checked">
-          <a href="/step3" class="ms-number">3</a>
-          <span class="ms-detail">Servicios <br>adicionales</span>
-        </li>
-        <li class="active">
-          <span class="ms-number">4</span>
-          <span class="ms-detail">Pago</span>
-        </li>
-      </ul>
+        // Exist param
+        // if($matchFound == 1) {
+        //   $slide = $matchFound ? trim($_GET["serviceId"]) : '';
+        //   if($slide != '') {
+        //     print $slide;
+        //   } else {
+        //     header("Location:" . $home);
+        //   }
+        // } else {
+        //   header("Location:" . $home);
+        // }
+
+      ?>
+      <?php if($matchFound != 1) { ?>
+        <ul class="ms-step-list">
+          <li class="checked">
+            <a href="/step1" class="ms-number">1</a>
+            <span class="ms-detail">Identifica <br>tu mascota</span>
+          </li>
+          <li class="checked">
+            <a href="/step2" class="ms-number">2</a>
+            <span class="ms-detail">Datos <br>de contacto</span>
+          </li>
+          <li class="checked">
+            <a href="/step3" class="ms-number">3</a>
+            <span class="ms-detail">Servicios <br>adicionales</span>
+          </li>
+          <li class="active">
+            <span class="ms-number">4</span>
+            <span class="ms-detail">Pago</span>
+          </li>
+        </ul>
+      <?php 
+        }
+      ?>
+
 
       <div class="ms-header-step">
         <h1 class="ms-title">PAGO</h1>
@@ -100,9 +121,9 @@ get_header(); ?>
                         <span class="ms-img-size error-size"></span> -->
 
                         <span>Sube la captura del pago para validarlo</span>
-                        <input type="file" id="screenVoucher" class="ms-picture-file" name="screenVoucherx" data-type="voucher" accept="image/png, image/jpeg">
-                        <input type="hidden" name="screenVoucher" id="screenVoucher" value="">  
-                        <label for="screenVoucher">Seleccione una imagen</label>
+                        <input type="file" id="screenVoucher-1" class="ms-picture-file" name="screenVoucherx" data-type="voucher" accept="image/png, image/jpeg">
+                        <input type="hidden" name="screenVoucher" id="screenVoucher-2" value="">  
+                        <label for="screenVoucher-1">Seleccione una imagen</label>
                         <span class="ms-img-size">imagenes menos de 2Mb</span>
                         <img>
                       </div>
@@ -113,8 +134,6 @@ get_header(); ?>
                   </script>
 
             <form id="frm-store-payment" style="width: 100%" enctype="multipart/form-data" method="post">
-
-              
               <input type="hidden" name="bankId" id="bankId" value="">
               <input type="hidden" name="order" id="order">
               <input type="hidden" name="active" id="active" value="1cca03ea-07dc-11eb-ab06-50e549398ade">
@@ -137,12 +156,18 @@ get_header(); ?>
                   </div>
                 </div>
 
+                <?php if($matchFound != 1) { ?>
                 <div class="ms-payment-list">
                   <div class="ms-wrap-checkbox">
                     <input type="checkbox" name="usingContact" value="1" id="use-data">
                     <label for="use-data">Usar mis datos de contacto</label>
                   </div>
                 </div>
+                <?php } else {  ?>
+                  <!-- <div class="ms-msg-note">
+                    <strong>¡Importante!</strong> Usaremos tus datos personales para crear tu cuenta
+                  </div> -->
+                <?php } ?>
               </div>
               <div class="ms-panel">
                 
@@ -165,8 +190,14 @@ get_header(); ?>
       </div>
       
       <div class="ms-wrap-btn">
+      <?php if($matchFound != 1) { ?>
         <a href="/step3" class="ms-btn">Volver</a>
         <button class="ms-btn bg-sc" id="save-step-payment" type="button">Finalizar</button>
+      <?php } else { ?>
+        <a href="javascript:window.history.back();" class="ms-btn">Cancelar</a>
+        <button class="ms-btn bg-sc" id="save-step-payment" type="button">Comprar</button>
+      <?php } ?>
+      
       </div>
     </div>
   </div>

@@ -33,33 +33,9 @@ Handlebars.registerHelper('ifnoteq', function (a, b, options) {
         return indexed_array;
     }
 
-    // getValidateIsLogin = function(response) {
-
-    //     // if(localStorage.getItem('accessToken') != undefined && localStorage.getItem('accessToken').value != ''){
-    //     //     if(response != null) {
-
-    //     //         $("#user-name").html(response.username);
-
-    //     //         if(response.customer.firstName != '') {
-    //     //             $("#user-name").append(response.customer.firstName);
-    //     //         }
-                
-    //     //         var imageDefault = $("#user-image").attr("src");
-
-    //     //         if(response.customer && response.customer.image != undefined){
-    //     //             $("#user-image").src = (response.customer.image != '')?  response.customer.image: imageDefault;
-    //     //         } else {
-    //     //             $("#user-image").src = imageDefault;                  
-    //     //         }
-    //     //     }
-    //     // }
-    // }
-
     disabledButton = function(element, disabledBoolean) {
         if(disabledBoolean === true) {
-            // setTimeout(() => {
-                $("#modal-loading").fadeIn();
-            // }, 2000);
+            $("#modal-loading").fadeIn();
         } else {
             $("#modal-loading").fadeOut();
         }
@@ -88,7 +64,45 @@ Handlebars.registerHelper('ifnoteq', function (a, b, options) {
         setTimeout(() => {
             $("#modal-error").fadeOut();
         }, 5000);
-        // alert(response.responseJSON.error.message);
+    }
+
+    alertErrorServiceNoExist = function(response, message = '') {
+        $("#modal-error").fadeIn();
+        if(message != '') {
+            $("#modal-error").find(".message").html(message);
+        } else {
+            $("#modal-error").find(".message").html(response.responseJSON.error.message);
+        }
+        
+        setTimeout(() => {
+            $("#modal-error").fadeOut();
+            window.history.back();
+        }, 4000);
+    }
+
+    alertErrorTokenExpired = function(response, message = '') {
+        $("#modal-error").fadeIn();
+        if(message != '') {
+            $("#modal-error").find(".message").html(message);
+        } else {
+            $("#modal-error").find(".message").html(response.responseJSON.error.message);
+        }
+        
+        setTimeout(() => {
+            
+            $("#modal-error").fadeOut();
+            $("#modal-loading").fadeOut();
+            $("#modal-login-register").fadeIn();
+
+            var tabId = "tabLogin";
+            $(".ms-tab-item").removeClass("active");
+            $("#"+tabId).addClass("active");
+            $(".ms-header-group .ms-tab-btn").removeClass("active");
+            $(".ms-tab-btn[data-tab='"+tabId+"']").addClass("active");
+
+            $("body").addClass("close-false");
+        }, 5000);
+
     }
 
     assignedToken = function(response) {
@@ -212,7 +226,7 @@ Handlebars.registerHelper('ifnoteq', function (a, b, options) {
         
     }
 
-    validateIsLoggin = function() {
+    validateIsLogin = function() {
         if(localStorage.getItem('accessToken') != undefined && localStorage.getItem('accessToken').value != ''){
             return true;
         } else {
@@ -222,6 +236,24 @@ Handlebars.registerHelper('ifnoteq', function (a, b, options) {
 
     validateIsStep = function() {
 
+        // Logic B
+        var existParamServiceId = getValidateUrlServiceId();
+
+        if(existParamServiceId) {
+
+            var queryString = window.location.search;
+
+            var urlParams = new URLSearchParams(queryString);
+
+            var serviceId = urlParams.get('serviceId');
+
+            getService(serviceId);
+
+            
+            return true;
+        } 
+
+        // Logic A
         // Validar si el usuario existe logeando
         if(localStorage.getItem('accessToken') != undefined && localStorage.getItem('accessToken').value != ''){
 
@@ -246,9 +278,11 @@ Handlebars.registerHelper('ifnoteq', function (a, b, options) {
                     window.location.href = '/step2/';
                 }
             } else if(pathname == '/step4/') {
+
                 if(validateTransaction['order'].length == 0) {
                     window.location.href = '/step3/';
                 }
+
             } else if(pathname == '/thankyou/' || pathname == '/gracias/') {
                 localStorage.removeItem('transaction');
             }
@@ -257,11 +291,25 @@ Handlebars.registerHelper('ifnoteq', function (a, b, options) {
         } else {
             $(".icon-user.ms-show-lg-modal").trigger("click");
         }
+        
+
+
+       
     }
 
     setDataOfPayment = function(key, element) {
         var formData = element;
         bodyParsedPayment[key] = formData;
+    }
+
+    getValidateUrlServiceId = function() {
+        var field = 'serviceId';
+        var url = window.location.href;
+        if(url.indexOf('?' + field + '=') != -1)
+            return true;
+        else if(url.indexOf('&' + field + '=') != -1)
+            return true;
+        return false;
     }
     
     // getFileReaderVouchers = function(content) {
@@ -487,7 +535,7 @@ Handlebars.registerHelper('ifnoteq', function (a, b, options) {
     calcularSubtotal = function(bodyParsedPayment) {
 
         var numDays = restaFechas(bodyParsedPayment['booking']['dateFrom'], bodyParsedPayment['booking']['dateTo']);
-        var numPets = Number(bodyParsedPayment['booking']['numPets']);
+        var numPets = (bodyParsedPayment['booking']['numPets'] != undefined)? Number(bodyParsedPayment['booking']['numPets']) : 1;
 
         bodyParsedPayment['order'].forEach(service => { 
             if(service.serviceId == '1fdcf8ea-199c-11eb-aed1-50e549398ade') {
@@ -715,6 +763,38 @@ Handlebars.registerHelper('ifnoteq', function (a, b, options) {
         $(".price_total").html('S/' + calculateTotal(bodyParsedPayment));
     }
 
+    getService = function(serviceId) {
+        baseGet("services/", serviceId).done(function(response) {
+            if(response['data'] && response['statusCode'] == 200){
+                // console.log(response);
+                var orderList = [];
+
+                orderList.push({
+                    'serviceId': response['data']['id'],
+                    'price'    : response['data']['price'],
+                    'quantity' : 1,
+                    'subtotal' : response['data']['price'],
+                    'serviceName': response['data']['name']
+                });
+
+                bodyParsedPayment['order'] = orderList;
+
+                setItemLocalStorageTransaction('serviceId', serviceId);
+                setItemLocalStorageTransaction('order', bodyParsedPayment['order']);
+
+                viewDetail(bodyParsedPayment);
+            }
+        })
+        .fail(function(response) {
+            
+            if(response.responseJSON.statusCode === 404) {
+                alertErrorServiceNoExist(response, 'El servicio no existe');
+            }
+        })
+        .always(function() {
+
+        });
+    }
 
 
 })(jQuery);

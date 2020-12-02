@@ -372,10 +372,6 @@ get_header(); ?>
         <img data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/img/servicios/cam-logo.png" alt="Pet Hotel">
         <p>Contamos con una App móvil que permite monitorear a tu mascota las 24 horas del día, los 7 días de la semana en tiempo real, que incluye cámaras distribuidas una en cada habitación y el resto en el área de jardines, Grooming y recepción. Podrás ver a tu engreído en el momento que lo desees.  Así mismo contamos con Supervisión, asistencia y vigilancia del personal encargado 24 hrs. La App contará con una opción mediante la cual podrás acceder al circuito integrado de cámaras y visualizar cuando desees a tu mascota en tiempo real a través de tu celular.</p>
       </div>
-      <div style="display:block; text-align: center">
-      <a href="/step4/?serviceId=f347d6f7-fe4f-4a6d-bc86-3719ee9b9bda" class="ms-btn bg-sc" data-remove="remove">Comprar</a>
-      </div> 
-      
 
       <div class="ms-other-services">
         <h3 class="ms-title">Otros Servicios</h3>

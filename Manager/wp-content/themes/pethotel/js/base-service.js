@@ -259,11 +259,8 @@ var that = this;
 
         if($(".ms-wrap-login").length > 0) { 
 
-            $(".ms-wrap-login").html('Cargando...');
-            // $(".ms-wrap-login").html(userTemplateLoginTpl({
-            //     isLogin: 'false'
-            // }));
-    
+            //$(".ms-wrap-login").html('Cargando...');
+
             if(localStorage.getItem('userInfo') != undefined && localStorage.getItem('userInfo') != null) {
                 
                 var customInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -272,13 +269,6 @@ var that = this;
                 customInfo['isLogin'] = 'true';
 
                 $(".ms-wrap-login").html(userTemplateLoginTpl(customInfo));
-
-                // if($("#hidden-template").length){
-                //     var theTemplateScript = $("#hidden-template").html();
-                //     var theTemplate = Handlebars.compile(theTemplateScript);
-                //     $(".ms-dogs").html('');
-                //     $(".ms-dogs").html(theTemplate(customInfo));
-                // }
 
                 if($("#user-template").length){
                     var userTemplate = $("#user-template").html();
@@ -302,14 +292,10 @@ var that = this;
 
                 localStorage.setItem('userInfo', JSON.stringify(me));
 
-                // getValidateIsLogin(me);
-
                 var customInfo = JSON.parse(localStorage.getItem('userInfo'));
 
                 if(me.customer && me.customer['firstName'] != '') {
-                    //if($.isEmptyObject(customInfo['customer']) != true) {
-                        getDataCustomer(me);
-                    //}
+                    getDataCustomer(me);
                     
                     if($("#user-template").length){
                         var userTemplate = $("#user-template").html();
@@ -333,10 +319,11 @@ var that = this;
  
             })
             .fail(function(response) {
-                console.log(response);
-                // getValidateIsLogin(null);
-                // localStorage.clear();
-                // location.href = '/';
+                if(response.responseJSON.statusCode == 401) {
+                    alertErrorTokenExpired(null, 'Su sesión ha expirado, vuelva a iniciar sesión');
+                } else {
+                    alertError(response);
+                }
             })
             .always(function() {
                 
@@ -524,11 +511,19 @@ var that = this;
                         var selectedServiceTransport = bodyParsedTransaction['order'].find(f => f.serviceId == '7bcf5547-f268-463d-8760-e769d31fd345') !== undefined;
     
                         var paymentMethod = [];
-    
+
                         if(selectedServiceTransport == true) {
                             paymentMethod = response['data'];
                         } else {
-                            paymentMethod = response['data'].filter(f => f.value != '176d7072-19f1-11eb-a86b-50e549398ade4');
+
+                            // Logic B
+                            var existParamServiceId = getValidateUrlServiceId();
+                            if(!existParamServiceId) {
+                                paymentMethod = response['data'].filter(f => f.value != '176d7072-19f1-11eb-a86b-50e549398ade4');
+                            } else {
+                                paymentMethod = response['data'];
+                            }
+                            
                         }
     
                         response['data'] = paymentMethod;    
@@ -616,5 +611,7 @@ var that = this;
 
         });
     }
+
+    
 
 }(jQuery));

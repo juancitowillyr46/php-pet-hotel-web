@@ -1,6 +1,7 @@
 <?php
 namespace App\BackOffice\Services\Domain\Entities;
 
+use App\BackOffice\Payments\Domain\Entities\PaymentModel;
 use App\BackOffice\Roles\Domain\Entities\RoleModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -34,5 +35,13 @@ class ServiceModel extends Model
         'active',
         'order'
     ];
+
+    protected $with = ['payments'];
+
     use SoftDeletes;
+
+    public function payments()
+    {
+        return $this->belongsToMany(PaymentModel::class, 'service_payment', 'service_id', 'payment_id')->withPivot('payment_id','service_id');
+    }
 }

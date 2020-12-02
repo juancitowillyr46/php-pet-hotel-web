@@ -279,9 +279,7 @@
 		mm = '0' + mm; 
 	} 
 	var today = yyyy + '-' + mm + '-' + dd;
-	if (dd < 10) { 
-		dd = '0' + dd; 
-	} 
+
 	var month = monthText[new Date().getMonth()];
 
 	$(".startDate").find(".ms-item-date").empty().html(dd+'<span class="ms-item-month">'+month+'</span></span>');

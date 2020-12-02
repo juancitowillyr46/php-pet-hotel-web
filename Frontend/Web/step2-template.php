@@ -40,23 +40,14 @@ get_header(); ?>
                 <div class="ms-panel-body">
                   <div class="ms-wrap-img">
                     <div class="ms-img-pf">
-                      <img src="<?php echo get_template_directory_uri(); ?>/img/profile/user-avatar.png" data-image-default="<?php echo get_template_directory_uri(); ?>/img/profile/user-avatar.png">
+                      <img src="<?php echo get_template_directory_uri(); ?>/img/profile/user-avatar.png" data-image-default="<?php echo get_template_directory_uri(); ?>/img/profile/pet-avatar.png">
                     </div>
-                    <!-- <button class="ms-picture ms-picture-jr" type="button">Cambiar imagen</button> -->
-                    <!-- <label class="ms-picture" for="avatar">Cambiar imagen</label>
+                    <label class="ms-picture" for="avatar">Cambiar imagen</label>
                     <input type="file" class="ms-pass" accept="image/*">
                     <input type="file" accept="image/*" id="avatar" class="ms-picture-file">
                     <input type="hidden" id="image" class="ms-pass" name="image">
                     <span class="ms-img-size">imagenes menos de 2Mb</span>
-                    <span class="ms-img-size error-size"></span> -->
-
-                      <label class="ms-picture" for="avatar">Cambiar imagen</label>
-                      <input type="file" class="ms-pass" accept="image/*">
-                      <input type="file" accept="image/*" id="avatar" class="ms-picture-file">
-                      <input type="hidden" id="image" class="ms-pass" name="image">
-                      <span class="ms-img-size">imagenes menos de 2Mb</span>
-                      <span class="ms-img-size error-size"></span>
-                      
+                    <span class="ms-img-size error-size"></span>
                   </div>
                   <div class="ms-wrap-inputs">
                     <span class="ms-label">Campo obligartorio*</span>
@@ -70,7 +61,7 @@ get_header(); ?>
                       </select>
                     </div>
                     <div class="ms-form-input full"><input type="text" id="address" name="address" placeholder="Dirección principal"></div>
-                    <div class="ms-form-input full"><textarea placeholder="Referencias" id="address-reference-edit-customer" name="addressReference" required></textarea></div>
+                    <div class="ms-form-input full"><textarea placeholder="Referencias" id="address-reference-edit-customer" name="addressReference"></textarea></div>
                     <!-- <div class="ms-form-input full"><input type="text" id="addressOptional" name="addressOptional" placeholder="Dirección opcional"></div> -->
                     <div class="ms-form-input full"><textarea id="comments" name="comments" placeholder="Comentarios adicionales"></textarea></div>
                     

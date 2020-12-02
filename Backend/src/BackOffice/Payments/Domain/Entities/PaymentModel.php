@@ -3,6 +3,7 @@ namespace App\BackOffice\Payments\Domain\Entities;
 
 use App\BackOffice\Bookings\Domain\Entities\BookingModel;
 use App\BackOffice\Roles\Domain\Entities\RoleModel;
+use App\BackOffice\Services\Domain\Entities\ServiceModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -47,6 +48,11 @@ class PaymentModel extends Model
     public function bookings()
     {
         return $this->belongsToMany(BookingModel::class, 'booking_payment', 'payment_id', 'booking_id')->withPivot('payment_id','booking_id');
-//        return $this->belongsToMany(BookingModel::class);
     }
+
+    public function services()
+    {
+        return $this->belongsToMany(ServiceModel::class, 'service_payment', 'payment_id', 'service_id')->withPivot('payment_id','service_id');
+    }
+
 }

@@ -37,11 +37,6 @@ class BookingModel extends Model
 
     use SoftDeletes;
 
-//    public function payment()
-//    {
-//        return $this->belongsTo(PaymentModel::class, 'booking_id', 'id');
-//    }
-
     public function payments()
     {
         return $this->belongsToMany(PaymentModel::class, 'booking_payment', 'booking_id', 'payment_id')->withPivot('payment_id','booking_id');

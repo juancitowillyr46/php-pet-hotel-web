@@ -91,7 +91,7 @@ get_header(); ?>
 
                 <div class="ms-wrap-img">
                   <label class="ms-img-pf" for="pet-01">
-                    <img id="preview" src="" data-image-defult="<?php echo get_template_directory_uri(); ?>/img/profile/user-avatar.png">
+                    <img id="preview" src="" data-image-defult="<?php echo get_template_directory_uri(); ?>/img/profile/pet-avatar.png">
                   </label>
                   <button class="ms-picture ms-picture-edit" data-label="#pet-01" type="button">Cambiar imagen</button>
                   <input type="file" accept="image/*" id="pet-01" name="image-control" accept="image/*" class="ms-picture-file">
@@ -101,11 +101,23 @@ get_header(); ?>
                 
                 <div class="ms-wrap-inputs">
                   <span class="ms-label">Campo obligartorio*</span>
-                  <div class="ms-form-input"><input type="text" placeholder="Nombre*" id="name-edit-pet" name="name" required></div>
-                  <div class="ms-form-input small"><input type="text" placeholder="Edad*" id="age-edit-pet" name="age" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required></div>
+                  <div class="ms-form-input small-33">
+                    <input type="text" placeholder="Nombre*" id="name-edit-pet" name="name" required>
+                  </div>
+                  <div class="ms-form-input small-33 ms-md">
+                    <input type="text" placeholder="Edad*" id="age-edit-pet" name="age" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
+                  </div>
+                  <div class="ms-form-input small-33 ms-md">
+                    <select name="ageType" id="gender-type-edit-pet" required >
+                      <option value="" selected="">Tipo edad*</option>
+                      <option value="MESES">MESES</option>
+                      <option value="ANIOS">AÑOS</option>
+                    </select>
+                  </div>
                   <div class="ms-form-input small">
                     <select name="gender" id="gender-edit-pet" required class="valid" aria-invalid="false">
-                      <option value="HEMBRA" selected="">Hembra</option>
+                      <option value="" selected="">Genero*</option>
+                      <option value="HEMBRA">Hembra</option>
                       <option value="MACHO">Macho</option>
                     </select>
                   </div>
@@ -121,7 +133,7 @@ get_header(); ?>
                   <div class="ms-form-input small"><input type="text" placeholder="Peso en kg" id="weight"name="weight" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></div>
                   <div class="ms-form-input small margin"><input type="text" placeholder="Talla en cm" id="size-edit-pet" name="size" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></div>
                   <div class="ms-form-input full"><textarea placeholder="Enfermedades y condiciones pre existentes" id="diseases-edit-pet" name="diseases"></textarea></div>
-                  <div class="ms-form-input"><input type="text" placeholder="Nombre del veterinario*" id="veterinary-edit-pet" name="veterinary" required></div>
+                  <div class="ms-form-input"><input type="text" placeholder="Nombre del veterinario" id="veterinary-edit-pet" name="veterinary"></div>
                   <div class="ms-form-input small"><input type="text" placeholder="Teléfono" id="veterinaryPhone-edit-pet" name="veterinaryPhone"></div>
                   <div class="ms-form-input full"><textarea placeholder="Tratamientos recibidos" id="treatments-edit-pet" name="treatments"></textarea></div>
                   <div class="ms-form-input full"><textarea placeholder="Última vacuna" id="lastVaccine-edit-pet" name="lastVaccine"></textarea></div>
@@ -139,9 +151,15 @@ get_header(); ?>
                     </ul>
                   </div>
                   <div class="ms-form-input"><textarea placeholder="Depende (explicar)" id="observation-edit-pet" name="observation"></textarea></div>
-                  <div class="ms-form-input small mediun"><input type="text" id="initZeal-edit-pet" name="initZeal" placeholder="Inicio fecha de celo" class="ms-input-calendar"></div>
-                  <div class="ms-form-input small mediun"><input type="text" id="lastZeal-edit-pet" name="lastZeal" placeholder="Final fecha de celo" class="ms-input-calendar"></div>
-                  <div class="ms-form-input full"><textarea placeholder="Comida y cama o manta en que duerme" id="other-edit-pet" name="other"></textarea></div>
+
+                  <div class="ms-form-input small mediun">
+                    <input type="text" id="initZeal-edit-pet" name="initZeal" placeholder="Inicio fecha de celo" class="ms-input-calendar">
+                  </div>
+                  <div class="ms-form-input small mediun">
+                    <input type="text" id="lastZeal-edit-pet" name="lastZeal" placeholder="Final fecha de celo" class="ms-input-calendar">
+                  </div>
+
+                  <div class="ms-form-input full"><input type="hidden" placeholder="Comida y cama o manta en que duerme" id="other-edit-pet" name="other"></div>
               </div>
             </div>
           </form>
@@ -162,48 +180,34 @@ get_header(); ?>
   <div class="ms-wrap-modal large">
     <div class="ms-modal-content">
       <div class="ms-modal-body">
-        
         <div class="ms-tab-body">
           <form id="frm-edit-customer" novalidate="novalidate">
             <input type="hidden" id="id-edit-customer" name="id">
-            
-            
-            <input type="hidden" id="phone-edit-customer" name="phone">
             <input type="hidden" id="addressOptional-edit-customer" name="addressOptional">
-            
             <input type="hidden" id="comments-edit-customer" name="comments">
             <input type="hidden" id="userId-edit-customer" name="userId">
             <input type="hidden" id="active-edit-customer" name="active">
-            <!-- <input type="hidden" id="image-edit-customer" class="ms-pass" name="image">  -->
             <input type="hidden" id="image-defult" class="ms-pass" name="image" value="">
             <input type="hidden" id="email-edit-customer" class="ms-pass" name="email" value="">
-            
             <div class="ms-panel">
               <div class="ms-panel-header">Datos Básicos</div>
               <div class="ms-panel-body">
-
                 <div class="ms-wrap-img">
                   <label class="ms-img-pf" for="pet-02">
                     <img id="preview" src="" data-image-default="<?php echo get_template_directory_uri(); ?>/img/profile/user-avatar.png" >
                   </label>
-
                   <label class="ms-picture" for="avatar">Cambiar imagen</label>
-                      <input type="file" class="ms-pass" accept="image/*">
-                      <input type="file" accept="image/*" id="avatar" class="ms-picture-file">
-                      <input type="hidden" id="image" class="ms-pass" name="image">
-                      <span class="ms-img-size">imagenes menos de 2Mb</span>
-                      <span class="ms-img-size error-size"></span>
-
-                  <!-- <button type="button" class="ms-picture ms-picture-edit" data-label="#pet-02" type="button">Cambiar imagen</button>
-                  <input type="file" accept="image/*" id="pet-02" name="image-control" accept="image/*" class="ms-picture-file-customer">
-                  <span class="ms-img-size">imágenes menos de 2Mb</span>
-                  <span class="ms-img-size error-size"></span> -->
+                  <input type="file" class="ms-pass" accept="image/*">
+                  <input type="file" accept="image/*" id="avatar" class="ms-picture-file">
+                  <input type="hidden" id="image" class="ms-pass" name="image">
+                  <span class="ms-img-size">imagenes menos de 2Mb</span>
+                  <span class="ms-img-size error-size"></span>
                 </div>
-                
                 <div class="ms-wrap-inputs">
                   <span class="ms-label">Campo obligartorio*</span>
                   <div class="ms-form-input full"><input type="text" placeholder="Nombre*" id="firstName-edit-customer" name="firstName" required></div>
                   <div class="ms-form-input full"><input type="text" placeholder="Apellidos*" id="lastName-edit-customer" name="lastName" required></div>
+                  <div class="ms-form-input full"><input type="text" placeholder="Teléfono*" id="phone-edit-customer" name="phone" required></div>
                   <div class="ms-form-input full">
                     <select id="district-id" name="districtId" required>
                       <option value="" selected>Distrito*</option>
@@ -216,7 +220,6 @@ get_header(); ?>
             </div>
           </form>
         </div>
-
       </div>
       <div class="ms-modal-footer">
         <button class="ms-btn cancel close-modal" data-remove="remove">Cancelar</button>

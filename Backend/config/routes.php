@@ -21,6 +21,7 @@ return function (App $app) {
             $group->get('/me', \App\BackOffice\Users\Application\Actions\UserInfoAction::class)->add(AuthValidateTokenMiddleware::class);
             $group->post('/transaction', \App\BackOffice\Transactions\Application\Actions\TransactionAddAction::class)
                 ->add(AuthValidateTokenMiddleware::class);
+            $group->post('/transaction-service', \App\BackOffice\Transactions\Application\Actions\TransactionAddServiceAction::class);
             $group->get('/transaction/mailling', \App\BackOffice\Transactions\Application\Actions\TransactionMaillingsAction::class);
         });
 
@@ -67,12 +68,12 @@ return function (App $app) {
         })->add(AuthValidateTokenMiddleware::class);
 
         $group->group('/services', function (RouteCollectorProxy $group) {
-            $group->post('', \App\BackOffice\Services\Application\Actions\ServiceAddAction::class);
+            $group->post('', \App\BackOffice\Services\Application\Actions\ServiceAddAction::class)->add(AuthValidateTokenMiddleware::class);
             $group->get('/{uuid}', \App\BackOffice\Services\Application\Actions\ServiceFindAction::class);
             $group->get('', \App\BackOffice\Services\Application\Actions\ServiceFindAllAction::class);
-            $group->put('/{uuid}', \App\BackOffice\Services\Application\Actions\ServiceEditAction::class);
-            $group->delete('/{uuid}', \App\BackOffice\Services\Application\Actions\ServiceRemoveAction::class);
-        })->add(AuthValidateTokenMiddleware::class);
+            $group->put('/{uuid}', \App\BackOffice\Services\Application\Actions\ServiceEditAction::class)->add(AuthValidateTokenMiddleware::class);
+            $group->delete('/{uuid}', \App\BackOffice\Services\Application\Actions\ServiceRemoveAction::class)->add(AuthValidateTokenMiddleware::class);
+        });
 
         $group->group('/kennels', function (RouteCollectorProxy $group) {
             $group->post('', \App\BackOffice\Kennels\Application\Actions\KennelAddAction::class);
@@ -111,9 +112,9 @@ return function (App $app) {
 
         $group->group('/commons', function (RouteCollectorProxy $group) {
             $group->get('/data-master/{type}', \App\BackOffice\DataMaster\Application\Actions\DataMasterCommonAction::class);
-            $group->get('/roles', \App\BackOffice\Roles\Application\Actions\RoleCommonAction::class);
-            $group->get('/type-services', \App\BackOffice\Services\Application\Actions\ServiceTypeCommonAction::class);
-        })->add(AuthValidateTokenMiddleware::class);
+            $group->get('/roles', \App\BackOffice\Roles\Application\Actions\RoleCommonAction::class)->add(AuthValidateTokenMiddleware::class);;
+            $group->get('/type-services', \App\BackOffice\Services\Application\Actions\ServiceTypeCommonAction::class)->add(AuthValidateTokenMiddleware::class);;
+        });
 
         $group->group('/contacts', function (RouteCollectorProxy $group) {
             $group->post('', \App\BackOffice\Contacts\Application\Actions\ContactAddAction::class);

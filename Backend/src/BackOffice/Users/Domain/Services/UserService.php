@@ -122,6 +122,10 @@ class UserService extends BaseService
         }
     }
 
+    public function validateByEmail($username) {
+        return $this->userRepository->getModel()::all()->where('username', '=' ,$username)->first();
+    }
+
     public function getUserDto(array $row): object {
         $role = $this->getRowByIdModel(new RoleModel(), $row['role_id']);
         $row['role_id'] = $role['uuid'];

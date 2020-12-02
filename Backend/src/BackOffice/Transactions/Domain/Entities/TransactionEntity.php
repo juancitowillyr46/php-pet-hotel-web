@@ -2,6 +2,7 @@
 namespace App\BackOffice\Transactions\Domain\Entities;
 
 use App\BackOffice\Transactions\Domain\Exceptions\TransactionActionRequestSchema;
+use App\BackOffice\Transactions\Domain\Exceptions\TransactionActionServiceRequestSchema;
 use App\Shared\Domain\Entities\Audit;
 use App\Shared\Utility\SecurityPassword;
 use Exception;
@@ -151,6 +152,18 @@ class TransactionEntity extends Audit
         try {
 
             $validate = new TransactionActionRequestSchema();
+
+        } catch(Exception $ex) {
+            throw new Exception($ex->getMessage(), $ex->getCode());
+        }
+
+    }
+
+    public function payloadService(object $formData): void {
+
+        try {
+
+            $validate = new TransactionActionServiceRequestSchema();
 
         } catch(Exception $ex) {
             throw new Exception($ex->getMessage(), $ex->getCode());

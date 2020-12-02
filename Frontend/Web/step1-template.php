@@ -58,6 +58,7 @@ get_header(); ?>
               <input type="hidden" id="image-{{index}}" class="ms-pass" name="image">
               <input type="hidden" placeholder="Nombre*" id="name-{{index}}" name="name">
               <input type="hidden" placeholder="Edad*" id="age-{{index}}" name="age" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+              <input type="hidden" id="age-type-{{index}}" name="ageType" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
               <input type="hidden" placeholder="gender*" id="gender-{{index}}" name="gender">
               <input type="hidden" placeholder="Raza*" id="race-{{index}}" name="race">
               <input type="hidden" id="weight-{{index}}" name="weight">
@@ -69,8 +70,11 @@ get_header(); ?>
               <input type="hidden" id="lastVaccine-{{index}}" name="lastVaccine"></textarea>
               <input type="hidden" id="isAgressived-f876f6d-301a-4129-a2d8-72606f1c21a0-{{index}}" value="df876f6d-301a-4129-a2d8-72606f1c21a0" name="isAgressive">
               <input type="hidden" id="observation-{{index}}" name="observation" ></textarea>
-              <input type="hidden" id="initZeal-{{index}}" name="initZeal" class="ms-input-calendar">        
-              <input type="hidden" id="lastZeal-{{index}}" name="lastZeal" class="ms-input-calendar">
+              <div style="display:none">
+                <input type="hidden" id="initZeal-{{index}}" name="initZeal" class="ms-input-calendar">        
+                <input type="hidden" id="lastZeal-{{index}}" name="lastZeal" class="ms-input-calendar">
+              </div>
+              
             </form>
           </li>
         {{/each}}
@@ -93,7 +97,7 @@ get_header(); ?>
 
                     <div class="ms-wrap-img">
                       <label class="ms-img-pf" for="avatar-{{index}}">
-                        <img src="<?php echo get_template_directory_uri(); ?>/img/profile/user-avatar.png" data-image-default="<?php echo get_template_directory_uri(); ?>/img/profile/user-avatar.png" alt="">
+                        <img src="<?php echo get_template_directory_uri(); ?>/img/profile/pet-avatar.png" data-image-default="<?php echo get_template_directory_uri(); ?>/img/profile/pet-avatar.png" alt="">
                       </label>
                       <!--<button class="ms-picture ms-picture-jr" type="button">Cambiar imagen</button>-->
                       <label class="ms-picture" for="avatar-{{index}}">Cambiar imagen</label>
@@ -103,14 +107,21 @@ get_header(); ?>
                       <span class="ms-img-size">imagenes menos de 2Mb</span>
                       <span class="ms-img-size error-size"></span>
                     </div>
-
-                    <div class="ms-wrap-inputs">
+                    <div class="ms-wrap-inputs ms-flex">
                       <span class="ms-label">Campo obligartorio*</span>
-                      <div class="ms-form-input"><input type="text" placeholder="Nombre*" id="name-{{index}}" name="name" required></div>
-                      <div class="ms-form-input small"><input type="text" placeholder="Edad*" id="age-{{index}}" name="age" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required></div>
+                      <div class="ms-form-input small-33"><input type="text" placeholder="Nombre*" id="name-{{index}}" name="name" required></div>
+                      <div class="ms-form-input small-33 ms-md"><input type="text" placeholder="Edad*" id="age-{{index}}" name="age" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required></div>
+                      <div class="ms-form-input small-33 ms-md">
+                        <select name="ageType" id="age-type-edit-pet">
+                          <option value="" selected="">Tipo edad*</option>
+                          <option value="MESES">MESES</option>
+                          <option value="ANIOS">AÑOS</option>
+                        </select>
+                      </div>
                       <div class="ms-form-input small">
                         <select name="gender" id="gender-{{index}}" required>
-                          <option value="HEMBRA" selected>Hembra</option>
+                          <option value="" selected>Género*</option>
+                          <option value="HEMBRA">Hembra</option>
                           <option value="MACHO">Macho</option>
                         </select>
                       </div>
@@ -126,7 +137,7 @@ get_header(); ?>
                       <div class="ms-form-input small"><input type="text" id="weight-{{index}}" name="weight" placeholder="Peso en kg" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></div>
                       <div class="ms-form-input small margin"><input type="text" id="size-{{index}}" name="size" placeholder="Talla en cm" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></div>
                       <div class="ms-form-input full"><textarea id="diseases-{{index}}" name="diseases" placeholder="Enfermedades y condiciones pre existentes"></textarea></div>
-                      <div class="ms-form-input"><input type="text" id="veterinary-{{index}}" name="veterinary" placeholder="Nombre del veterinario*" required></div>
+                      <div class="ms-form-input"><input type="text" id="veterinary-{{index}}" name="veterinary" placeholder="Nombre del veterinario"></div>
                       <div class="ms-form-input small"><input type="text" id="veterinaryPhone-{{index}}" name="veterinaryPhone" placeholder="Teléfono" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></div>
                       <div class="ms-form-input full"><textarea id="treatments-{{index}}" name="treatments" placeholder="Tratamientos recibidos"></textarea></div>
                       <div class="ms-form-input full"><textarea id="lastVaccine-{{index}}" name="lastVaccine" placeholder="Última vacuna"></textarea></div>
@@ -189,13 +200,7 @@ get_header(); ?>
         <span class="ms-title-modal">¿Porqué debo traer la comida de mi engreido?</span>
       </div>
       <div class="ms-modal-body">
-        <p>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum:</p>
-        <ul class="ms-dtl-list">
-          <li>lorem ipsum</li>
-          <li>lorem ipsum</li>
-          <li>lorem ipsum</li>
-          <li>lorem ipsum</li>
-        </ul>
+        <p>Debes traer a tu perrito con su comida para evitar que tenga algún rechazo, intoxicación o alteración estomacal durante su estadía con nosotros.</p>
       </div>
       <div class="ms-modal-footer">
         <button class="ms-btn save close-modal" data-remove="remove">Entiendo</button>
@@ -224,7 +229,7 @@ get_header(); ?>
 
                 <div class="ms-wrap-img">
                   <label class="ms-img-pf" for="pet-01">
-                    <img id="preview" src="" data-image-defult="<?php echo get_template_directory_uri(); ?>/img/profile/user-avatar.png">
+                    <img id="preview" src="" data-image-defult="<?php echo get_template_directory_uri(); ?>/img/profile/pet-avatar.png">
                   </label>
                   <button class="ms-picture ms-picture-edit" data-label="#pet-01" type="button">Cambiar imagen</button>
                   <input type="file" accept="image/*" id="pet-01" name="image-control" accept="image/*" class="ms-picture-file">
@@ -232,10 +237,18 @@ get_header(); ?>
                   <span class="ms-img-size error-size"></span>
                 </div>
                 
-                <div class="ms-wrap-inputs">
+                <div class="ms-wrap-inputs ms-flex">
                   <span class="ms-label">Campo obligartorio*</span>
-                  <div class="ms-form-input"><input type="text" placeholder="Nombre*" id="name-edit-pet" name="name" required></div>
-                  <div class="ms-form-input small"><input type="text" placeholder="Edad*" id="age-edit-pet" name="age" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required></div>
+                  <div class="ms-form-input small-33"><input type="text" placeholder="Nombre*" id="name-edit-pet" name="name" required></div>
+                  <div class="ms-form-input small-33 ms-md"><input type="text" placeholder="Edad*" id="age-edit-pet" name="age" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required></div>
+                  <div class="ms-form-input small-33 ms-md">
+                    <select name="ageType" id="age-type-edit-pet">
+                      <option value="" selected="">Tipo edad*</option>
+                      <option value="MESES">MESES</option>
+                      <option value="ANIOS">AÑOS</option>
+                    </select>
+                  </div>
+
                   <div class="ms-form-input small">
                     <select name="gender" id="gender-edit-pet" required class="valid" aria-invalid="false">
                       <option value="HEMBRA" selected="">Hembra</option>
@@ -254,7 +267,7 @@ get_header(); ?>
                   <div class="ms-form-input small"><input type="text" placeholder="Peso en kg" id="weight"name="weight" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></div>
                   <div class="ms-form-input small margin"><input type="text" placeholder="Talla en cm" id="size-edit-pet" name="size" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"></div>
                   <div class="ms-form-input full"><textarea placeholder="Enfermedades y condiciones pre existentes" id="diseases-edit-pet" name="diseases"></textarea></div>
-                  <div class="ms-form-input"><input type="text" placeholder="Nombre del veterinario*" id="veterinary-edit-pet" name="veterinary" required></div>
+                  <div class="ms-form-input"><input type="text" placeholder="Nombre del veterinario*" id="veterinary-edit-pet" name="veterinary"></div>
                   <div class="ms-form-input small"><input type="text" placeholder="Teléfono" id="veterinaryPhone-edit-pet" name="veterinaryPhone"></div>
                   <div class="ms-form-input full"><textarea placeholder="Tratamientos recibidos" id="treatments-edit-pet" name="treatments"></textarea></div>
                   <div class="ms-form-input full"><textarea placeholder="Última vacuna" id="lastVaccine-edit-pet" name="lastVaccine"></textarea></div>

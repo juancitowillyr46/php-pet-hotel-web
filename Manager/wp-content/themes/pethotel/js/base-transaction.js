@@ -17,12 +17,18 @@ var pathname = window.location.pathname;
         }
 
         if(pathname == '/step1/' || pathname == '/step2/' || pathname == '/step3/' || pathname == '/step4/' || pathname == '/thankyou/' || pathname == '/gracias/') {
+            if(pathname == '/gracias/') {
+                var existParamServiceId = getValidateUrlServiceId();
+                if(existParamServiceId){
+                    return true;
+                }
+            }
             validateIsStep();
         }
 
         if(pathname == '/step1/') {
 
-            if(validateIsLoggin() == false) {
+            if(validateIsLogin() == false) {
                 $("body").addClass("close-false");
             } else {
                 $("body").removeClass("close-false");
@@ -31,7 +37,7 @@ var pathname = window.location.pathname;
         } else {
             $("body").removeClass("close-false");
         }
-        
+
         // Validates
         $("#frm-store-booking").validate({ignore: ""});
         $("#frm-store-customer").validate();
@@ -172,7 +178,6 @@ var pathname = window.location.pathname;
         $(document).on("click", "#save-step-payment", function() { 
 
             
-
             $(".error-size").hide();
 
             // Validate is checked payment method
@@ -218,6 +223,43 @@ var pathname = window.location.pathname;
                     $("#frm-store-payment").find("[name='screenVoucher']").val('').attr("value", '');
                 }
 
+                var existParamServiceId = getValidateUrlServiceId();
+
+                // Logic B
+                if(existParamServiceId) {
+
+                    delete bodyParsedPayment['booking'];
+                    delete bodyParsedPayment['customer'];
+                    delete bodyParsedPayment['pets'];
+                    delete bodyParsedPayment['terms'];
+                    delete bodyParsedPayment['usingContact'];
+                    
+                    bodyParsedPayment['order'].forEach(element => {
+                        delete element.serviceName;
+                    });
+                    
+                    if(localStorage.getItem('transaction') != undefined && localStorage.getItem('transaction') != null && localStorage.getItem('transaction') != '') {
+                        var bodyParsedEnd = bodyParsedPayment;
+                        disabledButton('save-step-payment', true);
+
+                        basePost("security/transaction-service", bodyParsedEnd)
+                        .done(function(response) {
+                            disabledButton('save-step-payment', false);
+                            localStorage.removeItem('transaction');
+                            window.location.href = '/gracias/?serviceId=' + bodyParsedPayment['serviceId'];
+                        })
+                        .fail(function(response) {
+                            alertError(response);
+                            disabledButton('save-step-payment', false);
+                        })
+                        .always(function() {
+                        }); 
+
+                    }
+                    return true;
+                }
+
+                // Logic A
                 delete bodyParsedPayment['payment']['usingContact'];
 
                 bodyParsedPayment['order'].forEach(element => {

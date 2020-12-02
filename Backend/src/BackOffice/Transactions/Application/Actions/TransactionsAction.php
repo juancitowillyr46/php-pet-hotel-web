@@ -7,6 +7,7 @@ use App\BackOffice\Kennels\Domain\Services\KennelService;
 use App\BackOffice\Payments\Domain\Services\PaymentOrderService;
 use App\BackOffice\Payments\Domain\Services\PaymentService;
 use App\BackOffice\Pets\Domain\Services\PetService;
+use App\BackOffice\Services\Domain\Services\ServiceService;
 use App\BackOffice\Transactions\Domain\Services\TransactionService;
 use App\BackOffice\Users\Domain\Services\UserService;
 use App\Shared\Action\Action;
@@ -22,6 +23,7 @@ abstract class TransactionsAction extends Action
     public PaymentOrderService $paymentOrderService;
     public BookingService $bookingService;
     public KennelService $kennelService;
+    public ServiceService $serviceService;
 
     public function __construct(
         LoggerInterface $logger,
@@ -32,7 +34,8 @@ abstract class TransactionsAction extends Action
         PaymentOrderService $paymentOrderService,
         BookingService $bookingService,
         KennelService $kennelService,
-        UserService $userService
+        UserService $userService,
+        ServiceService $serviceService
     )
     {
         $this->customerService = $customerService;
@@ -43,6 +46,7 @@ abstract class TransactionsAction extends Action
         $this->bookingService = $bookingService;
         $this->kennelService = $kennelService;
         $this->userService = $userService;
+        $this->serviceService = $serviceService;
         parent::__construct($logger);
     }
 }

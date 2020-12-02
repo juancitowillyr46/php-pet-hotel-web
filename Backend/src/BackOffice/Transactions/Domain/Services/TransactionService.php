@@ -31,6 +31,11 @@ class TransactionService extends BaseService
         return true;
     }
 
+    public function executeAddService(array $request): bool {
+        $this->transactionEntity->payloadService((object)$request);
+        return true;
+    }
+
     public function getDateDayDiff($dateFrom, $dateTo): int {
 
         $dates = [];
@@ -70,6 +75,26 @@ class TransactionService extends BaseService
                 $subtotal =  $subtotal + ($order['quantity'] * $order['price']);
                 $quantity = $order['quantity'];
             }
+
+            $order['quantity'] = $quantity;
+            $order['subtotal'] = $subtotal;
+            $total = $total + $order['subtotal'];
+        }
+        return $total;
+    }
+
+    public function getTotalTransactionService($order): float {
+        $total = 0;
+        foreach ($order as $item) {
+
+            $order = (array) $item;
+
+            $subtotal = 0;
+            $quantity = 0;
+
+            // Hospedaje
+            $subtotal =  $subtotal + ($order['quantity'] * $order['price']);
+            $quantity = $order['quantity'];
 
             $order['quantity'] = $quantity;
             $order['subtotal'] = $subtotal;

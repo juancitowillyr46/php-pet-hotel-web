@@ -4,6 +4,7 @@ namespace App\BackOffice\Transactions\Application\Actions;
 use App\BackOffice\Pets\Domain\Entities\PetModel;
 use App\Shared\Utility\EmailTplBooking;
 use App\Shared\Utility\EmailTplPayment;
+use App\Shared\Utility\EmailTplPaymentService;
 use App\Shared\Utility\EmailTplRegister;
 use Exception;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -65,34 +66,43 @@ class TransactionMaillingsAction extends TransactionsAction
 
 
         // Payment Register
-        $services = [];
-        $body = '';
-        $emailTpl = new EmailTplPayment();
-        $paymentSuccess = $this->paymentService->executeGet('7a0f5a64-2e83-11eb-8a28-e86a64228de9');
+//        $services = [];
+//        $body = '';
+//        $emailTpl = new EmailTplPayment();
+//        $paymentSuccess = $this->paymentService->executeGet('7a0f5a64-2e83-11eb-8a28-e86a64228de9');
+//
+//        $emailBookings = [];
+//        $bookings = $this->paymentService->executeGetBookingIds((int) $paymentSuccess->ticket);
+//        foreach ($bookings as $booking) {
+//            $petFind = $this->petService->getRowByIdModel(new PetModel(), $booking['pet_id']);
+//            $emailBookings[] = ['pet' => $petFind['name'], 'booking' => $booking];
+//        }
+//
+//        if(is_object($paymentSuccess)){
+//            $paymentSuccess = (array) $paymentSuccess;
+//            $emailTpl->setMethodPaymentName($paymentSuccess['paymentMethodName']);
+//            $emailTpl->setTicket($paymentSuccess['ticket']);
+//            $emailTpl->setStatePayment($paymentSuccess['stateName']);
+//            $emailTpl->setGridTotal($paymentSuccess['total']);
+//            $emailTpl->setTotal($paymentSuccess['total']);
+//            $emailTpl->setBookings($emailBookings);
+//            $services = (array) $this->paymentOrderService->executeGetAllDetail(['paymentId' => '7a0f5a64-2e83-11eb-8a28-e86a64228de9']);
+//            $emailTpl->setServices($services);
+//            //$body = $emailTpl->getContent();
+//        }
+//
+//        $body = $emailTpl->getContent();
 
-        $emailBookings = [];
-        $bookings = $this->paymentService->executeGetBookingIds((int) $paymentSuccess->ticket);
-        foreach ($bookings as $booking) {
-            $petFind = $this->petService->getRowByIdModel(new PetModel(), $booking['pet_id']);
-            $emailBookings[] = ['pet' => $petFind['name'], 'booking' => $booking];
-        }
-
-        if(is_object($paymentSuccess)){
-            $paymentSuccess = (array) $paymentSuccess;
-            $emailTpl->setMethodPaymentName($paymentSuccess['paymentMethodName']);
-            $emailTpl->setTicket($paymentSuccess['ticket']);
-            $emailTpl->setStatePayment($paymentSuccess['stateName']);
-            $emailTpl->setGridTotal($paymentSuccess['total']);
-            $emailTpl->setTotal($paymentSuccess['total']);
-            $emailTpl->setBookings($emailBookings);
-            $services = (array) $this->paymentOrderService->executeGetAllDetail(['paymentId' => '7a0f5a64-2e83-11eb-8a28-e86a64228de9']);
-            $emailTpl->setServices($services);
-            //$body = $emailTpl->getContent();
-        }
-
-        $body = $emailTpl->getContent();
-
-        print $body;
+//        $emailTplPaymentService = new EmailTplPaymentService();
+//        $emailTplPaymentService->setTicket("123456");
+//        $emailTplPaymentService->setTotal(150);
+//        $emailTplPaymentService->setGridTotal(150);
+//        $emailTplPaymentService->setStatePayment('ok');
+//        $emailTplPaymentService->setMethodPaymentName('DEPOSITO BANCARIO');
+//        $service[] = ['serviceName' => 'dasdasd', 'price' => 123, 'quantity' => 1, 'subtotal' => 123 ];
+//        $emailTplPaymentService->setServices($service);
+//        $body = $emailTplPaymentService->getContent();
+//        print $body;
 
         return $this->commandSuccess($body);
     }

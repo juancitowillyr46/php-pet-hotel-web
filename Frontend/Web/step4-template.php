@@ -91,17 +91,30 @@ get_header(); ?>
 
                     <li>
                       <div class="ms-wrap-file-upload">
+
+                        <!-- <span>Sube la captura del pago para validarlo</span>
+                        <input type="file" class="ms-pass" accept="image/*">
+                        <input type="file" accept="image/*" id="avatar" class="ms-picture-file">
+                        <input type="hidden" name="screenVoucher" id="screenVoucher" value="">  
+                        <span class="ms-img-size">imagenes menos de 2Mb</span>
+                        <span class="ms-img-size error-size"></span> -->
+
                         <span>Sube la captura del pago para validarlo</span>
-                        <input type="file" id="screenVoucher-{{value}}" name="screenVoucherx" accept="image/png, image/jpeg">
-                        <label for="screenVoucher-{{value}}">Seleccione una imagen</label>
-                        <span class="error-size"></span>
+                        <input type="file" id="screenVoucher" class="ms-picture-file" name="screenVoucherx" data-type="voucher" accept="image/png, image/jpeg">
+                        <input type="hidden" name="screenVoucher" id="screenVoucher" value="">  
+                        <label for="screenVoucher">Seleccione una imagen</label>
+                        <span class="ms-img-size">imagenes menos de 2Mb</span>
+                        <img>
                       </div>
+
+                      
+
                     </li>
                   </script>
 
             <form id="frm-store-payment" style="width: 100%" enctype="multipart/form-data" method="post">
 
-              <input type="hidden" name="screenVoucher" id="screenVoucher" value="">  
+              
               <input type="hidden" name="bankId" id="bankId" value="">
               <input type="hidden" name="order" id="order">
               <input type="hidden" name="active" id="active" value="1cca03ea-07dc-11eb-ab06-50e549398ade">
@@ -140,83 +153,11 @@ get_header(); ?>
                 </div>
 
                 <div class="ms-panel-body">
-                  
                   <ul class="ms-payment-list container-payment-method-add"></ul>
-                  
-                  <!-- <li>
-                      <div class="ms-wrap-radio">
-                        <input type="radio" name="payment" value="1" id="payment-1" checked>
-                        <label for="payment-1">Transferencia bancaria directa</label>
-                      </div>
-
-                      <ul class="ms-payment-banks ">
-                        <li>
-                          <div class="ms-item bbv-icon">
-                            <p>Cuenta Ahorro Soles:</p>
-                            <strong>192 90624301 0 96</strong>
-                            <p>Código de Cuenta Interbancaria:</p>
-                            <strong>0011 0480 0200 3833 47</strong>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="ms-item bcp-icon">
-                            <p>Cuenta Ahorro Soles:</p>
-                            <strong>193 002 524 88037</strong>
-                            <p>Código de Cuenta Interbancaria:</p>
-                            <strong>002 193 100 252 488 03719</strong>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="ms-item scotia-icon">
-                            <p>Cuenta Ahorro Soles:</p>
-                            <strong>045 743 1690</strong>
-                            <p>Código de Cuenta Interbancaria:</p>
-                            <strong>009 231 200 457 431 690 27</strong>
-                          </div>
-                        </li>
-                      </ul>
-                      <div class="ms-wrap-file-upload padding">
-                        <span>Sube tu captura de pago</span>
-                        <input type="file" id="banks-img" name="banks-img" accept="image/png, image/jpeg">
-                        <label for="banks-img">Seleccione una imagen</label>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="ms-wrap-radio">
-                        <input type="radio" name="payment" value="2" id="payment-2">
-                        <label for="payment-2">Plin y lukita</label>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="ms-wrap-radio">
-                        <input type="radio" name="payment" value="3" id="payment-3">
-                        <label for="payment-3">Yape</label>
-                      </div>
-                      <ul class="ms-payment-banks nowrap">
-                        <li>
-                          <div class="ms-item flex yape-icon">
-                            <img src="<?php echo get_template_directory_uri(); ?>/img/qr.png" alt="yape QR">
-                            <div class="ms-wrap-file-upload">
-                              <span>Sube tu captura de pago</span>
-                              <input type="file" id="yape-img" name="banks-img" accept="image/png, image/jpeg">
-                              <label for="yape-img">Seleccione una imagen</label>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <div class="ms-wrap-radio">
-                        <input type="radio" name="payment" value="4" id="payment-4">
-                        <label for="payment-4" data-tool="Lorem Ipsum">
-                          <span class="ms-info-icon">Enviar POS</span> 
-                          <span class="ms-small-text">Enviaremos un POS al recoger a tu engreido</span>
-                        </label>
-                      </div>
-                    </li> -->
                 </div>
                 <!-- <label id="billingFirstName-errorx" class="errorx">Seleccione un método de pago</label> -->
-                <label id="payment-method-message" class="type-method-error"></label>
+                <!-- <label id="payment-method-message" class="type-method-error"></label> -->
+                <span class="error-size type-method-error"></span>
               </div>
             </form>
           </div>
@@ -280,6 +221,22 @@ get_header(); ?>
   </div>
   <div class="ms-layout-modal close-modal" data-remove="remove"></div>
 </div>
+
+<div class="ms-modal" id="modal-cropp" tabindex="-1" role="dialog">
+  <div class="ms-wrap-modal small">
+    <div class="ms-modal-content">
+      <div class="ms-modal-body">
+        <div class="ms-wrap-img-modal"></div>
+      </div>
+      <div class="ms-modal-footer">
+        <button class="ms-btn cancel close-modal" data-remove="remove-cropp">Cancelar</button>
+        <button class="ms-btn save" id="btnCropp">Aceptar</button>
+      </div>
+    </div>
+  </div>
+  <div class="ms-layout-modal close-modal" data-remove="remove-cropp"></div>
+</div>
+
 <?php get_footer();?>
 
 <script>
