@@ -76,7 +76,9 @@ class PaymentService extends BaseService
     }
 
     public function executeGetAll(array $query): object {
-        $getRows = $this->getAllRows($query, true);
+//        $query['createdFrom'] = '2020-11-30';
+//        $query['createdTo'] = '2020-11-30';
+        $getRows = $this->getAllRowsFilter($query, true);
         $list = [];
         foreach ($getRows->rows as $getRow) {
             $list[] = $this->getPaymentDto($getRow);

@@ -72,6 +72,12 @@ class BaseService implements ServiceInterface
         return $this->baseRepository->getAllRows($query, $usingPaginate);
     }
 
+    public function getAllRowsFilter(?array $query, bool $usingPaginate = true): object
+    {
+        $this->validatePagerParameters($query);
+        return $this->baseRepository->getAllRowsFilter($query, $usingPaginate);
+    }
+
     public function getIdByUuidModel(Model $model, string $uuid): int {
         $id = $this->baseRepository->getIdByUuidModel($model, $uuid);
         if($id == 0) {

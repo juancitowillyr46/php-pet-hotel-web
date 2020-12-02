@@ -16,8 +16,8 @@ export class PaymentAllUseCase implements UseCase<any, any> {
     public execute(obj: any): Observable<any> {
         const that = this;
         //let accessTokenData: AccessTokenDto = new AccessTokenDto();
-
-        return that.PaymentRepository.getAll(obj).pipe(map(res => {
+        
+        return that.PaymentRepository.getAllFilters(obj).pipe(map(res => {
             console.log(res);
             return res;
             // accessTokenData.token = res.data.token;

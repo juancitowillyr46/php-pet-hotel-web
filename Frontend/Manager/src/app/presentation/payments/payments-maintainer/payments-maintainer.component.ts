@@ -15,6 +15,9 @@ import { ModalPaymentsComponent } from '../../../shared/components/modals/modal-
 export class PaymentsMaintainerComponent extends BaseTableComponent implements OnInit {
 
   public dataRows: any[] = [];
+  public dateFrom: any;
+  public dateTo: any;
+  public stateId: any;
 
   constructor(
     public route: ActivatedRoute,
@@ -52,7 +55,10 @@ export class PaymentsMaintainerComponent extends BaseTableComponent implements O
     that.loadData = true;
     that.paymentAllUseCase.execute({
       page: page,
-      size: that.totalPages
+      size: that.totalPages,
+      dateFrom: that.dateFrom,
+      dateTo: that.dateTo,
+      stateId: that.stateId
     }).subscribe(res => {
       that.loadData = false;
       that.dataRows = res.data.rows;

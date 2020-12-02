@@ -5,11 +5,13 @@ namespace App\Shared\Infrastructure\Persistence;
 use App\Shared\Domain\Entities\PaginateEntity;
 use App\Shared\Domain\Repository\RepositoryInterface;
 use App\Shared\Exception\Commands\FindActionException;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use mysql_xdevapi\Exception;
 use Psr\Log\LoggerInterface;
 use stdClass;
 use Throwable;
+use Illuminate\Database\Capsule\Manager as DB;
 
 class BaseRepository implements RepositoryInterface
 {
@@ -58,12 +60,15 @@ class BaseRepository implements RepositoryInterface
 
     public function getAllRows(?array $query, bool $usingPaginate): object
     {
+
         if($usingPaginate == true){
-            $findAll = $this->getModel()::all()
-                ->sortByDesc('id')
-                ->skip(((int)$query['page'] - 1) * $query['size'])
-                ->take((int)$query['size'])
-                ->toArray();
+
+            $findAll = $this->getModel()::all()->sortByDesc('id')
+                  ->skip(((int)$query['page'] - 1) * $query['size'])
+                  ->take((int)$query['size'])
+                  ->toArray();
+
+
         } else {
             $findAll = $this->getModel()::all()->toArray();
         }
@@ -75,6 +80,60 @@ class BaseRepository implements RepositoryInterface
         return $paginate;
 
     }
+
+    public function getAllRowsFilter(?array $query, bool $usingPaginate): object
+    {
+        $findAllResult = [];
+        if($usingPaginate == true){
+
+            $findAll = $this->getModel()::all()
+                ->where('created_at', '>=',($query['dateFrom'])? $query['dateFrom'].' 00:00:00' : date('Y-m-d').' 00:00:00')
+                ->where('created_at', '<=',($query['dateTo'])? $query['dateTo'].' 23:59:00' : date('Y-m-d').' 23:59:00');
+
+            if($query['stateId']){
+                $findAll->where('state_id', '=',$query['stateId']);
+            }
+
+            $findAllResult = $findAll->sortByDesc('id')
+                ->skip(((int)$query['page'] - 1) * $query['size'])
+                ->take((int)$query['size'])
+                ->toArray();
+
+            // $findAll = $this->filterDate($this->getModel()::all(), $query);
+            // query()->whereBetween(DB::raw('DATE(created_at)'), ['2020-11-30','2020-11-30']);
+
+            // $dff = $findAll->get();
+//                ->whereBetween('created_at', ['2020-11-30 00:00:00','2020-11-30 23:59:00']);
+//                ->where('created_at', '>=','2020-11-30 00:00:00')
+//                ->where('created_at', '<=', '2020-11-30 23:59:00');
+//                ->where('created_at', '>=',Carbon::parse('2020-11-30 00:00:00'))
+//                ->where('created_at', '<=', Carbon::parse('2020-11-30 23:59:00'));
+//            ->where(DB::raw('DATE(created_at)'), '=', '2020-11-30');
+            //->whereDate(DB::raw('DATE(created_at)'), '=', '2020-11-30');
+//            ->where(DB::raw('DATE(created_at)'), '<=','2020-11-30');
+//            ->where(DB::raw('DATE(created_at)'), '<=', '2020-11-30 23:59:00');
+
+//            ->whereBetween(DB::raw('DATE(created_at)'), ['2020-11-30','2020-11-30']);
+
+
+
+        } else {
+            $findAll = $this->getModel()::all()->toArray();
+        }
+
+        $paginate = new PaginateEntity();
+        $paginate->setRows($findAllResult);
+        $paginate->setTotalRows($findAll->count());
+        $paginate->setTotalPages(ceil($findAll->count()/(int)$query['size']));
+        return $paginate;
+
+    }
+
+//    public function filterDate($model, $query) {
+//        $model->all()->where('created_at', '>=',($query['createdFrom'])? $query['createdFrom'].' 00:00:00' : date('Y-m-d'))
+//        ->where('created_at', '<=',($query['createdFrom'])? $query['createdFrom'].' 23:59:00' : date('Y-m-d'));
+//        return $model;
+//    }
 
     /*
      * Get Id by Uuid

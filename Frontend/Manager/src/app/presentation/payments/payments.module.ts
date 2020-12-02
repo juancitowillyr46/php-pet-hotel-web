@@ -6,15 +6,19 @@ import { PaymentsComponent } from './payments.component';
 import { PaymentsMaintainerComponent } from './payments-maintainer/payments-maintainer.component';
 import { PaymentsRoutingModule } from './payments-routing.module';
 import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { PaymentsServicesComponent } from './payments-services/payments-services.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [PaymentsComponent, PaymentsMaintainerComponent],
+  declarations: [PaymentsComponent, PaymentsMaintainerComponent, PaymentsServicesComponent],
   imports: [
     CommonModule,
     SharedModule,
     PaymentsRoutingModule,
     NgbPaginationModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   exports: [PaymentsComponent, PaymentsMaintainerComponent],
 })

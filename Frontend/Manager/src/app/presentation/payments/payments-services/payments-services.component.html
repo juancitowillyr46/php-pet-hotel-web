@@ -15,31 +15,23 @@
         </div>
         <div class="row">
             <div class="col-12 box-margin">
-              <form class="form-inline">
-                <!-- <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Preference</label> -->
-                <!-- <select class="form-control my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-                  <option selected>Servicios</option>
-                  <option value="PET_HOTEL">Pet Hotel</option>
-                  <option value="PET_TRAINNING">Pet Training</option>
-                </select> -->
-              
-                <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Fecha Desde: </label>
-                <input type="text" value="" class="form-control my-1 mr-sm-2" placeholder="YYYY-mm-dd" [ngModelOptions]="{standalone: true}" [(ngModel)]="dateFrom">
-              
-                <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Fecha Hasta: </label>
-                <input type="text" value="" class="form-control my-1 mr-sm-2" placeholder="YYYY-mm-dd" [ngModelOptions]="{standalone: true}" [(ngModel)]="dateTo">
+                <form class="form-inline">
+                    <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Preference</label>
+                    <select class="form-control my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                      <option selected>Choose...</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                  
+                    <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Fecha de pago: </label>
+                    <input type="text" value="" class="form-control my-1 mr-sm-2">
+                  
+                    
+                  </form>
 
-
-                <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Estado del Pago: </label>
-                <select class="form-control my-1 mr-sm-2" id="inlineFormCustomSelectPref" [ngModelOptions]="{standalone: true}" [(ngModel)]="stateId">
-                  <option selected>Estado</option>
-                  <option value="1">CONFIRMADO</option>
-                  <option value="2">PENDIENTE</option>
-                </select>
                 
-                <button class="btn btn-success" (click)="getPaginatedRows(1)">Buscar</button>
-              </form>
-            </div>
+              </div>
             <div class="col-12 box-margin">
                 <div class="card">
                     <div class="card-body">
@@ -68,22 +60,53 @@
                             <tr>
                               <th scope="col">N° Ticket</th>
                               <th scope="col">Cliente</th>
-                              <th scope="col">Medio de Pago</th>
+                              
                               <th scope="col">Total</th>
                               <th scope="col">Estado</th>
-                              <th scope="col">Fecha registro</th>
+                              <th scope="col">Fecha pago</th>
+                              <th scope="col"></th>
                               <!-- <th scope="col">Fecha registro</th> -->
-                              <th></th>
+                              <!-- <th></th> -->
                             </tr>
                             </thead>
                             <tbody>
+                                <tr>
+                                    <th scope="col">
+                                        1213231
+                                    </th>
+                                    <th scope="col">Juan Rodas</th>
+                                    
+                                    <th scope="col">550</th>
+                                    <th scope="col">
+                                        <a class="badge badge-pill badge-warning">
+                                            <div class="text-dark">
+                                              Pendiente
+                                            </div>
+                                        </a>
+                                    </th>
+                                    <th scope="col">
+                                        2020-12-02 01:48:00
+                                    </th>
+                                    <th scope="col">
+                                        <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic"> 
+                                          <!-- <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Editar" >
+                                            <a href="javascript:void(0)" ngbButton class="text-white">
+                                              <fa-icon [icon]="['fas', 'pencil-alt']" class="mr-1"></fa-icon>
+                                            </a>
+                                          </label> -->
+                                          <label class="btn-primary" ngbButtonLabel placement="top" ngbTooltip="Ver detalle">
+                                            <a href="javascript:void(0)" ngbButton class="text-white">
+                                              <fa-icon [icon]="['fas', 'eye']" class="mr-1" ></fa-icon>
+                                            </a>
+                                          </label>
+                                          
+                                        </div>
+                                      </th>
+                                  </tr>
                             <tr *ngFor="let row of dataRows">
                               <td width="14%">
                                 {{ row.ticket }}
                               </td>
-                              <td width="14%">
-                                {{ row.billingFirstName }} {{ row.billingLastName }}
-                              </td> 
                               <td width="14%">
                                 {{ row.paymentMethodName }}
                               </td>   

@@ -128,7 +128,7 @@ class EmailTplPaymentService
                         </tr>
                         <tr>
                           <td height="139" align="center" valign="top" style="line-height: 0">
-                            <img src="http://www.pethotelshangrila.pe/wp-content/themes/pethotel//img/mailing/header-pago.png" width="680" height="139" alt="">
+                            <img src="http://www.pethotelshangrila.pe/wp-content/themes/pethotel//img/mailing/header-pettrainning.jpg" width="680" height="139" alt="">
                           </td>
                         </tr>
                         <tr>
