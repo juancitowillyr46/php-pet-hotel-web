@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BookingAllUseCase } from '../../../domain/bookings/usecase/booking-all.usecase';
 // import { ModalBookingsComponent } from 'src/app/shared/components/modals/modal-bookings/modal-bookings.component';
 import { ModalDataObservable } from 'src/app/shared/components/modals/modal-data.observable';
@@ -21,7 +21,8 @@ export class BookingsMaintainerComponent extends BaseTableComponent implements O
   constructor(
     public route: ActivatedRoute,
     private bookingAllUseCase: BookingAllUseCase,
-    public modalService: NgbModal
+    public modalService: NgbModal,
+    private calendar: NgbCalendar
   ) { 
     super(modalService, route);
     const that = this;
@@ -30,6 +31,9 @@ export class BookingsMaintainerComponent extends BaseTableComponent implements O
 
   ngOnInit(): void {
     const that = this;
+    that.dateFrom = that.calendar.getToday();
+    that.dateTo = that.calendar.getToday();
+    that.stateId = '0';
     that.getDataRoute();
     that.getActionStoreAndRemove();
   }
@@ -48,13 +52,22 @@ export class BookingsMaintainerComponent extends BaseTableComponent implements O
     });
   }
 
+  search() {
+    const that = this;
+    // that.dateFrom = that.toModel(that.dateFrom);
+    // that.dateTo = that.toModel(that.dateTo);
+    that.getPaginatedRows(1);
+  }
 
   getPaginatedRows(page: number): void {
     const that = this;
     that.loadData = true;
     that.bookingAllUseCase.execute({
       page: page,
-      size: that.totalPages
+      size: that.totalPages,
+      dateFrom: that.toModel(that.dateFrom),
+      dateTo: that.toModel(that.dateTo),
+      stateId: that.stateId
     }).subscribe(res => {
       that.loadData = false;
       that.dataRows = res.data.rows;

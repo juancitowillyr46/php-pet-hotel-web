@@ -82,8 +82,6 @@ class ServiceService extends BaseService
         $visibleService = $this->getRowByIdModelByTable(new DataMasterModel(), $row['visible_id'], 'TABLE_STATE_VISIBLE');
         $selectPets = $this->getRowByIdModelByTable(new DataMasterModel(), $row['select_pets'], 'TABLE_SERVICE_NUM_PETS');
 
-
-
         $row['plan_id'] = $planService['uuid'];
         $row['plan_name'] = $planService['name'];
 

@@ -24,19 +24,19 @@
                         <td style="border-top: 0 !important;">{{row.kennelName}}</td>
                     </tr>
                     <tr>
-                        <td>Mascota</td><td>{{row.petName}}</td>
+                        <td>Mascota:</td><td>{{row.petName}}</td>
                     </tr>
                     <tr>
-                        <td>Dueño</td><td>{{row.customerName}}</td>
+                        <td>Dueño:</td><td>{{row.customerName}}</td>
                     </tr>
                     <tr>
-                        <td>Fecha inicio</td><td>{{row.dateTo}}</td>
+                        <td>Check-In:</td><td>{{row.dateTo}}</td>
                     </tr>
                     <tr>
-                        <td>Fecha fin</td><td>{{row.dateFrom}}</td>
+                        <td>Check-Out:</td><td>{{row.dateFrom}}</td>
                     </tr>
                     <tr>
-                        <td>Estado</td>
+                        <td>Estado:</td>
                         <td>
                             <a class="badge badge-pill badge-warning" *ngIf="row.stateName === 'PENDIENTE'">
                                 <div class="text-dark">

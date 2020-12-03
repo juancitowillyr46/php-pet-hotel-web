@@ -11,7 +11,7 @@
  
         <div class="row" *ngIf="row">
             <div class="col-sm-6 pb-1">
-                <h6 class="font-15 mb-3">INVOICE #{{row.ticket}}</h6>
+                <h6 class="font-15 mb-3">N °{{row.ticket}}</h6>
                 <div class="mb-1 font-15">Fecha: {{ row.createdAt }}</div>
                 <!-- <div class="media align-items-center">
                     
@@ -38,7 +38,7 @@
 
         <div class="row" *ngIf="row">
             <div class="col-sm-6 mb-4">
-                <div class="mb-2">Emitido a:</div>
+                <div class="mb-2">Facturación:</div>
                 <div class="font-14 mb-1">Nombres: {{ row.billingFirstName }}</div>
                 <div class="font-14 mb-1">Apellidos: {{ row.billingLastName }}</div>
                 <div class="font-14 mb-1">Documento: {{ row.billingDni }}</div>
@@ -59,8 +59,8 @@
                             <td class="font-14">{{ row.paymentMethodName }}</td>
                         </tr>
                         <tr *ngIf="row.bankId">
-                            <td class="pr-3 font-14">Banco / Cta:</td>
-                            <td class="font-14">{{ row.paymentMethodName }}</td>
+                            <td class="pr-3 font-14">Banco:</td>
+                            <td class="font-14">{{ row.bankName }}</td>
                         </tr>
                         <tr>
                             <td class="pr-3 font-14">Estado:</td>

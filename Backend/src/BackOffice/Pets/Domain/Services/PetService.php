@@ -65,7 +65,7 @@ class PetService extends BaseService
     public function executeGetAllByIdCustomer(array $query): array {
 
         $customerId = $this->petRepository->getIdByUuidModel(new CustomerModel(), $query['customerId']);
-        $getRows = $this->petRepository->getModel()::all()->where('customer_id', '=', $customerId)->toArray();
+        $getRows = $this->petRepository->getModel()::all()->where('customer_id', '=', $customerId)->sortByDesc('created_at')->toArray();
         $list = [];
 
         foreach ($getRows as $getRow) {

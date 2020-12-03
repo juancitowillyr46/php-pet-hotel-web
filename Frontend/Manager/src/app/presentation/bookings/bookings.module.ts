@@ -7,6 +7,7 @@ import { BookingsComponent } from './bookings.component';
 import { BookingsMaintainerComponent } from './bookings-maintainer/bookings-maintainer.component';
 import { BookingsRoutingModule } from './bookings-routing.module';
 import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [BookingsComponent,BookingsMaintainerComponent],
@@ -16,6 +17,10 @@ import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
     BookingsRoutingModule,
     NgbPaginationModule,
     NgbModule,
+    NgbPaginationModule,
+    NgbModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   exports: [BookingsComponent,BookingsMaintainerComponent]
 })

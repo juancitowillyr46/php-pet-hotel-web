@@ -1,10 +1,15 @@
 import { Inject, Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class BaseTableComponent {
+
+    public dateFrom: any;
+    public dateTo: any;
+    public stateId: any;
+
 
     // Refresh Table
     public actionStore = new BehaviorSubject<any>(null);
@@ -29,12 +34,19 @@ export class BaseTableComponent {
 
     public route:ActivatedRoute = null;
 
+
+    public displayMonths = 1;
+    public navigation = 'select';
+    public showWeekNumbers = false;
+    public outsideDays = 'visible';
+
     constructor(
       @Inject(NgbModal) modalService: NgbModal,
       @Inject(ActivatedRoute) route: ActivatedRoute
     ) {
         
       const that = this;
+      
       that.modalService = modalService;
       that.route = route;
       that.actionStore.next(true);
@@ -100,4 +112,51 @@ export class BaseTableComponent {
       that.actionStore.next(true);
     }
 
+    public getTodayFormatDate() {
+      // JR
+      var dd: any = new Date().getDate();
+      var mm: any = new Date().getMonth() + 1; 
+      var yyyy:any = new Date().getFullYear(); 
+
+      if (dd < 10) { 
+        dd = '0' + String(dd); 
+      } 
+      if (mm < 10) { 
+        mm = '0' + String(mm); 
+      } 
+      return [{
+        year: yyyy,
+        month: mm,
+        day: dd
+      }];
+    }
+
+
+    public toModel(date: NgbDateStruct | null): string | null {
+
+      var dd: any = date.day;
+      var mm: any = date.month; 
+      var yyyy:any = date.year; 
+
+      if (dd < 10) { 
+        dd = '0' + String(dd); 
+      } 
+      if (mm < 10) { 
+        mm = '0' + String(mm); 
+      } 
+
+      return date ? yyyy + '-' + mm + '-' + dd : null;
+    }
+
+    // public fromModel(value: string | null): NgbDateStruct | null {
+    //   if (value) {
+    //     let date = value.split('-');
+    //     return {
+    //       day : parseInt(date[0], 10),
+    //       month : parseInt(date[1], 10),
+    //       year : parseInt(date[2], 10)
+    //     };
+    //   }
+    //   return null;
+    // }
 }

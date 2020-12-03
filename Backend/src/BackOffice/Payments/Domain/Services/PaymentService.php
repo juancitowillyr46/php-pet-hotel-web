@@ -65,22 +65,62 @@ class PaymentService extends BaseService
         return $bookingId;
     }
 
+    public function executeGetServiceIds(int $paymentId): array {
+        $payment = $this->paymentRepository->getModel()::find($paymentId);
+        $serviceId = [];
+        foreach ($payment->services as $service) {
+            $serviceId[] = $service->toArray();
+        }
+        return $serviceId;
+    }
 
-    public function executeGetByBookingId(string $bookingId) {
+    public function executeValidateTplSendMail(int $paymentId) {
 
-        //$payment = $this->paymentRepository->getModel()::find($paymentId);
+        $serviceType = 0;
 
-//        $id = $this->paymentRepository->getIdByUuidModel(new BookingModel(), $bookingId);
-//        $getRow = $this->paymentRepository->getModel()::all()->where('booking_id', '=', $id)->first();
-//        return $this->getPaymentDto($getRow->toArray());
+        // Bookings
+        $bookings = $this->executeGetBookingIds($paymentId);
+
+        // Services
+        $services = $this->executeGetServiceIds($paymentId);
+
+        if(count($bookings) > 0) {
+            $serviceType = 1;
+        }
+
+        if(count($services) > 0) {
+            $serviceType = 2;
+        }
+
+        return $serviceType;
+    }
+
+    public function executeGetItemsServiceMain(int $paymentId): string {
+
+        $serviceType = "";
+
+        // Bookings
+        $bookings = $this->executeGetBookingIds($paymentId);
+
+        // Services
+        $services = $this->executeGetServiceIds($paymentId);
+
+        if(count($bookings) > 0) {
+            $serviceType = 'PET HOTEL';
+        }
+
+        if(count($services) > 0) {
+            $serviceType = 'PET TRAINING';
+        }
+
+        return $serviceType;
     }
 
     public function executeGetAll(array $query): object {
-//        $query['createdFrom'] = '2020-11-30';
-//        $query['createdTo'] = '2020-11-30';
         $getRows = $this->getAllRowsFilter($query, true);
         $list = [];
         foreach ($getRows->rows as $getRow) {
+            $getRow['relation_service'] = $this->executeGetItemsServiceMain((int) $getRow['id']);
             $list[] = $this->getPaymentDto($getRow);
         }
         $getRows->rows = $list;
@@ -92,13 +132,11 @@ class PaymentService extends BaseService
         $bankId = $this->paymentRepository->getIdByUuidModel(new DataMasterModel(), $request['bankId']);
         $paymentMethodId = $this->getAttrByUuidModel(new DataMasterModel(), $request['paymentMethodId'], 'id_row');
         $stateId = $this->paymentRepository->getAttrByUuidModel(new DataMasterModel(), $request['stateId'], 'id_row');
-        //$bookingId = $this->paymentRepository->getIdByUuidModel(new BookingModel(), $request['bookingId']);
         $customerId = $this->paymentRepository->getIdByUuidModel(new CustomerModel(), $request['customerId']);
 
         $this->paymentEntity->setBankId($bankId);
         $this->paymentEntity->setPaymentMethodId($paymentMethodId);
         $this->paymentEntity->setStateId($stateId);
-        //$this->paymentEntity->setBookingId($bookingId);
         $this->paymentEntity->setCustomerId($customerId);
         $this->paymentEntity->payload((object)$request);
 
@@ -128,7 +166,6 @@ class PaymentService extends BaseService
         $state = $this->getRowByIdModelByTable(new DataMasterModel(), $row['state_id'], 'TABLE_PAYMENT_STATE');
         $row['state_name'] = $state['name'];
         $row['state_id'] = $state['uuid'];
-
 
         if($row['bank_id'] > 0){
             $bank = $this->getRowByIdModelByTable(new DataMasterModel(), $row['bank_id'], 'TABLE_BANKS');

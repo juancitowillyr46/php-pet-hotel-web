@@ -68,7 +68,7 @@ class BookingService extends BaseService
     }
 
     public function executeGetAll(array $query): object {
-        $getRows = $this->getAllRows($query, true);
+        $getRows = $this->getAllRowsFilterBooking($query, true);
         $list = [];
         foreach ($getRows->rows as $getRow) {
             $list[] = $this->getBookingDto($getRow);

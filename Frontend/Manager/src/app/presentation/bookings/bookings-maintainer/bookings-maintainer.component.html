@@ -14,6 +14,41 @@
             </div>
         </div>
         <div class="row">
+          
+          <div class="col-12 box-margin">
+            <form class="form-inline">
+              <label class="my-1 mr-sm-2" for="inlineFormCustomSelectPref">Fecha Desde: </label>
+              <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                       name="dp" [displayMonths]="displayMonths" [navigation]="navigation" [outsideDays]="outsideDays"
+                       [showWeekNumbers]="showWeekNumbers" ngbDatepicker #d="ngbDatepicker" placeholder="yyyy-mm-dd" [ngModelOptions]="{standalone: true}" [(ngModel)]="dateFrom">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary calendar mr-1" (click)="d.toggle()" type="button"><fa-icon [icon]="['fas', 'calendar']" class="mr-1"></fa-icon></button>
+                </div>
+              </div>
+
+              <label class="my-1 mr-sm-2" for="inlineFormCustomSelectPref">Fecha Hasta: </label>
+              <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                       name="dp" [displayMonths]="displayMonths" [navigation]="navigation" [outsideDays]="outsideDays"
+                       [showWeekNumbers]="showWeekNumbers" ngbDatepicker #dd="ngbDatepicker" placeholder="yyyy-mm-dd" [ngModelOptions]="{standalone: true}" [(ngModel)]="dateTo">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary calendar mr-1" (click)="dd.toggle()" type="button"><fa-icon [icon]="['fas', 'calendar']" class="mr-1"></fa-icon></button>
+                </div>
+              </div>
+
+              <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Estado: </label>
+              <select class="form-control my-1 mr-sm-2" id="inlineFormCustomSelectPref" [ngModelOptions]="{standalone: true}" [(ngModel)]="stateId">
+                <option selected disabled>Estado</option>
+                <option value="0">TODOS</option>
+                <option value="1">CONFIRMADO</option>
+                <option value="2">PENDIENTE</option>
+              </select>
+              
+              <button class="btn btn-success" (click)="search()">Buscar</button>
+            </form>
+          </div>
+
             <div class="col-12 box-margin">
                 <div class="card">
                     <div class="card-body">
@@ -40,11 +75,12 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                              <th scope="col">Canil</th>
+                              <th scope="col">Cliente</th>
+                              <!-- <th scope="col">Canil</th> -->
                               <th scope="col">Desde</th>
                               <th scope="col">Hasta</th>
                               <th scope="col">Mascota</th>
-                              <th scope="col">Cliente</th>
+                              
                               <th scope="col">Estado</th>
                               <th scope="col">Fecha creación</th>
                               <th></th>
@@ -53,20 +89,18 @@
                             <tbody>
                             <tr *ngFor="let row of dataRows">
                               <td width="14%">
-                                {{ row.kennelName }}
-                              </td>
-                              <td width="14%">
-                                {{ row.dateTo }}
+                                {{ row.customerName }}
                               </td>
                               <td width="14%">
                                 {{ row.dateFrom }}
                               </td>
                               <td width="14%">
-                                {{ row.petName }}
+                                {{ row.dateTo }}
                               </td>
                               <td width="14%">
-                                {{ row.customerName }}
+                                {{ row.petName }}
                               </td>
+                              
                               <td width="14%">
                                 <a class="badge badge-pill badge-warning" *ngIf="row.stateName === 'PENDIENTE'">
                                   <div class="text-dark">

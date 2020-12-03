@@ -11,7 +11,6 @@ use mysql_xdevapi\Exception;
 use Psr\Log\LoggerInterface;
 use stdClass;
 use Throwable;
-use Illuminate\Database\Capsule\Manager as DB;
 
 class BaseRepository implements RepositoryInterface
 {
@@ -74,7 +73,7 @@ class BaseRepository implements RepositoryInterface
         }
 
         $paginate = new PaginateEntity();
-        $paginate->setRows($findAll);
+        $paginate->setRows(array_values($findAll));
         $paginate->setTotalRows($this->getModel()::all()->count());
         $paginate->setTotalPages(ceil($this->getModel()::all()->count()/(int)$query['size']));
         return $paginate;
@@ -88,11 +87,8 @@ class BaseRepository implements RepositoryInterface
 
             $findAll = $this->getModel()::all()
                 ->where('created_at', '>=',($query['dateFrom'])? $query['dateFrom'].' 00:00:00' : date('Y-m-d').' 00:00:00')
-                ->where('created_at', '<=',($query['dateTo'])? $query['dateTo'].' 23:59:00' : date('Y-m-d').' 23:59:00');
-
-            if($query['stateId']){
-                $findAll->where('state_id', '=',$query['stateId']);
-            }
+                ->where('created_at', '<=',($query['dateTo'])? $query['dateTo'].' 23:59:00' : date('Y-m-d').' 23:59:00')
+                ->whereIn('state_id',($query['stateId'] != '0')? [(int) $query['stateId']]: [1,2]);
 
             $findAllResult = $findAll->sortByDesc('id')
                 ->skip(((int)$query['page'] - 1) * $query['size'])
@@ -122,7 +118,34 @@ class BaseRepository implements RepositoryInterface
         }
 
         $paginate = new PaginateEntity();
-        $paginate->setRows($findAllResult);
+        $paginate->setRows(array_values($findAllResult));
+        $paginate->setTotalRows($findAll->count());
+        $paginate->setTotalPages(ceil($findAll->count()/(int)$query['size']));
+        return $paginate;
+
+    }
+
+    public function getAllRowsFilterBooking(?array $query, bool $usingPaginate): object
+    {
+        $findAllResult = [];
+        if($usingPaginate == true){
+
+            $findAll = $this->getModel()::all()
+                ->where('date_from', '>=',($query['dateFrom'])? $query['dateFrom'] : date('Y-m-d'))
+                ->where('date_to', '<=',($query['dateTo'])? $query['dateTo'] : date('Y-m-d'))
+                ->whereIn('state_id',($query['stateId'] != '0')? [(int) $query['stateId']]: [1,2]);
+
+            $findAllResult = $findAll->sortByDesc('id')
+                ->skip(((int)$query['page'] - 1) * $query['size'])
+                ->take((int)$query['size'])
+                ->toArray();
+
+        } else {
+            $findAll = $this->getModel()::all()->toArray();
+        }
+
+        $paginate = new PaginateEntity();
+        $paginate->setRows(array_values($findAllResult));
         $paginate->setTotalRows($findAll->count());
         $paginate->setTotalPages(ceil($findAll->count()/(int)$query['size']));
         return $paginate;
@@ -130,7 +153,7 @@ class BaseRepository implements RepositoryInterface
     }
 
 //    public function filterDate($model, $query) {
-//        $model->all()->where('created_at', '>=',($query['createdFrom'])? $query['createdFrom'].' 00:00:00' : date('Y-m-d'))
+//        $model->1all()->where('created_at', '>=',($query['createdFrom'])? $query['createdFrom'].' 00:00:00' : date('Y-m-d'))
 //        ->where('created_at', '<=',($query['createdFrom'])? $query['createdFrom'].' 23:59:00' : date('Y-m-d'));
 //        return $model;
 //    }

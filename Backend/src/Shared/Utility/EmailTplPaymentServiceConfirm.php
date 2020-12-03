@@ -1,17 +1,14 @@
 <?php
 namespace App\Shared\Utility;
 
-class EmailTplPayment
+class EmailTplPaymentServiceConfirm
 {
 
     public string $methodPaymentName;
     public string $statePayment;
-    public string $checkIn;
-    public string $checkOut;
     public array $services;
     public string $total;
     public string $gridTotal;
-    public array $bookings;
     public string $ticket;
 
     /**
@@ -28,66 +25,6 @@ class EmailTplPayment
     public function setTicket(string $ticket): void
     {
         $this->ticket = $ticket;
-    }
-
-    public function getBookings(): string
-    {
-        $body = '';
-        $body .= '<tr>';
-        $body .= '<td bgcolor="#008192" style="padding: 13px; padding-left: 25px; color: #ffa827; font-weight: 600; font-family: Arial, Verdana, \'sans - serif\' !important; font-size: 15px">Check-In</td>';
-        $body .= '<td bgcolor="#008192" style="padding: 13px; padding-left: 25px; color: #ffa827; font-weight: 600; font-family: Arial, Verdana, \'sans - serif\' !important; font-size: 15px">Check-Out</td>';
-        $body .= '<td bgcolor="#008192" style="padding: 13px; padding-left: 25px; color: #ffa827; font-weight: 600; font-family: Arial, Verdana, \'sans - serif\' !important; font-size: 15px">Mascotas</td>';
-        $body .= '</tr>';
-
-        foreach ($this->bookings as $booking) {
-            $body .= '<tr>';
-                $body .= '<td bgcolor="#f5f5f5" style="padding: 13px; padding-left: 25px; color: #008193; font-family: Arial, Verdana, \'sans-serif\' !important; font-size: 15px">'.$booking['booking']['date_from'].'</td>';
-                $body .= '<td bgcolor="#f5f5f5" style="padding: 13px; padding-left: 25px; color: #008193; font-family: Arial, Verdana, \'sans-serif\' !important; font-size: 15px">'.$booking['booking']['date_to'].'</td>';
-                $body .= '<td bgcolor="#f5f5f5" style="padding: 13px; padding-left: 25px; color: #008193; font-family: Arial, Verdana, \'sans-serif\' !important; font-size: 15px">'.$booking['pet'].'</td>';
-            $body .= '</tr>';
-
-        }
-        return $body;
-    }
-
-    /**
-     * @param array $bookings
-     */
-    public function setBookings(array $bookings): void
-    {
-        $this->bookings = $bookings;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCheckIn(): string
-    {
-        return $this->checkIn;
-    }
-
-    /**
-     * @param string $checkIn
-     */
-    public function setCheckIn(string $checkIn): void
-    {
-        $this->checkIn = $checkIn;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCheckOut(): string
-    {
-        return $this->checkOut;
-    }
-
-    /**
-     * @param string $checkOut
-     */
-    public function setCheckOut(string $checkOut): void
-    {
-        $this->checkOut = $checkOut;
     }
 
     public function getServices(): string
@@ -261,29 +198,18 @@ class EmailTplPayment
 
 
 
-                        $body .= $this->getServices();
+        $body .= $this->getServices();
 
-                        $body .= $this->getGridTotal();
+        $body .= $this->getGridTotal();
 
-                        $body .= '</tbody>
+        $body .= '</tbody>
                             </table></td></tr>
 <tr>
                           <td height="20">&nbsp;</td>
                         </tr>
 
                         
-                        <tr>
-                            <td align="center" valign="middle">
-                                <table width="420" border="0" cellpadding="0" cellspacing="0" style="-webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px; overflow: hidden;">
-                                <tr>
-                                <td colspan="3" align="center" bgcolor="#007b8c" style="padding: 13px; padding-left: 25px; color: #ffa827; font-weight: 600; font-family: Arial, Verdana, \'sans-serif\' !important; font-size: 15px">Reservas</td>
-</tr>
-                                <tbody>
-                                '.$this->getBookings().'
-                                </tbody>
-                                </table>
-                            </td>
-                        </tr>
+                       
                         <tr>
                           <td height="54">&nbsp;</td>
                         </tr>

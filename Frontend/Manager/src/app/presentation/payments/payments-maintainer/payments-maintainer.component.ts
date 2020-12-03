@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PaymentAllUseCase } from '../../../domain/payments/usecase/payment-all.usecase';
 import { ModalUsersComponent } from '../../../shared/components/modals/modal-users/modal-users.component';
 import { BaseTableComponent } from '../../../shared/components/tables/base-table.component';
@@ -15,14 +15,12 @@ import { ModalPaymentsComponent } from '../../../shared/components/modals/modal-
 export class PaymentsMaintainerComponent extends BaseTableComponent implements OnInit {
 
   public dataRows: any[] = [];
-  public dateFrom: any;
-  public dateTo: any;
-  public stateId: any;
 
   constructor(
     public route: ActivatedRoute,
     private paymentAllUseCase: PaymentAllUseCase,
-    public modalService: NgbModal
+    public modalService: NgbModal,
+    private calendar: NgbCalendar
   ) { 
     super(modalService, route);
     const that = this;
@@ -31,6 +29,9 @@ export class PaymentsMaintainerComponent extends BaseTableComponent implements O
 
   ngOnInit(): void {
     const that = this;
+    that.dateFrom = that.calendar.getToday();
+    that.dateTo = that.calendar.getToday();
+    that.stateId = '0';
     that.getDataRoute();
     that.getActionStoreAndRemove();
   }
@@ -39,7 +40,7 @@ export class PaymentsMaintainerComponent extends BaseTableComponent implements O
     const that = this;
     that.currentActionStore.subscribe( res => {
       if(res === true){
-        that.getPaginatedRows(that.currentPage);
+        that.search();
       }
     });
     that.currentActionRemove.subscribe( res => {
@@ -50,14 +51,21 @@ export class PaymentsMaintainerComponent extends BaseTableComponent implements O
   }
 
 
+  search() {
+    const that = this;
+    // that.dateFrom = that.toModel(that.dateFrom);
+    // that.dateTo = that.toModel(that.dateTo);
+    that.getPaginatedRows(1);
+  }
+
   getPaginatedRows(page: number): void {
     const that = this;
     that.loadData = true;
     that.paymentAllUseCase.execute({
       page: page,
       size: that.totalPages,
-      dateFrom: that.dateFrom,
-      dateTo: that.dateTo,
+      dateFrom: that.toModel(that.dateFrom),
+      dateTo: that.toModel(that.dateTo),
       stateId: that.stateId
     }).subscribe(res => {
       that.loadData = false;

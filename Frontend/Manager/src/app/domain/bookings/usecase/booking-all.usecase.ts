@@ -17,7 +17,7 @@ export class BookingAllUseCase implements UseCase<any, any> {
         const that = this;
         //let accessTokenData: AccessTokenDto = new AccessTokenDto();
 
-        return that.customerRepository.getAll(obj).pipe(map(res => {
+        return that.customerRepository.getAllFilters(obj).pipe(map(res => {
             console.log(res);
             return res;
             // accessTokenData.token = res.data.token;

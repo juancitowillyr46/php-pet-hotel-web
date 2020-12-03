@@ -12,7 +12,7 @@
         <div class="form-group">
             <label for="stateId">Voucher:</label>
             <div *ngIf="paymentDto" style="text-align: center;">
-              <img [src]="paymentDto['screenVoucher']" *ngIf="paymentDto['screenVoucher'] != ''">
+              <img [src]="paymentDto['screenVoucher']" *ngIf="paymentDto['screenVoucher'] != ''" style="width: 40%;">
             </div>
         </div>
  
