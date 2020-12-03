@@ -26,6 +26,8 @@ class TransactionAddAction extends TransactionsAction
 
             $validateSuccess = $this->transactionService->executeAdd((array)$bodyParsed);
 
+            $isDoggySchool = ($bodyParsed->serviceSpecial)? true : false;
+
             $customerRequest = (array) $bodyParsed->customer;
             $petsRequest     = (array) $bodyParsed->pets;
             $paymentRequest  = (array) $bodyParsed->payment;
@@ -102,7 +104,8 @@ class TransactionAddAction extends TransactionsAction
                         "dateFrom" => $bookingRequest['dateFrom'],
                         "cancellationDate" => "",
                         "cancellationNote" => "",
-                        "active" => $activeId == 1
+                        "active" => $activeId == 1,
+                        "isDoggySchool" => $isDoggySchool
                     ];
 
                     // Add Payment

@@ -24,7 +24,7 @@ export class BookingRepository {
 
     getAllFilters(obj: any): Observable<ResponseDataDto<BookingDto[]>> {
         const that = this;
-        return that.dataService.get(that.resource + '?size='+ obj.size  +'&page=' + obj.page + '&usingPaginate=1' + '&dateFrom=' + obj.dateFrom + '&dateTo=' + obj.dateTo + '&stateId=' + obj.stateId);
+        return that.dataService.get(that.resource + '?size='+ obj.size  +'&page=' + obj.page + '&usingPaginate=1' + '&dateFrom=' + obj.dateFrom + '&dateTo=' + obj.dateTo + '&stateId=' + obj.stateId + '&isDoggySchool=' + obj.isDoggySchool);
     }
     
     get(id: string): Observable<ResponseDataDto<BookingDto>> {

@@ -43,6 +43,9 @@ class BookingActionRequestSchema extends BaseValidatorRequest
             ],
             'active' => [
                 new Required(),
+            ],
+            'isDoggySchool' => [
+                new Required()
             ]
         ], $data);
 

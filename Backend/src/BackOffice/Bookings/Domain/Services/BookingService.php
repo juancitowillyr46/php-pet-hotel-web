@@ -132,6 +132,7 @@ class BookingService extends BaseService
         return $this->bookingRepository->getModel()::all()
             ->where('date_from', '=', $dateFrom)
             ->where('date_to', '=', $dateTo)
+            ->where('state_id', '!=', 1)
             ->toArray();
     }
 

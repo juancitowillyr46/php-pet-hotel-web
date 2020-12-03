@@ -18,7 +18,7 @@ class BookingEntity extends Audit
     public string $date_from;
     public string $cancellation_date;
     public string $cancellation_note;
-
+    public bool $is_doggy_school;
     /**
      * @return int
      */
@@ -147,6 +147,24 @@ class BookingEntity extends Audit
         $this->cancellation_note = $cancellation_note;
     }
 
+    /**
+     * @return bool
+     */
+    public function isIsDoggySchool(): bool
+    {
+        return $this->is_doggy_school;
+    }
+
+    /**
+     * @param bool $is_doggy_school
+     */
+    public function setIsDoggySchool(bool $is_doggy_school): void
+    {
+        $this->is_doggy_school = $is_doggy_school;
+    }
+
+
+
     public function payload(object $formData): void {
 
         try {
@@ -157,6 +175,7 @@ class BookingEntity extends Audit
 
             $this->setDateTo($formData->dateTo);
             $this->setDateFrom($formData->dateFrom);
+            $this->setIsDoggySchool($formData->isDoggySchool);
 
             if($formData->cancellationDate != ""){
                 $this->setCancellationDate($formData->cancellationDate);

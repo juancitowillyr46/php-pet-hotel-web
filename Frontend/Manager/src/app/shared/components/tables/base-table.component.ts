@@ -148,6 +148,7 @@ export class BaseTableComponent {
       return date ? yyyy + '-' + mm + '-' + dd : null;
     }
 
+    
     // public fromModel(value: string | null): NgbDateStruct | null {
     //   if (value) {
     //     let date = value.split('-');

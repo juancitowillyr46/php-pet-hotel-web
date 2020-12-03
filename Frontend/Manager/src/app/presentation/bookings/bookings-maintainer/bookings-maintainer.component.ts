@@ -17,6 +17,7 @@ import { ModalBookingsViewComponent } from 'src/app/shared/components/modals/mod
 export class BookingsMaintainerComponent extends BaseTableComponent implements OnInit {
 
   public dataRows: any[] = [];
+  public isDoggySchool: any = false;
 
   constructor(
     public route: ActivatedRoute,
@@ -34,6 +35,7 @@ export class BookingsMaintainerComponent extends BaseTableComponent implements O
     that.dateFrom = that.calendar.getToday();
     that.dateTo = that.calendar.getToday();
     that.stateId = '0';
+    that.isDoggySchool = false;
     that.getDataRoute();
     that.getActionStoreAndRemove();
   }
@@ -67,7 +69,8 @@ export class BookingsMaintainerComponent extends BaseTableComponent implements O
       size: that.totalPages,
       dateFrom: that.toModel(that.dateFrom),
       dateTo: that.toModel(that.dateTo),
-      stateId: that.stateId
+      stateId: that.stateId,
+      isDoggySchool: that.isDoggySchool
     }).subscribe(res => {
       that.loadData = false;
       that.dataRows = res.data.rows;

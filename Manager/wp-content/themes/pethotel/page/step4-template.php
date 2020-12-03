@@ -5,23 +5,16 @@ get_header(); ?>
   <div data-real-type="background" data-img="<?php echo get_template_directory_uri(); ?>/img/patron_huesos.png">
     <div class="ms-wrap-section">
       <?php 
-        $matchFound = (array_key_exists("serviceId", $_GET));
         $home = "http://".$_SERVER['HTTP_HOST'];
+        
+        // Pet Training
+        $matchFound = (array_key_exists("serviceId", $_GET));
 
-        // Exist param
-        // if($matchFound == 1) {
-        //   $slide = $matchFound ? trim($_GET["serviceId"]) : '';
-        //   if($slide != '') {
-        //     print $slide;
-        //   } else {
-        //     header("Location:" . $home);
-        //   }
-        // } else {
-        //   header("Location:" . $home);
-        // }
-
+        // Doggy School
+        $matchFoundDoggy = (array_key_exists("serviceSpecial", $_GET));
+        
       ?>
-      <?php if($matchFound != 1) { ?>
+      <?php if($matchFound != 1 && $matchFoundDoggy != 1) { ?>
         <ul class="ms-step-list">
           <li class="checked">
             <a href="/step1" class="ms-number">1</a>
@@ -41,9 +34,25 @@ get_header(); ?>
           </li>
         </ul>
       <?php 
-        }
+        } 
       ?>
 
+      <?php if($matchFoundDoggy == 1 && $matchFound != 1) { ?>
+        <ul class="ms-step-list">
+          <li class="checked">
+            <a href="/step1/?serviceSpecial=<?php print $_GET['serviceSpecial']; ?>" class="ms-number">1</a>
+            <span class="ms-detail">Identifica <br>tu mascota</span>
+          </li>
+          <li class="checked">
+            <a href="/step2/?serviceSpecial=<?php print $_GET['serviceSpecial']; ?>" class="ms-number">2</a>
+            <span class="ms-detail">Datos <br>de contacto</span>
+          </li>
+          <li class="active">
+            <span class="ms-number">3</span>
+            <span class="ms-detail">Pago</span>
+          </li>
+        </ul>
+      <?php } ?>
 
       <div class="ms-header-step">
         <h1 class="ms-title">PAGO</h1>
@@ -125,7 +134,7 @@ get_header(); ?>
                         <input type="hidden" name="screenVoucher" id="screenVoucher-2" value="">  
                         <label for="screenVoucher-1">Seleccione una imagen</label>
                         <span class="ms-img-size">imagenes menos de 2Mb</span>
-                        <img>
+                        <img style="width: 50%; margin: auto 0">
                       </div>
 
                       
@@ -190,14 +199,23 @@ get_header(); ?>
       </div>
       
       <div class="ms-wrap-btn">
-      <?php if($matchFound != 1) { ?>
+
+
+      <?php if($matchFound != 1 && $matchFoundDoggy != 1) { ?>
         <a href="/step3" class="ms-btn">Volver</a>
         <button class="ms-btn bg-sc" id="save-step-payment" type="button">Finalizar</button>
-      <?php } else { ?>
+      <?php } ?>
+
+      <?php if($matchFound == 1 && $matchFoundDoggy != 1) { ?>
         <a href="javascript:window.history.back();" class="ms-btn">Cancelar</a>
         <button class="ms-btn bg-sc" id="save-step-payment" type="button">Comprar</button>
       <?php } ?>
       
+      <?php if($matchFound != 1 && $matchFoundDoggy == 1) { ?>
+        <a href="/step2/?serviceSpecial=<?php print $_GET['serviceSpecial']; ?>" class="ms-btn">Volver</a>
+        <button class="ms-btn bg-sc" id="save-step-payment" type="button">Comprar</button>
+      <?php } ?>
+
       </div>
     </div>
   </div>

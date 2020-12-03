@@ -20,4 +20,5 @@ class BookingDto
     public bool $active;
     public string $activeName;
     public string $createdAt;
+    public bool $isDoggySchool;
 }

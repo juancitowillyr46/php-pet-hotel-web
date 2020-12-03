@@ -107,6 +107,28 @@
     </div>
     <div class="ms-layout-modal close-modal" data-remove="remove"></div>
   </div>
+
+  <div class="ms-modal" id="modal-doggy-school" tabindex="-1" role="dialog">
+    <div class="ms-wrap-modal small">
+      <div class="ms-modal-content">
+        <div class="ms-modal-header">
+          <span class="ms-title-modal">Doggy School</span>
+        </div>
+        <div class="ms-modal-body">
+          <img style="display: block; margin: 0 auto;" data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/img/logo/logo_b.png" src="<?php echo get_template_directory_uri(); ?>/img/servicios/servicios_03.png" alt="Pet Hotel Shangrila">
+          <p>Recogeremos a tu mascota por la mañana, en una movilidad adecuada, la trasladaremos al hotel, donde personal calificado la estará esperando para asegurarse que su estadía sea cómoda, agradable, segura y divertida.</p>
+          <p>Actualmente el servicio se encuntra disponible para los distritos de:</p>
+          <ul style="color: #00839b;">
+            <li>Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum y Lorem ipsum</li>
+          </ul>
+        </div>
+        <div class="ms-modal-footer">
+          <button class="ms-btn save close-modal" id="save-step-booking-doggy" data-remove="remove">Continuar</button>
+        </div>
+      </div>
+    </div>
+    <div class="ms-layout-modal close-modal" data-remove="remove"></div>
+  </div>
   
   <?php wp_footer(); ?>
   <script src="<?php echo get_template_directory_uri(); ?>/js/handlebars.js"></script>

@@ -446,7 +446,7 @@ var that = this;
         $("#services-errorx").hide();
 
         if($("#frm-store-services").length > 0) {
-            baseGet("services?size=10&page=1&usingPaginate=1", '')
+            baseGet("services?size=10&page=1&usingPaginate=0", '')
             .done(function(response) {
 
                 response['data']['rows'] = response['data']['rows'].filter(f => f.visibleId == '87083fb2-c8a1-4dcd-833d-8a5a4c0ae45a');

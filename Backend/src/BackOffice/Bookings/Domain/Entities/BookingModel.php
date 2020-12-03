@@ -30,6 +30,7 @@ class BookingModel extends Model
         'updated_by',
         'deleted_at',
         'deleted_by',
+        'is_doggy_school',
         'active'
     ];
 

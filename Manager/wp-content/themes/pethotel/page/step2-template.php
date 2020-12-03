@@ -5,24 +5,50 @@ get_header(); ?>
   <div data-real-type="background" data-img="<?php echo get_template_directory_uri(); ?>/img/patron_huesos.png">
     <div class="ms-wrap-section">
 
-      <ul class="ms-step-list">
-        <li class="checked">
-          <a href="/step1" class="ms-number">1</a>
-          <span class="ms-detail">Identifica <br>tu mascota</span>
-        </li>
-        <li class="active">
-          <span class="ms-number">2</span>
-          <span class="ms-detail">Datos <br>de contacto</span>
-        </li>
-        <li>
-          <span class="ms-number">3</span>
-          <span class="ms-detail">Servicios <br>adicionales</span>
-        </li>
-        <li>
-          <span class="ms-number">4</span>
-          <span class="ms-detail">Pago</span>
-        </li>
-      </ul>
+    <?php 
+        $matchFound = (array_key_exists("serviceSpecial", $_GET));
+        $home = "http://".$_SERVER['HTTP_HOST'];
+      ?>
+      <?php if($matchFound != 1) { ?>
+        <ul class="ms-step-list">
+          <li class="checked">
+            <a href="/step1" class="ms-number">1</a>
+            <span class="ms-detail">Identifica <br>tu mascota</span>
+          </li>
+          <li class="active">
+            <span class="ms-number">2</span>
+            <span class="ms-detail">Datos <br>de contacto</span>
+          </li>
+          <li>
+            <span class="ms-number">3</span>
+            <span class="ms-detail">Servicios <br>adicionales</span>
+          </li>
+          <li>
+            <span class="ms-number">4</span>
+            <span class="ms-detail">Pago</span>
+          </li>
+        </ul>
+      <?php } else { ?>
+        <ul class="ms-step-list">
+          <li>
+            <span class="ms-number">1</span>
+            <span class="ms-detail">Identifica <br>tu mascota</span>
+          </li>
+          <li class="active">
+            <span class="ms-number">2</span>
+            <span class="ms-detail">Datos <br>de contacto</span>
+          </li>
+          <li>
+            <span class="ms-number">3</span>
+            <span class="ms-detail">Pago</span>
+          </li>
+          <!-- <li>
+            <span class="ms-number">4</span>
+            <span class="ms-detail">Pago</span>
+          </li> -->
+        </ul>
+      <?php } ?>
+
 
       <div class="ms-header-step">
         <h1 class="ms-title">DATOS DE CONTACTO</h1>
@@ -73,8 +99,13 @@ get_header(); ?>
         </div>
       </div>
       <div class="ms-wrap-btn">
-        <a href="/step1" class="ms-btn">Volver</a>
-        <button class="ms-btn bg-sc" id="save-step-customer">Continuar</button>
+        <?php if($matchFoundDoggy != 1) { ?>
+          <a href="/step1/?serviceSpecial=<?php print $_GET['serviceSpecial'] ?>" class="ms-btn">Volver</a>
+          <button class="ms-btn bg-sc" id="save-step-customer">Continuar</button>
+        <?php } else { ?>
+          <a href="/step1" class="ms-btn">Volver</a>
+          <button class="ms-btn bg-sc" id="save-step-customer">Continuar</button>
+          <?php } ?>
       </div>
     </div>
   </div>

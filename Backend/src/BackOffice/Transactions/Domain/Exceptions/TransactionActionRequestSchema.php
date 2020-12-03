@@ -34,6 +34,9 @@ class TransactionActionRequestSchema extends BaseValidatorRequest
             ],
             'usingContact' => [
                 new Required(),
+            ],
+            'serviceSpecial' => [
+                new Optional()
             ]
         ], $data);
 

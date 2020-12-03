@@ -77,7 +77,12 @@ if (wp_is_mobile()) {
             </div>
           </div>
         </form>
-        <button class="ms-btn icon-paw" id="save-step-booking" type="button" disabled>Reservar</button>
+      
+        <div class="ms-wrap-btn">
+          <button class="ms-btn icon-paw" id="save-step-booking" type="button" disabled>Pet Hotel</button>
+          <a href="#" class="ms-btn icon-paw" id="doggyBtn">Doggy School</a>
+        </div>
+
       </div>
       <span class="ms-bg-calendar"></span>
       <span class="ms-bg-a"></span>
@@ -240,6 +245,51 @@ if (wp_is_mobile()) {
               </div>
             </div>
           </div>
+
+          <div class="ms-item swiper-slide">
+            <div class="ms-bubble">
+              <div class="ms-wrap-bubble" data-real-type="background" data-img="<?php echo get_template_directory_uri(); ?>/img/bubble.png">
+                <div class="ms-wrap-img">
+                  <img data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/img/testimonios/avatar04.png" src="<?php echo get_template_directory_uri(); ?>/img/temp.png" alt="Vanina Baca">
+                </div>
+                <p>No sabía donde dejar a mi perrito y ahora estoy encantada! En pet Hotel Shangrila lo cuidan y lo engríen como si estuviera en casa!</p>
+                <span class="ms-creator">-Vanina Baca</span>
+              </div>
+              <div class="ms-wrap-count">
+                <div class="ms-bone-count">
+                  <span class="ms-icon-bone active"></span>
+                  <span class="ms-icon-bone active"></span>
+                  <span class="ms-icon-bone active"></span>
+                  <span class="ms-icon-bone active"></span>
+                  <span class="ms-icon-bone"></span>
+                </div>
+                <!--<span class="ms-count">Hace un mes</span>-->
+              </div>
+            </div>
+          </div>
+
+          <div class="ms-item swiper-slide">
+            <div class="ms-bubble">
+              <div class="ms-wrap-bubble" data-real-type="background" data-img="<?php echo get_template_directory_uri(); ?>/img/bubble.png">
+                <div class="ms-wrap-img">
+                  <img data-real-type="image" data-img="<?php echo get_template_directory_uri(); ?>/img/testimonios/avatar05.png" src="<?php echo get_template_directory_uri(); ?>/img/temp.png" alt="Flor Gandolfo">
+                </div>
+                <p>Lo mas importante para mi es encontrar un lugar donde pueda dejar a mis engreídos y saber qué están haciendo durante todo el día.</p>
+                <span class="ms-creator">-Flor Gandolfo</span>
+              </div>
+              <div class="ms-wrap-count">
+                <div class="ms-bone-count">
+                  <span class="ms-icon-bone active"></span>
+                  <span class="ms-icon-bone active"></span>
+                  <span class="ms-icon-bone active"></span>
+                  <span class="ms-icon-bone active"></span>
+                  <span class="ms-icon-bone"></span>
+                </div>
+                <!--<span class="ms-count">Hace un mes</span>-->
+              </div>
+            </div>
+          </div>
+
         </div>
         <div class="swiper-pagination"></div>
       </div>
@@ -260,14 +310,10 @@ if (wp_is_mobile()) {
       <div class="ms-title">Contáctanos</div>
       <ul class="ms-info-list">
         <li>
-          <p>Estamos úbicados en la dirección <br>asdasdasdasdadasd <br>asdasdadssadasda</p>
+          <p>Estamos úbicados en: <br>Manzana J. Lote 3 Urbanización Shangrila <br>Km. 24 de la Panamericana Norte <br>Puente Piedra</p>
         </li>
         <li>
-          <span>Address:</span>
-          <strong>1600 Shangrilla, Lima</strong>
-        </li>
-        <li>
-          <span>phone:</span>
+          <span>Teléfono:</span>
           <a href="tel:954873058">954873058</a>
         </li>
       </ul>

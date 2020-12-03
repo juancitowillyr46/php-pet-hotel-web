@@ -23,13 +23,13 @@
 	<meta property="og:description" content="Pet Hotel Shangrila, brinda un servicio de calidad y de confianza con grandes profesionales de amplia experiencia.">
 	<meta property="og:url" content="">
 
-    <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon/touch-icon-iphone.png">
-    <link rel="android-touch-icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon/touch-icon-iphone.png">
+	<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon/touch-icon-iphone.png">
+	<link rel="android-touch-icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon/touch-icon-iphone.png">
 	<?php wp_head(); ?>
 
-	<link rel="preload" as="font" type="font/ttf" href="<?php echo get_site_url(); ?>/wp-content/themes/pethotel/css/icons/fonts/ms-icons.ttf?c14k3k" crossorigin>
+	<link rel="preload" as="font" type="font/ttf" href="<?php echo get_site_url(); ?>/wp-content/themes/pethotel/css/icons/fonts/ms-icons.ttf?1ej0en" crossorigin>
 	<link rel="preload" as="font" type="font/ttf" href="<?php echo get_site_url(); ?>/wp-content/themes/pethotel/fonts/carnas/Carnas-Regular.woff2" crossorigin>
 	<link rel="preload" as="font" type="font/ttf" href="<?php echo get_site_url(); ?>/wp-content/themes/pethotel/fonts/carnas/Carnas-Bold.woff2" crossorigin>
 
@@ -40,10 +40,10 @@
 		<button class="ms-user-btn">
 			{{#with customer}}
 				{{#ifnoteq image '' }}
-					<img data-real-type="image" data-img-default="<?php echo get_template_directory_uri(); ?>/img/profile/avatar_min.jpg" src="{{image}}" id="user-image" alt="{{firstName}}{{LastName}}">
+					<img data-real-type="image" data-img-default="<?php echo get_template_directory_uri(); ?>/img/profile/avatar.jpg" src="{{image}}" id="user-image" alt="{{firstName}}{{LastName}}">
 				{{/ifnoteq}}
 				{{#ifeq image '' }}
-					<img data-real-type="image" data-img-default="<?php echo get_template_directory_uri(); ?>/img/profile/avatar_min.jpg" src="<?php echo get_template_directory_uri(); ?>/img/profile/avatar_min.jpg" id="user-image" alt="{{firstName}}{{LastName}}">
+					<img data-real-type="image" data-img-default="<?php echo get_template_directory_uri(); ?>/img/profile/avatar.jpg" src="<?php echo get_template_directory_uri(); ?>/img/profile/avatar.jpg" id="user-image" alt="{{firstName}}{{LastName}}">
 				{{/ifeq}}
 				{{#ifnoteq firstName '' }}
 					<span id="user-name">{{firstName}} {{lastName}}</span>
@@ -81,7 +81,7 @@
 
 				<div class="ms-wrap-login" id="success-login">
 					<button class="ms-user-btn">
-						<img data-real-type="image" data-img-default="<?php echo get_template_directory_uri(); ?>/img/profile/pet-avatar.png" src="http://www.pethotelshangrila.pe/wp-content/themes/pethotel/img/profile/pet-avatar.png" id="user-image" alt="">
+						<img data-real-type="image" data-img-default="<?php echo get_template_directory_uri(); ?>/img/profile/avatar.jpg" src="http://www.pethotelshangrila.pe/wp-content/themes/pethotel/img/profile/avatar.jpg" id="user-image" alt="">
 						<span id="user-name"></span>
 					</button>
 					<ul class="ms-user-menu">

@@ -45,6 +45,9 @@
                 <option value="2">PENDIENTE</option>
               </select>
               
+              <label class="my-1 mr-2" for="inlineFormCustomSelectPref">¿Doggy School?: </label>
+              <input type="checkbox" name="" class="mr-sm-2" id="" [ngModelOptions]="{standalone: true}" [(ngModel)]="isDoggySchool">
+
               <button class="btn btn-success" (click)="search()">Buscar</button>
             </form>
           </div>
@@ -77,8 +80,8 @@
                             <tr>
                               <th scope="col">Cliente</th>
                               <!-- <th scope="col">Canil</th> -->
-                              <th scope="col">Desde</th>
-                              <th scope="col">Hasta</th>
+                              <th scope="col">Check-In</th>
+                              <th scope="col">Check-Out</th>
                               <th scope="col">Mascota</th>
                               
                               <th scope="col">Estado</th>

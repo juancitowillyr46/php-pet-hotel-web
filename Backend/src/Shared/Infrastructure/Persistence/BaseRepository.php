@@ -133,7 +133,8 @@ class BaseRepository implements RepositoryInterface
             $findAll = $this->getModel()::all()
                 ->where('date_from', '>=',($query['dateFrom'])? $query['dateFrom'] : date('Y-m-d'))
                 ->where('date_to', '<=',($query['dateTo'])? $query['dateTo'] : date('Y-m-d'))
-                ->whereIn('state_id',($query['stateId'] != '0')? [(int) $query['stateId']]: [1,2]);
+                ->whereIn('state_id',($query['stateId'] != '0')? [(int) $query['stateId']]: [1,2])
+                ->where('is_doggy_school', '=',  ($query['isDoggySchool'] == 'true'));
 
             $findAllResult = $findAll->sortByDesc('id')
                 ->skip(((int)$query['page'] - 1) * $query['size'])

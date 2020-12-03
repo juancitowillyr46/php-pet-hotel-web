@@ -68,7 +68,74 @@ var pathname = window.location.pathname;
             }
         });
     
+        $(document).on('click','#save-step-booking-doggy', function() {
+
+            var dateFrom    = $("#dateFrom").val();
+            var dateTo      = $("#dateTo").val();
+            var dateNumPets = $("#numPets").val();
+            var serviceId = '7bcf5547-f268-463d-8760-e769d31fd345';
+
+            disabledButton('save-step-booking-doggy', true);
+
+            if(dateFrom != '' && dateTo != '') {
+
+                baseGet("services/", serviceId).done(function(response) {
+                    if(response['data'] && response['statusCode'] == 200){
+
+                        disabledButton('save-step-booking-doggy', true);
+
+                        var booking = {
+                            dateFrom: dateFrom,
+                            dateTo: dateTo,
+                            numPets: Number(dateNumPets)
+                        };
+                        setItemLocalStorageTransaction("booking", booking);
+                        localStorage.setItem('bookingLog', JSON.stringify(booking)); 
+
+                        // console.log(response);
+                        var orderList = [];
+        
+                        orderList.push({
+                            'serviceId': response['data']['id'],
+                            'price'    : response['data']['price'],
+                            'quantity' : Number(dateNumPets),
+                            'subtotal' : response['data']['price'] * Number(dateNumPets),
+                            'serviceName': response['data']['name']
+                        });
+        
+                        bodyParsedPayment['order'] = orderList;
+        
+                        setItemLocalStorageTransaction('serviceId', serviceId);
+                        setItemLocalStorageTransaction('order', bodyParsedPayment['order']);
+                        localStorage.setItem('serviceId', serviceId);
+                        window.location.href = '/step1/?serviceSpecial=' +serviceId;
+                    }
+                })
+                .fail(function(response) {
+                    if(response.responseJSON.statusCode === 404) {
+                        alertErrorServiceNoExist(response, 'El servicio no existe');
+                    }
+                })
+                .always(function() {
+        
+                });
+
+            } else {
+                alertError(null, 'Ingrese la fecha de ingreso y fecha de recojo');
+                disabledButton('save-step-booking-doggy', false);
+            }
+
+        });
+
         $(document).on("click", '#save-step-pets', function() {
+
+            var urlRedirect = '/step2/';
+
+            // Doggy School
+            var existParamServiceSpecial = getValidateUrlServiceISpecial();
+            if(existParamServiceSpecial) {
+                urlRedirect = '/step2/?serviceSpecial=' + localStorage.getItem('serviceId');
+            }
 
             disabledButton('save-step-pets', true);
 
@@ -110,13 +177,13 @@ var pathname = window.location.pathname;
 
                         $(document).find('input:checkbox[name="terms"]').trigger("change");
 
-                        window.location.href = '/step2';
+                        window.location.href = urlRedirect;
                     }
 
                 } else if($(".frm-petsbycheckbox").length > 0) {
 
                     if($('[name="selectPet"]:checked').length == num_pets) {
-                        window.location.href = '/step2';
+                        window.location.href = urlRedirect;
                     } else {
                         $(".msg-error-terms").html('Seleccione el total de mascotas permitidas');
                         return true;
@@ -129,12 +196,21 @@ var pathname = window.location.pathname;
         });
         
         $(document).on("click", "#save-step-customer", function() { 
+
+            var urlRedirect = '/step3/';
+
+            // Doggy School
+            var existParamServiceSpecial = getValidateUrlServiceISpecial();
+            if(existParamServiceSpecial) {
+                urlRedirect = '/step4/?serviceSpecial=' + localStorage.getItem('serviceId');
+            }
+
             disabledButton('save-step-customer', true);
             if($("#frm-store-customer").valid() == true){
                 setDataOfPayment("customer", $("#frm-store-customer").serializeFormJSON());
                 disabledButton('save-step-customer', false);
                 setItemLocalStorageTransaction("customer", bodyParsedPayment['customer']);
-                window.location.href = '/step3';
+                window.location.href = urlRedirect;
             } else {
                 disabledButton('save-step-customer', false);
             }
@@ -240,6 +316,7 @@ var pathname = window.location.pathname;
                     
                     if(localStorage.getItem('transaction') != undefined && localStorage.getItem('transaction') != null && localStorage.getItem('transaction') != '') {
                         var bodyParsedEnd = bodyParsedPayment;
+                     
                         disabledButton('save-step-payment', true);
 
                         basePost("security/transaction-service", bodyParsedEnd)
@@ -262,6 +339,7 @@ var pathname = window.location.pathname;
                 // Logic A
                 delete bodyParsedPayment['payment']['usingContact'];
 
+
                 bodyParsedPayment['order'].forEach(element => {
                     delete element.serviceName;
                 });
@@ -269,6 +347,11 @@ var pathname = window.location.pathname;
                 if(localStorage.getItem('transaction') != undefined && localStorage.getItem('transaction') != null && localStorage.getItem('transaction') != '') {
 
                     var bodyParsedEnd = bodyParsedPayment;
+
+                    // Logic C
+                    if(getValidateUrlServiceISpecial()) {
+                        bodyParsedEnd['serviceSpecial'] = localStorage.getItem('serviceId');
+                    }
 
                     disabledButton('save-step-payment', true);
 

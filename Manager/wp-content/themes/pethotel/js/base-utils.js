@@ -127,6 +127,21 @@ Handlebars.registerHelper('ifnoteq', function (a, b, options) {
 
             
         } else {
+
+            // Logic B
+            // var existParamServiceId = getValidateUrlServiceId();
+            // console.log(existParamServiceId);
+            // if(!existParamServiceId){
+            //     return true;
+            // } else {
+
+            // }
+            // if(!existParamServiceId) {
+            //     paymentMethod = response['data'].filter(f => f.value != '176d7072-19f1-11eb-a86b-50e549398ade4');
+            // } else {
+            //     paymentMethod = response['data'];
+            // }
+
             return true;
         }
 
@@ -304,6 +319,15 @@ Handlebars.registerHelper('ifnoteq', function (a, b, options) {
 
     getValidateUrlServiceId = function() {
         var field = 'serviceId';
+        var url = window.location.href;
+        if(url.indexOf('?' + field + '=') != -1)
+            return true;
+        else if(url.indexOf('&' + field + '=') != -1)
+            return true;
+        return false;
+    }
+    getValidateUrlServiceISpecial = function() {
+        var field = 'serviceSpecial';
         var url = window.location.href;
         if(url.indexOf('?' + field + '=') != -1)
             return true;
@@ -550,7 +574,7 @@ Handlebars.registerHelper('ifnoteq', function (a, b, options) {
     }
 
     viewDetail = function(bodyParsedPayment) {
-        if(bodyParsedPayment['order'].length > 0) {
+        if(bodyParsedPayment['order'].length > 0 && $("#store-detail-payment-template").length) {
             var theTemplateScript = $("#store-detail-payment-template").html();
             var theTemplate = Handlebars.compile(theTemplateScript);
             var getCalcularSubtotal = calcularSubtotal(bodyParsedPayment);
