@@ -351,6 +351,8 @@ var pathname = window.location.pathname;
                     // Logic C
                     if(getValidateUrlServiceISpecial()) {
                         bodyParsedEnd['serviceSpecial'] = localStorage.getItem('serviceId');
+                    } else {
+                        bodyParsedEnd['serviceSpecial'] = null;
                     }
 
                     disabledButton('save-step-payment', true);

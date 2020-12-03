@@ -67,9 +67,9 @@ class TransactionService extends BaseService
             $subtotal = 0;
             $quantity = 0;
 
-            // Hospedaje
-            if($order['serviceId'] == '1fdcf8ea-199c-11eb-aed1-50e549398ade'){
-                $subtotal = $subtotal + ($numDays * $order['price']);
+            // Pet Hotel - Doggy School
+            if($order['serviceId'] == '1fdcf8ea-199c-11eb-aed1-50e549398ade' || $order['serviceId'] == '7bcf5547-f268-463d-8760-e769d31fd345'){
+                $subtotal = $subtotal + (($numDays * $order['price']) * $numPets);
                 $quantity = $numDays;
             } else {
                 $subtotal =  $subtotal + ($order['quantity'] * $order['price']);

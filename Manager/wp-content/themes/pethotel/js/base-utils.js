@@ -530,7 +530,7 @@ Handlebars.registerHelper('ifnoteq', function (a, b, options) {
         var countTotal = 0;
 
         bodyParsedPayment['order'].forEach(service => { 
-            if(service.serviceId == '1fdcf8ea-199c-11eb-aed1-50e549398ade') {
+            if(service.serviceId == '1fdcf8ea-199c-11eb-aed1-50e549398ade' || service.serviceId == '7bcf5547-f268-463d-8760-e769d31fd345') {
                 countTotal = countTotal + ((service.price * numDays) * numPets);
             } else {
                 
@@ -562,7 +562,7 @@ Handlebars.registerHelper('ifnoteq', function (a, b, options) {
         var numPets = (bodyParsedPayment['booking']['numPets'] != undefined)? Number(bodyParsedPayment['booking']['numPets']) : 1;
 
         bodyParsedPayment['order'].forEach(service => { 
-            if(service.serviceId == '1fdcf8ea-199c-11eb-aed1-50e549398ade') {
+            if(service.serviceId == '1fdcf8ea-199c-11eb-aed1-50e549398ade' || service.serviceId == '7bcf5547-f268-463d-8760-e769d31fd345') {
                 service['subtotal'] = ((service.price * numDays) * numPets);
             } else {
                 service['subtotal'] = (service.price * numPets);

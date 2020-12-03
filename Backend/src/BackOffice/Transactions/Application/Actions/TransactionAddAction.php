@@ -144,7 +144,7 @@ class TransactionAddAction extends TransactionsAction
                 $services = (array) $this->paymentOrderService->executeGetAllDetail(['paymentId' => $this->paymentUuid]);
             }
 
-            $subject = 'Reserva registrada';
+            $subject = ($isDoggySchool == true)? 'Doggy School registrado' : 'Reserva registrada';
             $emailTpl = new EmailTplBooking();
             $emailTpl->setCheckIn($bookingRequest['dateFrom']);
             $emailTpl->setCheckOut($bookingRequest['dateTo']);
@@ -223,7 +223,7 @@ class TransactionAddAction extends TransactionsAction
             $order = (array) $item;
 
             // Service Hospedaje
-            if($order['serviceId'] == '1fdcf8ea-199c-11eb-aed1-50e549398ade') {
+            if($order['serviceId'] == '1fdcf8ea-199c-11eb-aed1-50e549398ade' || $order['serviceId'] == '7bcf5547-f268-463d-8760-e769d31fd345') {
                 for($i = 1; $i <= $numPets; $i++){
                     $order['quantity']  = $numDays;
                     $order['subtotal']  = ($numDays * $order['price']);

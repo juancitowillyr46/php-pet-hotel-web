@@ -149,7 +149,7 @@ class EmailTplBooking
                           </td>
                         </tr>
                         <tr>
-                          <td height="69" align="center" valign="middle" style="color: #008193; font-family: Arial, Verdana, \'sans-serif\' !important; font-size: 20px; font-weight: 500">Te indicamos tus datos de acceso a nuestra web:</td>
+                          <td height="69" align="center" valign="middle" style="color: #008193; font-family: Arial, Verdana, \'sans-serif\' !important; font-size: 20px; font-weight: 500">Te indicamos tus datos de tu reserva:</td>
                         </tr>
                         <tr>
                           <td align="center" valign="middle">
